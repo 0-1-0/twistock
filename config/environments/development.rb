@@ -28,4 +28,7 @@ Twitterexchange::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # SASS по умолчанию (вместо SCSS) для генераторов
+  config.sass.preferred_syntax = :sass
 end
