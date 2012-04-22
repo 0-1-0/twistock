@@ -19,16 +19,14 @@ html lang="en"
     .navbar.navbar-fixed-top
       .navbar-inner
         .container
-          a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
           a.brand href="#" TwitterExchange
-          .container.nav-collapse
-            ul.nav
-              li= link_to "Link 1", "/path1"
-              li= link_to "Link 2", "/path2"
-              li= link_to "Link 3", "/path3"
+          .container
+            - if signed_in?
+              #user_navbar.pull-right
+                = image_tag current_user.avatar, size: '32x32', class: 'avatar'
+                .info
+                  span.nickname= current_user.nickname + ' '
+                  = link_to 'Sign out', sign_out_path
 
     .container
 
