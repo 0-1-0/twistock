@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe WelcomeController do
 
-  describe "GET '/'" do
+  describe "GET 'index'" do
     it "returns http success" do
-      get '/'
+      get 'index'
       response.should be_success
     end
   end
