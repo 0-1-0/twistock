@@ -33,6 +33,10 @@ gem 'slim-rails'
 # simple_form избавляет от головной боли
 gem 'simple_form'
 
+# аутентификация
+gem 'omniauth'
+gem 'omniauth-twitter'
+
 # полезные для разработки утилиты
 group :development do
   gem 'looksee'

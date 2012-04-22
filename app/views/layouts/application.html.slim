@@ -33,8 +33,15 @@ html lang="en"
     .container
 
       .content
-        .row
-          = yield
+        - if notice
+          .alert.alert-info
+            a.close data-dismiss="alert" x
+            = notice
+        - if alert
+          .alert.alert-error
+            a.close data-dismiss="alert" x
+            = alert
+        = yield
     
       footer
         p &copy; Company 2012
