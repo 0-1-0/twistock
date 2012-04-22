@@ -39,9 +39,6 @@ group :development do
   gem 'rails_best_practices'
 end
 
-# аутентификацию делаем через sorcery
-gem 'sorcery'
-
 # --- BDD фреймворки
 
 # cucumber для интерфейса
