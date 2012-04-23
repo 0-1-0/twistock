@@ -1,11 +1,16 @@
 Twitterexchange::Application.routes.draw do
   root to: 'welcome#index'
+  get 'not_found' => 'welcome#not_found'
 
   match '/auth/:provider/callback', :to => 'session#create'
   match '/auth/failure',            :to => 'session#failure'
   get 'sign_out'  => 'session#destroy'
 
-  resources :profiles, only: [:show]
+  resources :profiles, only: [:show] do
+    collection do
+      post 'search'
+    end
+  end
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

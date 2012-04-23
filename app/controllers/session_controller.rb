@@ -3,7 +3,7 @@ class SessionController < ApplicationController
     auth = request.env['omniauth.auth']
 
     unless @user = User.try_to_find(auth.uid)
-      @user = User.create_from_twitter(auth)
+      @user = User.create_from_twitter_oauth(auth)
     end
 
     session[:user_id] = @user.id

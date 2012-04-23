@@ -27,6 +27,8 @@ html lang="en"
                 .info
                   span.nickname= current_user.nickname + ' '
                   = link_to 'Sign out', sign_out_path
+              = form_tag search_profiles_path, class: 'form-search', style: 'padding: 7px 0; margin: 0;' do
+                = text_field_tag 'nickname', nil, class: 'search-query', placeholder: 'enter a nickname'
 
     .container
 
