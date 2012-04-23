@@ -1,3 +1,37 @@
+#buy_modal.modal.fade
+  .modal-header
+    a.close data-dismiss="modal" x
+    h3 Buy Shares
+  = simple_form_for root_path, html: { class: 'form-horizontal' } do |f|
+    .modal-body
+      = f.input :count, as: :integer, input_html: {value: @user.available_shares}
+    .modal-footer
+      a.btn data-dismiss="modal" Close
+      = f.button :submit, 'Buy', class: 'btn btn-success'
+
+#sell_retention_modal.modal.fade
+  .modal-header
+    a.close data-dismiss="modal" x
+    h3 Sell Retention Shares
+  = simple_form_for root_path, html: { class: 'form-horizontal' } do |f|
+    .modal-body
+      = f.input :count, as: :integer, input_html: {value: @user.retention_shares}
+    .modal-footer
+      a.btn data-dismiss="modal" Close
+      = f.button :submit, 'Sell', class: 'btn btn-success'
+
+#sell_modal.modal.fade
+  .modal-header
+    a.close data-dismiss="modal" x
+    h3 Sell Shares
+  = simple_form_for root_path, html: { class: 'form-horizontal' } do |f|
+    .modal-body
+      = f.input :owner, disabled: true
+      = f.input :count, as: :integer, input_html: {value: @user.available_shares}
+    .modal-footer
+      a.btn data-dismiss="modal" Close
+      = f.button :submit, 'Sell', class: 'btn btn-success'
+
 .row
   .span1 style="text-align: center;"
     = image_tag @user.avatar
@@ -11,9 +45,9 @@
           h3 style="display: inline; color: darkgreen;" #{@user.available_shares} shares available
           |&nbsp
           - if @my_page
-            = link_to 'Sell Retention', root_path, class: 'btn btn-success'
+            a.btn.btn-success data-toggle="modal" href="#sell_retention_modal" Sell Retention Shares
           - else
-            = link_to 'Buy', root_path, class: 'btn btn-success'
+            a.btn.btn-success data-toggle="modal" href="#buy_modal" Buy
     table.table
       tr
         th Share Price
@@ -35,6 +69,8 @@
         th #
         th Shares Owner
         th Shares Count
+        th One Share Price
+        th Total Cost
         - if @my_page
           th style="width: 1px"
       - i = 0
@@ -43,8 +79,11 @@
           td= i += 1
           td= link_to bos.owner.nickname, profile_path(bos.owner)
           td= bos.count
+          td= bos.owner.share_price
+          td= bos.owner.share_price * bos.count
           - if @my_page
-            td= link_to 'Sell', root_path, class: 'btn btn-info'
+            td
+              a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=bos.owner.nickname data-count=bos.count Sell
 
     h2 Shares Holders
     table.table.table-bordered
@@ -52,12 +91,14 @@
         th #
         th Shares Holder
         th Shares Count
+        th Total Cost
       - i = 0
       - @user.my_shares.each do |bos|
         tr
           td= i += 1
           td= link_to bos.holder.nickname, profile_path(bos.holder)
           td= bos.count
+          td= bos.count * @user.share_price
 
     - if @my_page
       h2 History
