@@ -6,8 +6,10 @@ gem 'rails', '3.2.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 # подключаем mongo
-gem 'mongoid'
-gem 'bson_ext'
+#gem 'mongoid'
+#gem 'bson_ext'
+
+gem 'pg'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -36,6 +38,9 @@ gem 'simple_form'
 # аутентификация
 gem 'omniauth'
 gem 'omniauth-twitter'
+
+# twitter API
+gem 'twitter'
 
 # полезные для разработки утилиты
 group :development do

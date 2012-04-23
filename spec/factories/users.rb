@@ -6,5 +6,6 @@ FactoryGirl.define do
     name "MyString"
     nickname "MyString"
     avatar "MyString"
+    money 1
   end
 end

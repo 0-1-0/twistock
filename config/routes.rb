@@ -5,6 +5,8 @@ Twitterexchange::Application.routes.draw do
   match '/auth/failure',            :to => 'session#failure'
   get 'sign_out'  => 'session#destroy'
 
+  resources :profiles, only: [:show]
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

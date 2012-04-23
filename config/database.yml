@@ -1,0 +1,12 @@
+common: &common
+  adapter: postgresql
+  username: developer
+  password: '123'
+
+development:
+  <<: *common
+  database: twitterexchange_dev
+
+test:
+  <<: *common
+  database: twitterexchange_test
