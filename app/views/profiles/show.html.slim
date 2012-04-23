@@ -17,7 +17,11 @@
     table.table
       tr
         th Share Price
-        td = @user.share_price
+        td
+          - if @user.share_price
+            = @user.share_price
+          - else
+            | calculating...
       tr
         th Retention Shares
         td = @user.retention_shares

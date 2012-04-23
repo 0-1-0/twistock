@@ -121,4 +121,22 @@ class User < ActiveRecord::Base
 
     self
   end
+
+  def sell_retention(count)
+    User.transaction do
+      self.reload
+
+      raise "Shares aren't ready for selling yet" unless self.share_price
+      raise "You haven't enough shares" if count > self.retention_shares
+
+      cost = self.share_price * count
+
+      self.retention_shares -= count
+      self.money += cost
+
+      self.save
+    end
+
+    self
+  end
 end
