@@ -46,6 +46,8 @@ class User < ActiveRecord::Base
   end
 
   def buy_shares(owner, count)
+    raise "You cannot buy 0 shares" unless count > 0
+
     cost = 0
 
     User.transaction do
@@ -87,6 +89,8 @@ class User < ActiveRecord::Base
   end
 
   def sell_shares(owner, count)
+    raise "You cannot sell 0 shares" unless count > 0
+
     cost = 0
 
     User.transaction do
@@ -123,6 +127,10 @@ class User < ActiveRecord::Base
   end
 
   def sell_retention(count)
+    raise "You cannot sell 0 shares" unless count > 0
+    
+    cost = 0
+
     User.transaction do
       self.reload
 
@@ -136,6 +144,13 @@ class User < ActiveRecord::Base
 
       self.save
     end
+
+    Transaction.create(
+      user:   self,
+      owner:  self,
+      count:  count,
+      cost:   cost,
+      action: 'sell')
 
     self
   end

@@ -11,6 +11,14 @@ Twitterexchange::Application.routes.draw do
       post 'search'
     end
   end
+
+  resources :shares, only: [] do
+    collection do
+      post 'buy'
+      post 'sell'
+      post 'sell_retention'
+    end
+  end
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

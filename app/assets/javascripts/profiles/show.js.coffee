@@ -1,4 +1,4 @@
 $(document).ready ->
   $('.btn-sell').click (e) ->
-    $('#sell_modal #_owner').val $(@).attr('data-owner')
-    $('#sell_modal #_count').val $(@).attr('data-count')
+    $('#sell_modal #sell_owner').val $(@).attr('data-owner')
+    $('#sell_modal #sell_count').val $(@).attr('data-count')
