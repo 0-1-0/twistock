@@ -11,7 +11,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120423134710) do
+ActiveRecord::Schema.define(:version => 20120423201625) do
+
+  create_table "block_of_shares", :force => true do |t|
+    t.integer  "owner_id"
+    t.integer  "holder_id"
+    t.integer  "count"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "block_of_shares", ["holder_id"], :name => "index_block_of_shares_on_holder_id"
+  add_index "block_of_shares", ["owner_id"], :name => "index_block_of_shares_on_owner_id"
+
+  create_table "transactions", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "action"
+    t.integer  "owner_id"
+    t.integer  "count"
+    t.integer  "cost"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "transactions", ["action"], :name => "index_transactions_on_action"
+  add_index "transactions", ["user_id"], :name => "index_transactions_on_user_id"
 
   create_table "users", :force => true do |t|
     t.integer  "uid"
@@ -19,8 +43,11 @@ ActiveRecord::Schema.define(:version => 20120423134710) do
     t.string   "nickname"
     t.string   "avatar"
     t.integer  "money"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "shares"
+    t.integer  "retention_shares"
+    t.integer  "share_price"
   end
 
   add_index "users", ["name"], :name => "index_users_on_name", :unique => true

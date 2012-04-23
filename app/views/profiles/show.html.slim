@@ -8,13 +8,19 @@
         |&nbsp
         small= @user.name
         .pull-right
-          h3 style="display: inline; color: darkgreen;" X shares available
+          h3 style="display: inline; color: darkgreen;" #{@user.available_shares} shares available
           |&nbsp
-          = link_to 'Buy', root_path, class: 'btn btn-success'
+          - if @my_page
+            = link_to 'Sell Retention', root_path, class: 'btn btn-success'
+          - else
+            = link_to 'Buy', root_path, class: 'btn btn-success'
     table.table
       tr
-        th Shares Cost
-        td = @my_page
+        th Share Price
+        td = @user.share_price
+      tr
+        th Retention Shares
+        td = @user.retention_shares
       tr
         th Money
         td = @user.money
@@ -25,10 +31,16 @@
         th #
         th Shares Owner
         th Shares Count
-      tr
-        td 1
-        td mr_ffloyd
-        td 100
+        - if @my_page
+          th style="width: 1px"
+      - i = 0
+      - @user.portfel.each do |bos|
+        tr
+          td= i += 1
+          td= link_to bos.owner.nickname, profile_path(bos.owner)
+          td= bos.count
+          - if @my_page
+            td= link_to 'Sell', root_path, class: 'btn btn-info'
 
     h2 Shares Holders
     table.table.table-bordered
@@ -36,22 +48,29 @@
         th #
         th Shares Holder
         th Shares Count
-      tr
-        td 1
-        td mr_ffloyd
-        td 100
+      - i = 0
+      - @user.my_shares.each do |bos|
+        tr
+          td= i += 1
+          td= link_to bos.holder.nickname, profile_path(bos.holder)
+          td= bos.count
 
-    h2 History
-    table.table.table-bordered
-      tr
-        th #
-        th Shares Owner
-        th Shares Count
-        th Action
-        th Price
-      tr
-        td 1
-        td mr_ffloyd
-        td 10
-        td sell
-        td 100
+    - if @my_page
+      h2 History
+      table.table.table-bordered
+        tr
+          th #
+          th Action
+          th Date
+          th Shares Owner
+          th Shares Count
+          th Cost
+        - i = 0
+        - @user.transactions.each do |t|
+          tr
+            td= i += 1
+            td= t.action
+            td= I18n.l t.created_at, format: :short
+            td= link_to t.owner.nickname, profile_path(t.owner)
+            td= t.count
+            td= t.cost

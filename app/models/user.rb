@@ -1,5 +1,10 @@
 class User < ActiveRecord::Base
-  attr_accessible :avatar, :money, :name, :nickname, :uid
+  has_many :portfel,        class_name: BlockOfShares, foreign_key: :holder_id
+  has_many :my_shares,      class_name: BlockOfShares, foreign_key: :owner_id
+
+  has_many :transactions
+
+  attr_accessible :avatar, :money, :name, :nickname, :uid, :shares, :retention_shares
 
   def to_param
     nickname
@@ -10,7 +15,9 @@ class User < ActiveRecord::Base
                   name:     auth.info.name,
                   nickname: auth.info.nickname,
                   avatar:   auth.info.image,
-                  money:    1000
+                  money:    1000,
+                  shares:   1000,
+                  retention_shares: 200
                 )
   end
 
@@ -24,11 +31,94 @@ class User < ActiveRecord::Base
                   name:     info.name,
                   nickname: info.screen_name,
                   avatar:   info.profile_image_url,
-                  money:    1000
+                  money:    1000,
+                  shares:   1000,
+                  retention_shares: 200
                 )
   end
 
   def self.try_to_find(uid)
     User.where(uid: uid).first
+  end
+
+  def available_shares
+    shares - retention_shares
+  end
+
+  def buy_shares(owner, count)
+    cost = 0
+
+    User.transaction do
+      owner.reload
+      self.reload
+
+      raise "Shares aren't ready for selling yet" unless owner.share_price
+
+      cost = count*owner.share_price
+
+      # проверяем на валидность
+      raise "There are no #{count} shares"   unless owner.available_shares >= count
+      raise "You haven't enough money"       unless self.money >= cost
+
+      # проводим операцию
+      owner.shares  -= count
+      self.money    -= cost
+      if bos = self.portfel.where(owner_id: owner.id).first
+        bos.count += count
+        bos.save
+      else
+        self.portfel << BlockOfShares.new(count: count, owner_id: owner.id)
+      end
+
+      owner.save!
+      self.save!
+    end
+
+    # теперь фигачим транзакцию
+    Transaction.create(
+      user:   self,
+      owner:  owner,
+      action: 'buy',
+      count:  count,
+      cost:   cost)
+
+    # return self
+      self
+  end
+
+  def sell_shares(owner, count)
+    cost = 0
+
+    User.transaction do
+      self.reload
+      owner.reload
+      
+      raise "You have not this shares" unless bos = self.portfel.where(owner_id: owner.id).first
+      raise "You have not this shares" if bos.count < count
+
+      owner.shares  += count
+      bos.count     -= count
+
+      if bos.count == 0
+        bos.delete
+      else
+        bos.save
+      end
+
+      cost = count*owner.share_price
+      self.money += cost
+
+      owner.save
+      self.save
+    end
+
+    Transaction.create(
+      user:   self,
+      owner:  owner,
+      action: 'sell',
+      count:  count,
+      cost:   cost)
+
+    self
   end
 end

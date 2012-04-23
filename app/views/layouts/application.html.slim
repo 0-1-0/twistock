@@ -19,7 +19,7 @@ html lang="en"
     .navbar.navbar-fixed-top
       .navbar-inner
         .container
-          a.brand href="#" TwitterExchange
+          = link_to 'TwitterExchange', (signed_in? ? profile_path(current_user) : root_path), class: 'brand'
           .container
             - if signed_in?
               #user_navbar.pull-right
