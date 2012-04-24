@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
                   money:    1000,
                   shares:   1000,
                   retention_shares: 200
-                )
+                ).update_stats
   end
 
   def self.create_from_twitter(nickname)
@@ -34,11 +34,15 @@ class User < ActiveRecord::Base
                   money:    1000,
                   shares:   1000,
                   retention_shares: 200
-                )
+                ).update_stats
   end
 
   def self.try_to_find(uid)
     User.where(uid: uid).first
+  end
+
+  def self.find_by_nickname(nickname)
+    User.where("nickname ~* '#{nickname}'").first
   end
 
   def available_shares
@@ -55,6 +59,7 @@ class User < ActiveRecord::Base
       self.reload
 
       raise "Shares aren't ready for selling yet" unless owner.share_price
+      raise "You cannot buy shares with zero price" if owner.share_price == 0
 
       cost = count*owner.share_price
 
@@ -152,6 +157,11 @@ class User < ActiveRecord::Base
       cost:   cost,
       action: 'sell')
 
+    self
+  end
+
+  def update_stats
+    UserUpdateWorker.perform_async(nickname)
     self
   end
 end
