@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  after_find :auto_update
+  after_find :update_stats
 
   has_many :portfel,        class_name: BlockOfShares, foreign_key: :holder_id
   has_many :my_shares,      class_name: BlockOfShares, foreign_key: :owner_id
@@ -163,15 +163,14 @@ class User < ActiveRecord::Base
   end
 
   def update_stats
-    self.last_update = Time.now
-    self.save
-    UserUpdateWorker.perform_async(nickname)
-    self
-  end
-
-  private
-  # after_find callback
-  def auto_update
-    self.update_stats if Time.now - (last_update || Time.now - 7.hours) > 6.hours
+    if Time.now - (last_update || Time.now - 7.hours) > 6.hours
+      User.transaction do
+        self.last_update = Time.now
+        self.share_price = nil
+        self.save
+      end
+      UserUpdateWorker.perform_async(nickname)
+      self
+    end
   end
 end
