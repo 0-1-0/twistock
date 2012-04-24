@@ -1,4 +1,6 @@
 class SharesController < ApplicationController
+  before_filter :user_required
+  
   def buy
     p = params[:buy]
     owner = User.find_by_nickname(p[:owner])

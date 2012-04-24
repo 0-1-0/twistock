@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
   def signed_in?
     (true if session[:user_id]) or false
   end
+
+  def user_required
+    redirect_to root_path, alert: 'You must be signed in to view that page =)' unless signed_in?
+  end
 end
