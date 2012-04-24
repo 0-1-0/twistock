@@ -78,5 +78,8 @@ module Twitterexchange
         :fixture => true,
         :fixture_replacement => "factory_girl"
     end
+
+    # sidekiq workers
+    config.autoload_paths += %W(#{config.root}/app/workers)
   end
 end

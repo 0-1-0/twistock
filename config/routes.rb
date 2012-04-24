@@ -1,4 +1,7 @@
 Twitterexchange::Application.routes.draw do
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
   root to: 'welcome#index'
   get 'not_found' => 'welcome#not_found'
 

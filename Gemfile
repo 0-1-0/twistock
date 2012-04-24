@@ -42,6 +42,11 @@ gem 'omniauth-twitter'
 # twitter API
 gem 'twitter'
 
+# очередь для обработки тяжелых запросов
+gem 'sidekiq'
+# требуется для его веб-интерфейса
+gem 'sinatra'
+
 # полезные для разработки утилиты
 group :development do
   gem 'looksee'
