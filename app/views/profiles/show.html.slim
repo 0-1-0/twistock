@@ -35,7 +35,7 @@
       = f.button :submit, 'Sell', class: 'btn btn-success'
 
 .row
-  .span1 style="text-align: center;"
+  .span1#avatar_div
     = image_tag @user.avatar
   .span11
     .page-header
@@ -44,7 +44,7 @@
         |&nbsp
         small= @user.name
         .pull-right
-          h3 style="display: inline; color: darkgreen;" #{@user.available_shares} shares available
+          h3#available_shares #{@user.available_shares} shares available
           |&nbsp
           - if @my_page
             a.btn.btn-success data-toggle="modal" href="#sell_retention_modal" Sell Retention Shares
@@ -74,7 +74,7 @@
         th One Share Price
         th Total Cost
         - if @my_page
-          th style="width: 1px"
+          th.mini
       - i = 0
       - @user.portfel.each do |bos|
         tr
@@ -112,10 +112,10 @@
           th Shares Owner
           th Shares Count
           th Cost
-        - i = 0
+        - i = @user.transactions.count + 1
         - @user.transactions.each do |t|
           tr
-            td= i += 1
+            td= i -= 1
             td= t.action
             td= I18n.l t.created_at, format: :short
             td= link_to t.owner.nickname, profile_path(t.owner)
