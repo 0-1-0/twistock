@@ -14,10 +14,12 @@
 /log/*.log
 /tmp
 
-.rvmrc
-.powenv
+/.rvmrc
+/.powenv
 
-wrap.sh
-start_server.sh
-stop_server.sh
-reassets.sh
+/wrap.sh
+/start_server.sh
+/stop_server.sh
+/reassets.sh
+
+/shared
