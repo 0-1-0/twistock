@@ -10,3 +10,9 @@ development:
 test:
   <<: *common
   database: twitterexchange_test
+
+production:
+  adapter: postgresql
+  username: ENV['DB_USERNAME']
+  password: ENV['DB_PASSWORD']
+  database: ENV['DB_NAME']
