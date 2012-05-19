@@ -18,9 +18,8 @@ class UserUpdateWorker
 
     retweets, tweets, followers = retweets.to_f, tweets.to_f, followers.to_f
     
-    beta = 25.0
     user.share_price = ( 
-      retweets * (1.0 + retweets/(tweets+1) ) + (followers/beta) + 1
+      270.0*( retweets/(tweets+1) ) + 22.0*retweets + followers/2.0 + 100.0
       ).round
     user.save
   end
