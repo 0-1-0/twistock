@@ -163,7 +163,8 @@ class User < ActiveRecord::Base
   end
 
   def update_stats
-    if Time.now - (last_update || Time.now - 7.hours) > 6.hours
+    #if Time.now - (last_update || Time.now - 7.hours) > 6.hours
+    if Time.now - (last_update || Time.now - 7.hours) > 2.minutes
       User.transaction do
         self.last_update = Time.now
         self.share_price = nil
