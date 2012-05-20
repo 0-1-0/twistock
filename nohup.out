@@ -1,0 +1,93 @@
+2012-04-24T16:45:33Z 58280 TID-ouhzltfg8 INFO: Booting sidekiq 1.1.3 with Redis at redis://localhost:6379/0
+2012-04-24T16:45:33Z 58280 TID-ouhzltfg8 INFO: Running in ruby 1.9.3p194 (2012-04-20 revision 35410) [x86_64-darwin11.3.0]
+2012-04-24T16:48:04Z 58303 TID-oxha418fs INFO: Booting sidekiq 1.1.3 with Redis at redis://localhost:6379/0
+2012-04-24T16:48:04Z 58303 TID-oxha418fs INFO: Running in ruby 1.9.3p194 (2012-04-20 revision 35410) [x86_64-darwin11.3.0]
+2012-04-24T16:48:04Z 58303 TID-oxh9lfh04 INFO: Starting processing, hit Ctrl-C to stop
+2012-04-25T15:27:51Z 58303 TID-oxha56dh0 INFO: UserUpdateWorker MSG-oxha56bp4 start
+2012-04-25T15:27:54Z 58303 TID-oxha56dh0 INFO: UserUpdateWorker MSG-oxha56bp4 done: 3.39 sec
+2012-04-25T15:31:00Z 58303 TID-oxha56dh0 INFO: UserUpdateWorker MSG-oxha0v31g start
+2012-04-25T15:31:03Z 58303 TID-oxha56dh0 INFO: UserUpdateWorker MSG-oxha0v31g done: 3.408 sec
+2012-04-25T15:34:10Z 58303 TID-oxha56dh0 INFO: UserUpdateWorker MSG-oxha4ciqg start
+2012-04-25T15:34:15Z 58303 TID-oxha56dh0 INFO: UserUpdateWorker MSG-oxha4ciqg done: 4.387 sec
+2012-04-25T16:03:52Z 58303 TID-oxha56dh0 INFO: UserUpdateWorker MSG-oxha4efeo start
+2012-04-25T16:03:54Z 58303 TID-oxha56dh0 INFO: UserUpdateWorker MSG-oxha4efeo done: 1.739 sec
+2012-04-26T22:03:16Z 58303 TID-oxh9lfh04 INFO: Shutting down
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: Error fetching message: Connection refused - Unable to connect to Redis on localhost:6379
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: /Users/N/.rvm/gems/ruby-1.9.3-p194/gems/redis-2.2.2/lib/redis/client.rb:236:in `rescue in establish_connection'
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: Error fetching message: Connection refused - Unable to connect to Redis on localhost:6379
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: /Users/N/.rvm/gems/ruby-1.9.3-p194/gems/redis-2.2.2/lib/redis/client.rb:236:in `rescue in establish_connection'
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: Error fetching message: Connection refused - Unable to connect to Redis on localhost:6379
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: /Users/N/.rvm/gems/ruby-1.9.3-p194/gems/redis-2.2.2/lib/redis/client.rb:236:in `rescue in establish_connection'
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: Error fetching message: Connection refused - Unable to connect to Redis on localhost:6379
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: /Users/N/.rvm/gems/ruby-1.9.3-p194/gems/redis-2.2.2/lib/redis/client.rb:236:in `rescue in establish_connection'
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: Error fetching message: Connection refused - Unable to connect to Redis on localhost:6379
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: /Users/N/.rvm/gems/ruby-1.9.3-p194/gems/redis-2.2.2/lib/redis/client.rb:236:in `rescue in establish_connection'
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: Error fetching message: Connection refused - Unable to connect to Redis on localhost:6379
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: /Users/N/.rvm/gems/ruby-1.9.3-p194/gems/redis-2.2.2/lib/redis/client.rb:236:in `rescue in establish_connection'
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: Error fetching message: Connection refused - Unable to connect to Redis on localhost:6379
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: /Users/N/.rvm/gems/ruby-1.9.3-p194/gems/redis-2.2.2/lib/redis/client.rb:236:in `rescue in establish_connection'
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: Fetcher#fetch died
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: task was terminated
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: /Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/task.rb:23:in `suspend'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/actor.rb:204:in `sleep'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid.rb:45:in `sleep'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid.rb:259:in `sleep'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:44:in `rescue in block in fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:31:in `block in fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/util.rb:42:in `watchdog'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:30:in `fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:39:in `block (2 levels) in fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/actor.rb:186:in `block (2 levels) in after'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/task.rb:45:in `block in initialize'
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: Fetcher#fetch died
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: task was terminated
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: /Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/task.rb:23:in `suspend'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/actor.rb:204:in `sleep'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid.rb:45:in `sleep'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid.rb:259:in `sleep'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:44:in `rescue in block in fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:31:in `block in fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/util.rb:42:in `watchdog'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:30:in `fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:39:in `block (2 levels) in fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/actor.rb:186:in `block (2 levels) in after'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/task.rb:45:in `block in initialize'
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: Fetcher#fetch died
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: task was terminated
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: /Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/task.rb:23:in `suspend'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/actor.rb:204:in `sleep'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid.rb:45:in `sleep'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid.rb:259:in `sleep'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:44:in `rescue in block in fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:31:in `block in fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/util.rb:42:in `watchdog'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:30:in `fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:39:in `block (2 levels) in fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/actor.rb:186:in `block (2 levels) in after'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/task.rb:45:in `block in initialize'
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: Fetcher#fetch died
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: task was terminated
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: /Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/task.rb:23:in `suspend'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/actor.rb:204:in `sleep'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid.rb:45:in `sleep'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid.rb:259:in `sleep'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:44:in `rescue in block in fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:31:in `block in fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/util.rb:42:in `watchdog'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:30:in `fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:39:in `block (2 levels) in fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/actor.rb:186:in `block (2 levels) in after'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/task.rb:45:in `block in initialize'
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: Fetcher#fetch died
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: task was terminated
+2012-04-26T22:03:16Z 58303 TID-oxha3m0kg ERROR: /Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/task.rb:23:in `suspend'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/actor.rb:204:in `sleep'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid.rb:45:in `sleep'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid.rb:259:in `sleep'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:44:in `rescue in block in fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:31:in `block in fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/util.rb:42:in `watchdog'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:30:in `fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/sidekiq-1.1.3/lib/sidekiq/fetch.rb:39:in `block (2 levels) in fetch'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/actor.rb:186:in `block (2 levels) in after'
+/Users/N/.rvm/gems/ruby-1.9.3-p194/gems/celluloid-0.10.0/lib/celluloid/task.rb:45:in `block in initialize'
