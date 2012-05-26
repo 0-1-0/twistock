@@ -18,10 +18,11 @@ class UserUpdateWorker
 
     retweets, tweets, followers = retweets.to_f, tweets.to_f, followers.to_f
     
-    base_price = 270.0*( retweets/(tweets+1) ) + 22.0*retweets + followers/2.0 + 100.0
-
-    user.base_price  = base_price.round    
-    user.share_price = (((user.my_shares.sum(:count) + 1000)/1000)*base_price).round
+    user.base_price = (      
+      270.0*( retweets/(tweets+1) ) + 22.0*retweets + followers/2.0 + 100.0
+      ).round
+    
+    user.share_price = (((user.my_shares.sum(:count) + 1000)/1000)*user.base_price).round
     
     user.save
   end
