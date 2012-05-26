@@ -1,0 +1,77 @@
+[35579] 26 May 21:59:25 * Server started, Redis version 2.4.11
+[35579] 26 May 21:59:25 * DB loaded from disk: 0 seconds
+[35579] 26 May 21:59:25 * The server is now ready to accept connections on port 6379
+[35579] 26 May 21:59:25 - DB 0: 9 keys (0 volatile) in 24 slots HT.
+[35579] 26 May 21:59:25 - 0 clients connected (0 slaves), 923536 bytes in use
+[35579] 26 May 21:59:30 - DB 0: 9 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 21:59:30 - 0 clients connected (0 slaves), 923536 bytes in use
+[35579] 26 May 21:59:35 - DB 0: 9 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 21:59:35 - 0 clients connected (0 slaves), 923536 bytes in use
+[35579] 26 May 21:59:40 - DB 0: 9 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 21:59:40 - 0 clients connected (0 slaves), 923536 bytes in use
+[35579] 26 May 21:59:41 - Accepted 127.0.0.1:65488
+[35579] 26 May 21:59:42 - Accepted 127.0.0.1:65490
+[35579] 26 May 21:59:42 - Accepted 127.0.0.1:65493
+[35579] 26 May 21:59:42 - Accepted 127.0.0.1:65495
+[35579] 26 May 21:59:42 - Accepted 127.0.0.1:65497
+[35579] 26 May 21:59:42 - Accepted 127.0.0.1:65499
+[35579] 26 May 21:59:42 - Accepted 127.0.0.1:65501
+[35579] 26 May 21:59:42 - Accepted 127.0.0.1:65504
+[35579] 26 May 21:59:42 - Accepted 127.0.0.1:65506
+[35579] 26 May 21:59:42 - Accepted 127.0.0.1:65508
+[35579] 26 May 21:59:42 - Accepted 127.0.0.1:65511
+[35579] 26 May 21:59:42 - Accepted 127.0.0.1:65512
+[35579] 26 May 21:59:45 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 21:59:45 - 12 clients connected (0 slaves), 1030592 bytes in use
+[35579] 26 May 21:59:50 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 21:59:50 - 12 clients connected (0 slaves), 1030592 bytes in use
+[35579] 26 May 21:59:55 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 21:59:55 - 12 clients connected (0 slaves), 1030592 bytes in use
+[35579] 26 May 22:00:00 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:00:00 - 12 clients connected (0 slaves), 1030576 bytes in use
+[35579] 26 May 22:00:05 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:00:05 - 12 clients connected (0 slaves), 1030592 bytes in use
+[35579] 26 May 22:00:10 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:00:10 - 12 clients connected (0 slaves), 1030592 bytes in use
+[35579] 26 May 22:00:15 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:00:15 - 12 clients connected (0 slaves), 1030576 bytes in use
+[35579] 26 May 22:00:20 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:00:20 - 12 clients connected (0 slaves), 1030592 bytes in use
+[35579] 26 May 22:00:25 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:00:25 - 12 clients connected (0 slaves), 1030592 bytes in use
+[35579] 26 May 22:00:30 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:00:30 - 12 clients connected (0 slaves), 1030576 bytes in use
+[35579] 26 May 22:00:35 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:00:35 - 12 clients connected (0 slaves), 1030592 bytes in use
+[35579] 26 May 22:00:40 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:00:40 - 12 clients connected (0 slaves), 1030592 bytes in use
+[35579] 26 May 22:00:45 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:00:45 - 12 clients connected (0 slaves), 1030576 bytes in use
+[35579] 26 May 22:00:50 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:00:50 - 12 clients connected (0 slaves), 1030592 bytes in use
+[35579] 26 May 22:00:55 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:00:55 - 12 clients connected (0 slaves), 1030592 bytes in use
+[35579] 26 May 22:01:00 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:01:00 - 12 clients connected (0 slaves), 1030576 bytes in use
+[35579] 26 May 22:01:05 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:01:05 - 12 clients connected (0 slaves), 1030592 bytes in use
+[35579] 26 May 22:01:10 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:01:10 - 12 clients connected (0 slaves), 1030592 bytes in use
+[35579] 26 May 22:01:16 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:01:16 - 12 clients connected (0 slaves), 1030576 bytes in use
+[35579] 26 May 22:01:21 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:01:21 - 12 clients connected (0 slaves), 1030592 bytes in use
+[35579] 26 May 22:01:26 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:01:26 - 12 clients connected (0 slaves), 1030592 bytes in use
+[35579] 26 May 22:01:31 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:01:31 - 12 clients connected (0 slaves), 1030576 bytes in use
+[35579] 26 May 22:01:36 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:01:36 - 12 clients connected (0 slaves), 1030592 bytes in use
+[35579] 26 May 22:01:41 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:01:41 - 12 clients connected (0 slaves), 1030592 bytes in use
+[35579] 26 May 22:01:46 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:01:46 - 12 clients connected (0 slaves), 1030592 bytes in use
+[35579] 26 May 22:01:51 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:01:51 - 12 clients connected (0 slaves), 1030592 bytes in use
+[35579] 26 May 22:01:56 - DB 0: 10 keys (0 volatile) in 16 slots HT.
+[35579] 26 May 22:01:56 - 12 clients connected (0 slaves), 1030592 bytes in use

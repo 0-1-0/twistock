@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
                   name:     auth.info.name,
                   nickname: auth.info.nickname,
                   avatar:   auth.info.image,
-                  money:    1000,
+                  money:    20000,
                   shares:   1000,
                   retention_shares: 200
                 ).update_stats
@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
                   name:     info.name,
                   nickname: info.screen_name,
                   avatar:   info.profile_image_url,
-                  money:    1000,
+                  money:    20000,
                   shares:   1000,
                   retention_shares: 200
                 ).update_stats
@@ -79,6 +79,8 @@ class User < ActiveRecord::Base
         self.portfel << BlockOfShares.new(count: count, owner_id: owner.id)
       end
 
+      owner.update_share_price
+
       owner.save!
       self.save!
     end
@@ -118,6 +120,8 @@ class User < ActiveRecord::Base
 
       cost = count*owner.share_price
       self.money += cost
+
+      owner.update_share_price
 
       owner.save
       self.save
@@ -160,6 +164,15 @@ class User < ActiveRecord::Base
       action: 'sell')
 
     self
+  end
+
+  def update_share_price
+      User.transaction do
+         #Мультипликатор, имитирующий рыночный спрос/предложение
+         self.share_price = nil
+         self.share_price = (((self.my_shares.sum(:count) + 1000)/1000)*self.base_price).round
+         self.save   
+      end
   end
 
   def update_stats

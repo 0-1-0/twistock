@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120424110645) do
+ActiveRecord::Schema.define(:version => 20120526172513) do
 
   create_table "block_of_shares", :force => true do |t|
     t.integer  "owner_id"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20120424110645) do
     t.integer  "retention_shares"
     t.integer  "share_price"
     t.datetime "last_update"
+    t.integer  "base_price"
   end
 
   add_index "users", ["name"], :name => "index_users_on_name", :unique => true
