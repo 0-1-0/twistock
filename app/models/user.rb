@@ -170,7 +170,7 @@ class User < ActiveRecord::Base
       User.transaction do
          #Мультипликатор, имитирующий рыночный спрос/предложение
          self.share_price = nil
-         self.share_price = (((self.my_shares.sum(:count) + 1000)/1000)*self.base_price).round
+         self.share_price = (((self.my_shares.sum(:count) + 1000)/1000.0)*self.base_price).round
          self.save   
       end
   end
