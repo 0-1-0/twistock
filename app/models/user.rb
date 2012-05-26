@@ -169,7 +169,7 @@ class User < ActiveRecord::Base
   def update_share_price
       User.transaction do
          #Мультипликатор, имитирующий рыночный спрос/предложение
-         self.share_price = nil
+         #self.share_price = nil
          self.share_price = (((self.my_shares.sum(:count) + 1000)/1000.0)*self.base_price).round
          self.save   
       end
@@ -180,7 +180,7 @@ class User < ActiveRecord::Base
     if Time.now - (last_update || Time.now - 7.hours) > 2.minutes
       User.transaction do
         self.last_update = Time.now
-        self.share_price = nil
+        #self.share_price = nil
         self.save
       end
       UserUpdateWorker.perform_async(nickname)
