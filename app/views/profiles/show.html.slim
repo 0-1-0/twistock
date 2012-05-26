@@ -53,7 +53,7 @@
     table.table
       tr
         th Share Price
-        td
+        td#price-box
           - if @user.share_price
             = @user.share_price
           - else
@@ -115,20 +115,22 @@
 
     - if @my_page
       h2 History
-      table.table.table-bordered
-        tr
-          th #
-          th Action
-          th Date
-          th Shares Owner
-          th Shares Count
-          th Cost
-        - i = @user.transactions.count + 1
-        - @user.transactions.each do |t|
+      table#history-datatable.table.table-bordered
+        thead
           tr
-            td= i -= 1
-            td= t.action
-            td= I18n.l t.created_at, format: :short
-            td= link_to t.owner.nickname, profile_path(t.owner)
-            td= t.count
-            td= t.cost
+            th #
+            th Action
+            th Date
+            th Shares Owner
+            th Shares Count
+            th Cost
+        tbody
+          - i = @user.transactions.count + 1
+          - @user.transactions.each do |t|
+            tr
+              td= i -= 1
+              td= t.action
+              td= I18n.l t.created_at, format: :short
+              td= link_to t.owner.nickname, profile_path(t.owner)
+              td= t.count
+              td= t.cost
