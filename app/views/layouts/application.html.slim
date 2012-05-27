@@ -54,7 +54,10 @@ html lang="en"
                         span =transaction.user.name
                         h5 #{transaction.action} #{transaction.count} shares of
                         span =transaction.owner.name
-                        span.label.label-success   $ #{transaction.cost}
+                        - if transaction.action == 'buy'
+                          span.label.label-success   $ #{transaction.cost}
+                        - else
+                          span.label.label-important  $ #{transaction.cost}
               .item
                 ul.thumbnails
                   - Transaction.find(:all, :limit=> 6, :offset => 5, :order=> 'cost desc').each do |transaction|
@@ -64,6 +67,10 @@ html lang="en"
                         span =transaction.user.name
                         h5 #{transaction.action} #{transaction.count} of
                         span =transaction.owner.name
+                        - if transaction.action == 'buy'
+                          span.label.label-success   $ #{transaction.cost}
+                        - else
+                          span.label.label-important  $ #{transaction.cost}
         = yield
     
       footer
