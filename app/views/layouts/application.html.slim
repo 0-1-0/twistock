@@ -31,31 +31,6 @@ html lang="en"
                 = text_field_tag 'nickname', nil, class: 'search-query', placeholder: 'enter a nickname'
 
     .container
-
-      h2 Top deals
-      .carousel
-        .carousel-inner
-          .active.item
-            ul.thumbnails
-              - Transaction.find(:all, :limit=> 6, :order=> 'cost desc').each do |transaction|
-                li.span2
-                  .thumbnail
-                    = image_tag transaction.user.avatar, :style=>'float:right'
-                    span =transaction.user.name
-                    h5 #{transaction.action} #{transaction.count} shares of
-                    span =transaction.owner.name
-                    span.label.label-success   $ #{transaction.cost}
-          .item
-            ul.thumbnails
-              - Transaction.find(:all, :limit=> 6, :offset => 5, :order=> 'cost desc').each do |transaction|
-                li.span2
-                  .thumbnail
-                    = image_tag transaction.user.avatar, :style=>'float:right'
-                    span =transaction.user.name
-                    h5 #{transaction.action} #{transaction.count} of
-                    span =transaction.owner.name
-
-
       .content
         - if notice
           .alert.alert-info
@@ -65,6 +40,30 @@ html lang="en"
           .alert.alert-error
             a.close data-dismiss="alert" x
             = alert
+
+        - if signed_in?
+          h2 Top deals
+          .carousel
+            .carousel-inner
+              .active.item
+                ul.thumbnails
+                  - Transaction.find(:all, :limit=> 6, :order=> 'cost desc').each do |transaction|
+                    li.span2
+                      .thumbnail
+                        = image_tag transaction.user.avatar, :style=>'float:right'
+                        span =transaction.user.name
+                        h5 #{transaction.action} #{transaction.count} shares of
+                        span =transaction.owner.name
+                        span.label.label-success   $ #{transaction.cost}
+              .item
+                ul.thumbnails
+                  - Transaction.find(:all, :limit=> 6, :offset => 5, :order=> 'cost desc').each do |transaction|
+                    li.span2
+                      .thumbnail
+                        = image_tag transaction.user.avatar, :style=>'float:right'
+                        span =transaction.user.name
+                        h5 #{transaction.action} #{transaction.count} of
+                        span =transaction.owner.name
         = yield
     
       footer
