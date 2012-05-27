@@ -1,3 +1,26 @@
+h1 Top users:
+.carousel
+  .carousel-inner
+    .active.item
+      ul.thumbnails
+        - User.find(:all, :limit=> 6, :order=> 'share_price desc').each do |user|
+          li.span2
+            .thumbnail
+              = image_tag user.avatar, :style=>'float:right'
+              span =user.name
+              h5 Share price:
+              span.label.label-success   $ #{user.share_price}
+    .item
+      ul.thumbnails
+        - User.find(:all, :limit=> 6, :offset => 4, :order=> 'share_price desc').each do |user|
+          li.span2
+            .thumbnail
+              = image_tag user.avatar, :style=>'float:right'
+              span =user.name
+              h5 Share price:
+              span.label.label-success   $ #{user.share_price}
+
+
 .hero-unit
   h1 Hello there!
   p
@@ -9,3 +32,4 @@
     | proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
   p
     = link_to 'Sign in!', '/auth/twitter', class: 'btn btn-large btn-primary'
+
