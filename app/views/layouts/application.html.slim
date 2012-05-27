@@ -31,6 +31,8 @@ html lang="en"
                 = text_field_tag 'nickname', nil, class: 'search-query', placeholder: 'enter a nickname'
 
     .container
+      - if signed_in?
+        .subnav.subnav-fixed Сделки
 
       .content
         - if notice
