@@ -8,6 +8,11 @@ class User < ActiveRecord::Base
 
   attr_accessible :avatar, :money, :name, :nickname, :uid, :shares, :retention_shares
 
+
+  START_MONEY            = 20000
+  START_SHARES           = 1000
+  START_RETENTION_SHARES = 200
+
   def to_param
     nickname
   end
@@ -17,9 +22,9 @@ class User < ActiveRecord::Base
                   name:     auth.info.name,
                   nickname: auth.info.nickname,
                   avatar:   auth.info.image,
-                  money:    20000,
-                  shares:   1000,
-                  retention_shares: 200
+                  money:    User::START_MONEY,
+                  shares:   User::START_SHARES,
+                  retention_shares: User::START_RETENTION_SHARES
                 ).update_stats
   end
 
@@ -33,9 +38,9 @@ class User < ActiveRecord::Base
                   name:     info.name,
                   nickname: info.screen_name,
                   avatar:   info.profile_image_url,
-                  money:    20000,
-                  shares:   1000,
-                  retention_shares: 200
+                  money:    User::START_MONEY,
+                  shares:   User::START_SHARES,
+                  retention_shares: User::START_RETENTION_SHARES
                 ).update_stats
   end
 
@@ -118,10 +123,11 @@ class User < ActiveRecord::Base
         bos.save
       end
 
+      #Важен порядок следующих 3 операций!
+      owner.update_share_price
+
       cost = count*owner.share_price
       self.money += cost
-
-      owner.update_share_price
 
       owner.save
       self.save
@@ -168,9 +174,16 @@ class User < ActiveRecord::Base
 
   def update_share_price
       User.transaction do
-         #Мультипликатор, имитирующий рыночный спрос/предложение
-         #self.share_price = nil
-         self.share_price = (((self.my_shares.sum(:count) + 1000)/1000.0)*self.base_price).round
+         self.share_price = (
+            (
+              #Мультипликатор, имитирующий рыночный спрос/предложение
+              (self.my_shares.sum(:count) + User::START_SHARES)/(1.0*User::START_SHARES)
+              
+            )*
+              #Базовая цена аккаунта твиттера
+              self.base_price
+          ).round
+         
          self.save   
       end
   end
