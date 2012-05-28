@@ -6,13 +6,18 @@ class ProfilesController < ApplicationController
       return redirect_to not_found_path
     end
     @my_page  = (@user == current_user)
+
+    respond_to do |format|
+      format.html
+      format.json{
+        render :json => @user.to_json
+      }
+    end
   end
 
   def search
     redirect_to profile_path(params[:nickname])
   end
 
-  def price
-    @user = User.find_by_nickname(params[:id])
-  end
+
 end
