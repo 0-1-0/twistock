@@ -23,7 +23,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 
   # даешь TB! (из всех прочих это наиболее мощный и приятный GEM)
-  gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+  gem "twitter-bootstrap-rails"#, "~> 2.0.1.0"
+  #gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 end
 
 gem 'jquery-rails'
