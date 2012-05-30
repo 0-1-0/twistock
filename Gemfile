@@ -31,6 +31,7 @@ gem 'jquery-rails'
 # Оказывается SLIM быстрее HAML
 gem 'slim'
 gem 'slim-rails'
+gem 'less-rails'
 
 # simple_form избавляет от головной боли
 gem 'simple_form'
