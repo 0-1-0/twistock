@@ -1,4 +1,4 @@
-:concurrency:  10
+:concurrency:  1
 :queues:
   - [user_updates, 2]
   - [default, 1]
