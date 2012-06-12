@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
 
       #доп эмиссия (если нужно)
       if owner.available_shares < User::START_SHARES
-        owner.shares += User::START_SHARES
+        owner.shares *= 2
         owner.save
       end
 
@@ -190,8 +190,11 @@ class User < ActiveRecord::Base
               self.base_price
           ).round
          
-         self.save   
-      end
+         self.save  
+
+         #Сохраняем цену в историю
+         PriceStamp.create(user:self, price:self.share_price) 
+      end      
   end
 
   def update_stats
