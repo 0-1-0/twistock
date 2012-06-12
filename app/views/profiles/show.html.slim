@@ -125,7 +125,10 @@
           td= i += 1
           td= link_to bos.holder.nickname, profile_path(bos.holder)
           td= bos.count
-          td= bos.count * @user.share_price
+          - if @user.share_price
+            td= bos.count * @user.share_price
+          - else
+            td Calculating..
 
     - if @my_page
       h2 History
