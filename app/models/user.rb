@@ -108,7 +108,12 @@ class User < ActiveRecord::Base
       self
   end
 
-  def sell_shares(owner, count, user_redirect_to)
+  def sell_shares_and_redirect_to_owner(owner,count)
+    self.sell_shares(owner,count)
+    owner
+  end
+
+  def sell_shares(owner, count)
     raise "You cannot sell 0 shares" unless count > 0
 
     cost = 0
@@ -146,7 +151,7 @@ class User < ActiveRecord::Base
       count:  count,
       cost:   cost)
 
-    user_redirect_to
+    self
   end
 
   def sell_retention(count)
