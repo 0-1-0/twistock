@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   START_MONEY            = 20000
   START_SHARES           = 1000
-  START_RETENTION_SHARES = 200
+  START_RETENTION_SHARES = 1000
 
   def to_param
     nickname
@@ -82,6 +82,12 @@ class User < ActiveRecord::Base
         bos.save
       else
         self.portfel << BlockOfShares.new(count: count, owner_id: owner.id)
+      end
+
+      #доп эмиссия (если нужно)
+      if owner.available_shares < User::START_SHARES
+        owner.shares += User::START_SHARES
+        owner.save
       end
 
       owner.update_share_price
