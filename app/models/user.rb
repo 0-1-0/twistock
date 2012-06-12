@@ -180,6 +180,8 @@ class User < ActiveRecord::Base
 
   def update_share_price
       User.transaction do
+        prev_price = self.share_price
+
          self.share_price = (
             (
               #Мультипликатор, имитирующий рыночный спрос/предложение
@@ -193,7 +195,7 @@ class User < ActiveRecord::Base
          self.save  
 
          #Сохраняем цену в историю
-         PriceStamp.create(user:self, price:self.share_price) 
+         PriceStamp.create(user:self, previous_price:prev_price, price:self.share_price, delta: self.share_price - prev_price) 
       end      
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120612092026) do
+ActiveRecord::Schema.define(:version => 20120612092910) do
 
   create_table "block_of_shares", :force => true do |t|
     t.integer  "owner_id"
@@ -27,8 +27,10 @@ ActiveRecord::Schema.define(:version => 20120612092026) do
   create_table "price_stamps", :force => true do |t|
     t.integer  "user_id"
     t.integer  "price"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "previous_price"
+    t.integer  "delta"
   end
 
   add_index "price_stamps", ["user_id"], :name => "index_price_stamps_on_user_id"
