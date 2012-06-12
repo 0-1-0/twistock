@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :my_shares,      class_name: BlockOfShares, foreign_key: :owner_id
 
   has_many :transactions
+  has_many :price_stamps
 
   attr_accessible :avatar, :money, :name, :nickname, :uid, :shares, :retention_shares
 

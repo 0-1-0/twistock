@@ -7,6 +7,9 @@ class ProfilesController < ApplicationController
     end
     @my_page  = (@user == current_user)
 
+    #Определяем популярность пользователя
+    @popularity = @user.price_stamps.where("created_at >= :time", {:time => Time.now - 42000}).count
+
     respond_to do |format|
       format.html
       format.json{
