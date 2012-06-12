@@ -5,13 +5,12 @@ class User < ActiveRecord::Base
   has_many :my_shares,      class_name: BlockOfShares, foreign_key: :owner_id
 
   has_many :transactions
-  has_many :price_stamps
 
   attr_accessible :avatar, :money, :name, :nickname, :uid, :shares, :retention_shares
 
 
   START_MONEY            = 20000
-  START_SHARES           = 1000
+  START_SHARES           = 2048
   START_RETENTION_SHARES = 1000
 
   def to_param
@@ -183,6 +182,17 @@ class User < ActiveRecord::Base
       User.transaction do
         prev_price = self.share_price
 
+
+
+        prev_hour_transaction = self.transactions.where("created_at <= :time", {:time => Time.now - 3600}).last
+
+        if prev_hour_transaction
+          prev_hour_price = prev_hour_transaction.price
+        else
+          prev_hour_price = self.share_price
+        end
+
+
          self.share_price = (
             (
               #Мультипликатор, имитирующий рыночный спрос/предложение
@@ -192,11 +202,10 @@ class User < ActiveRecord::Base
               #Базовая цена аккаунта твиттера
               self.base_price
           ).round
+
+         self.hour_delta_price = self.share_price - prev_hour_price
          
          self.save  
-
-         #Сохраняем цену в историю
-         PriceStamp.create(user:self, previous_price:prev_price, price:self.share_price, delta: self.share_price - prev_price) 
       end      
   end
 

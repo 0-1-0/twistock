@@ -8,7 +8,11 @@ class ProfilesController < ApplicationController
     @my_page  = (@user == current_user)
 
     #Определяем популярность пользователя
-    @popularity = @user.price_stamps.where("created_at >= :time", {:time => Time.now - 42000}).count
+    if @user.transaction 
+      @popularity = @user.transaction.where("created_at >= :time", {:time => Time.now - 42000}).count
+    else 
+      @popularity = 0
+    end
 
     respond_to do |format|
       format.html
