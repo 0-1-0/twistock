@@ -89,7 +89,7 @@
           - else
             a.btn.btn-success data-toggle="modal" href="#buy_modal" Buy
 
-            a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_2modal" data-owner=@user data-count=current_user.portfel.where('owner_id'=>@user.id).last.count Sell
+            a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_2modal" data-owner=@user.nickname data-count=@user.my_shares.where(:holder_id=>current_user.id).sum(count) Sell
     table.table
       tr
         th Share Price
