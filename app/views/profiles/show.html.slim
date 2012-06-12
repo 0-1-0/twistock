@@ -5,7 +5,7 @@
   = simple_form_for 'buy', url: buy_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
     .modal-body
       = f.input :owner, as: :hidden, input_html: {value: @user.nickname}
-      = f.input :count, as: :integer, input_html: {value: @user.available_shares}
+      = f.input :count, as: :integer, input_html: {value: (0.9*current_user.money/@user.share_price).to_i}
     .modal-footer
       a.btn data-dismiss="modal" Close
       = f.button :submit, 'Buy', class: 'btn btn-success'
@@ -76,7 +76,7 @@
           - else
             a.btn.btn-success data-toggle="modal" href="#buy_modal" Buy
 
-            a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-count=current_user.portfel.find(:owner_id=>@user.id).count Sell
+            a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-count=current_user.portfel.where('owner_id'=>@user.id).count Sell
     table.table
       tr
         th Share Price
