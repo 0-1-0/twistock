@@ -81,7 +81,7 @@ html lang="en"
           .carousel-inner
             .active.item
               ul.thumbnails
-                - User.find(:all, :limit=> 6, :order=> 'hour_delta_price desc').each do |user|
+                - User.where("hour_delta_price >= 0").find(:all, :limit=> 6, :order=> 'hour_delta_price desc').each do |user|
                   li.span2
                     .thumbnail
                       = image_tag user.avatar, :style=>'float:right'
@@ -91,7 +91,7 @@ html lang="en"
                       span.label.label-success   $ #{user.hour_delta_price || 0}
             .item
               ul.thumbnails
-                - User.find(:all, :limit=> 6, :offset=> 5, :order=> 'hour_delta_price desc').each do |user|
+                - User.where("hour_delta_price >= 0").find(:all, :limit=> 6, :offset=> 5, :order=> 'hour_delta_price desc').each do |user|
                   li.span2
                     .thumbnail
                       = image_tag user.avatar, :style=>'float:right'
@@ -106,7 +106,7 @@ html lang="en"
           .carousel-inner
             .active.item
               ul.thumbnails
-                - User.find(:all, :limit=> 6, :order=> 'hour_delta_price asc').each do |user|
+                - User.where("hour_delta_price < 0").find(:all, :limit=> 6, :order=> 'hour_delta_price asc').each do |user|
                   li.span2
                     .thumbnail
                       = image_tag user.avatar, :style=>'float:right'
@@ -116,7 +116,7 @@ html lang="en"
                       span.label.label-danger   $ #{user.hour_delta_price || 0}
             .item
               ul.thumbnails
-                - User.find(:all, :limit=> 6, :offset=> 5, :order=> 'hour_delta_price asc').each do |user|
+                - User.where("hour_delta_price < 0").find(:all, :limit=> 6, :offset=> 5, :order=> 'hour_delta_price asc').each do |user|
                   li.span2
                     .thumbnail
                       = image_tag user.avatar, :style=>'float:right'

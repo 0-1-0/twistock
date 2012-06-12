@@ -30,6 +30,7 @@
       = f.input :owner, as: :hidden
       = f.input :owner, disabled: true
       = f.input :count, as: :integer, input_html: {value: @user.available_shares}
+      = f.input :user_redirect_to, as: :hidden
     .modal-footer
       a.btn data-dismiss="modal" Close
       = f.button :submit, 'Sell', class: 'btn btn-success'
@@ -76,7 +77,7 @@
           - else
             a.btn.btn-success data-toggle="modal" href="#buy_modal" Buy
 
-            a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-count=current_user.portfel.where('owner_id'=>@user.id).sum(:count) Sell
+            a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-count=current_user.portfel.where('owner_id'=>@user.id).sum(:count) data-user_redirect_to=@user Sell
     table.table
       tr
         th Share Price
@@ -112,7 +113,7 @@
           td= bos.total_cost
           - if @my_page
             td
-              a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=bos.owner.nickname data-count=bos.count Sell
+              a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=bos.owner.nickname data-count=bos.count data-user_redirect_to=@user Sell
 
     h2 Shares Holders
     table.table.table-bordered
