@@ -108,11 +108,6 @@ class User < ActiveRecord::Base
       self
   end
 
-  def sell_shares_and_redirect_to_owner(owner,count)
-    self.sell_shares(owner,count)
-    owner
-  end
-
   def sell_shares(owner, count)
     raise "You cannot sell 0 shares" unless count > 0
 
