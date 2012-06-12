@@ -9,7 +9,7 @@ class ProfilesController < ApplicationController
 
     #Определяем популярность пользователя
     if @user.transaction 
-      @popularity = @user.transaction.where("created_at >= :time", {:time => Time.now - 42000}).count
+      @popularity = Transaction.where(:owner_id=>@user.id).where("created_at >= :time", {:time => Time.now - 42000}).count
     else 
       @popularity = 0
     end

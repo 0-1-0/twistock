@@ -49,17 +49,17 @@
             .progress.progress-danger
               .bar[style="width: 25%"]
 
-          - if @popularity >= 5 and @popularity < 25
+          - if @popularity >= 5 and @popularity < 10
             h3 Popularity: low
             .progress.progress-warning
               .bar[style="width: 35%"]
 
-          - if @popularity >= 25 and @popularity < 100
+          - if @popularity >= 10 and @popularity < 50
             h3 Popularity: medium
             .progress.progress-success
               .bar[style="width: 50%"]
 
-          - if @popularity > 100 and @popularity < 1000
+          - if @popularity > 50 and @popularity < 1000
             h3 Popularity: high
             .progress.progress-success
               .bar[style="width: 80%"]
