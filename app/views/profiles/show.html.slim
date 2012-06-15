@@ -27,7 +27,7 @@
     h3 Sell Shares
   = simple_form_for 'sell', url: sell_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
     .modal-body
-      = f.input :owner, as: :hidden {value: @user.nickname}
+      = f.input :owner, as: :hidden, input_html:{value: @user.nickname}
       = f.input :owner, disabled: true
       = f.input :count, as: :integer, input_html: {value: @user.available_shares}
     .modal-footer
