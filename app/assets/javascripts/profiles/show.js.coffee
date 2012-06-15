@@ -6,7 +6,10 @@ $(document).ready ->
 
   window.setInterval (->
     $.get $(location).attr("href") + ".json", ((data) ->
-      $("#price-box").html (if data.user.share_price then data.user.share_price else 'calculating...')
+      if data.user.share_price 
+        $("#buy_modal #buy_count").val Math.round(0.9*current_money/data.user.share_price) 
+        $("#price-box").html data.user.share_price
+
     ), "json"
 
   ), 1000

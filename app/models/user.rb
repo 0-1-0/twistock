@@ -95,10 +95,10 @@ class User < ActiveRecord::Base
 
       owner.save!
       self.save!
-    end
 
-    # теперь фигачим транзакцию
-    Transaction.create(
+
+      # теперь фигачим транзакцию
+      Transaction.create(
       user:   self,
       owner:  owner,
       action: 'buy',
@@ -106,8 +106,9 @@ class User < ActiveRecord::Base
       price:  price,
       cost:   cost)
 
-    # return self
+      # return self
       self
+    end
   end
 
   def sell_shares(owner, count)
@@ -225,4 +226,6 @@ class User < ActiveRecord::Base
       self
     end
   end
+
+
 end
