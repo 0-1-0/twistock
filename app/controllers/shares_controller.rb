@@ -17,13 +17,14 @@ class SharesController < ApplicationController
   def sell
     p = params[:sell]
     owner = User.find_by_nickname(p[:owner])
+    origin = User.find_by_nickname(p[:origin])
     count = p[:count].to_i
 
     begin
       current_user.sell_shares owner, count
-      redirect_to profile_path(@user), notice: 'Success!'
+      redirect_to profile_path(origin), notice: 'Success!'
     rescue
-      redirect_to profile_path(@user), alert: $!.to_s
+      redirect_to profile_path(origin), alert: $!.to_s
     end
   end
 

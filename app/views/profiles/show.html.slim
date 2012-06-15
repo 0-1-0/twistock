@@ -25,11 +25,12 @@
   .modal-header
     a.close data-dismiss="modal" x
     h3 Sell Shares
-  = simple_form_for 'sell', url: sell_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
+  = simple_form_for 'sell', url: sell_shares_path(@user), html: { class: 'form-horizontal' } do |f|
     .modal-body
-      = f.input :owner, as: :hidden, input_html:{value: @user.nickname}
+      = f.input :owner, as: :hidden
+      = f.input :origin, as: :hidden
       = f.input :owner, disabled: true
-      = f.input :count, as: :integer, input_html: {value: @user.available_shares}
+      = f.input :count, as: :integer
     .modal-footer
       a.btn data-dismiss="modal" Close
       = f.button :submit, 'Sell', class: 'btn btn-success'
@@ -75,7 +76,8 @@
             a.btn.btn-success data-toggle="modal" href="#sell_retention_modal" Sell Retention Shares
           - else
             a.btn.btn-success data-toggle="modal" href="#buy_modal" Buy
-            a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-count=current_user.portfel.where(:owner_id=>@user.id).last.count Sell
+            - if current_user.portfel.where(:owner_id=>@user.id).last
+              a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-origin=@user.nickname  data-count=current_user.portfel.where(:owner_id=>@user.id).last.count Sell
     
     table.table
       tr
@@ -112,7 +114,7 @@
           td= bos.total_cost
           - if @my_page
             td
-              a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=bos.owner.nickname data-count=bos.count Sell
+              a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=bos.owner.nickname data-count=bos.count data-origin=current_user.nickname Sell
 
     h2 Shares Holders
     table.table.table-bordered

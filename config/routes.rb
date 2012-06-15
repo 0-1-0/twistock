@@ -12,10 +12,12 @@ Twitterexchange::Application.routes.draw do
   resources :profiles, only: [:show] do
     collection do
       post 'search'
+      post 'show'
     end
   end
 
   resources :shares, only: [] do
+    resources :profiles
     collection do
       post 'buy'
       post 'sell'
