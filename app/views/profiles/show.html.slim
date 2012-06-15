@@ -30,7 +30,7 @@
       = f.input :owner, as: :hidden
       = f.input :profile, as: :hidden
       = f.input :owner, disabled: true
-      /= f.input :profile, disabled: true
+      = f.input :profile, disabled: true
       = f.input :count, as: :integer, input_html: {value: @user.available_shares}
     .modal-footer
       a.btn data-dismiss="modal" Close
@@ -114,7 +114,7 @@
           td= bos.total_cost
           - if @my_page
             td
-              a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=bos.owner.nickname data-count=bos.count data-profile=current_user.nickname Sell
+              a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=bos.owner.nickname data-count=bos.count data-profile=@user.nickname Sell
 
     h2 Shares Holders
     table.table.table-bordered
