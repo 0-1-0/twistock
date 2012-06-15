@@ -30,6 +30,7 @@
       = f.input :owner, as: :hidden
       = f.input :profile, as: :hidden
       = f.input :owner, disabled: true
+      = f.input :profile, disabled: true
       = f.input :count, as: :integer, input_html: {value: @user.available_shares}
     .modal-footer
       a.btn data-dismiss="modal" Close

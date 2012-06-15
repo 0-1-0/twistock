@@ -18,7 +18,7 @@ class SharesController < ApplicationController
     p = params[:sell]
     owner = User.find_by_nickname(p[:owner])
     count = p[:count].to_i
-    profile = p[:profile]
+    profile = User.find_by_nickname(p[:profile])
 
     begin
       current_user.sell_shares owner, count
