@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   attr_accessible :avatar, :money, :name, :nickname, :uid, :shares, :retention_shares
 
 
-  START_MONEY            = 20000
+  START_MONEY            = 50000
   START_SHARES           = 2048
   START_RETENTION_SHARES = 1000
 
