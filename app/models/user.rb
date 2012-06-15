@@ -187,7 +187,7 @@ class User < ActiveRecord::Base
         prev_hour_transaction = self.transactions.where("created_at <= :time", {:time => Time.now - 3600}).last
 
         if prev_hour_transaction
-          prev_hour_price = prev_hour_transaction.price
+          prev_hour_price = (prev_hour_transaction.cost/prev_hour_transaction.count).to_i
         else
           prev_hour_price = self.share_price
         end
