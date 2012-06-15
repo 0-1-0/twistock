@@ -176,6 +176,7 @@ class User < ActiveRecord::Base
       owner:  self,
       count:  count,
       cost:   cost,
+      price:  self.share_price
       action: 'sell')
 
     self
