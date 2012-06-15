@@ -18,13 +18,13 @@ class SharesController < ApplicationController
     p = params[:sell]
     owner = User.find_by_nickname(p[:owner])
     count = p[:count].to_i
-    profile = User.find_by_nickname(p[:profile])
+    user_page = User.find_by_nickname(p[:user_page])
 
     begin
       current_user.sell_shares owner, count
-      redirect_to profile_path(profile), notice: 'Success!'
+      redirect_to profile_path(user_page), notice: 'Success!'
     rescue
-      redirect_to profile_path(profile), alert: $!.to_s
+      redirect_to profile_path(user_page), alert: $!.to_s
     end
   end
 
