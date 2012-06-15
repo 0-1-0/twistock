@@ -68,6 +68,7 @@ class User < ActiveRecord::Base
       raise "Shares aren't ready for selling yet" unless owner.share_price
       raise "You cannot buy shares with zero price" if owner.share_price == 0
 
+      price = owner.share_price
       cost = count*owner.share_price
 
       # проверяем на валидность
@@ -102,6 +103,7 @@ class User < ActiveRecord::Base
       owner:  owner,
       action: 'buy',
       count:  count,
+      price:  price,
       cost:   cost)
 
     # return self
@@ -129,9 +131,9 @@ class User < ActiveRecord::Base
         bos.save
       end
 
-      #Важен порядок следующих 3 операций!
+      #Важен порядок следующих 4 операций!
       owner.update_share_price
-
+      price = owner.share_price
       cost = count*owner.share_price
       self.money += cost
 
@@ -144,6 +146,7 @@ class User < ActiveRecord::Base
       owner:  owner,
       action: 'sell',
       count:  count,
+      price:  price,
       cost:   cost)
 
     self
@@ -187,7 +190,7 @@ class User < ActiveRecord::Base
         prev_hour_transaction = self.transactions.where("created_at <= :time", {:time => Time.now - 3600}).last
 
         if prev_hour_transaction
-          prev_hour_price = (prev_hour_transaction.cost/prev_hour_transaction.count).to_i
+          prev_hour_price = prev_hour_transaction.price
         else
           prev_hour_price = self.share_price
         end

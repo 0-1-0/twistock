@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120612102826) do
+ActiveRecord::Schema.define(:version => 20120615153950) do
 
   create_table "block_of_shares", :force => true do |t|
     t.integer  "owner_id"
@@ -41,8 +41,9 @@ ActiveRecord::Schema.define(:version => 20120612102826) do
     t.integer  "owner_id"
     t.integer  "count"
     t.integer  "cost"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "price",      :default => 0
   end
 
   add_index "transactions", ["action"], :name => "index_transactions_on_action"
