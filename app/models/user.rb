@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_many :portfel,        class_name: BlockOfShares, foreign_key: :holder_id
   has_many :my_shares,      class_name: BlockOfShares, foreign_key: :owner_id
 
+  has_many :history,        class_name: Transaction, foreign_key: :owner_id
+
   has_many :transactions
 
   attr_accessible :avatar, :money, :name, :nickname, :uid, :shares, :retention_shares
@@ -68,7 +70,6 @@ class User < ActiveRecord::Base
       raise "Shares aren't ready for selling yet" unless owner.share_price
       raise "You cannot buy shares with zero price" if owner.share_price == 0
 
-      price = owner.share_price
       cost = count*owner.share_price
 
       # проверяем на валидность
@@ -98,13 +99,15 @@ class User < ActiveRecord::Base
 
 
       # теперь фигачим транзакцию
-      Transaction.create(
+      t = Transaction.create(
       user:   self,
       owner:  owner,
       action: 'buy',
       count:  count,
-      price:  price,
+      price:  owner.share_price,
       cost:   cost)
+      t.price = owner.share_price
+      t.save
 
       # return self
       self
@@ -132,9 +135,8 @@ class User < ActiveRecord::Base
         bos.save
       end
 
-      #Важен порядок следующих 4 операций!
+      #Важен порядок следующих 3 операций!
       owner.update_share_price
-      price = owner.share_price
       cost = count*owner.share_price
       self.money += cost
 
@@ -142,13 +144,15 @@ class User < ActiveRecord::Base
       self.save
     end
 
-    Transaction.create(
+    t = Transaction.create(
       user:   self,
       owner:  owner,
       action: 'sell',
       count:  count,
-      price:  price,
+      price:  owner.share_price,
       cost:   cost)
+    t.price = owner.share_price
+    t.save
 
     self
   end
@@ -172,7 +176,7 @@ class User < ActiveRecord::Base
       self.save
     end
 
-    Transaction.create(
+    t = Transaction.create(
       user:   self,
       owner:  self,
       count:  count,
@@ -189,7 +193,7 @@ class User < ActiveRecord::Base
 
 
 
-        prev_hour_transaction = self.transactions.where("created_at <= :time", {:time => Time.now - 3600}).last
+        prev_hour_transaction = Transaction.where(:user_id=>self.id).where("created_at <= :time", {:time => Time.now - 3600}).last
 
         if prev_hour_transaction
           prev_hour_price = prev_hour_transaction.price

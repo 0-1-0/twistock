@@ -79,6 +79,9 @@ end
 # Use unicorn as the app server
 gem 'unicorn'
 
+#для графиков
+gem 'gchartrb', :require => 'google_chart'
+
 
 # Deploy with Capistrano
 # gem 'capistrano'

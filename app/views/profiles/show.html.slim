@@ -83,6 +83,7 @@ javascript:
               .span1
                 a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-origin=@user.nickname data-count=current_user.portfel.where(:owner_id=>@user.id).last.count Sell
     
+  .span8 
     table.table
       tr
         th Share Price
@@ -159,3 +160,8 @@ javascript:
               td= link_to t.owner.nickname, profile_path(t.owner)
               td= t.count
               td= t.cost
+  .span4
+    span[hidden="true"]= data = @user.history.collect(&:price)
+    span[hidden="true"]= lc = GoogleChart::LineChart.new("400x200", "Price History", false)
+    span[hidden="true"]= lc.data "price", data, '7777dd'
+    = image_tag lc.to_url

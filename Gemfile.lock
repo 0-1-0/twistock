@@ -74,6 +74,7 @@ GEM
     faraday (0.8.1)
       multipart-post (~> 1.1)
     ffi (1.0.11)
+    gchartrb (0.8)
     gherkin (2.11.0)
       json (>= 1.4.6)
     hashie (1.2.0)
@@ -243,6 +244,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   factory_girl_rails
+  gchartrb
   jquery-rails
   less-rails
   looksee
