@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(:version => 20120612102826) do
   add_index "block_of_shares", ["holder_id"], :name => "index_block_of_shares_on_holder_id"
   add_index "block_of_shares", ["owner_id"], :name => "index_block_of_shares_on_owner_id"
 
+  create_table "price_stamps", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "price"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "previous_price"
+    t.integer  "delta"
+  end
+
+  add_index "price_stamps", ["user_id"], :name => "index_price_stamps_on_user_id"
+
   create_table "transactions", :force => true do |t|
     t.integer  "user_id"
     t.string   "action"
