@@ -76,7 +76,7 @@
             a.btn.btn-success data-toggle="modal" href="#sell_retention_modal" Sell Retention Shares
           - else
             a.btn.btn-success data-toggle="modal" href="#buy_modal" Buy
-            a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=@user data-profile=@user data-count=current_user.portfel.where(:owner_id=>@user.id).last.count Sell
+            a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-profile=@user.nickname data-count=current_user.portfel.where(:owner_id=>@user.id).last.count Sell
     
     table.table
       tr
@@ -113,7 +113,7 @@
           td= bos.total_cost
           - if @my_page
             td
-              a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=bos.owner.nickname data-count=bos.count Sell data-profile=current_user
+              a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=bos.owner.nickname data-count=bos.count data-profile=current_user.nickname Sell
 
     h2 Shares Holders
     table.table.table-bordered
