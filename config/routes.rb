@@ -22,7 +22,6 @@ Twitterexchange::Application.routes.draw do
       post 'buy'
       post 'sell'
       post 'sell_retention'
-      post 'sell2'
     end
   end
   
