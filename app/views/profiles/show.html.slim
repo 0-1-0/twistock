@@ -6,6 +6,7 @@
     .modal-body
       = f.input :owner, as: :hidden, input_html: {value: @user.nickname}
       = f.input :count, as: :integer, input_html: {value: (0.9*current_user.money/(@user.share_price || current_user.money)).to_i}
+      = f.input :total_cost, :disabled => true
     .modal-footer
       a.btn data-dismiss="modal" Close
       = f.button :submit, 'Buy', class: 'btn btn-success'
@@ -20,6 +21,7 @@ javascript:
   = simple_form_for 'sell', url: sell_retention_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
     .modal-body
       = f.input :count, as: :integer, input_html: {value: @user.retention_shares}
+      = f.input :total_cost, :disabled => true
     .modal-footer
       a.btn data-dismiss="modal" Close
       = f.button :submit, 'Sell', class: 'btn btn-success'
@@ -33,56 +35,59 @@ javascript:
       = f.input :owner, as: :hidden, input_html: {value: @user.nickname}
       = f.input :origin, as: :hidden, input_html: {value: @user.nickname}
       = f.input :count, as: :integer, input_html: {value:  @user.available_shares}
+      = f.input :total_cost, :disabled => true
     .modal-footer
       a.btn data-dismiss="modal" Close
       = f.button :submit, 'Sell', class: 'btn btn-success'
 
-.row
+.row.well
   .span1#avatar_div
     = image_tag @user.avatar
-  .span11
+  .span5
     .page-header
       h1
         = @user.nickname
         |&nbsp
         small= @user.name
-        .pull-right
-          - if @popularity < 5
-            h3 Popularity: abandoned
-            .progress.progress-danger
-              .bar[style="width: 25%"]
 
-          - if @popularity >= 5 and @popularity < 10
-            h3 Popularity: low
-            .progress.progress-warning
-              .bar[style="width: 35%"]
+      /h3#available_shares #{@user.available_shares} shares available
+  .span2.btn-group
+    |&nbsp
+    - if @my_page
+      a.btn.btn-success.btn-large data-toggle="modal" href="#sell_retention_modal" Sell Retention Shares
+    - else
+      a.btn.btn-success.btn-large data-toggle="modal" href="#buy_modal" Buy
+      - if current_user.portfel.where(:owner_id=>@user.id).last
+        a.btn.btn-info.btn-sell.btn-large data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-origin=@user.nickname data-count=current_user.portfel.where(:owner_id=>@user.id).last.count Sell
+      -else
+        a.btn.btn-large.disabled Sell
 
-          - if @popularity >= 10 and @popularity < 50
-            h3 Popularity: medium
-            .progress.progress-success
-              .bar[style="width: 50%"]
+  .span2
+    - if @popularity < 5
+      h3 Popularity: abandoned
+      .progress.progress-danger
+        .bar[style="width: 25%"]
 
-          - if @popularity > 50 and @popularity < 1000
-            h3 Popularity: high
-            .progress.progress-success
-              .bar[style="width: 80%"]
+    - if @popularity >= 5 and @popularity < 10
+      h3 Popularity: low
+      .progress.progress-warning
+        .bar[style="width: 35%"]
 
-          - if @popularity >= 1000 
-            h3 Popularity: superstar
-            .progress.progress-info
-              .bar[style="width: 100%"]
+    - if @popularity >= 10 and @popularity < 50
+      h3 Popularity: medium
+      .progress.progress-success
+        .bar[style="width: 50%"]
 
-          /h3#available_shares #{@user.available_shares} shares available
-          |&nbsp
-          - if @my_page
-            a.btn.btn-success data-toggle="modal" href="#sell_retention_modal" Sell Retention Shares
-          - else
-            .span1
-              a.btn.btn-success data-toggle="modal" href="#buy_modal" Buy
-            - if current_user.portfel.where(:owner_id=>@user.id).last
-              .span1
-                a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-origin=@user.nickname data-count=current_user.portfel.where(:owner_id=>@user.id).last.count Sell
-    
+    - if @popularity > 50 and @popularity < 1000
+      h3 Popularity: high
+      .progress.progress-success
+        .bar[style="width: 80%"]
+
+    - if @popularity >= 1000 
+      h3 Popularity: superstar
+      .progress.progress-info
+        .bar[style="width: 100%"]
+.row   
   .span8 
     table.table
       tr
@@ -163,5 +168,6 @@ javascript:
   .span4
     span[hidden="true"]= data = @user.history.collect(&:price)
     span[hidden="true"]= lc = GoogleChart::LineChart.new("400x200", "Price History", false)
-    span[hidden="true"]= lc.data "price", data, '7777dd'
+    span[hidden="true"]= lc.show_legend = false
+    span[hidden="true"]= lc.data "price", data, '51c1ee'
     = image_tag lc.to_url
