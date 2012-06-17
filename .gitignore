@@ -16,6 +16,9 @@
 /log
 /tmp
 
+/*.out
+/log/*.out
+
 /public/assets
 
 /.rvmrc

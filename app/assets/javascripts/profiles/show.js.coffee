@@ -18,7 +18,7 @@ $(document).ready ->
     curr_count = $('#sell_modal #sell_count').val()
     base_price = $('#sell_modal #sell_base_price').val()
 
-    $('#sell_modal #sell_total_cost').val  curr_count*base_price*(curr_total_count-curr_count+2000.0)/2000.0
+    $('#sell_modal #sell_total_cost').val  Math.round(curr_count*base_price*(curr_total_count-curr_count+2000.0)/2000.0)
     
 
   setinterval_id = window.setInterval (->
