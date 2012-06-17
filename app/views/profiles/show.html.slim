@@ -6,7 +6,8 @@
     .modal-body
       = f.input :owner, as: :hidden, input_html: {value: @user.nickname}
       = f.input :count, as: :integer, input_html: {value: (0.9*current_user.money/(@user.share_price || current_user.money)).to_i}
-      = f.input :total_cost, :disabled => true
+      = f.input :price, as: :hidden, input_html: {value: @user.share_price}
+      = f.input :total_cost, :disabled => true, input_html: {value: (0.9*current_user.money/(@user.share_price || current_user.money)).to_i*@user.share_price}
     .modal-footer
       a.btn data-dismiss="modal" Close
       = f.button :submit, 'Buy', class: 'btn btn-success'
@@ -20,8 +21,9 @@ javascript:
     h3 Sell Retention Shares
   = simple_form_for 'sell', url: sell_retention_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
     .modal-body
-      = f.input :count, as: :integer, input_html: {value: @user.retention_shares}
-      = f.input :total_cost, :disabled => true
+      = f.input :count, as: :integer, input_html: {value: current_user.retention_shares}
+      = f.input :price, as: :hidden, input_html: {value: current_user.share_price}
+      = f.input :total_cost, :disabled => true, input_html: {value: current_user.retention_shares*current_user.share_price}
     .modal-footer
       a.btn data-dismiss="modal" Close
       = f.button :submit, 'Sell', class: 'btn btn-success'
@@ -35,7 +37,10 @@ javascript:
       = f.input :owner, as: :hidden, input_html: {value: @user.nickname}
       = f.input :origin, as: :hidden, input_html: {value: @user.nickname}
       = f.input :count, as: :integer, input_html: {value:  @user.available_shares}
-      = f.input :total_cost, :disabled => true
+      = f.input :total_count, as: :hidden, input_html: {value: @user.my_shares.sum(:count)}
+      = f.input :price, as: :hidden, input_html: {value: @user.share_price}
+      = f.input :base_price, as: :hidden, input_html: {value: @user.base_price}
+      = f.input :total_cost, :disabled => true, input_html: {value: @user.available_shares*@user.share_price}
     .modal-footer
       a.btn data-dismiss="modal" Close
       = f.button :submit, 'Sell', class: 'btn btn-success'
@@ -56,9 +61,9 @@ javascript:
     - if @my_page
       a.btn.btn-success.btn-large data-toggle="modal" href="#sell_retention_modal" Sell Retention Shares
     - else
-      a.btn.btn-success.btn-large data-toggle="modal" href="#buy_modal" Buy
+      a.btn.btn-buy.btn-success.btn-large data-toggle="modal" href="#buy_modal" data-price=@user.share_price Buy
       - if current_user.portfel.where(:owner_id=>@user.id).last
-        a.btn.btn-info.btn-sell.btn-large data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-origin=@user.nickname data-count=current_user.portfel.where(:owner_id=>@user.id).last.count Sell
+        a.btn.btn-sell.btn-info.btn-sell.btn-large data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-origin=@user.nickname data-count=current_user.portfel.where(:owner_id=>@user.id).last.count Sell
       -else
         a.btn.btn-large.disabled Sell
 
