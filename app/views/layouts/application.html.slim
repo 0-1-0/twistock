@@ -1,6 +1,13 @@
 doctype html
 html lang="en"
   head
+
+  
+    /Да, здесь ломается assets pipeline, но это НУЖНО чтобы все работало. Грязный хак, но без него никуда
+    =javascript_include_tag 'jquery.js' 
+
+
+
     meta charset="utf-8"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     title= content_for?(:title) ? yield(:title) : "Twistock"

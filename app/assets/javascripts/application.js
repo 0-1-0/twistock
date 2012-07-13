@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require jquery.dataTables.min
 //= require bootstrap
+//= require DT_bootstrap
 //= require bootstrap-actions
-//= require_tree .
+//= require interactive
