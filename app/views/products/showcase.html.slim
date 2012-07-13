@@ -5,7 +5,7 @@
   = simple_form_for 'buy', url: buy_product_path(current_user), html: { class: 'form-horizontal' } do |f|
     .modal-body
       = f.input :product_name, :disabled => true
-      = f.input :total_cost
+      = f.input :total_cost, :disabled => true
     .modal-footer
       a.btn data-dismiss="modal" Close
       = f.button :submit, 'Buy', class: 'btn btn-success'

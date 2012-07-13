@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120713141348) do
+ActiveRecord::Schema.define(:version => 20120713144050) do
 
   create_table "block_of_shares", :force => true do |t|
     t.integer  "owner_id"
@@ -47,6 +47,9 @@ ActiveRecord::Schema.define(:version => 20120713141348) do
     t.integer  "total_cost"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "product_id"
+    t.integer  "user_id"
+    t.string   "status"
   end
 
   create_table "products", :force => true do |t|
