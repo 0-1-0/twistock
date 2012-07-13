@@ -2,9 +2,16 @@
   .modal-header
     a.close data-dismiss="modal" x
     h3 Buy Product
-  = simple_form_for 'buy', url: buy_product_path(current_user), html: { class: 'form-horizontal' } do |f|
+  = simple_form_for 'buy', url: '/', html: { class: 'form-horizontal' } do |f|
     .modal-body
-      = f.input :product_name, :disabled => true
+      = f.input :product, :disabled => true
+      = f.input :country, :as=> :string
+      = f.input :postal_code, :as=> :string
+      = f.input :city, :as=> :string
+      = f.input :full_name, :as=> :string
+      = f.input :address, :as=> :string
+      = f.input :email, :as=> :string
+      = f.input :phone, :as=> :string
       = f.input :total_cost, :disabled => true
     .modal-footer
       a.btn data-dismiss="modal" Close
@@ -23,7 +30,14 @@ ul.thumbnails
         h4 = product.name
         p = product.description.html_safe
 
-      .pull-right        
-        .btn.btn-small
-          h5 $ #{product.price}
-          = link_to 'Buy this item'
+      .pull-right[style="height:60px"] 
+        - if current_user.money >= product.price      
+        a.btn.btn-small data-toggle="modal" href="#buy_modal"
+          h5 $ #{product.price}          
+          | Buy this item
+        - else
+          .btn.btn-small.disabled 
+            h5 $ #{product.price}
+            You haven't enough money to buy this item. Try to earn more!
+          
+

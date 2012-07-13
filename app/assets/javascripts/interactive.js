@@ -1,3 +1,5 @@
+//Infinite scroll
+
 var page = 0,
   loading = false, initial = true;
 
