@@ -41,93 +41,17 @@ html lang="en"
             a.close data-dismiss="alert" x
             = alert
 
-        h2 Top deals
-        .carousel.slide
-          .carousel-inner
-            .active.item
-              ul.thumbnails
-                - Transaction.find(:all, :limit=> 6, :order=> 'cost desc').each do |transaction|
-                  li.span2
-                    .thumbnail
-                      = image_tag transaction.user.avatar, :style=>'float:right'
-                      span 
-                        a[href="/profiles/#{transaction.user.nickname}"] =transaction.user.name
-                      h5 #{transaction.action} #{transaction.count} shares of
-                      span 
-                        a[href="/profiles/#{transaction.owner.nickname}"] =transaction.owner.name 
-                        //#=transaction.owner.name
-                      - if transaction.action == 'buy'
-                        span.label.label-success   $ #{transaction.cost}
-                      - else
-                        span.label.label-important  $ #{transaction.cost}
-            .item
-              ul.thumbnails
-                - Transaction.find(:all, :limit=> 6, :offset => 5, :order=> 'cost desc').each do |transaction|
-                  li.span2
-                    .thumbnail
-                      = image_tag transaction.user.avatar, :style=>'float:right'
-                      span
-                        a[href="/profiles/#{transaction.user.nickname}"] =transaction.user.name
-                      h5 #{transaction.action} #{transaction.count} of
-                      span
-                        a[href="/profiles/#{transaction.owner.nickname}"] =transaction.owner.name
-                      - if transaction.action == 'buy'
-                        span.label.label-success   $ #{transaction.cost}
-                      - else
-                        span.label.label-important  $ #{transaction.cost}
-
-        h2 Top Users (delta)
-        .carousel.slide
-          .carousel-inner
-            .active.item
-              ul.thumbnails
-                - User.where("hour_delta_price >= 0").find(:all, :limit=> 6, :order=> 'hour_delta_price desc').each do |user|
-                  li.span2
-                    .thumbnail
-                      = image_tag user.avatar, :style=>'float:right'
-                      span 
-                        a[href="/profiles/#{user.nickname}"] =user.name
-                      h5 Delta price:
-                      span.label.label-success   $ #{user.hour_delta_price || 0}
-            .item
-              ul.thumbnails
-                - User.where("hour_delta_price >= 0").find(:all, :limit=> 6, :offset=> 5, :order=> 'hour_delta_price desc').each do |user|
-                  li.span2
-                    .thumbnail
-                      = image_tag user.avatar, :style=>'float:right'
-                      span
-                        a[href="/profiles/#{user.nickname}"] =user.name
-                      h5 Delta price:
-                      span.label.label-success   $ #{user.hour_delta_price || 0}
-
-
-        h2 Top Users (-delta)
-        .carousel.slide
-          .carousel-inner
-            .active.item
-              ul.thumbnails
-                - User.where("hour_delta_price < 0").find(:all, :limit=> 6, :order=> 'hour_delta_price asc').each do |user|
-                  li.span2
-                    .thumbnail
-                      = image_tag user.avatar, :style=>'float:right'
-                      span
-                        a[href="/profiles/#{user.nickname}"] =user.name
-                      h5 Delta price:
-                      span.label.label-danger   $ #{user.hour_delta_price || 0}
-            .item
-              ul.thumbnails
-                - User.where("hour_delta_price < 0").find(:all, :limit=> 6, :offset=> 5, :order=> 'hour_delta_price asc').each do |user|
-                  li.span2
-                    .thumbnail
-                      = image_tag user.avatar, :style=>'float:right'
-                      span
-                        a[href="/profiles/#{user.nickname}"] =user.name
-                      h5 Delta price:
-                      span.label.label-danger   $ #{user.hour_delta_price || 0}
         = yield
+
+        .raw
+          .span12
+            /Блок с топовыми юзерами
+            hr
+            h1 Explore trends
+            hr
+            
+            ul.thumbnails.market-infinite
     
-      footer
-        p &copy; TwitterExchange 2012
     /!
       Javascripts
       \==================================================

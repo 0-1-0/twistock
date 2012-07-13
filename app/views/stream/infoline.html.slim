@@ -1,0 +1,54 @@
+- User.find(:all, :limit=> 6, :order=> 'share_price desc', :offset=> params[:page].to_i*6).each do |user|
+  li.span2.well.market-info-box
+    .label.label-success
+      h5 #Most valuable
+    .thumbnail.well
+      = image_tag user.avatar, :style=>'float:right'
+      span =user.name
+      h5 Share price:
+      span.label.label-success $ #{user.share_price}              
+    a[href="/profiles/#{user.nickname}"] #{user.name} profile
+
+- User.where("hour_delta_price >= 0").find(:all, :limit=> 6, :order=> 'hour_delta_price desc', :offset=> params[:page].to_i*6).each do |user|
+  li.span2.well
+    .label.label-info
+      h5 #Most booming
+    .thumbnail
+      = image_tag user.avatar, :style=>'float:right'
+      span 
+        a[href="/profiles/#{user.nickname}"] =user.name
+      h5 Delta price:
+      span.label.label-success   $ #{user.hour_delta_price || 0}
+    br
+    a[href="/profiles/#{user.nickname}"] #{user.name} profile
+
+- User.where("hour_delta_price < 0").find(:all, :limit=> 6, :order=> 'hour_delta_price asc', :offset=> params[:page].to_i*6).each do |user|
+  li.span2.well
+    .label.label-important
+      h5 #Most falling
+    .thumbnail
+      = image_tag user.avatar, :style=>'float:right'
+      span
+        a[href="/profiles/#{user.nickname}"] =user.name
+      h5 Delta price:
+      span.label.label-danger   $ #{user.hour_delta_price || 0}
+
+- Transaction.find(:all, :limit=> 6, :order=> 'cost desc', :offset=> params[:page].to_i*6).each do |transaction|
+  li.span2.well
+    .label.label-warning
+      h5 #Best deal
+    .thumbnail
+      span
+        = image_tag transaction.user.avatar
+        a[href="/profiles/#{transaction.user.nickname}"] =transaction.user.name
+      span
+        h5 #{transaction.action} #{transaction.count} shares of
+      span
+        = image_tag transaction.owner.avatar
+        a[href="/profiles/#{transaction.owner.nickname}"] =transaction.owner.name
+    span[style="float:right"]
+      h6 Total cost:
+      - if transaction.action == 'buy'
+        span.label.label-success   $ #{transaction.cost}
+      - else
+        span.label.label-important  $ #{transaction.cost}

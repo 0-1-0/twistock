@@ -45,7 +45,7 @@ javascript:
       a.btn data-dismiss="modal" Close
       = f.button :submit, 'Sell', class: 'btn btn-success'
 
-.row.well
+.row.well[style="position:fixed; top: 40px"]
   .span1#avatar_div
     = image_tag @user.avatar
   .span5
@@ -67,7 +67,7 @@ javascript:
       -else
         a.btn.btn-large.disabled Sell
 
-  .span2
+  .span4
     - if @popularity < 5
       h3 Popularity: abandoned
       .progress.progress-danger
@@ -92,7 +92,7 @@ javascript:
       h3 Popularity: superstar
       .progress.progress-info
         .bar[style="width: 100%"]
-.row   
+.row[style="margin-top:150px"] 
   .span8 
     table.table
       tr

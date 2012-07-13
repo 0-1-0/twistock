@@ -1,28 +1,5 @@
-h2 Top users (price)
-.carousel
-  .carousel-inner
-    .active.item
-      ul.thumbnails
-        - User.find(:all, :limit=> 6, :order=> 'share_price desc').each do |user|
-          li.span2
-            .thumbnail
-              = image_tag user.avatar, :style=>'float:right'
-              span =user.name
-              h5 Share price:
-              span.label.label-success   $ #{user.share_price}
-    .item
-      ul.thumbnails
-        - User.find(:all, :limit=> 6, :offset => 4, :order=> 'share_price desc').each do |user|
-          li.span2
-            .thumbnail
-              = image_tag user.avatar, :style=>'float:right'
-              span =user.name
-              h5 Share price:
-              span.label.label-success   $ #{user.share_price}
-
-
 .hero-unit
-  h1 Hello there!
+  h1 Hello!
   p
     | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
     | tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,

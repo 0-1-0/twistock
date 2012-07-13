@@ -1,4 +1,6 @@
 Twitterexchange::Application.routes.draw do
+  get "stream/infoline"
+
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
