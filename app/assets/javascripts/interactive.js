@@ -12,7 +12,7 @@ function updateInfoLine(){
 	}
 
 
-	if(nearBottomOfPage() || initial) {
+	if((nearBottomOfPage() || initial) && page < 4) {
 
 	  loading=true;
 	  $.ajax({

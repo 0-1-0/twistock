@@ -1,4 +1,7 @@
 Twitterexchange::Application.routes.draw do
+  match '/products/showcase', :controller => 'products', :action => 'showcase'
+  resources :products
+
   get "stream/infoline"
 
   require 'sidekiq/web'

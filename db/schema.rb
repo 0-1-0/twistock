@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120615153950) do
+ActiveRecord::Schema.define(:version => 20120713131828) do
 
   create_table "block_of_shares", :force => true do |t|
     t.integer  "owner_id"
@@ -34,6 +34,14 @@ ActiveRecord::Schema.define(:version => 20120615153950) do
   end
 
   add_index "price_stamps", ["user_id"], :name => "index_price_stamps_on_user_id"
+
+  create_table "products", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "price"
+  end
 
   create_table "transactions", :force => true do |t|
     t.integer  "user_id"
