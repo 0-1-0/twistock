@@ -1,7 +1,7 @@
 class CreateProductInvoices < ActiveRecord::Migration
   def change
     create_table :product_invoices do |t|
-      t.Product :product
+      t.string :product
       t.string :country
       t.string :postal_code
       t.string :city
@@ -9,6 +9,7 @@ class CreateProductInvoices < ActiveRecord::Migration
       t.string :address
       t.string :email
       t.string :phone
+      t.integer :total_cost
 
       t.timestamps
     end

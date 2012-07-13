@@ -1,3 +1,3 @@
 class ProductInvoice < ActiveRecord::Base
-  attr_accessible :address, :city, :country, :email, :full_name, :phone, :postal_code, :product
+  attr_accessible :address, :city, :country, :email, :full_name, :phone, :postal_code, :product, :total_cost
 end
