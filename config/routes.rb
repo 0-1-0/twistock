@@ -1,4 +1,6 @@
 Twitterexchange::Application.routes.draw do
+  get "ping/pong"
+
   match '/products/showcase', :controller => 'products', :action => 'showcase'
   resources :products
 
@@ -29,6 +31,9 @@ Twitterexchange::Application.routes.draw do
       post 'sell_retention'
     end
   end
+
+  resources :product_invoices
+  match '/product_invoices/create', :to => 'product_invoices#create'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

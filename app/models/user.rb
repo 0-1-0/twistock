@@ -60,24 +60,6 @@ class User < ActiveRecord::Base
     shares - retention_shares
   end
 
-  def buy_product(product, country, postal_code, city, full_name, address, email, phone)
-    User.transaction do
-      self.money -= product.price
-
-      ProductInvoice.create(
-        user: self,
-        product: product,
-        total_cost: product.price,
-        postal_code: postal_code,
-        city: city,
-        full_name: full_name,
-        address: address,
-        email: email,
-        phone: phone
-      )
-    end
-  end
-
   def buy_shares(owner, count)
     raise "You cannot buy 0 shares" unless count > 0
 
