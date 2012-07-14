@@ -5,10 +5,3 @@
 require File.expand_path('../config/application', __FILE__)
 
 Twitterexchange::Application.load_tasks
-
-begin
-  require 'vlad'
-  Vlad.load :scm => :git, :app => :thin
-rescue LoadError
-	#do nothing
-end

@@ -82,10 +82,5 @@ gem 'unicorn'
 #для графиков
 gem 'gchartrb', :require => 'google_chart'
 
-
-# Deploy with awesome Vlad the Deployer
-gem 'vlad'
-gem 'vlad-git'
-
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
