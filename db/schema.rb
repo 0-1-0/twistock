@@ -79,14 +79,14 @@ ActiveRecord::Schema.define(:version => 20120713144050) do
     t.string   "name"
     t.string   "nickname"
     t.string   "avatar"
-    t.integer  "money"
+    t.integer  "money",      :default => 0
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.integer  "shares"
     t.integer  "retention_shares"
-    t.integer  "share_price"
+    t.integer  "share_price",      :default => 0
     t.datetime "last_update"
-    t.integer  "base_price"
+    t.integer  "base_price",      :default => 0
     t.integer  "hour_delta_price"
   end
 
