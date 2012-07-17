@@ -40,7 +40,7 @@ javascript:
       = f.input :total_count, as: :hidden, input_html: {value: @user.my_shares.sum(:count)}
       = f.input :price, as: :hidden, input_html: {value: @user.share_price.to_i}
       = f.input :base_price, as: :hidden, input_html: {value: @user.base_price}
-      = f.input :total_cost, :disabled => true, input_html: {value: 0)}
+      = f.input :total_cost, :disabled => true, input_html: {value: @user.share_price.to_i*@user.available_shares}
     .modal-footer
       a.btn data-dismiss="modal" Close
       = f.button :submit, 'Sell', class: 'btn btn-success'
