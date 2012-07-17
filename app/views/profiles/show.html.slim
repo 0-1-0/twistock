@@ -7,7 +7,7 @@
       = f.input :owner, as: :hidden, input_html: {value: @user.nickname}
       = f.input :count, as: :integer, input_html: {value: (0.9*current_user.money/@user.share_price.to_i).to_i}
       = f.input :price, as: :hidden, input_html: {value: @user.share_price.to_i}
-      = f.input :total_cost, :disabled => true, input_html: {value: (0.9*current_user.money).to_i}
+      = f.input :total_cost, :disabled => true, input_html: {value: 0.9*(current_user.money.to_i)}
     .modal-footer
       a.btn data-dismiss="modal" Close
       = f.button :submit, 'Buy', class: 'btn btn-success'
