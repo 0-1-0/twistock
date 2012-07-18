@@ -18,7 +18,7 @@ javascript:
 #sell_retention_modal.modal.fade
   .modal-header
     a.close data-dismiss="modal" x
-    h3 Sell Retention Shares
+    h3 Sell your starting shares
   = simple_form_for 'sell', url: sell_retention_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
     .modal-body
       = f.input :count, as: :integer, input_html: {value: current_user.retention_shares}
@@ -59,7 +59,8 @@ javascript:
   .span2.btn-group
     |&nbsp
     - if @my_page
-      a.btn.btn-success.btn-large data-toggle="modal" href="#sell_retention_modal" Sell Retention Shares
+      - if @user.retention_shares > 0
+        a.btn.btn-success.btn-large data-toggle="modal" href="#sell_retention_modal" Sell your starting shares
     - else
       a.btn.btn-buy.btn-success.btn-large data-toggle="modal" href="#buy_modal" data-price=(@user.share_price.to_i) Buy
       - if current_user.portfel.where(:owner_id=>@user.id).last
@@ -102,9 +103,10 @@ javascript:
             = @user.share_price
           - else
             | calculating...
-      tr
-        th Retention Shares
-        td = @user.retention_shares
+      - if @my_page and @user.retention_shares > 0
+        tr
+          th Your starting shares
+          td = @user.retention_shares
       tr
         th Money
         td = @user.money
@@ -113,10 +115,10 @@ javascript:
     table.table.table-bordered
       tr
         th #
-        th Shares Owner
-        th Shares Count
-        th One Share Price
-        th Total Cost
+        th Share owner
+        th Share count
+        th One share price
+        th Total cost
         - if @my_page
           th.mini
       - i = 0
@@ -135,9 +137,9 @@ javascript:
     table.table.table-bordered
       tr
         th #
-        th Shares Holder
-        th Shares Count
-        th Total Cost
+        th Shares holder
+        th Shares count
+        th Total cost
       - i = 0
       - @user.my_shares.each do |bos|
         tr
@@ -157,8 +159,8 @@ javascript:
             th #
             th Action
             th Date
-            th Shares Owner
-            th Shares Count
+            th Shares owner
+            th Shares count
             th Cost
         tbody
           - i = @user.transactions.count + 1

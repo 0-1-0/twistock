@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120713144050) do
+ActiveRecord::Schema.define(:version => 20120717094645) do
 
   create_table "block_of_shares", :force => true do |t|
     t.integer  "owner_id"
@@ -55,9 +55,10 @@ ActiveRecord::Schema.define(:version => 20120713144050) do
   create_table "products", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.integer  "price"
+    t.text     "short_description", :default => "0"
   end
 
   create_table "transactions", :force => true do |t|
@@ -79,14 +80,14 @@ ActiveRecord::Schema.define(:version => 20120713144050) do
     t.string   "name"
     t.string   "nickname"
     t.string   "avatar"
-    t.integer  "money",      :default => 0
+    t.integer  "money"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.integer  "shares"
     t.integer  "retention_shares"
-    t.integer  "share_price",      :default => 0
+    t.integer  "share_price"
     t.datetime "last_update"
-    t.integer  "base_price",      :default => 0
+    t.integer  "base_price"
     t.integer  "hour_delta_price"
   end
 
