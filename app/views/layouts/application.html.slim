@@ -24,44 +24,151 @@ html lang="en"
   body
     .navbar.navbar-fixed-top
       .navbar-inner
-        .container
-          = link_to 'Twistock', (signed_in? ? profile_path(current_user) : root_path), class: 'brand'
-          .container
-            - if signed_in?
-              #user_navbar.pull-right
-                = image_tag current_user.avatar, size: '32x32', class: 'avatar'
-                .info
-                  span.nickname= current_user.nickname + ' '
-                  = link_to 'Sign out', sign_out_path
-                br
-                = link_to 'Buy the real goods for virtual money', '/products/showcase'
-
+        .container-fluid
+          .row-fluid
+            .span4
+              = link_to 'Twistock', root_path, class: 'brand' 
               = form_tag search_profiles_path, class: 'form-search', style: 'padding: 7px 0; margin: 0;' do
-                = text_field_tag 'nickname', nil, class: 'search-query', placeholder: 'enter a nickname'
+                .input-append.input-prepend
+                  = text_field_tag 'nickname', nil, class: 'search-query', placeholder: 'search user by nickname'
+                  button[type="submit" class="btn"] Go  
+
+            =yield :streamline
+
+    .container-fluid
+      .row-fluid
+        .span4
+          .well.sidebar-nav.sidebar-nav-fixed
+            ul.nav.nav-list
+              = link_to 'Sign in!', '/auth/twitter', class: 'btn btn-large btn-primary' if current_user.nil?
+              
+              - if current_user
+                li
+                  table
+                    tr
+                      td rowspan=3
+                        = image_tag current_user.avatar, size: '64x64', class: 'avatar' 
+                      td
+                        h3 
+                          | @ #{current_user.nickname} (
+                          = link_to 'Sign out', '/sign_out' 
+                          | )                         
+                    tr
+                      td 
+                        = current_user.name 
+                    tr
+                      td Your money: $#{current_user.money} 
+                    tr
+                      td
+                      td = link_to 'Spend in Twistock Store', '/products/showcase' 
+                li
+                  hr              
+
+                li Your share price: $#{current_user.share_price} 
+                li
+                  - pr = current_user.popularity
+                  - if pr < 5
+                    p Popularity: abandoned
+                    .progress.progress-danger
+                      .bar[style="width: 25%"]
+
+                  - if pr >= 5 and pr < 10
+                    p Popularity: low
+                    .progress.progress-warning
+                      .bar[style="width: 35%"]
+
+                  - if pr >= 10 and pr < 50
+                    p Popularity: medium
+                    .progress.progress-success
+                      .bar[style="width: 50%"]
+
+                  - if pr > 50 and pr < 1000
+                    h3 Popularity: high
+                    .progress.progress-success
+                      .bar[style="width: 80%"]
+
+                  - if pr >= 1000 
+                    p Popularity: superstar
+                    .progress.progress-info
+                      .bar[style="width: 100%"]
+                li Share price dynamics:
+                li
+                  span[hidden="true"]= data = current_user.history.collect(&:price)
+                  span[hidden="true"]= lc = GoogleChart::LineChart.new("300x80", "", false)
+                  span[hidden="true"]= lc.show_legend = false
+                  span[hidden="true"]= lc.data "price", data, '51c1ee'
+                  = image_tag lc.to_url
+                li
+                  .nav-header 
+                    i.icon-lock
+                    | My Investment portfolio (#{current_user.portfel.count}) 
+                    .btn.btn-small=link_to 'Show all', '/iportfolio'
+                    
+                li 
+                  table.table
+                    tr
+                      th Share owner
+                      th Share count
+                      th One share price
+                      th Total cost
+                    - current_user.portfel.first(3).each do |bos|
+                      tr
+                        td= link_to bos.owner.nickname, profile_path(bos.owner)
+                        td= bos.count
+                        td= bos.one_share_cost
+                        td= bos.total_cost
+
+                li
+                  .nav-header 
+                    i.icon-user
+                    | My Share holders (#{current_user.my_shares.count}) 
+                    .btn.btn-small=link_to 'Show all', '/holders'
+                    
+                li 
+                  table.table
+                    tr
+                      th Share holder
+                      th Share count
+                      th Total cost
+                    - current_user.my_shares.first(3).each do |bos|
+                      tr
+                        td= link_to bos.holder.nickname, profile_path(bos.holder)
+                        td= bos.count
+                        - if current_user.share_price
+                          td= bos.count * current_user.share_price
+                        - else
+                          td Calculating..
+
+                li
+                  .nav-header
+                    i.icon-bookmark
+                    | My History (#{current_user.transactions.count})
+                  =link_to 'show all transactions', '/history'
+
+                li
+                  .nav-header 
+                    i.icon-shopping-cart
+                    | My Twistock store
+                  .btn.btn-small= link_to 'Buy real goods for virtual money', '/products/showcase'
+                - if current_user.is_admin?
+                  li.nav-header
+                    =link_to 'Products listing', '/products'
+                  li.nav-header
+                    =link_to 'Product invoices', '/product_invoices'
+
+        .span8
+          .content
+            - if notice
+              .alert.alert-info
+                a.close data-dismiss="alert" x
+                = notice
+            - if alert
+              .alert.alert-error
+                a.close data-dismiss="alert" x
+                = alert
+            =yield
 
 
-
-    .container
-      .content
-        - if notice
-          .alert.alert-info
-            a.close data-dismiss="alert" x
-            = notice
-        - if alert
-          .alert.alert-error
-            a.close data-dismiss="alert" x
-            = alert
-
-        = yield
-
-        .raw
-          .span10
-            /Блок с топовыми юзерами
-            hr
-            h1 Explore trends
-            hr
-            
-            ul.thumbnails.market-infinite
     
     /!
       Javascripts

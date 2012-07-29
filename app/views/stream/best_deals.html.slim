@@ -1,0 +1,19 @@
+- Transaction.find(:all, :limit=> 50, :order=> 'cost desc').each do |transaction|
+  .block
+    .label.label-warning
+      h5 #Best deal
+    .thumbnail
+      span
+        = image_tag transaction.user.avatar
+        a[href="/profiles/#{transaction.user.nickname}"] =transaction.user.name
+      span
+        h5 #{transaction.action} #{transaction.count} shares of
+      span
+        = image_tag transaction.owner.avatar
+        a[href="/profiles/#{transaction.owner.nickname}"] =transaction.owner.name
+    span[style="float:right"]
+      h6 Total cost:
+      - if transaction.action == 'buy'
+        span.label.label-success   $ #{transaction.cost}
+      - else
+        span.label.label-important  $ #{transaction.cost}

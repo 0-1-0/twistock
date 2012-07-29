@@ -1,0 +1,10 @@
+- User.where("hour_delta_price < 0").find(:all, :limit=> 50, :order=> 'hour_delta_price asc').each do |user|
+  .block
+    .label.label-important
+      h5 #Most falling
+    .thumbnail
+      = image_tag user.avatar, :style=>'float:right'
+      span
+        a[href="/profiles/#{user.nickname}"] =user.name
+      h5 Delta price:
+      span.label.label-danger   $ #{user.hour_delta_price || 0}

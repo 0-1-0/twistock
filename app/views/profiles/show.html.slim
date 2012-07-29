@@ -1,3 +1,10 @@
+=content_for :streamline do
+  .span2 
+      ul.nav
+        li
+          =link_to 'Back to main page', :root
+end
+
 #buy_modal.modal.fade
   .modal-header
     a.close data-dismiss="modal" x
@@ -45,7 +52,7 @@ javascript:
       a.btn data-dismiss="modal" Close
       = f.button :submit, 'Sell', class: 'btn btn-success'
 
-.row.well[style="position:fixed; top: 40px"]
+.row.block
   .span1#avatar_div
     = image_tag @user.avatar
   .span5
@@ -54,6 +61,8 @@ javascript:
         = @user.nickname
         |&nbsp
         small= @user.name
+    .info
+      h4 Share Price: $#{@user.share_price}
 
       /h3#available_shares #{@user.available_shares} shares available
   .span2.btn-group
@@ -67,47 +76,21 @@ javascript:
         a.btn.btn-sell.btn-info.btn-sell.btn-large data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-origin=@user.nickname data-count=current_user.portfel.where(:owner_id=>@user.id).last.count Sell
       -else
         a.btn.btn-large.disabled Sell
-
-  .span4
-    - if @popularity < 5
-      h3 Popularity: abandoned
-      .progress.progress-danger
-        .bar[style="width: 25%"]
-
-    - if @popularity >= 5 and @popularity < 10
-      h3 Popularity: low
-      .progress.progress-warning
-        .bar[style="width: 35%"]
-
-    - if @popularity >= 10 and @popularity < 50
-      h3 Popularity: medium
-      .progress.progress-success
-        .bar[style="width: 50%"]
-
-    - if @popularity > 50 and @popularity < 1000
-      h3 Popularity: high
-      .progress.progress-success
-        .bar[style="width: 80%"]
-
-    - if @popularity >= 1000 
-      h3 Popularity: superstar
-      .progress.progress-info
-        .bar[style="width: 100%"]
-.row[style="margin-top:150px"] 
+.row.well.block[style="background:white"]
   .span8 
     table.table
-      tr
+      /tr
         th Share Price
         td#price-box
           - if @user.share_price
             = @user.share_price
           - else
             | calculating...
-      - if @my_page and @user.retention_shares > 0
+      /- if @my_page and @user.retention_shares > 0
         tr
           th Your starting shares
           td = @user.retention_shares
-      tr
+      /tr
         th Money
         td = @user.money
 
@@ -151,27 +134,6 @@ javascript:
           - else
             td Calculating..
 
-    - if @my_page
-      h2 History
-      table#history-datatable.table.table-bordered
-        thead
-          tr
-            th #
-            th Action
-            th Date
-            th Shares owner
-            th Shares count
-            th Cost
-        tbody
-          - i = @user.transactions.count + 1
-          - @user.transactions.each do |t|
-            tr
-              td= i -= 1
-              td= t.action
-              td= I18n.l t.created_at, format: :short
-              td= link_to t.owner.nickname, profile_path(t.owner)
-              td= t.count
-              td= t.cost
   .span4
     span[hidden="true"]= data = @user.history.collect(&:price)
     span[hidden="true"]= lc = GoogleChart::LineChart.new("400x200", "Price History", false)

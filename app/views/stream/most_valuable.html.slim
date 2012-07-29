@@ -1,0 +1,10 @@
+- User.find(:all, :limit=> 50, :order=> 'share_price desc').each do |user|
+  .block.market-info-box
+    .label.label-success
+      h5 #Most valuable
+    .thumbnail
+      = image_tag user.avatar, :style=>'float:right'
+      a[href="/profiles/#{user.nickname}"] =user.name
+      h5 Share price:
+      span.label.label-success $ #{user.share_price}              
+    a[href="/profiles/#{user.nickname}"] #{user.name} profile

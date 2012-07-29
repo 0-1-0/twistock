@@ -233,5 +233,9 @@ class User < ActiveRecord::Base
     end
   end
 
+  def popularity
+    Transaction.where(:owner_id=>self.id).where("created_at >= :time", {:time => Time.now - 42000}).count
+  end
+
 
 end

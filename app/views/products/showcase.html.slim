@@ -1,3 +1,10 @@
+=content_for :streamline do
+  .span2 
+      ul.nav
+        li
+          =link_to 'Back to main page', '/'
+end
+
 #buy_modal.modal.fade
   .modal-header
     a.close data-dismiss="modal" x
@@ -25,8 +32,8 @@ h1 Twistock virtual showcase
 hr
 ul.thumbnails
   - @products.each do |product|
-    li.span3.well
-      .thumbnail[style="height:250px"]
+    li.span3.well.block
+      .product.thumbnail[style="height:250px"]
         h4 = product.name
         p = product.description.html_safe
 
@@ -41,5 +48,10 @@ ul.thumbnails
             | You haven't enough money to buy this item. Try to earn more!
 
 = javascript_include_tag "products/showcase.js"
+
+javascript:
+  $('.product').click(function(){
+    $(this).parent().find('.btn-buy').click();
+  });
           
 

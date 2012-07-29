@@ -1,10 +1,18 @@
 Twitterexchange::Application.routes.draw do
+  get "history/transactions"
+
+  get "history_controller/operations"
+
   get "ping/pong"
 
   match '/products/showcase', :controller => 'products', :action => 'showcase'
   resources :products
 
   get "stream/infoline"
+  get "stream/most_valuable"
+  get "stream/most_booming"
+  get "stream/most_falling"
+  get "stream/best_deals"
 
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
@@ -34,6 +42,10 @@ Twitterexchange::Application.routes.draw do
 
   resources :product_invoices
   match '/product_invoices/create', :to => 'product_invoices#create'
+
+  match '/history', :to => 'history#transactions'
+  match '/iportfolio', :to => 'history#investment_portfolio'
+  match '/holders', :to => 'history#share_holders'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

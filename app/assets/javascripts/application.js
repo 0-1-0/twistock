@@ -16,4 +16,5 @@
 //= require bootstrap
 //= require DT_bootstrap
 //= require bootstrap-actions
+//= require move.min
 //= require interactive
