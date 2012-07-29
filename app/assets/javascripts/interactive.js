@@ -63,19 +63,19 @@ setInterval(function(){
 
   if(! $('#most-booming').is(':hover')){
     move('#most-booming')
-    .add('top', -200)
+    .add('top', -250)
     .end();	
   }
 
   if(! $('#most-falling').is(':hover')){
     move('#most-falling')
-    .add('top', -200)
+    .add('top', -180)
     .end();	
   }
 
    if(! $('#best-deals').is(':hover')){
     move('#best-deals')
-    .add('top', -200)
+    .add('top', -360)
     .end();	
   }
 }, 2400);
