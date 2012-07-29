@@ -56,6 +56,7 @@ javascript:
   .span1#avatar_div
     = image_tag @user.avatar
   .span5
+    a[target='blank' href='http://twitter.com/#{@user.nickname}'] twitter profile
     .page-header
       h1
         = @user.nickname
@@ -63,19 +64,20 @@ javascript:
         small= @user.name
     .info
       h4 Share Price: $#{@user.share_price}
+    .btn-group
+      |&nbsp
+      - if @my_page
+        - if @user.retention_shares > 0
+          a.btn.btn-success.btn-large data-toggle="modal" href="#sell_retention_modal" Sell your starting shares
+      - else
+        a.btn.btn-buy.btn-success.btn-large data-toggle="modal" href="#buy_modal" data-price=(@user.share_price.to_i) Buy
+        - if current_user.portfel.where(:owner_id=>@user.id).last
+          a.btn.btn-sell.btn-info.btn-sell.btn-large data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-origin=@user.nickname data-count=current_user.portfel.where(:owner_id=>@user.id).last.count Sell
+        -else
+          a.btn.btn-large.disabled Sell
 
       /h3#available_shares #{@user.available_shares} shares available
-  .span2.btn-group
-    |&nbsp
-    - if @my_page
-      - if @user.retention_shares > 0
-        a.btn.btn-success.btn-large data-toggle="modal" href="#sell_retention_modal" Sell your starting shares
-    - else
-      a.btn.btn-buy.btn-success.btn-large data-toggle="modal" href="#buy_modal" data-price=(@user.share_price.to_i) Buy
-      - if current_user.portfel.where(:owner_id=>@user.id).last
-        a.btn.btn-sell.btn-info.btn-sell.btn-large data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-origin=@user.nickname data-count=current_user.portfel.where(:owner_id=>@user.id).last.count Sell
-      -else
-        a.btn.btn-large.disabled Sell
+  .span2
 .row.well.block[style="background:white"]
   .span8 
     table.table
