@@ -3,7 +3,7 @@
     .label.label-success
       h5 #Most valuable
     .thumbnail
-      = image_tag user.avatar, :style=>'float:right'
+      = image_tag user.avatar, :style=>'float:right', :size=>'48x48'
       a[href="/profiles/#{user.nickname}"] =user.name
       h5 Share price:
       span.label.label-success $ #{user.share_price}              
