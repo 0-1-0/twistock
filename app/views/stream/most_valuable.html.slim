@@ -1,7 +1,7 @@
 - User.find(:all, :limit=> 50, :order=> 'share_price desc').each do |user|
   .block
     .label.label-warning
-      h5 #Most valuable
+      h5 #Pricy
     .thumbnail
       = image_tag user.avatar, :style=>'float:right', :size=>'48x48'
       a[href="/profiles/#{user.nickname}"] =user.name

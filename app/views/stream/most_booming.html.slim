@@ -6,7 +6,7 @@
       = image_tag user.avatar, :style=>'float:right'
       span 
         a[href="/profiles/#{user.nickname}"] =user.name
-      h5 Delta price:
+      h5 Growth:
       span.label.label-success   $ #{user.hour_delta_price || 0}
     br
     a[href="/profiles/#{user.nickname}"] #{user.name} profile

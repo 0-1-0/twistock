@@ -73,8 +73,8 @@ setInterval(function(){
     .end();	
   }
 
-   if(! $('#best-deals').is(':hover')){
-    move('#best-deals')
+   if(! $('#random-deals').is(':hover')){
+    move('#random-deals')
     .add('top', -360)
     .end();	
   }
