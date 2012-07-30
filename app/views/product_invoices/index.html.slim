@@ -1,17 +1,18 @@
-table.table.table-bordered
-  tr
-    th Full Name
-    th Product Name
-    th status
-    th cost
-    th email
-    th address
-
-  - @product_invoices.each do |product_invoice|
+.span8
+  table.table.table-bordered
     tr
-      td = product_invoice.full_name
-      td = product_invoice.product.name
-      td = product_invoice.status
-      td = product_invoice.total_cost
-      td = product_invoice.email
-      td = product_invoice.address
+      th Full Name
+      th Product Name
+      th status
+      th cost
+      th email
+      th address
+
+    - @product_invoices.each do |product_invoice|
+      tr
+        td = product_invoice.full_name
+        td = product_invoice.product.name
+        td = product_invoice.status
+        td = product_invoice.total_cost
+        td = product_invoice.email
+        td = product_invoice.address

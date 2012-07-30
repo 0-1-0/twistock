@@ -5,24 +5,25 @@
           =link_to 'Back to main page', '/'
 end
 
-#history-box.block.well
-  h2 History
-  table#history-datatable.table.table-bordered
-    thead
-      tr
-        th #
-        th Action
-        th Date
-        th Shares owner
-        th Shares count
-        th Cost
-    tbody
-      - i = current_user.transactions.count + 1
-      - current_user.transactions.each do |t|
+.span8
+  #history-box.block.well
+    h2 History
+    table#history-datatable.table.table-bordered
+      thead
         tr
-          td= i -= 1
-          td= t.action
-          td= I18n.l t.created_at, format: :short
-          td= link_to t.owner.nickname, profile_path(t.owner)
-          td= t.count
-          td= t.cost
+          th #
+          th Action
+          th Date
+          th Shares owner
+          th Shares count
+          th Cost
+      tbody
+        - i = current_user.transactions.count + 1
+        - current_user.transactions.each do |t|
+          tr
+            td= i -= 1
+            td= t.action
+            td= I18n.l t.created_at, format: :short
+            td= link_to t.owner.nickname, profile_path(t.owner)
+            td= t.count
+            td= t.cost

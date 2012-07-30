@@ -1,23 +1,24 @@
-h1 Listing products
+.span8
+  h1 Listing products
 
-table.table.table-bordered
-  tr
-    th Name
-    th Description
-    th Price
-    th
-    th
-    th
-
-  - @products.each do |product|
+  table.table.table-bordered
     tr
-      td = product.name
-      td = product.description
-      td = product.price
-      td = link_to 'Show', product
-      td = link_to 'Edit', edit_product_path(product)
-      td = link_to 'Destroy', product, :confirm => 'Are you sure?', :method => :delete
+      th Name
+      th Description
+      th Price
+      th
+      th
+      th
 
-br
+    - @products.each do |product|
+      tr
+        td = product.name
+        td = product.description
+        td = product.price
+        td = link_to 'Show', product
+        td = link_to 'Edit', edit_product_path(product)
+        td = link_to 'Destroy', product, :confirm => 'Are you sure?', :method => :delete
 
-= link_to 'New Product', new_product_path
+  br
+
+  = link_to 'New Product', new_product_path

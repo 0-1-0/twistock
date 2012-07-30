@@ -151,6 +151,9 @@ html lang="en"
                     | My Twistock store
                   .btn.btn-small= link_to 'Buy real goods for virtual money', '/products/showcase'
                 - if current_user.is_admin?
+                  li
+                    hr
+                  li.nav-header Administration
                   li.nav-header
                     =link_to 'Products listing', '/products'
                   li.nav-header

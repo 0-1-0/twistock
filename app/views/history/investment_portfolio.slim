@@ -5,22 +5,23 @@
           =link_to 'Back to main page', '/'
 end
 
-#history-box.block.well
-  h2 Investment Postfolio
-  table#history-datatable.table.table-bordered
-    thead
-      tr
-        th #
-        th Share owner
-        th Share count
-        th One share price
-        th Total cost
-    tbody
-      - i = current_user.portfel.count + 1
-      - current_user.portfel.each do |bos|
+.span8
+  #history-box.block.well
+    h2 Investment Postfolio
+    table#history-datatable.table.table-bordered
+      thead
         tr
-          td= i -= 1
-          td= link_to bos.owner.nickname, profile_path(bos.owner)
-          td= bos.count
-          td= bos.one_share_cost
-          td= bos.total_cost
+          th #
+          th Share owner
+          th Share count
+          th One share price
+          th Total cost
+      tbody
+        - i = current_user.portfel.count + 1
+        - current_user.portfel.each do |bos|
+          tr
+            td= i -= 1
+            td= link_to bos.owner.nickname, profile_path(bos.owner)
+            td= bos.count
+            td= bos.one_share_cost
+            td= bos.total_cost
