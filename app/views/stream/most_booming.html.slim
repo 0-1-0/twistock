@@ -1,6 +1,6 @@
 - User.where("hour_delta_price >= 0").find(:all, :limit=> 50, :order=> 'hour_delta_price desc').each do |user|
-  .block[style="width:200px"]
-    .label.label-info
+  .block
+    .label.label-success
       h5 #Most booming
     .thumbnail
       = image_tag user.avatar, :style=>'float:right'

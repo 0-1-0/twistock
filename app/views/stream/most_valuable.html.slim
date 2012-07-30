@@ -1,6 +1,6 @@
 - User.find(:all, :limit=> 50, :order=> 'share_price desc').each do |user|
-  .block[style="width:200px"]
-    .label.label-success
+  .block
+    .label.label-warning
       h5 #Most valuable
     .thumbnail
       = image_tag user.avatar, :style=>'float:right', :size=>'48x48'

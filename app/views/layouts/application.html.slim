@@ -156,8 +156,8 @@ html lang="en"
                   li.nav-header
                     =link_to 'Product invoices', '/product_invoices'
 
-        .span8
-          .content
+        /.span8
+          /.content
             - if notice
               .alert.alert-info
                 a.close data-dismiss="alert" x
@@ -166,7 +166,7 @@ html lang="en"
               .alert.alert-error
                 a.close data-dismiss="alert" x
                 = alert
-            =yield
+        =yield
 
 
     
