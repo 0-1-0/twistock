@@ -7,4 +7,5 @@
       a[href="/profiles/#{user.nickname}"] =user.name
       h5 Share price:
       span.label.label-success $ #{user.share_price}              
-    a[href="/profiles/#{user.nickname}"] #{user.name} profile
+    a[href="/profiles/#{user.nickname}"] 
+      .btn.btn-small Buy @#{user.nickname}'s shares

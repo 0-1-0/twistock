@@ -6,6 +6,10 @@ class SessionController < ApplicationController
       @user = User.create_from_twitter_oauth(auth)
     end
 
+    if (not @user.token? or not @user.secret?)
+      @user.update_from_twitter_oauth(auth)
+    end
+
     session[:user_id] = @user.id
 
     redirect_to root_path, notice: "Signed in!"

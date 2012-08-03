@@ -21,8 +21,33 @@ class User < ActiveRecord::Base
     nickname
   end
 
+  def update_from_twitter_oauth(auth)
+    self.token  = auth.credentials.token
+    self.secret = auth.credentials.secret
+
+    self.save
+  end
+
+  def twitter_client()
+    if not self.t
+      self.t = Twitter::Client
+
+      selt.t.configure do |config|
+        config.consumer_key = ENV['TWITTER_CONSUMER_KEY']
+        config.consumer_secret = ENV['TWITTER_CONSUMER_SECRET']
+        config.oauth_token = self.token
+        config.oauth_token_secret = self.secret
+      end
+    end
+
+    self.t
+  end
+
+
   def self.create_from_twitter_oauth(auth)
     User.create(  uid:      auth.uid.to_i,
+                  token:    auth.credentials.token,
+                  secret:   auth.credentials.secret,
                   name:     auth.info.name,
                   nickname: auth.info.nickname,
                   avatar:   auth.info.image,

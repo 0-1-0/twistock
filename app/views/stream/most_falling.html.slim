@@ -8,3 +8,6 @@
         a[href="/profiles/#{user.nickname}"] =user.name
       h5 Decrease:
       span.label.label-danger   $ #{user.hour_delta_price || 0}
+    br
+    a[href="/profiles/#{user.nickname}"] 
+    .btn.btn-small Buy @#{user.nickname}'s shares

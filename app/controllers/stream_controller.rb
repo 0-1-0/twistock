@@ -15,7 +15,7 @@ class StreamController < ApplicationController
     render :layout=>false
   end
 
-  def random_deals
+  def random_people
     render :layout=>false
   end
 end

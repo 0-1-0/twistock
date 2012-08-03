@@ -1,5 +1,6 @@
 common: &common
   adapter: postgresql
+  host:    localhost
   username: developer
   password: '123'
 

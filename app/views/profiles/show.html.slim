@@ -52,95 +52,96 @@ javascript:
       a.btn data-dismiss="modal" Close
       = f.button :submit, 'Sell', class: 'btn btn-success'
 
-.row.block
-  .span1#avatar_div
-    = image_tag @user.avatar
-  .span5
-    a[target='blank' href='http://twitter.com/#{@user.nickname}'] twitter profile
-    .page-header
-      h1
-        = @user.nickname
+.span8
+  .row.block
+    .span1#avatar_div
+      = image_tag @user.avatar
+    .span5
+      a[target='blank' href='http://twitter.com/#{@user.nickname}'] twitter profile
+      .page-header
+        h1
+          = @user.nickname
+          |&nbsp
+          small= @user.name
+      .info
+        h4 Share Price: $#{@user.share_price}
+      .btn-group
         |&nbsp
-        small= @user.name
-    .info
-      h4 Share Price: $#{@user.share_price}
-    .btn-group
-      |&nbsp
-      - if @my_page
-        - if @user.retention_shares > 0
-          a.btn.btn-success.btn-large data-toggle="modal" href="#sell_retention_modal" Sell your starting shares
-      - else
-        a.btn.btn-buy.btn-success.btn-large data-toggle="modal" href="#buy_modal" data-price=(@user.share_price.to_i) Buy
-        - if current_user.portfel.where(:owner_id=>@user.id).last
-          a.btn.btn-sell.btn-info.btn-sell.btn-large data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-origin=@user.nickname data-count=current_user.portfel.where(:owner_id=>@user.id).last.count Sell
-        -else
-          a.btn.btn-large.disabled Sell
-
-      /h3#available_shares #{@user.available_shares} shares available
-  .span2
-.row.well.block[style="background:white"]
-  .span8 
-    table.table
-      /tr
-        th Share Price
-        td#price-box
-          - if @user.share_price
-            = @user.share_price
-          - else
-            | calculating...
-      /- if @my_page and @user.retention_shares > 0
-        tr
-          th Your starting shares
-          td = @user.retention_shares
-      /tr
-        th Money
-        td = @user.money
-
-    h2 Investment portfolio
-    table.table.table-bordered
-      tr
-        th #
-        th Share owner
-        th Share count
-        th One share price
-        th Total cost
         - if @my_page
-          th.mini
-      - i = 0
-      - @user.portfel.each do |bos|
+          - if @user.retention_shares > 0
+            a.btn.btn-success.btn-large data-toggle="modal" href="#sell_retention_modal" Sell your starting shares
+        - else
+          a.btn.btn-buy.btn-success.btn-large data-toggle="modal" href="#buy_modal" data-price=(@user.share_price.to_i) Buy
+          - if current_user.portfel.where(:owner_id=>@user.id).last
+            a.btn.btn-sell.btn-info.btn-sell.btn-large data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-origin=@user.nickname data-count=current_user.portfel.where(:owner_id=>@user.id).last.count Sell
+          -else
+            a.btn.btn-large.disabled Sell
+
+        /h3#available_shares #{@user.available_shares} shares available
+    .span2
+  .row.well.block[style="background:white"]
+    .span8 
+      table.table
+        /tr
+          th Share Price
+          td#price-box
+            - if @user.share_price
+              = @user.share_price
+            - else
+              | calculating...
+        /- if @my_page and @user.retention_shares > 0
+          tr
+            th Your starting shares
+            td = @user.retention_shares
+        /tr
+          th Money
+          td = @user.money
+
+      h2 Investment portfolio
+      table.table.table-bordered
         tr
-          td= i += 1
-          td= link_to bos.owner.nickname, profile_path(bos.owner)
-          td= bos.count
-          td= bos.one_share_cost
-          td= bos.total_cost
+          th #
+          th Share owner
+          th Share count
+          th One share price
+          th Total cost
           - if @my_page
-            td
-              a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=bos.owner.nickname data-origin=current_user.nickname data-count=bos.count Sell
+            th.mini
+        - i = 0
+        - @user.portfel.each do |bos|
+          tr
+            td= i += 1
+            td= link_to bos.owner.nickname, profile_path(bos.owner)
+            td= bos.count
+            td= bos.one_share_cost
+            td= bos.total_cost
+            - if @my_page
+              td
+                a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=bos.owner.nickname data-origin=current_user.nickname data-count=bos.count Sell
 
-    h2 Share holders
-    table.table.table-bordered
-      tr
-        th #
-        th Shares holder
-        th Shares count
-        th Total cost
-      - i = 0
-      - @user.my_shares.each do |bos|
+      h2 Share holders
+      table.table.table-bordered
         tr
-          td= i += 1
-          td= link_to bos.holder.nickname, profile_path(bos.holder)
-          td= bos.count
-          - if @user.share_price
-            td= bos.count * @user.share_price
-          - else
-            td Calculating..
+          th #
+          th Shares holder
+          th Shares count
+          th Total cost
+        - i = 0
+        - @user.my_shares.each do |bos|
+          tr
+            td= i += 1
+            td= link_to bos.holder.nickname, profile_path(bos.holder)
+            td= bos.count
+            - if @user.share_price
+              td= bos.count * @user.share_price
+            - else
+              td Calculating..
 
-  .span4
-    span[hidden="true"]= data = @user.history.collect(&:price)
-    span[hidden="true"]= lc = GoogleChart::LineChart.new("400x200", "Price History", false)
-    span[hidden="true"]= lc.show_legend = false
-    span[hidden="true"]= lc.data "price", data, '51c1ee'
+    .span4
+      span[hidden="true"]= data = @user.history.collect(&:price)
+      span[hidden="true"]= lc = GoogleChart::LineChart.new("400x200", "Price History", false)
+      span[hidden="true"]= lc.show_legend = false
+      span[hidden="true"]= lc.data "price", data, '51c1ee'
     = image_tag lc.to_url
 
 = javascript_include_tag "profiles/show"

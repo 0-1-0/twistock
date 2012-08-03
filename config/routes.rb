@@ -12,7 +12,7 @@ Twitterexchange::Application.routes.draw do
   get "stream/most_valuable"
   get "stream/most_booming"
   get "stream/most_falling"
-  get "stream/random_deals"
+  get "stream/random_people"
 
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'

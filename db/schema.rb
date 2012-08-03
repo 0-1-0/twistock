@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120729151551) do
+ActiveRecord::Schema.define(:version => 20120803054847) do
 
   create_table "block_of_shares", :force => true do |t|
     t.integer  "owner_id"
@@ -90,6 +90,8 @@ ActiveRecord::Schema.define(:version => 20120729151551) do
     t.integer  "base_price"
     t.integer  "hour_delta_price"
     t.boolean  "is_admin",         :default => false
+    t.string   "token"
+    t.string   "secret"
   end
 
   add_index "users", ["name"], :name => "index_users_on_name", :unique => true
