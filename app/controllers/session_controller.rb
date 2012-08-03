@@ -13,8 +13,8 @@ class SessionController < ApplicationController
     if User.count < 250
       session[:user_id] = @user.id
       
-      @user.activated = true
-      @user.save
+      #@user.activated = true
+      #@user.save
 
       redirect_to root_path, notice: "Signed in!"
     else
