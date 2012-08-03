@@ -16,4 +16,8 @@ class ApplicationController < ActionController::Base
   def user_required
     redirect_to root_path, alert: 'You must be signed in to view that page =)' unless signed_in?
   end
+
+  def admin_required
+    redirect_to '/', alert: 'You must be admin to view this page ^_^' unless (signed_in? and current_user.is_admin?)
+  end
 end

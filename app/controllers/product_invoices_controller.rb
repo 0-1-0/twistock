@@ -1,4 +1,7 @@
 class ProductInvoicesController < ApplicationController
+	before_filter :user_required
+	before_filter :admin_required, :only=>[:index]
+
 	def create
 		p = params[:create]
 		user = User.find_by_nickname(p[:user])

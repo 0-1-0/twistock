@@ -1,4 +1,10 @@
 class ProductsController < ApplicationController
+  before_filter :user_required
+  before_filter :admin_required, :only=>[:index,:new,:edit,:create,:destroy,:update]
+
+  def showcase
+    @products = Product.all
+  end
   # GET /products
   # GET /products.json
   def index
@@ -79,11 +85,6 @@ class ProductsController < ApplicationController
       format.html { redirect_to products_url }
       format.json { head :no_content }
     end
-  end
-
-
-  def showcase
-    @products = Product.all
   end
 
 end

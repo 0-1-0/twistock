@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
     nickname
   end
 
+  def profile_image
+    return self.avatar.sub("_normal", "")
+  end
+
   def update_from_twitter_oauth(auth)
     self.token  = auth.credentials.token
     self.secret = auth.credentials.secret

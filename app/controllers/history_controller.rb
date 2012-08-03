@@ -1,4 +1,6 @@
 class HistoryController < ApplicationController
+  before_filter :user_required
+
   def transactions
   end
 

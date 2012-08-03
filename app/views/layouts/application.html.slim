@@ -61,25 +61,28 @@ html lang="en"
                 li
                   table
                     tr
-                      td rowspan=3
-                        = image_tag current_user.avatar, size: '64x64', class: 'avatar' 
-                      td
+                      td rowspan=4
+                        = image_tag current_user.profile_image , size: '80x80', class: 'avatar' 
+                      td colspan=2
                         h3 
                           | @ #{current_user.nickname} (
                           = link_to 'Sign out', '/sign_out' 
-                          | )                         
+                          | )                        
                     tr
-                      td 
-                        = current_user.name 
+                      td colspan=2 =current_user.name  
+                      td            
                     tr
                       td Your money: $#{current_user.money} 
+                      td= link_to 'Spend in Twistock Store', '/products/showcase' 
                     tr
+                      td Your share price: $#{current_user.share_price} 
                       td
-                      td = link_to 'Spend in Twistock Store', '/products/showcase' 
-                li
-                  hr              
+                        - if current_user.retention_shares > 0
+                          =link_to 'Sell your retention shares', '/profiles/' + current_user.nickname
 
-                li Your share price: $#{current_user.share_price} 
+                li
+                  hr
+
                 li
                   - pr = current_user.popularity
                   - if pr < 5
