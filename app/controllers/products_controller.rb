@@ -1,5 +1,4 @@
 class ProductsController < ApplicationController
-  before_filter :user_required
   before_filter :admin_required, :only=>[:index,:new,:edit,:create,:destroy,:update]
 
   def showcase

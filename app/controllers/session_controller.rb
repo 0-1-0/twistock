@@ -10,9 +10,18 @@ class SessionController < ApplicationController
       @user.update_from_twitter_oauth(auth)
     end
 
-    session[:user_id] = @user.id
+    if User.count < 250
+      session[:user_id] = @user.id
+      
+      @user.activated = true
+      @user.save
 
-    redirect_to root_path, notice: "Signed in!"
+      redirect_to root_path, notice: "Signed in!"
+    else
+      redirect_to '/thanks'
+    end
+
+
   end
 
   def failure

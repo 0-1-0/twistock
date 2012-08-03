@@ -40,7 +40,8 @@ html lang="en"
         .span4
           .well.sidebar-nav.sidebar-nav-fixed
             ul.nav.nav-list
-              - if current_user.nil?
+              =yield :sidebar
+              - if not current_user
                 p
                   | Promo text Promo text Promo text
                   | Promo text Promo text Promo text
@@ -56,7 +57,7 @@ html lang="en"
                 hr
                 a[href='/auth/twitter']
                   =image_tag '/assets/sign-in-with-twitter.png'
-              
+
               - if current_user
                 li
                   table

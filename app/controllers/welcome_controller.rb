@@ -5,4 +5,7 @@ class WelcomeController < ApplicationController
 
   def not_found
   end
+
+  def thanks
+  end
 end
