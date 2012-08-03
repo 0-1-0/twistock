@@ -30,8 +30,8 @@ class User < ActiveRecord::Base
 
   #Twitter client methods  
   def twitter
-    consumer_key    = ENV['TWITTER_CONSUMER_KEY']    || 'TG7WrO8wVuLbFOKpWRaGg'
-    consumer_secret = ENV['TWITTER_CONSUMER_SECRET'] || 'jd0wKCy0uLIWYTOmhVDE1m8NqNxkVBtuds2ccOoHBY'
+    consumer_key    = ENV['TWITTER_CONSUMER_KEY']    || 'Jr8mGbKWWCgHr99rzjHa3g'
+    consumer_secret = ENV['TWITTER_CONSUMER_SECRET'] || 'a86Mfo1t4du7NVgFyplFfEhJ5j80esEUuknKRRtPJ60'
 
     @twitter_user ||= Twitter::Client.new(
       :consumer_key=>consumer_key, 
