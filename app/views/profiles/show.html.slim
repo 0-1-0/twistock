@@ -5,52 +5,53 @@
           =link_to 'Back to main page', :root
 end
 
-#buy_modal.modal.fade
-  .modal-header
-    a.close data-dismiss="modal" x
-    h3 Buy Shares
-  = simple_form_for 'buy', url: buy_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
-    .modal-body
-      = f.input :owner, as: :hidden, input_html: {value: @user.nickname}
-      = f.input :count, as: :integer, input_html: {value: (0.9*current_user.money/(@user.share_price.to_i + 1)).to_i}
-      = f.input :price, as: :hidden, input_html: {value: @user.share_price.to_i}
-      = f.input :total_cost, :disabled => true, input_html: {value: 0.9*(current_user.money.to_i)}
-    .modal-footer
-      a.btn data-dismiss="modal" Close
-      = f.button :submit, 'Buy', class: 'btn btn-success'
+- if signed_in?
+  #buy_modal.modal.fade
+    .modal-header
+      a.close data-dismiss="modal" x
+      h3 Buy Shares
+    = simple_form_for 'buy', url: buy_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
+      .modal-body
+        = f.input :owner, as: :hidden, input_html: {value: @user.nickname}
+        = f.input :count, as: :integer, input_html: {value: (0.9*current_user.money/(@user.share_price.to_i + 1)).to_i}
+        = f.input :price, as: :hidden, input_html: {value: @user.share_price.to_i}
+        = f.input :total_cost, :disabled => true, input_html: {value: 0.9*(current_user.money.to_i)}
+      .modal-footer
+        a.btn data-dismiss="modal" Close
+        = f.button :submit, 'Buy', class: 'btn btn-success'
 
-javascript:
-  current_money='#{current_user.money}';
+  javascript:
+    current_money='#{current_user.money}';
 
-#sell_retention_modal.modal.fade
-  .modal-header
-    a.close data-dismiss="modal" x
-    h3 Sell your starting shares
-  = simple_form_for 'sell', url: sell_retention_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
-    .modal-body
-      = f.input :count, as: :integer, input_html: {value: current_user.retention_shares}
-      = f.input :price, as: :hidden, input_html: {value: current_user.share_price}
-      = f.input :total_cost, :disabled => true, input_html: {value: current_user.retention_shares*current_user.share_price}
-    .modal-footer
-      a.btn data-dismiss="modal" Close
-      = f.button :submit, 'Sell', class: 'btn btn-success'
+  #sell_retention_modal.modal.fade
+    .modal-header
+      a.close data-dismiss="modal" x
+      h3 Sell your starting shares
+    = simple_form_for 'sell', url: sell_retention_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
+      .modal-body
+        = f.input :count, as: :integer, input_html: {value: current_user.retention_shares}
+        = f.input :price, as: :hidden, input_html: {value: current_user.share_price}
+        = f.input :total_cost, :disabled => true, input_html: {value: current_user.retention_shares*current_user.share_price}
+      .modal-footer
+        a.btn data-dismiss="modal" Close
+        = f.button :submit, 'Sell', class: 'btn btn-success'
 
-#sell_modal.modal.fade
-  .modal-header
-    a.close data-dismiss="modal" x
-    h3 Sell Shares
-  = simple_form_for 'sell', url: sell_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
-    .modal-body
-      = f.input :owner, as: :hidden, input_html: {value: @user.nickname}
-      = f.input :origin, as: :hidden, input_html: {value: @user.nickname}
-      = f.input :count, as: :integer, input_html: {value:  @user.available_shares}
-      = f.input :total_count, as: :hidden, input_html: {value: @user.my_shares.sum(:count)}
-      = f.input :price, as: :hidden, input_html: {value: @user.share_price.to_i}
-      = f.input :base_price, as: :hidden, input_html: {value: @user.base_price}
-      = f.input :total_cost, :disabled => true, input_html: {value: @user.share_price.to_i*@user.available_shares}
-    .modal-footer
-      a.btn data-dismiss="modal" Close
-      = f.button :submit, 'Sell', class: 'btn btn-success'
+  #sell_modal.modal.fade
+    .modal-header
+      a.close data-dismiss="modal" x
+      h3 Sell Shares
+    = simple_form_for 'sell', url: sell_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
+      .modal-body
+        = f.input :owner, as: :hidden, input_html: {value: @user.nickname}
+        = f.input :origin, as: :hidden, input_html: {value: @user.nickname}
+        = f.input :count, as: :integer, input_html: {value:  @user.available_shares}
+        = f.input :total_count, as: :hidden, input_html: {value: @user.my_shares.sum(:count)}
+        = f.input :price, as: :hidden, input_html: {value: @user.share_price.to_i}
+        = f.input :base_price, as: :hidden, input_html: {value: @user.base_price}
+        = f.input :total_cost, :disabled => true, input_html: {value: @user.share_price.to_i*@user.available_shares}
+      .modal-footer
+        a.btn data-dismiss="modal" Close
+        = f.button :submit, 'Sell', class: 'btn btn-success'
 
 .span8
   .row.block
@@ -65,17 +66,18 @@ javascript:
           small= @user.name
       .info
         h4 Share Price: $#{@user.share_price}
-      .btn-group
-        |&nbsp
-        - if @my_page
-          - if @user.retention_shares > 0
-            a.btn.btn-success.btn-large data-toggle="modal" href="#sell_retention_modal" Sell your starting shares
-        - else
-          a.btn.btn-buy.btn-success.btn-large data-toggle="modal" href="#buy_modal" data-price=(@user.share_price.to_i) Buy
-          - if current_user.portfel.where(:owner_id=>@user.id).last
-            a.btn.btn-sell.btn-info.btn-sell.btn-large data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-origin=@user.nickname data-count=current_user.portfel.where(:owner_id=>@user.id).last.count Sell
-          -else
-            a.btn.btn-large.disabled Sell
+      - if signed_in?
+        .btn-group
+          |&nbsp
+          - if @my_page
+            - if @user.retention_shares > 0
+              a.btn.btn-success.btn-large data-toggle="modal" href="#sell_retention_modal" Sell your starting shares
+          - else
+            a.btn.btn-buy.btn-success.btn-large data-toggle="modal" href="#buy_modal" data-price=(@user.share_price.to_i) Buy
+            - if current_user.portfel.where(:owner_id=>@user.id).last
+              a.btn.btn-sell.btn-info.btn-sell.btn-large data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-origin=@user.nickname data-count=current_user.portfel.where(:owner_id=>@user.id).last.count Sell
+            -else
+              a.btn.btn-large.disabled Sell
 
         /h3#available_shares #{@user.available_shares} shares available
     .span2
@@ -115,7 +117,7 @@ javascript:
             td= bos.count
             td= bos.one_share_cost
             td= bos.total_cost
-            - if @my_page
+            - if signed_in? and @my_page
               td
                 a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=bos.owner.nickname data-origin=current_user.nickname data-count=bos.count Sell
 
