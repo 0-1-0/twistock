@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   has_many :product_invoices
 
-  attr_accessible :avatar, :money, :name, :nickname, :uid, :shares, :retention_shares
+  attr_accessible :avatar, :money, :name, :nickname, :uid, :shares, :retention_shares, :token, :secret
 
 
   START_MONEY            = 0
@@ -28,19 +28,17 @@ class User < ActiveRecord::Base
     self.save
   end
 
-  def twitter_client()
-    if not self.t
-      self.t = Twitter::Client
+  #Twitter client methods  
+  def twitter
+    consumer_key    = ENV['TWITTER_CONSUMER_KEY']    || 'TG7WrO8wVuLbFOKpWRaGg'
+    consumer_secret = ENV['TWITTER_CONSUMER_SECRET'] || 'jd0wKCy0uLIWYTOmhVDE1m8NqNxkVBtuds2ccOoHBY'
 
-      selt.t.configure do |config|
-        config.consumer_key = ENV['TWITTER_CONSUMER_KEY']
-        config.consumer_secret = ENV['TWITTER_CONSUMER_SECRET']
-        config.oauth_token = self.token
-        config.oauth_token_secret = self.secret
-      end
-    end
-
-    self.t
+    @twitter_user ||= Twitter::Client.new(
+      :consumer_key=>consumer_key, 
+      :consumer_secret=>consumer_secret, 
+      :oauth_token => token, 
+      :oauth_token_secret => secret
+      )
   end
 
 
@@ -135,6 +133,9 @@ class User < ActiveRecord::Base
       cost:   cost)
       t.price = owner.share_price
       t.save
+
+      #Пишем о транзакции в твиттер
+      TweetWorker.perform_async(self.id, "I've just bought " + t.count.to_s + " shares of @" + owner.nickname + " on www.twistock.com")
 
       # return self
       self
@@ -254,6 +255,7 @@ class User < ActiveRecord::Base
         self.save
       end
       UserUpdateWorker.perform_async(nickname)
+      
       self
     end
   end
