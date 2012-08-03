@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   has_many :product_invoices
 
-  attr_accessible :avatar, :money, :name, :nickname, :uid, :shares, :retention_shares, :token, :secret
+  attr_accessible :avatar, :money, :name, :nickname, :uid, :shares, :retention_shares, :token, :secret, :activated
 
 
   START_MONEY            = 0
