@@ -56,9 +56,9 @@ end
 
 .well.block
   .row-fluid
-    .span1#avatar_div
+    .span2#avatar_div
       = image_tag @user.profile_image
-    .span5
+    .span10
       a[target='blank' href='http://twitter.com/#{@user.nickname}'] twitter profile
       .page-header
         h1
@@ -110,7 +110,7 @@ end
   .span2
 .well.block
   .row-fluid
-    .span8 
+    .span12
       table.table
         /tr
           th Share Price
@@ -127,7 +127,9 @@ end
           th Money
           td = @user.money
 
+      br
       h2 Investment portfolio
+      br
       table.table.table-bordered
         tr
           th #
@@ -149,7 +151,9 @@ end
               td
                 a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=bos.owner.nickname data-origin=current_user.nickname data-count=bos.count Sell
 
+      br
       h2 Share holders
+      br
       table.table.table-bordered
         tr
           th #
