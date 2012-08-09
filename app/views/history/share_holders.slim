@@ -1,28 +1,26 @@
 =content_for :streamline do
-  .span2 
-      ul.nav
-        li
-          =link_to 'Back to main page', '/'
+    ul.nav
+      li
+        =link_to 'Back to main page', '/'
 end
 
-.span8
-  #history-box.block.well
-    h2 Share Holders
-    table#history-datatable.table.table-bordered
-      thead
+#history-box.block.well
+  h2 Share Holders
+  table#history-datatable.table.table-bordered
+    thead
+      tr
+        th #
+        th Share holder
+        th Share count
+        th Total cost
+    tbody
+      - i = current_user.my_shares.count + 1
+      - current_user.my_shares.each do |bos|
         tr
-          th #
-          th Share holder
-          th Share count
-          th Total cost
-      tbody
-        - i = current_user.my_shares.count + 1
-        - current_user.my_shares.each do |bos|
-          tr
-            td= i -= 1                      
-            td= link_to bos.holder.nickname, profile_path(bos.holder)
-            td= bos.count
-            - if current_user.share_price
-              td= bos.count * current_user.share_price
-            - else
-              td Calculating..
+          td= i -= 1                      
+          td= link_to bos.holder.nickname, profile_path(bos.holder)
+          td= bos.count
+          - if current_user.share_price
+            td= bos.count * current_user.share_price
+          - else
+            td Calculating..

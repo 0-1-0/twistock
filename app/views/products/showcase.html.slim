@@ -42,25 +42,25 @@
 /           =link_to 'Back to main page', '/'
 / end
 
-.span8
-  h1 Twistock virtual showcase
-  hr
-  ul.thumbnails
-    - @products.each do |product|
-      li.span3.well.block
-        .product.thumbnail[style="height:250px"]
-          h4 = product.name
-          p = product.short_description.html_safe
 
-        .pull-right[style="height:60px"] 
-          - if signed_in? and current_user.money >= product.price      
-            a.btn.btn-small.btn-buy data-toggle="modal" href=".description_modal#{product.id}" total_cost=product.price product_name=product.name product_id=product.id
-              h5 $ #{product.price}          
-              | Buy this item
-          - else
-            .btn.btn-small.disabled 
-              h5 $ #{product.price}
-              | You haven't enough money to buy this item. Try to earn more!
+h1 Twistock virtual showcase
+hr
+ul.thumbnails
+  - @products.each do |product|
+    li.span3.well.block
+      .product.thumbnail[style="height:250px"]
+        h4 = product.name
+        p = product.short_description.html_safe
+
+      .pull-right[style="height:60px"] 
+        - if signed_in? and current_user.money >= product.price      
+          a.btn.btn-small.btn-buy data-toggle="modal" href=".description_modal#{product.id}" total_cost=product.price product_name=product.name product_id=product.id
+            h5 $ #{product.price}          
+            | Buy this item
+        - else
+          .btn.btn-small.disabled 
+            h5 $ #{product.price}
+            | You haven't enough money to buy this item. Try to earn more!
 
 = javascript_include_tag "products/showcase.js"
 

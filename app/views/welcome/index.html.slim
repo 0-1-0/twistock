@@ -1,31 +1,33 @@
 =content_for :streamline do
-  .span2 
-    ul.nav
-      li 
-        a Random person
-  .span2 
-    ul.nav
-      li 
-        a Most valuable
+  .row-fluid
+    .span3
+      ul.nav
+        li 
+          a Random person
+    .span3 
+      ul.nav
+        li 
+          a Most valuable
 
-  .span2 
-    ul.nav
-      li 
-        a Most booming
+    .span3 
+      ul.nav
+        li 
+          a Most booming
 
-  .span2 
-    ul.nav
-      li 
-        a Most falling
+    .span3 
+      ul.nav
+        li 
+          a Most falling
 end
 
-.span2
-  #random-deals.emitter.span2[speed=4 url='/stream/random_people']
-.span2
-  #most-valuable.emitter.span2[speed=1 url='/stream/most_valuable']
-.span2
-  #most-booming.emitter.span2[speed=2 url='/stream/most_booming']
-.span2
-  #most-falling.emitter.span2[speed=1 url='/stream/most_falling']
+.row-fluid
+  .span3
+    #random-deals.emitter.span2[speed=4 url='/stream/random_people']
+  .span3
+    #most-valuable.emitter.span2[speed=1 url='/stream/most_valuable']
+  .span3
+    #most-booming.emitter.span2[speed=2 url='/stream/most_booming']
+  .span3
+    #most-falling.emitter.span2[speed=1 url='/stream/most_falling']
 
 
