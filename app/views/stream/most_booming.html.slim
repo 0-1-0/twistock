@@ -25,4 +25,4 @@
             a[href="/profiles/#{user.nickname}"] =user.name
             h5 Growth:
             span.label.label-success $ #{user.hour_delta_price || 0}             
-          .btn=link_to 'Buy', '/profiles/' + user.nickname
+          .btn-center.btn=link_to 'Buy', '/profiles/' + user.nickname
