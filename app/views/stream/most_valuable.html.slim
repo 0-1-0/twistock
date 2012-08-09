@@ -6,6 +6,7 @@
           .label.label-warning
             h5 #Pricy          
           .thumbnail
+            = image_tag user.avatar, :style=>'float:right', :size=>'48x48'
             a[href="/profiles/#{user.nickname}"] @#{user.nickname}
             h5 Share price:
             span.label.label-success $ #{user.share_price} 

@@ -3,7 +3,7 @@
     -webkit-perspective: 1000;
     position: relative;
     width:  200px;
-    height: 200px;
+    height: 160px;
 }   
 .back, .front {
     position: absolute;
@@ -16,6 +16,8 @@
     -webkit-transform: rotateY(180deg);
     overflow: hidden;
     /*background: #7f37c2;*/
+    margin-top: -20px;
+    height: 180px;
 }   
 .front {
     
