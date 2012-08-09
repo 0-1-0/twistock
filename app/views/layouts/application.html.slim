@@ -75,7 +75,8 @@ html lang="en"
                       td            
                     tr
                       td Your money: $#{current_user.money} 
-                      td= link_to 'Spend in Twistock Store', '/products/showcase' 
+                      td                
+                        = link_to 'Spend in Twistock Store', '/products/showcase' 
                     tr
                       td Your share price: $#{current_user.share_price} 
                       td
@@ -122,7 +123,11 @@ html lang="en"
                   .nav-header 
                     i.icon-lock
                     | My Investment portfolio (#{current_user.portfel.count}) 
-                    .btn.btn-small=link_to 'Show all', '/iportfolio'
+                    .pull-right
+                      .btn.btn-small=link_to 'Show all', '/iportfolio'
+                    
+                li
+                  br
                     
                 li 
                   table.table
@@ -142,7 +147,11 @@ html lang="en"
                   .nav-header 
                     i.icon-user
                     | My Share holders (#{current_user.my_shares.count}) 
-                    .btn.btn-small=link_to 'Show all', '/holders'
+                    .pull-right
+                      .btn.btn-small=link_to 'Show all', '/holders'
+                    
+                li
+                  br
                     
                 li 
                   table.table

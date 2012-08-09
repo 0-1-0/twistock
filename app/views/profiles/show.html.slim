@@ -52,8 +52,9 @@ end
         a.btn data-dismiss="modal" Close
         = f.button :submit, 'Sell', class: 'btn btn-success'
 
-.span8
-  .row.block
+
+.well.block
+  .row-fluid
     .span1#avatar_div
       = image_tag @user.profile_image
     .span5
@@ -61,10 +62,36 @@ end
       .page-header
         h1
           = @user.nickname
-          |&nbsp
-          small= @user.name
-      .info
-        h4 Share Price: $#{@user.share_price}
+          small  Share Price: $#{@user.share_price}
+        br
+        h4= @user.name
+      
+      - pr = @user.popularity
+      - if pr < 5
+        p Popularity: abandoned
+        .progress.progress-danger
+          .bar[style="width: 25%"]
+
+      - if pr >= 5 and pr < 10
+        p Popularity: low
+        .progress.progress-warning
+          .bar[style="width: 35%"]
+
+      - if pr >= 10 and pr < 50
+        p Popularity: medium
+        .progress.progress-success
+          .bar[style="width: 50%"]
+
+      - if pr > 50 and pr < 1000
+        h3 Popularity: high
+        .progress.progress-success
+          .bar[style="width: 80%"]
+
+      - if pr >= 1000 
+        p Popularity: superstar
+        .progress.progress-info
+          .bar[style="width: 100%"]
+
       - if signed_in?
         .btn-group
           |&nbsp
@@ -78,9 +105,10 @@ end
             -else
               a.btn.btn-large.disabled Sell
 
-        /h3#available_shares #{@user.available_shares} shares available
-    .span2
-  .row.well.block[style="background:white"]
+      /h3#available_shares #{@user.available_shares} shares available
+  .span2
+.well.block
+  .row-fluid
     .span8 
       table.table
         /tr
@@ -145,4 +173,4 @@ end
       span[hidden="true"]= lc.data "price", data, '51c1ee'
     = image_tag lc.to_url
 
-= javascript_include_tag "profiles/show"
+  = javascript_include_tag "profiles/show"
