@@ -1,6 +1,42 @@
+=content_for :streamline do
+  ul.nav
+    li
+      .topbar-link
+        =link_to 'Back to main page', '/'
+end
+
+
+
+
+h1 Twistock Store
+hr
+ul.thumbnails
+  - @products.each do |product|
+    li.span6.well.block
+      .product.thumbnail[style="height:250px"]
+        h4 = product.name
+        p = product.short_description.html_safe
+
+      .pull-right[style="height:60px"] 
+        - if signed_in? and current_user.money >= product.price      
+          a.btn.btn-small.btn-buy data-toggle="modal" href="##{product.id}" total_cost=product.price product_name=product.name product_id=product.id
+            h5 $ #{product.price}          
+            | Buy this item
+        - else
+          .btn.btn-small.disabled 
+            h5 $ #{product.price}
+            | You haven't enough money to buy this item. Try to earn more!
+
+= javascript_include_tag "products/showcase.js"
+
+javascript:
+  $('.product').click(function(){
+    $(this).parent().find('.btn-buy').click();
+  });
+
 - if signed_in?
   - @products.each do |product|
-    div[class="description_modal#{product.id} modal fade"]
+    .modal.fade[id="#{product.id}"]
       .modal-header
         a.close data-dismiss="modal" x
         h3=product.name
@@ -34,39 +70,5 @@
       .modal-footer
         a.btn data-dismiss="modal" Close
         = f.button :submit, 'Buy', class: 'btn btn-success btn-buy-finish'
-
-/ =content_for :streamline do
-/   .span2[style="z-index:0"]
-/       ul.nav
-/         li
-/           =link_to 'Back to main page', '/'
-/ end
-
-
-h1 Twistock virtual showcase
-hr
-ul.thumbnails
-  - @products.each do |product|
-    li.span3.well.block
-      .product.thumbnail[style="height:250px"]
-        h4 = product.name
-        p = product.short_description.html_safe
-
-      .pull-right[style="height:60px"] 
-        - if signed_in? and current_user.money >= product.price      
-          a.btn.btn-small.btn-buy data-toggle="modal" href=".description_modal#{product.id}" total_cost=product.price product_name=product.name product_id=product.id
-            h5 $ #{product.price}          
-            | Buy this item
-        - else
-          .btn.btn-small.disabled 
-            h5 $ #{product.price}
-            | You haven't enough money to buy this item. Try to earn more!
-
-= javascript_include_tag "products/showcase.js"
-
-javascript:
-  $('.product').click(function(){
-    $(this).parent().find('.btn-buy').click();
-  });
           
 

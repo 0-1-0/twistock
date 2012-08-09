@@ -1,7 +1,8 @@
 =content_for :streamline do
     ul.nav
       li
-        =link_to 'Back to main page', :root
+        .topbar-link
+          =link_to 'Back to main page', :root
 end
 
 - if signed_in?

@@ -31,7 +31,7 @@ html lang="en"
               = form_tag search_profiles_path, class: 'form-search', style: 'padding: 7px 0; margin: 0;' do
                 .input-append.input-prepend
                   = text_field_tag 'nickname', nil, class: 'search-query', placeholder: 'search user by nickname'
-                  button[type="submit" class="btn"] Go  
+                  button[type="submit" class="btn btn-go"] Go  
 
             .span6=yield :streamline
 
