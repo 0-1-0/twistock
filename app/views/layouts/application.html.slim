@@ -26,8 +26,10 @@ html lang="en"
       .navbar-inner
         .container-fluid
           .row-fluid
-            .span6
-              = link_to 'Twistock', root_path, class: 'brand' 
+            .span2
+              .logo
+                h1 = link_to 'Twistock', root_path 
+            .span4
               = form_tag search_profiles_path, class: 'form-search', style: 'padding: 7px 0; margin: 0;' do
                 .input-append.input-prepend
                   = text_field_tag 'nickname', nil, class: 'search-query', placeholder: 'search user by nickname'
