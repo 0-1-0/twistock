@@ -80,7 +80,7 @@ html lang="en"
                       td Your share price: $#{current_user.share_price} 
                       td
                         - if current_user.retention_shares > 0
-                          =link_to 'Sell your retention shares', '/profiles/' + current_user.nickname
+                          =link_to 'Sell your starting shares', '/profiles/' + current_user.nickname
 
                 li
                   hr
