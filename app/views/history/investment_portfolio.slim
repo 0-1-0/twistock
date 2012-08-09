@@ -4,6 +4,25 @@
         =link_to 'Back to main page', '/'
 end
 
+- current_user.portfel.each do |bos|
+  - user = bos.owner
+  .modal.fade[ id="sell_#{bos.owner.id}_modal"]
+    .modal-header
+      a.close data-dismiss="modal" x
+      h3 Sell Shares
+    = simple_form_for 'sell', url: sell_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
+      .modal-body
+        = f.input :owner, as: :hidden, input_html: {value: user.nickname}
+        = f.input :origin, as: :hidden, input_html: {value: user.nickname}
+        = f.input :count, as: :integer, input_html: {value:  user.available_shares}
+        = f.input :total_count, as: :hidden, input_html: {value: user.my_shares.sum(:count)}
+        = f.input :price, as: :hidden, input_html: {value: user.share_price.to_i}
+        = f.input :base_price, as: :hidden, input_html: {value: user.base_price}
+        = f.input :total_cost, :disabled => true, input_html: {value: user.share_price.to_i*user.available_shares}
+      .modal-footer
+        a.btn data-dismiss="modal" Close
+        = f.button :submit, 'Sell', class: 'btn btn-success'
+
 
 #history-box.block.well
   h2 Investment Postfolio
@@ -15,6 +34,7 @@ end
         th Share count
         th One share price
         th Total cost
+        th 
     tbody
       - i = current_user.portfel.count + 1
       - current_user.portfel.each do |bos|
@@ -24,3 +44,5 @@ end
           td= bos.count
           td= bos.one_share_cost
           td= bos.total_cost
+          td 
+            a.btn.btn-info.btn-sell href="#sell_#{bos.owner.id}_modal" data-toggle="modal" Sell
