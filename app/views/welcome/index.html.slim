@@ -1,5 +1,5 @@
 =content_for :streamline do
-  .row-fluid
+  .row-fluid#streamline
     .span3
       ul.nav
         li.topbar-link Random person
@@ -29,4 +29,30 @@ end
   .span3
     #most-falling.emitter.span2[speed=1 url='/stream/most_falling']
 
+.row-fluid#for-iphone
+  .iphone-emitter.span6 url='/stream/random_people'
+  .iphone-emitter.span6 url='/stream/most_valuable'
+  .iphone-emitter.span6 url='/stream/most_booming'
+  .iphone-emitter.span6 url='/stream/most_falling'
 
+
+javascript:
+  if($(window).width() < 1024){
+    $('#streamline').hide();
+
+    $('.iphone-emitter').each(function(index) { 
+      var emitter = $(this);
+
+      $.ajax({
+        url: $(this).attr('url') + '?page=1',
+        type: 'get'
+      }).done(function(data){
+        emitter.append(data);
+      });
+            
+    });
+
+
+  }else{
+    $('#for-iphone').hide();
+  };

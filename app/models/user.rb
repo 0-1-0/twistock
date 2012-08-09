@@ -188,6 +188,8 @@ class User < ActiveRecord::Base
     t.price = owner.share_price
     t.save
 
+    #Пишем о транзакции в твиттер
+    TweetWorker.perform_async(self.id, "I've just sell " + t.count.to_s + " shares of @" + owner.nickname + " on www.twistock.com")
     self
   end
 

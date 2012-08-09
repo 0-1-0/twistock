@@ -53,8 +53,11 @@ var position = {}
 // move.defaults = {
 //   duration: 40
 // };
+if($(window).width() >= 1024){
+
 
 setInterval(function(){
+
 	if(! $('#most-valuable').is(':hover')){
     move('#most-valuable')
     .add('top', -200)
@@ -127,6 +130,9 @@ setInterval( function() {
 						
 				});
 } , 1000);
+
+};
+
 
 
 

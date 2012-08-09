@@ -35,3 +35,10 @@ section:hover .front {
 .btn-center{
     margin-left: 25%;
 }
+
+@media all and (max-width: 900px){
+    .btn-center{
+        width:95%;
+        margin-left: 0px;
+    }
+}
