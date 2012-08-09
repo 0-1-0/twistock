@@ -2,8 +2,8 @@
     -webkit-transform-style: preserve-3d;
     -webkit-perspective: 1000;
     position: relative;
-    width:  200px;
-    height: 160px;
+    width:  160px;
+    height: 180px;
 }   
 .back, .front {
     position: absolute;
@@ -17,7 +17,8 @@
     overflow: hidden;
     /*background: #7f37c2;*/
     margin-top: -20px;
-    height: 180px;
+    height: 200px;
+    margin-bottom: 40px;
 }   
 .front {
     
@@ -31,4 +32,8 @@ section:hover .back {
 }
 section:hover .front {      
     -webkit-transform: rotateY(-180deg);
+}
+
+.btn-center{
+    margin-left: 50px;
 }
