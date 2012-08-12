@@ -5,7 +5,7 @@
     .thumbnail.well
       = image_tag user.avatar, :style=>'float:right'
       span =user.name
-      h5 Share price:
+      h5 Stock price:
       span.label.label-success $ #{user.share_price}              
     a[href="/profiles/#{user.nickname}"] #{user.name} profile
 

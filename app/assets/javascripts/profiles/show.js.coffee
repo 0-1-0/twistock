@@ -24,7 +24,7 @@ $(document).ready ->
   setinterval_id = window.setInterval (->
     $.get $(location).attr("href") + ".json", ((data) ->
       if data.user.share_price 
-        $(".info").html 'Share price: $' + data.user.share_price
+        $(".info").html 'Stock price: $' + data.user.share_price
         $("#buy_modal #buy_count").val Math.round(0.9*current_money/data.user.share_price) 
         clearInterval(setinterval_id);
         

@@ -98,7 +98,7 @@ class User < ActiveRecord::Base
       owner.reload
       self.reload
 
-      raise "Shares aren't ready for selling yet" unless owner.share_price
+      raise "Stocks aren't ready for selling yet" unless owner.share_price
       raise "You cannot buy shares with zero price" if owner.share_price == 0
 
       cost = count*owner.share_price
@@ -201,7 +201,7 @@ class User < ActiveRecord::Base
     User.transaction do
       self.reload
 
-      raise "Shares aren't ready for selling yet" unless self.share_price
+      raise "Stocks aren't ready for selling yet" unless self.share_price
       raise "You haven't enough shares" if count > self.retention_shares
 
       cost = self.share_price * count

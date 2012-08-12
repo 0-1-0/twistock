@@ -104,9 +104,9 @@ html lang="en"
                 li 
                   table.table
                     tr
-                      th Share owner
-                      th Share count
-                      th One share price
+                      th Stocks owner
+                      th Stocks count
+                      th One stock price
                       th Total cost
                     - current_user.portfel.first(3).each do |bos|
                       tr
@@ -118,7 +118,7 @@ html lang="en"
                 li
                   .nav-header 
                     i.icon-user
-                    | My Share holders (#{current_user.my_shares.count}) 
+                    | My Stock holders (#{current_user.my_shares.count}) 
                     .pull-right
                       .btn.btn-small=link_to 'Show all', '/holders'
                     
@@ -128,8 +128,8 @@ html lang="en"
                 li 
                   table.table
                     tr
-                      th Share holder
-                      th Share count
+                      th Stock holder
+                      th Stock count
                       th Total cost
                     - current_user.my_shares.first(3).each do |bos|
                       tr

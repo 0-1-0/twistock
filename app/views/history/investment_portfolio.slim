@@ -10,7 +10,7 @@ end
   .modal.fade[ id="sell_#{bos.owner.id}_modal"]
     .modal-header
       a.close data-dismiss="modal" x
-      h3 Sell Shares
+      h3 Sell Stocks
     = simple_form_for 'sell', url: sell_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
       .modal-body
         = f.input :owner, as: :hidden, input_html: {value: user.nickname}
@@ -31,8 +31,8 @@ end
     thead
       tr
         th #
-        th Share owner
-        th Share count
+        th Stocks owner
+        th Stocks count
         th One share price
         th Total cost
         th 

@@ -9,7 +9,7 @@ end
   #buy_modal.modal.fade
     .modal-header
       a.close data-dismiss="modal" x
-      h3 Buy Shares
+      h3 Buy Stocks
     = simple_form_for 'buy', url: buy_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
       .modal-body
         = f.input :owner, as: :hidden, input_html: {value: @user.nickname}
@@ -39,7 +39,7 @@ end
   #sell_modal.modal.fade
     .modal-header
       a.close data-dismiss="modal" x
-      h3 Sell Shares
+      h3 Sell Stocks
     = simple_form_for 'sell', url: sell_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
       .modal-body
         = f.input :owner, as: :hidden, input_html: {value: @user.nickname}
@@ -74,7 +74,7 @@ end
       .page-header
         h1
           | @#{@user.nickname}
-          small  Share Price: $#{@user.share_price}
+          small  Stock Price: $#{@user.share_price}
         h4= @user.name
 
         br
@@ -91,21 +91,6 @@ end
 .well.block
   .row-fluid
     .span12
-      table.table
-        /tr
-          th Share Price
-          td#price-box
-            - if @user.share_price
-              = @user.share_price
-            - else
-              | calculating...
-        /- if @my_page and @user.retention_shares > 0
-          tr
-            th Your starting shares
-            td = @user.retention_shares
-        /tr
-          th Money
-          td = @user.money
 
       br
       h2 Investment portfolio
@@ -113,8 +98,8 @@ end
       table.table.table-bordered
         tr
           th #
-          th Share owner
-          th Share count
+          th Stock owner
+          th Stock count
           th One share price
           th Total cost
           - if @my_page
@@ -132,13 +117,13 @@ end
                 a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=bos.owner.nickname data-origin=current_user.nickname data-count=bos.count Sell
 
       br
-      h2 Share holders
+      h2 Stock holders
       br
       table.table.table-bordered
         tr
           th #
-          th Shares holder
-          th Shares count
+          th Stocks holder
+          th Stocks count
           th Total cost
         - i = 0
         - @user.my_shares.each do |bos|

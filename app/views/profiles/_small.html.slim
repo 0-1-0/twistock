@@ -7,7 +7,7 @@ section
         .thumbnail
           = image_tag user.avatar, :style=>'float:right', :size=>'48x48'
           a[href="/profiles/#{user.nickname}"] @#{user.nickname}
-          h5 Share price:
+          h5 Stock price:
           span.label.label-success $ #{user.share_price} 
           span[hidden="true"]= data = user.history.collect(&:price)
           span[hidden="true"]= lc = GoogleChart::LineChart.new("200x100", "Price History", false)
