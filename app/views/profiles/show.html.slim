@@ -1,9 +1,11 @@
 =content_for :upper_menu do
     ul.nav
-      li
+      li.span2
         .topbar-link
           =link_to 'Back to main page', :root
 end
+
+
 
 - if signed_in?
   #buy_modal.modal.fade

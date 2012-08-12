@@ -22,6 +22,9 @@ html lang="en"
     link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114"
 
   body
+
+
+
     .navbar.navbar-fixed-top
       .navbar-inner
         .container
@@ -37,28 +40,34 @@ html lang="en"
                   button[type="submit" class="btn btn-go"] Go  
 
 
-            .span7=yield :upper_menu
+            .span7
+              =yield :upper_menu
+              - if not current_page?('/')
+                ul.nav
+                  li.span2
+                    .topbar-link
+                      a data-toggle="modal" href="#promo_modal"     How it works?
+
 
     .container
+      #promo_modal.modal.fade
+        .modal-header
+          a.close data-dismiss="modal" x
+          h3 How it works?
+          .modal-body = render :partial=>'welcome/promo'
+          .modal-footer
+            a.btn data-dismiss="modal" Close
+
       .row
         .span5
           .well.sidebar-nav.sidebar-nav-fixed
             ul.nav.nav-list
               =yield :sidebar
+                
 
               - if not current_user
-                p
-                  | Promo text Promo text Promo text
-                  | Promo text Promo text Promo text
-                  | Promo text Promo text Promo text
-                  | Promo text Promo text Promo text
-                  | Promo text Promo text Promo text
-                  | Promo text Promo text Promo text
-                  | Promo text Promo text Promo text
-                  | Promo text Promo text Promo text
-                  | Promo text Promo text Promo text
-                  | Promo text Promo text Promo text
-                  | Promo text Promo text Promo text
+                = render :partial=>'welcome/promo'
+
                 hr
                 a[href='/auth/twitter']
                   =image_tag '/assets/sign-in-with-twitter.png'
