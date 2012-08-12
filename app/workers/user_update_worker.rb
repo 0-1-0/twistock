@@ -23,7 +23,7 @@ class UserUpdateWorker
       ).round
 
     if user.base_price > User::MAXIMUM_PRICE/2
-       user.base_price = ((User::MAXIMUM_PRICE/2) + (Math.log(1 + user.base_price - User::MAXIMUM_PRICE) * User::STEP)).round
+       user.base_price = ((User::MAXIMUM_PRICE/2) + ((1 + user.base_price - User::MAXIMUM_PRICE) * User::STEP)).round
     end
     
     user.share_price = (((user.my_shares.sum(:count) + 1000)/1000.0)*user.base_price).round
