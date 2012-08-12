@@ -1,4 +1,4 @@
-=content_for :streamline do
+=content_for :upper_menu do
   .row-fluid#streamline
     .span3
       ul.nav
@@ -27,7 +27,7 @@ end
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
-            :price_tag=>'Stock price',\
+            :price_tag=>'Stock price:',\
             :price_value=>(user.share_price), \
             :category=>'#Random',\
             :label_class=>'label-info'\
@@ -40,7 +40,7 @@ end
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
-            :price_tag=>'Price',\
+            :price_tag=>'Stock Price:',\
             :price_value=>(user.share_price), \
             :category=>'#Pricy',\
             :label_class=>'label-warning'\
@@ -53,7 +53,7 @@ end
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
-            :price_tag=>'Growth',\
+            :price_tag=>'Growth:',\
             :price_value=>(user.hour_delta_price || 0), \
             :category=>'#Booming',\
             :label_class=>'label-success'\
@@ -66,7 +66,7 @@ end
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
-            :price_tag=>'Decrease',\
+            :price_tag=>'Decrease:',\
             :price_value=>(user.hour_delta_price || 0), \
             :category=>'#Falling',\
             :label_class=>'label-important'\

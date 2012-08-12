@@ -1,4 +1,4 @@
-=content_for :streamline do
+=content_for :upper_menu do
     ul.nav
       li
         .topbar-link
@@ -55,46 +55,12 @@ end
 
 
 .well.block
-  .row-fluid
-    .span2#avatar_div
-      = image_tag @user.profile_image
-    .span10
+  .row
+    .span2.avatar= image_tag @user.profile_image
+    .span5
       a[target='blank' href='http://twitter.com/#{@user.nickname}'] twitter profile
-      .page-header
-        h1
-          = @user.nickname
-          small  Share Price: $#{@user.share_price}
-        br
-        h4= @user.name
-      
-      - pr = @user.popularity
-      - if pr < 5
-        p Popularity: abandoned
-        .progress.progress-danger
-          .bar[style="width: 25%"]
-
-      - if pr >= 5 and pr < 10
-        p Popularity: low
-        .progress.progress-warning
-          .bar[style="width: 35%"]
-
-      - if pr >= 10 and pr < 50
-        p Popularity: medium
-        .progress.progress-success
-          .bar[style="width: 50%"]
-
-      - if pr > 50 and pr < 1000
-        h3 Popularity: high
-        .progress.progress-success
-          .bar[style="width: 80%"]
-
-      - if pr >= 1000 
-        p Popularity: superstar
-        .progress.progress-info
-          .bar[style="width: 100%"]
-
       - if signed_in?
-        .btn-group
+        .btn-group.pull-right
           |&nbsp
           - if @my_page
             - if @user.retention_shares > 0
@@ -105,6 +71,20 @@ end
               a.btn.btn-sell.btn-info.btn-sell.btn-large data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-origin=@user.nickname data-count=current_user.portfel.where(:owner_id=>@user.id).last.count Sell
             -else
               a.btn.btn-large.disabled Sell
+      .page-header
+        h1
+          | @#{@user.nickname}
+          small  Share Price: $#{@user.share_price}
+        h4= @user.name
+
+        br
+      
+  .row
+    .span5.offset1 = render :partial=>'profiles/popularity', :locals=>{:user=>@user, :active=>'true'}
+  .row
+    .span5.offset1 = render :partial=>'profiles/price_dynamics', :locals=>{:user=>@user, :size=>'500x100'}
+
+
 
       /h3#available_shares #{@user.available_shares} shares available
   .span2
@@ -170,12 +150,5 @@ end
               td= bos.count * @user.share_price
             - else
               td Calculating..
-
-    .span4
-      span[hidden="true"]= data = @user.history.collect(&:price)
-      span[hidden="true"]= lc = GoogleChart::LineChart.new("400x200", "Price History", false)
-      span[hidden="true"]= lc.show_legend = false
-      span[hidden="true"]= lc.data "price", data, '51c1ee'
-    = image_tag lc.to_url
 
   = javascript_include_tag "profiles/show"

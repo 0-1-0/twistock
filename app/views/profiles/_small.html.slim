@@ -25,4 +25,4 @@ section
           h5 =price_tag
           span.label.label-success $ #{price_value}             
         .btn-center.btn=link_to 'Buy', '/profiles/' + user.nickname
-        = render :partial=>'profiles/popularity', :locals=>{:user=>user}
+        = render :partial=>'profiles/popularity', :locals=>{:user=>user, :active=>false}

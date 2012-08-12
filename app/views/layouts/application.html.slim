@@ -24,22 +24,24 @@ html lang="en"
   body
     .navbar.navbar-fixed-top
       .navbar-inner
-        .container-fluid
-          .row-fluid
-            .span2
+        .container
+          .row
+            .span1
               .logo
-                h1 = link_to 'Twistock', root_path 
+                h2 = link_to 'Twistock', root_path 
+              
             .span4
               = form_tag search_profiles_path, class: 'form-search', style: 'padding: 7px 0; margin: 0;' do
                 .input-append.input-prepend
                   = text_field_tag 'nickname', nil, class: 'search-query', placeholder: 'search user by nickname'
                   button[type="submit" class="btn btn-go"] Go  
 
-            .span6=yield :streamline
 
-    .container-fluid
-      .row-fluid
-        .span6
+            .span7=yield :upper_menu
+
+    .container
+      .row
+        .span5
           .well.sidebar-nav.sidebar-nav-fixed
             ul.nav.nav-list
               =yield :sidebar
@@ -87,40 +89,8 @@ html lang="en"
 
                 li
                   hr
-
-                li
-                  - pr = current_user.popularity
-                  - if pr < 5
-                    p Popularity: abandoned
-                    .progress.progress-danger
-                      .bar[style="width: 25%"]
-
-                  - if pr >= 5 and pr < 10
-                    p Popularity: low
-                    .progress.progress-warning
-                      .bar[style="width: 35%"]
-
-                  - if pr >= 10 and pr < 50
-                    p Popularity: medium
-                    .progress.progress-success
-                      .bar[style="width: 50%"]
-
-                  - if pr > 50 and pr < 1000
-                    h3 Popularity: high
-                    .progress.progress-success
-                      .bar[style="width: 80%"]
-
-                  - if pr >= 1000 
-                    p Popularity: superstar
-                    .progress.progress-info
-                      .bar[style="width: 100%"]
-                li Share price dynamics:
-                li
-                  span[hidden="true"]= data = current_user.history.collect(&:price)
-                  span[hidden="true"]= lc = GoogleChart::LineChart.new("300x80", "", false)
-                  span[hidden="true"]= lc.show_legend = false
-                  span[hidden="true"]= lc.data "price", data, '51c1ee'
-                  = image_tag lc.to_url
+                li= render :partial=>'profiles/popularity', :locals=>{:user=>current_user, :active=>'true'}
+                li= render :partial=>'profiles/price_dynamics', :locals=>{:user=>current_user, :size=>'400x100'}
                 li
                   .nav-header 
                     i.icon-lock
@@ -190,17 +160,8 @@ html lang="en"
                   li.nav-header
                     =link_to 'Product invoices', '/product_invoices'
 
-        /.span8
-          /.content
-            - if notice
-              .alert.alert-info
-                a.close data-dismiss="alert" x
-                = notice
-            - if alert
-              .alert.alert-error
-                a.close data-dismiss="alert" x
-                = alert
-        .span6=yield
+        .span7#main-content
+          =yield
 
 
     
