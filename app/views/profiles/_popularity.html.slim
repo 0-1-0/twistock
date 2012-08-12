@@ -1,0 +1,25 @@
+- pr = user.popularity
+- if pr < 5
+  p Popularity: abandoned
+  .progress.progress-striped.progress-danger
+    .bar[style="width: 25%"]
+
+- if pr >= 5 and pr < 10
+  p Popularity: low
+  .progress.progress-striped.progress-warning
+    .bar[style="width: 35%"]
+
+- if pr >= 10 and pr < 50
+  p Popularity: medium
+  .progress.progress-striped.progress-success
+    .bar[style="width: 50%"]
+
+- if pr > 50 and pr < 1000
+  h3 Popularity: high
+  .progress.progress-striped.progress-success
+    .bar[style="width: 80%"]
+
+- if pr >= 1000 
+  p Popularity: superstar
+  .progress.progress-striped.progress-info
+    .bar[style="width: 100%"]

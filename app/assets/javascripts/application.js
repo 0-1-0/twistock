@@ -13,8 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.dataTables.min
+//= require jscroll
 //= require bootstrap
 //= require DT_bootstrap
 //= require bootstrap-actions
-//= require move.min
 //= require interactive
+

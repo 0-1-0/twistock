@@ -3,20 +3,19 @@
     -webkit-perspective: 1000;
     position: relative;
     width: 75%;
-    height: 200px;
+    height: 250px;
 }   
 .back, .front {
     position: absolute;
     -webkit-backface-visibility: hidden;
-    -webkit-transition: -webkit-transform 1s ease-in;
+    -webkit-transition: -webkit-transform 0.3s ease-in;
     width: 100%;  
+    
 }
 .back {
     -webkit-transform: rotateY(180deg);
     overflow: hidden;
     /*background: #7f37c2;*/
-    margin-top: -20px;
-    margin-bottom: 40px;
 }   
 .front {
 }
@@ -41,4 +40,8 @@ section:hover .front {
         width:95%;
         margin-left: 0px;
     }
+}
+
+#m{
+    height: 2000px;
 }

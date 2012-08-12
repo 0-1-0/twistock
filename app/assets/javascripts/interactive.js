@@ -33,105 +33,110 @@
 // });
 
 // updateInfoLine();
-var cnt = {};
-var position = {}
+// var cnt = {};
+// var position = {}
+
+$(".scroll").each(function(index){
+  $(this).simplyScroll({orientation:'vertical',direction:'backwards',speed: 2*(index%2+1),customClass:'vert'});
+});
+ 
 
 //initialize emitters
 // $('.emitter').each(function(index) {
 // 	var emitter = $(this);
 
 // 	$.ajax({
-//     url: emitter.attr('url') + '?page=' + cnt[index],
+//     url: emitter.attr('url') + '?page=1',// + cnt[index],
 //     type: 'get'
 //   }).done(function(data){
 //   	emitter.append(data);
 //   });
 	
-// });
+//  });
 
 //Perform animation
 // move.defaults = {
 //   duration: 40
 // };
-if($(window).width() >= 1024){
+// if($(window).width() >= 1024){
 
 
-setInterval(function(){
+// setInterval(function(){
 
-	if(! $('#most-valuable').is(':hover')){
-    move('#most-valuable')
-    .add('top', -200)
-    .end();	
-  }
+// 	if(! $('#most-valuable').is(':hover')){
+//     move('#most-valuable')
+//     .add('top', -200)
+//     .end();	
+//   }
 
-  if(! $('#most-booming').is(':hover')){
-    move('#most-booming')
-    .add('top', -250)
-    .end();	
-  }
+//   if(! $('#most-booming').is(':hover')){
+//     move('#most-booming')
+//     .add('top', -250)
+//     .end();	
+//   }
 
-  if(! $('#most-falling').is(':hover')){
-    move('#most-falling')
-    .add('top', -180)
-    .end();	
-  }
+//   if(! $('#most-falling').is(':hover')){
+//     move('#most-falling')
+//     .add('top', -180)
+//     .end();	
+//   }
 
-   if(! $('#random-deals').is(':hover')){
-    move('#random-deals')
-    .add('top', -360)
-    .end();	
-  }
-}, 2400);
+//    if(! $('#random-deals').is(':hover')){
+//     move('#random-deals')
+//     .add('top', -360)
+//     .end();	
+//   }
+// }, 2400);
 
 
 //Enable Emitters
-setInterval( function() {
-			 $('.emitter').each(function(index) {	
+// setInterval( function() {
+// 			 $('.emitter').each(function(index) {	
 
-						if(! $(this).is(':hover')){
-							//position[index] -= $(this).attr('speed');
+// 						if(! $(this).is(':hover')){
+// 							//position[index] -= $(this).attr('speed');
 						
-							// $(this).css(
-							// 	"top",
-							//   position[index]
-							// );
+// 							// $(this).css(
+// 							// 	"top",
+// 							//   position[index]
+// 							// );
 
-							if($(this).position().top + $(this).height() < $(window).height()){
-								var emitter = $(this);
+// 							if($(this).position().top + $(this).height() < $(window).height()){
+// 								var emitter = $(this);
 
-							// 	if ($(this).height() > $(window).height()*2){
-							// 		child = $(this).children(":last");
-							// 		$(this).append(child.clone());
-							// 		child.remove();
-							// 		position[index] += child.height();
-							// 		$(this).css(
-							// 	"top",
-							//   position[index]
-							// );
+// 							// 	if ($(this).height() > $(window).height()*2){
+// 							// 		child = $(this).children(":last");
+// 							// 		$(this).append(child.clone());
+// 							// 		child.remove();
+// 							// 		position[index] += child.height();
+// 							// 		$(this).css(
+// 							// 	"top",
+// 							//   position[index]
+// 							// );
 
-							// 	}else{
+// 							// 	}else{
 
-											$.ajax({
-										    url: $(this).attr('url') + '?page=' + cnt[index],
-										    type: 'get'
-										  }).done(function(data){
-										  	cnt[index] += 1;
-										  	//alert($(this).attr('url'));
-										  	if(data.length < 10){
-										  		cnt[index] = 0;
-										  	}
-										  	emitter.append(data);
-										  });
+// 											$.ajax({
+// 										    url: $(this).attr('url') + '?page=' + cnt[index],
+// 										    type: 'get'
+// 										  }).done(function(data){
+// 										  	cnt[index] += 1;
+// 										  	//alert($(this).attr('url'));
+// 										  	if(data.length < 10){
+// 										  		cnt[index] = 0;
+// 										  	}
+// 										  	emitter.append(data);
+// 										  });
 
-							//	}
+// 							//	}
 
-							}
-					}
+// 							}
+// 					}
 						
-				});
-} , 1000);
+// 				});
+// } , 1000);
 
-};
+// };
 
 
 

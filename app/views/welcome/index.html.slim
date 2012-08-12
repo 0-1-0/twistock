@@ -20,14 +20,62 @@
 end
 
 .row-fluid
+  /Random
+  .span3 
+    ul.scroll
+      - User.find(:all, :limit=> 50, :order=> 'RANDOM()').each do |user|
+        li 
+          = render :partial=>'profiles/small', :locals=>{\
+            :user=>user,\ 
+            :price_tag=>'Stock price',\
+            :price_value=>(user.share_price), \
+            :category=>'#Random',\
+            :label_class=>'label-info'\
+            }
+
+  /Highest value
   .span3
-    #random-deals.emitter.span2[speed=4 url='/stream/random_people']
+    ul.scroll
+      - User.find(:all, :limit=> 20, :order=> 'share_price desc').each do |user|
+        li 
+          = render :partial=>'profiles/small', :locals=>{\
+            :user=>user,\ 
+            :price_tag=>'Price',\
+            :price_value=>(user.share_price), \
+            :category=>'#Pricy',\
+            :label_class=>'label-warning'\
+            }
+
+  /Most booming
   .span3
-    #most-valuable.emitter.span2[speed=1 url='/stream/most_valuable']
+    ul.scroll
+      - User.where("hour_delta_price >= 0").find(:all, :limit=> 50, :order=> 'hour_delta_price desc').each do |user|
+        li 
+          = render :partial=>'profiles/small', :locals=>{\
+            :user=>user,\ 
+            :price_tag=>'Growth',\
+            :price_value=>(user.hour_delta_price || 0), \
+            :category=>'#Booming',\
+            :label_class=>'label-success'\
+            }
+
+  /Most falling
   .span3
-    #most-booming.emitter.span2[speed=2 url='/stream/most_booming']
-  .span3
-    #most-falling.emitter.span2[speed=1 url='/stream/most_falling']
+    ul.scroll
+      - User.where("hour_delta_price < 0").find(:all, :limit=> 50, :order=> 'hour_delta_price asc').each do |user|
+        li 
+          = render :partial=>'profiles/small', :locals=>{\
+            :user=>user,\ 
+            :price_tag=>'Decrease',\
+            :price_value=>(user.hour_delta_price || 0), \
+            :category=>'#Falling',\
+            :label_class=>'label-important'\
+            }
+
+  / .span3
+  /   #most-booming.emitter.span2[speed=2 url='/stream/most_booming']
+  / .span3
+  /   #most-falling.emitter.span2[speed=1 url='/stream/most_falling']
 
 .row-fluid#for-iphone
   .iphone-emitter.span6 url='/stream/random_people'
@@ -47,7 +95,7 @@ javascript:
         url: $(this).attr('url') + '?page=1',
         type: 'get'
       }).done(function(data){
-        emitter.append(data);
+        emitter.html(data);
       });
             
     });

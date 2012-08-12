@@ -1,0 +1,28 @@
+section
+  .card
+    .back
+      .well.block
+        div[class='label #{label_class}']
+          h5 =category        
+        .thumbnail
+          = image_tag user.avatar, :style=>'float:right', :size=>'48x48'
+          a[href="/profiles/#{user.nickname}"] @#{user.nickname}
+          h5 Share price:
+          span.label.label-success $ #{user.share_price} 
+          span[hidden="true"]= data = user.history.collect(&:price)
+          span[hidden="true"]= lc = GoogleChart::LineChart.new("200x100", "Price History", false)
+          span[hidden="true"]= lc.show_legend = false
+          span[hidden="true"]= lc.data "price", data, '51c1ee'
+          = image_tag lc.to_url
+        .btn-center.btn=link_to 'Buy', '/profiles/' + user.nickname
+    .front
+      .well.block
+        div[class='label #{label_class}']
+          h5 =category
+        .thumbnail
+          = image_tag user.avatar, :style=>'float:right', :size=>'48x48'
+          a[href="/profiles/#{user.nickname}"] =user.name
+          h5 =price_tag
+          span.label.label-success $ #{price_value}             
+        .btn-center.btn=link_to 'Buy', '/profiles/' + user.nickname
+        = render :partial=>'profiles/popularity', :locals=>{:user=>user}
