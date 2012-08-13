@@ -1,0 +1,96 @@
+ul.nav.nav-list  
+  li
+    table
+      tr
+        td rowspan=4
+          = image_tag user.profile_image , size: '80x80', class: 'avatar' 
+        td colspan=2
+          h3 
+            | @ #{user.nickname} (
+            = link_to 'Sign out', '/sign_out' 
+            | )                        
+      tr
+        td colspan=2 =user.name  
+        td            
+      tr
+        td Your money: $#{user.money} 
+        td                
+          = link_to 'Spend in Twistock Store', '/products/showcase' 
+      tr
+        td Your share price: $#{user.share_price} 
+        td
+          - if user.retention_shares > 0
+            =link_to 'Sell your startingg shares', '/profiles/' + user.nickname
+
+  li
+    hr
+  li= render :partial=>'profiles/popularity', :locals=>{:user=>user, :active=>'true'}
+  li= render :partial=>'profiles/price_dynamics', :locals=>{:user=>user, :size=>'400x100'}
+  li
+    .nav-header 
+      i.icon-lock
+      | My Investment portfolio (#{user.portfel.count}) 
+      .pull-right
+        .btn.btn-small=link_to 'Show all', '/iportfolio'
+      
+  li
+    br
+      
+  li 
+    table.table
+      tr
+        th Stock owner
+        th Count
+        th One stock price
+        th Total cost
+      - user.portfel.first(3).each do |bos|
+        tr
+          td= link_to bos.owner.nickname, profile_path(bos.owner)
+          td= bos.count
+          td= bos.one_share_cost
+          td= bos.total_cost
+
+  li
+    .nav-header 
+      i.icon-user
+      | My Stock holders (#{user.my_shares.count}) 
+      .pull-right
+        .btn.btn-small=link_to 'Show all', '/holders'
+      
+  li
+    br
+      
+  li 
+    table.table
+      tr
+        th Stock holder
+        th Count
+        th Total cost
+      - user.my_shares.first(3).each do |bos|
+        tr
+          td= link_to bos.holder.nickname, profile_path(bos.holder)
+          td= bos.count
+          - if user.share_price
+            td= bos.count * user.share_price
+          - else
+            td Calculating..
+
+  li
+    .nav-header
+      i.icon-bookmark
+      | My History (#{user.transactions.count})
+    =link_to 'show all transactions', '/history'
+
+  li
+    .nav-header 
+      i.icon-shopping-cart
+      | Twistock store
+    .btn.btn-small= link_to 'Buy real goods for virtual money', '/products/showcase'
+  - if user.is_admin?
+    li
+      hr
+    li.nav-header Administration
+    li.nav-header
+      =link_to 'Products listing', '/products'
+    li.nav-header
+      =link_to 'Product invoices', '/product_invoices'
