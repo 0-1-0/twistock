@@ -23,7 +23,7 @@ end
   /Random
   .span3 
     ul.scroll
-      - User.find(:all, :limit=> 50, :order=> 'RANDOM()').each do |user|
+      - User.find(:all, :limit=> 20, :order=> 'RANDOM()').each do |user|
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
@@ -36,7 +36,7 @@ end
   /Highest value
   .span3
     ul.scroll
-      - User.find(:all, :limit=> 20, :order=> 'share_price desc').each do |user|
+      - User.find(:all, :limit=> 10, :order=> 'share_price desc').each do |user|
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
@@ -49,7 +49,7 @@ end
   /Most booming
   .span3
     ul.scroll
-      - User.where("hour_delta_price >= 0").find(:all, :limit=> 50, :order=> 'hour_delta_price desc').each do |user|
+      - User.where("hour_delta_price >= 0").find(:all, :limit=> 10, :order=> 'hour_delta_price desc').each do |user|
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
@@ -62,7 +62,7 @@ end
   /Most falling
   .span3
     ul.scroll
-      - User.where("hour_delta_price < 0").find(:all, :limit=> 50, :order=> 'hour_delta_price asc').each do |user|
+      - User.where("hour_delta_price < 0").find(:all, :limit=> 10, :order=> 'hour_delta_price asc').each do |user|
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 

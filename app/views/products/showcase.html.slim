@@ -5,6 +5,8 @@
         =link_to 'Back to main page', '/'
 end
 
+= javascript_include_tag "products/showcase.js"
+
 
 
 
@@ -12,14 +14,16 @@ h1 Twistock Store
 hr
 ul.thumbnails
   - @products.each do |product|
-    li.span6.well.block
+    li.span3.well.block
       .product.thumbnail[style="height:250px"]
         h4 = product.name
         p = product.short_description.html_safe
 
       .pull-right[style="height:60px"] 
-        - if signed_in? and current_user.money >= product.price      
-          a.btn.btn-small.btn-buy data-toggle="modal" href="##{product.id}" total_cost=product.price product_name=product.name product_id=product.id
+        - if signed_in? and current_user.money >= product.price   
+          .description-data
+            p=product.description.html_safe   
+          a.btn.btn-small.btn-buy data-toggle="modal" href="#buy_modal" total_cost=product.price product_name=product.name product_id=product.id
             h5 $ #{product.price}          
             | Buy this item
         - else
@@ -27,35 +31,23 @@ ul.thumbnails
             h5 $ #{product.price}
             | You haven't enough money to buy this item. Try to earn more!
 
-= javascript_include_tag "products/showcase.js"
+
 
 javascript:
   $('.product').click(function(){
     $(this).parent().find('.btn-buy').click();
   });
 
-- if signed_in?
-  - @products.each do |product|
-    .modal.fade[id="#{product.id}"]
-      .modal-header
-        a.close data-dismiss="modal" x
-        h3=product.name
-      .modal-body
-        p=product.description.html_safe
-        hr
-      .modal-footer
-          a.btn data-dismiss="modal" Close
-          a.btn data-toggle="modal" href="#buy_modal" Buy this item
 
-
-
-  #buy_modal.modal.fade
-    .modal-header
-      a.close data-dismiss="modal" x
-      h3 Buy Product
-      #description
-    = simple_form_for 'create', url: '/product_invoices/create', html: { class: 'form-horizontal' } do |f|
-      .modal-body
+          
+#buy_modal.modal.fade
+  .modal-header
+    a.close data-dismiss="modal" x
+    h3#productname Buy Product
+  = simple_form_for 'create', url: '/product_invoices/create', html: { class: 'form-horizontal' } do |f|
+    .modal-body
+      .pre-order#description
+      #form-order.order
         = f.input :product_name, :disabled => true, input_html: {value:'sdf'}
         = f.input :product_id, :as=>:hidden, input_html: {value: ''}
         = f.input :user, :as=>:hidden, input_html: {value: current_user.nickname}
@@ -67,8 +59,8 @@ javascript:
         = f.input :email, :as=> :string
         = f.input :phone, :as=> :string
         = f.input :total_cost, :disabled => true
-      .modal-footer
-        a.btn data-dismiss="modal" Close
-        = f.button :submit, 'Buy', class: 'btn btn-success btn-buy-finish'
-          
+    .modal-footer
+      a.btn data-dismiss="modal" Close
+      a.btn#btn-order.pre-order href="javscript:void(0)" Buy this item
+      = f.button :submit, 'Buy', class: 'btn btn-success order', id: 'btn-buy-finish'
 

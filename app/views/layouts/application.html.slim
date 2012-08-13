@@ -31,7 +31,8 @@ html lang="en"
           .row
             .span1
               .logo
-                h2 = link_to 'Twistock', root_path 
+                h2 
+                  b= link_to 'Twistock', root_path 
               
             .span4
               = form_tag search_profiles_path, class: 'form-search', style: 'padding: 7px 0; margin: 0;' do
