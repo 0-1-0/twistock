@@ -7,12 +7,12 @@ end
 
 #history-box.block.well
   h2 Stock Holders
-  table#history-datatable.table.table-bordered
+  table#history-datatable.table
     thead
       tr
         th #
         th Stock holder
-        th Stock count
+        th Count
         th Total cost
     tbody
       - i = current_user.my_shares.count + 1

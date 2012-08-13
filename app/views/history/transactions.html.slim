@@ -7,14 +7,14 @@ end
 
 #history-box.block.well
   h2 History
-  table#history-datatable.table.table-bordered
+  table#history-datatable.table
     thead
       tr
         th #
         th Action
         th Date
-        th Stocks owner
-        th Stocks count
+        th Stock owner
+        th Count
         th Cost
     tbody
       - i = current_user.transactions.count + 1
