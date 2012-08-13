@@ -30,9 +30,8 @@ html lang="en"
         .container
           .row
             .span1
-              .logo
-                h2 
-                  b= link_to 'Twistock', root_path 
+              a href='/'
+                img.logo src='/assets/logo.png'
               
             .span4
               = form_tag search_profiles_path, class: 'form-search', style: 'padding: 7px 0; margin: 0;' do
