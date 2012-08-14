@@ -6,9 +6,11 @@ ul.nav.nav-list
           = image_tag user.profile_image , size: '80x80', class: 'avatar' 
         td colspan=2
           h3 
-            | @ #{user.nickname} (
-            = link_to 'Sign out', '/sign_out' 
-            | )                        
+            | @ #{user.nickname}
+            small.pull-right
+              |(
+              = link_to 'Sign out', '/sign_out' 
+              |)                     
       tr
         td colspan=2 =user.name  
         td            
