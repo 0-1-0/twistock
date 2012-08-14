@@ -84,3 +84,6 @@ gem 'gchartrb', :require => 'google_chart'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+# мониторинг
+gem 'newrelic_rpm'
