@@ -4,6 +4,6 @@ class TweetWorker
   def perform(id, message)
     user = User.find(id)
     client = user.twitter
-    client.update(message)
+    # client.update(message)
   end
 end
