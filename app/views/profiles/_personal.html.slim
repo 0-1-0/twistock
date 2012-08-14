@@ -35,11 +35,7 @@ ul.nav.nav-list
     .nav-header 
       i.icon-lock
       | My Investment portfolio (#{user.portfel.count}) 
-      .pull-right
-        .btn.btn-small=link_to 'Show all', '/iportfolio'
       
-  li
-    br
       
   li 
     table.table
@@ -54,16 +50,18 @@ ul.nav.nav-list
           td= bos.count
           td= bos.one_share_cost
           td= bos.total_cost
+    .pull-right
+      .btn.btn-small=link_to 'Show all', '/iportfolio'
+  li
+    br
+  li
+    br
 
   li
     .nav-header 
       i.icon-user
       | My Stock holders (#{user.my_shares.count}) 
-      .pull-right
-        .btn.btn-small=link_to 'Show all', '/holders'
-      
-  li
-    br
+
       
   li 
     table.table
@@ -79,6 +77,12 @@ ul.nav.nav-list
             td= bos.count * user.share_price
           - else
             td Calculating..
+    .pull-right
+      .btn.btn-small=link_to 'Show all', '/holders'
+  li
+    br
+  li
+    br
 
   li
     .nav-header
