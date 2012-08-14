@@ -29,6 +29,9 @@ ul.nav.nav-list
   li= render :partial=>'profiles/popularity', :locals=>{:user=>user, :active=>'true'}
   li= render :partial=>'profiles/price_dynamics', :locals=>{:user=>user, :size=>'400x100'}
   li
+    br
+    br
+  li
     .nav-header 
       i.icon-lock
       | My Investment portfolio (#{user.portfel.count}) 
