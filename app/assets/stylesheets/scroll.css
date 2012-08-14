@@ -144,41 +144,4 @@
 
 
 
-/* Vertical scroller example */
 
-.vert { /* wider than clip to position buttons to side */
-  width: 200px;
-  height: 1000px;
-  margin-bottom: 1.5em;
-}
-
-  .vert .simply-scroll-clip {
-    width: 200px;
-    height: 1000px;
-  }
-
-    .vert .simply-scroll-list {}
-
-    .vert .simply-scroll-list li {
-      width: 220px;
-      height: 220px;
-    }
-    .vert .simply-scroll-list li img {}
-
-  .vert .simply-scroll-btn {}
-
-  .vert .simply-scroll-btn-up { /* modified btn pos */
-    right: 0;
-    top: 0;
-  }
-  .vert .simply-scroll-btn-up.disabled {}
-  .vert .simply-scroll-btn-up:hover {}
-
-  .vert .simply-scroll-btn-down { /* modified btn pos */
-    right: 0;
-    top: 52px;
-  }
-  .vert .simply-scroll-btn-down.disabled {}
-  .vert .simply-scroll-btn-down:hover {}
-
-  /* NOTE left-right classes wouldn't be needed on vertical scroller */

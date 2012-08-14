@@ -32,14 +32,66 @@ section:hover .front {
 }
 
 .btn-center{
-    margin-left: 25%;
+    margin-left: 60px;
 }
 
-@media all and (max-width: 900px){
-    .btn-center{
-        width:95%;
-        margin-left: 0px;
+
+
+/* Vertical scroller example */
+
+.vert { /* wider than clip to position buttons to side */
+  width: 200px;
+  height: 1000px;
+  margin-bottom: 1.5em;
+}
+
+  .vert .simply-scroll-clip {
+    width: 200px;
+    height: 1000px;
+  }
+
+    .vert .simply-scroll-list {}
+
+    .vert .simply-scroll-list li {
+      width: 220px;
+      height: 220px;
     }
+    .vert .simply-scroll-list li img {}
+
+  .vert .simply-scroll-btn {}
+
+  .vert .simply-scroll-btn-up { /* modified btn pos */
+    right: 0;
+    top: 0;
+  }
+  .vert .simply-scroll-btn-up.disabled {}
+  .vert .simply-scroll-btn-up:hover {}
+
+  .vert .simply-scroll-btn-down { /* modified btn pos */
+    right: 0;
+    top: 52px;
+  }
+  .vert .simply-scroll-btn-down.disabled {}
+  .vert .simply-scroll-btn-down:hover {}
+
+  /* NOTE left-right classes wouldn't be needed on vertical scroller */
+
+
+
+
+@media screen and (max-width: 1030px) {
+
+
+    .vert .simply-scroll-list li {
+        width: 180px;
+        height: 250px;
+    }
+
+    .btn-center{
+        margin-left: 40px;
+    }
+
+
 }
 
 #m{
