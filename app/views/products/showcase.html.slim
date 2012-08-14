@@ -5,8 +5,30 @@
         =link_to 'Back to main page', '/'
 end
 
-= javascript_include_tag "products/showcase.js"
-
+- if signed_in?
+  #buy_modal.modal.fade.in
+    .modal-header
+      a.close data-dismiss="modal" x
+      h3#productname Buy Product
+    = simple_form_for 'create', url: '/product_invoices/create', html: { class: 'form-horizontal' } do |f|
+      .modal-body
+        .pre-order#description
+        #form-order.order
+          = f.input :product_name, :disabled => true, input_html: {value:'sdf'}
+          = f.input :product_id, :as=>:hidden, input_html: {value: ''}
+          = f.input :user, :as=>:hidden, input_html: {value: signed_in? ? current_user.nickname : ''}
+          = f.input :country, :as=> :string
+          = f.input :postal_code, :as=> :string
+          = f.input :city, :as=> :string
+          = f.input :full_name, :as=> :string
+          = f.input :address, :as=> :string
+          = f.input :email, :as=> :string
+          = f.input :phone, :as=> :string
+          = f.input :total_cost, :disabled => true
+      .modal-footer
+        a.btn data-dismiss="modal" Close
+        a.btn#btn-order.pre-order href="javscript:void(0)" Buy this item
+        = f.button :submit, 'Buy', class: 'btn btn-success order', id: 'btn-buy-finish'
 
 
 
@@ -38,29 +60,8 @@ javascript:
     $(this).parent().find('.btn-buy').click();
   });
 
+  $('.modal').hide();
 
-          
-#buy_modal.modal.fade
-  .modal-header
-    a.close data-dismiss="modal" x
-    h3#productname Buy Product
-  = simple_form_for 'create', url: '/product_invoices/create', html: { class: 'form-horizontal' } do |f|
-    .modal-body
-      .pre-order#description
-      #form-order.order
-        = f.input :product_name, :disabled => true, input_html: {value:'sdf'}
-        = f.input :product_id, :as=>:hidden, input_html: {value: ''}
-        = f.input :user, :as=>:hidden, input_html: {value: current_user.nickname}
-        = f.input :country, :as=> :string
-        = f.input :postal_code, :as=> :string
-        = f.input :city, :as=> :string
-        = f.input :full_name, :as=> :string
-        = f.input :address, :as=> :string
-        = f.input :email, :as=> :string
-        = f.input :phone, :as=> :string
-        = f.input :total_cost, :disabled => true
-    .modal-footer
-      a.btn data-dismiss="modal" Close
-      a.btn#btn-order.pre-order href="javscript:void(0)" Buy this item
-      = f.button :submit, 'Buy', class: 'btn btn-success order', id: 'btn-buy-finish'
 
+
+= javascript_include_tag "products/showcase.js"

@@ -17,3 +17,5 @@ $(document).ready ->
 
   $('#btn-buy-finish').click(e) ->
     alert('Thank you for your purchase!')
+
+    
