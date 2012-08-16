@@ -34,13 +34,5 @@ class UserUpdateWorker
     user.share_price = (((user.my_shares.sum(:count) + 1000)/1000.0)*user.base_price).round
     
     user.save
-
-    #sell starting shares if availible
-    if user.retention_shares > 0
-      user.money += user.retention_shares*user.share_price
-      user.retention_shares = 0
-      user.save
-    end
-
   end
 end

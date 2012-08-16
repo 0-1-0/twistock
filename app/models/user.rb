@@ -267,6 +267,10 @@ class User < ActiveRecord::Base
       self
     end
 
+    if self.retention_shares > 0
+      self.sell_retention self.retention_shares
+    end
+
   end
 
   def popularity
