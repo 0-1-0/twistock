@@ -19,7 +19,7 @@ ul.nav.nav-list
         td                
           = link_to 'Spend in Twistock Store', '/products/showcase' 
       tr
-        td Your share price: $#{user.share_price} 
+        td Your stock price: $#{user.share_price} 
         td
           - if user.retention_shares > 0
             =link_to 'Sell your startingg shares', '/profiles/' + user.nickname
