@@ -3,16 +3,11 @@ Twitterexchange::Application.routes.draw do
 
   get "history_controller/operations"
 
-  get "ping/pong"
 
   match '/products/showcase', :controller => 'products', :action => 'showcase'
   resources :products
 
   get "stream/infoline"
-  get "stream/most_valuable"
-  get "stream/most_booming"
-  get "stream/most_falling"
-  get "stream/random_people"
 
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
