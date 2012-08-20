@@ -141,7 +141,7 @@ class User < ActiveRecord::Base
       t.save
 
       #Пишем о транзакции в твиттер
-      TweetWorker.perform_async(self.id, "I've just bought " + t.count.to_s + " shares of @" + owner.nickname + " on www.twistock.com")
+      TweetWorker.perform_async(self.id, "@" + self.nickname + " bought " + t.count.to_s + " stocks of @" + owner.nickname + " on www.twistock.com #MonetizeSocialCapital")
 
       # return self
       self
@@ -189,7 +189,7 @@ class User < ActiveRecord::Base
     t.save
 
     #Пишем о транзакции в твиттер
-    TweetWorker.perform_async(self.id, "I've just sell " + t.count.to_s + " shares of @" + owner.nickname + " on www.twistock.com")
+    TweetWorker.perform_async(self.id, "@" + self.nickname + " sold " + t.count.to_s + " stocks of @" + owner.nickname + " on www.twistock.com #MonetizeSocialCapital")
     self
   end
 
