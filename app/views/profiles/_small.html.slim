@@ -22,7 +22,7 @@ section
         .thumbnail
           a[href="/profiles/#{user.nickname}"] @#{user.nickname}
           = image_tag user.avatar, :style=>'float:right', :size=>'48x48'          
-          h5 Stock price:
-          span.label.label-success = number_to_currency user.share_price, :precision => 0        
+          h5 =price_tag
+          span.label.label-success = number_to_currency price_value, :precision => 0        
           = render :partial=>'profiles/popularity', :locals=>{:user=>user, :active=>false}
         .btn-center.btn=link_to 'Buy', '/profiles/' + user.nickname
