@@ -47,7 +47,8 @@ $("#yourprice").tooltip({
 })
 
 $("#popularity").tooltip({
-    title: 'Popularity of the stocks increases when users buy or sell them.'
+    title: 'Popularity of the stocks increases when users buy or sell them.',
+     'placement': 'bottom'
     
 })
 
