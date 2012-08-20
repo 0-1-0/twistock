@@ -1,23 +1,18 @@
-=content_for :upper_menu do
-  .row-fluid#streamline
-    .span3#random-person
-      ul.nav
-        li
-          .topbar-link Random person
-    .span3#most-valuable
-      ul.nav
-        li 
-          .topbar-link Most valuable
-
-    .span3#most-booming
-      ul.nav
-        li 
-          .topbar-link Most booming
-
-    .span3#most-falling
-      ul.nav
-        li 
-          .topbar-link Most falling
+=content_for :upper_menu do  
+  ul.nav#streamline.span7
+    .row-fluid
+      li.span3
+        .topbar-link
+          =link_to 'Random person', '#', :id=>'random-person'
+      li.span3
+        .topbar-link
+          =link_to 'Most valuable', '#', :id=>'most-valuable'
+      li.span3
+        .topbar-link
+          =link_to 'Most booming', '#', :id=>'most-booming'
+      li.span3
+        .topbar-link
+          =link_to 'Most falling', '#', :id=>'most-falling'
 end
 
 .row-fluid
