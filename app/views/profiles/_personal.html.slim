@@ -121,8 +121,8 @@ javascript:
         $.get("/profiles/#{current_user.nickname}.json", 
             (function(data){
             if (data.user.share_price) {
-              $("#yourprice").html('Your stock price:  $' + data.user.share_price);
-              $("#yourmoney").html('Your money:  $' + data.user.money);
+              $("#yourprice").html('Your stock price:  $' + data.user.share_price.toMoney());
+              $("#yourmoney").html('Your money:  $' + data.user.money.toMoney());
               clearInterval(setinterval_id);
             }
             }), 

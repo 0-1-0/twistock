@@ -42,7 +42,7 @@ ul.thumbnails
         h4 = product.name
         p = product.short_description.html_safe
 
-      .pull-right[style="height:60px"] 
+      .center[style="height:60px"] 
         - if signed_in? and current_user.money >= product.price   
           .description-data
             p=product.description.html_safe   
@@ -51,7 +51,7 @@ ul.thumbnails
               h5 $ #{product.price}          
               | Buy this item
         - else
-          .btn.btn-small.disabled
+          .btn.btn-small.disabled.btn-cannot-buy
             h5 $ #{product.price}
             ="You haven't enough money to buy this item."
             br
