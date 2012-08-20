@@ -63,7 +63,7 @@ $("#stockholders").tooltip({
 })
 
 $(".search-query").tooltip({
-    title: 'Here you can find users by their nickname.',
+    title: 'Here you can find users by their nicknames.',
     'placement': 'bottom'
     
 })
