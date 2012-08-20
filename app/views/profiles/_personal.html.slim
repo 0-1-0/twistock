@@ -14,14 +14,16 @@ ul.nav.nav-list
         td colspan=2 =user.name  
         td            
       tr
-        td#yourmoney Your money: $#{user.money} 
+        td#yourmoney 
+          | Your money: 
+          = number_to_currency user.money
         td                
           = link_to 'Spend in Twistock Store', '/products/showcase' 
       tr
         td#yourprice 
           | Your stock price: 
           - if user.share_price
-            | $#{user.share_price} 
+            = number_to_currency user.share_price
           - else
             | Calculating..
         td

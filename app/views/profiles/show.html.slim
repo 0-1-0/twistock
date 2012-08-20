@@ -76,7 +76,10 @@ end
       .page-header
         h1
           | @#{@user.nickname}
-          small.info  Stock Price: $#{@user.share_price}
+        h1
+          small.info 
+            | Stock Price: 
+            =number_to_currency @user.share_price
         h4= @user.name
 
         br

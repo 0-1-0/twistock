@@ -61,3 +61,9 @@ $("#stockholders").tooltip({
     title: 'Look who bought your stocks.'
     
 })
+
+$(".search-query").tooltip({
+    title: 'Here you can find users by their nickname.',
+    'placement': 'bottom'
+    
+})
