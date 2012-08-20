@@ -30,12 +30,12 @@ ul.nav.nav-list
 
   li
     hr
-  li= render :partial=>'profiles/popularity', :locals=>{:user=>user, :active=>'true'}
+  li#popularity= render :partial=>'profiles/popularity', :locals=>{:user=>user, :active=>'true'}
   li= render :partial=>'profiles/price_dynamics', :locals=>{:user=>user, :size=>'400x100'}
   li
     br
     br
-  li
+  li#iportfolio
     .nav-header 
       i.icon-lock
       | My Investment portfolio (#{user.portfel.count}) 
@@ -61,7 +61,7 @@ ul.nav.nav-list
   li
     br
 
-  li
+  li#stockholders
     .nav-header 
       i.icon-user
       | My Stock holders (#{user.my_shares.count}) 

@@ -39,3 +39,25 @@ $("#most-falling").tooltip({
     title: 'Everybody in a hurry to sell the stocks of these users and they are falling in price.',
     'placement': 'bottom'
 })
+
+
+$("#yourprice").tooltip({
+    title: 'This is a price of one stock of you. Twistock web-robots counted it value by assessing your social influence.',
+    'placement': 'bottom'
+})
+
+$("#popularity").tooltip({
+    title: 'Popularity of the stocks increases when users buy or sell them.'
+    
+})
+
+
+$("#iportfolio").tooltip({
+    title: 'Look whose stocks you possess.'
+    
+})
+
+$("#stockholders").tooltip({
+    title: 'Look who bought your stocks.'
+    
+})
