@@ -8,9 +8,8 @@ ul.nav.nav-list
           h3 
             | @ #{user.nickname}
             small.pull-right
-              |(
-              = link_to 'Sign out', '/sign_out' 
-              |)                     
+              .btn.btn-small
+                a data-toggle="modal" href="#promo_modal"  How it works?                   
       tr
         td colspan=2 =user.name  
         td            
@@ -104,7 +103,8 @@ ul.nav.nav-list
     br
   li
     .btn.btn-small
-      a data-toggle="modal" href="#promo_modal"  How it works?
+      = link_to 'Sign out', '/sign_out'  
+    
   - if user.is_admin?
     li
       hr

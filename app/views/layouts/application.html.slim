@@ -54,11 +54,6 @@ html lang="en"
 
             .span7
               =yield :upper_menu
-              - if not current_page?('/')
-                ul.nav
-                  li.span2
-                    .topbar-link
-                      a data-toggle="modal" href="#promo_modal"     How it works?
 
 
     .container
@@ -76,7 +71,7 @@ html lang="en"
             - if current_user
               = render :partial=>'profiles/personal', :locals=>{:user=>current_user}
             - else
-              = render :partial=>'welcome/short_promo'
+              = render :partial=>'welcome/sign_in'
 
 
 

@@ -26,14 +26,15 @@ end
           = f.input :phone, :as=> :string
           = f.input :total_cost, :disabled => true
       .modal-footer
-        a.btn data-dismiss="modal" Close
-        a.btn#btn-order.pre-order href="javscript:void(0)" Buy this item
+        a.btn.btn-small data-dismiss="modal" Close
+        a.btn.btn-small#btn-order.pre-order href="javscript:void(0)" Buy this item
         = f.button :submit, 'Buy', class: 'btn btn-success order', id: 'btn-buy-finish'
 
 
 
-.well.block
+#store-header
   h1 Twistock Store
+  h3 Spend your social capital on great things - try them out and tell others
 ul.thumbnails
   - @products.each do |product|
     li.span3.well.block
@@ -45,9 +46,10 @@ ul.thumbnails
         - if signed_in? and current_user.money >= product.price   
           .description-data
             p=product.description.html_safe   
-          a.btn.btn-small.btn-buy data-toggle="modal" href="#buy_modal" total_cost=product.price product_name=product.name product_id=product.id
-            h5 $ #{product.price}          
-            | Buy this item
+          .btn.btn-small.btn-buy data-toggle="modal" href="#buy_modal" total_cost=product.price product_name=product.name product_id=product.id
+            a href="javascript:void()"
+              h5 $ #{product.price}          
+              | Buy this item
         - else
           .btn.btn-small.disabled 
             h5 $ #{product.price}

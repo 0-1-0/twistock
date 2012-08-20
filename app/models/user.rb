@@ -14,9 +14,9 @@ class User < ActiveRecord::Base
 
 
   START_MONEY            = 0
-  START_SHARES           = 2000
-  START_RETENTION_SHARES = 1000
-  MAXIMUM_PRICE          = 100500000 #сто пицот миллионов
+  START_SHARES           = 200
+  START_RETENTION_SHARES = 100
+  MAXIMUM_PRICE          = 1005000 #сто пицот тыщ
   STEP = 0.0003
 
   def to_param
@@ -205,6 +205,10 @@ class User < ActiveRecord::Base
       raise "You haven't enough shares" if count > self.retention_shares
 
       cost = self.share_price * count
+
+      if cost > User::MAXIMUM_PRICE*100
+        cost = User::MAXIMUM_PRICE*100
+      end
 
       self.retention_shares -= count
       self.money += cost

@@ -19,7 +19,7 @@ end
         = f.input :price, as: :hidden, input_html: {value: @user.share_price.to_i}
         = f.input :total_cost, :disabled => true, input_html: {value: 0.9*(current_user.money.to_i)}
       .modal-footer
-        a.btn data-dismiss="modal" Close
+        a.btn.btn-small data-dismiss="modal" Close
         = f.button :submit, 'Buy', class: 'btn btn-success'
 
   javascript:
@@ -35,7 +35,7 @@ end
         = f.input :price, as: :hidden, input_html: {value: current_user.share_price}
         = f.input :total_cost, :disabled => true, input_html: {value: current_user.retention_shares*current_user.share_price}
       .modal-footer
-        a.btn data-dismiss="modal" Close
+        a.btn.btn-small data-dismiss="modal" Close
         = f.button :submit, 'Sell', class: 'btn btn-success'
 
   #sell_modal.modal.fade
@@ -52,7 +52,7 @@ end
         = f.input :base_price, as: :hidden, input_html: {value: @user.base_price}
         = f.input :total_cost, :disabled => true, input_html: {value: @user.share_price.to_i*@user.available_shares}
       .modal-footer
-        a.btn data-dismiss="modal" Close
+        a.btn.btn-small data-dismiss="modal" Close
         = f.button :submit, 'Sell', class: 'btn btn-success'
 
 
