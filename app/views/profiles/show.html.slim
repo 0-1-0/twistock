@@ -79,7 +79,7 @@ end
         h1
           small.info 
             | Stock Price: 
-            =number_to_currency @user.share_price
+            =number_to_currency @user.share_price, :precision => 0
         h4= @user.name
 
         br
