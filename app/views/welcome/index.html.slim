@@ -1,19 +1,20 @@
 =content_for :upper_menu do
   .row-fluid#streamline
-    .span3
+    .span3#random-person
       ul.nav
-        li.topbar-link Random person
-    .span3 
+        li
+          .topbar-link Random person
+    .span3#most-valuable
       ul.nav
         li 
           .topbar-link Most valuable
 
-    .span3 
+    .span3#most-booming
       ul.nav
         li 
           .topbar-link Most booming
 
-    .span3 
+    .span3#most-falling
       ul.nav
         li 
           .topbar-link Most falling
@@ -104,3 +105,10 @@ javascript:
   }else{
     $('#for-iphone').hide();
   };
+
+  $(document).ready(function () {
+    $("[rel=tooltip]").tooltip({
+      selector: '.topbar-link'
+    }
+    );
+  });

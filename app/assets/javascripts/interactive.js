@@ -39,6 +39,9 @@
 $(".scroll").each(function(index){
   $(this).simplyScroll({orientation:'vertical',direction:'backwards',speed: 2*(index%2+1),customClass:'vert'});
 });
+
+
+//$('.tooltip').tooltip();
  
 
 //initialize emitters
