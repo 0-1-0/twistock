@@ -3,7 +3,9 @@ h1 Listing products
 table.table.table-bordered
   tr
     th Name
+    th Priority
     th Description
+    th Short Description
     th Price
     th
     th
@@ -12,7 +14,9 @@ table.table.table-bordered
   - @products.each do |product|
     tr
       td = product.name
+      td = product.priority
       td = product.description
+      td = product.short_description
       td = product.price
       td = link_to 'Show', product
       td = link_to 'Edit', edit_product_path(product)
