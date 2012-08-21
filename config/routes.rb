@@ -15,6 +15,7 @@ Twitterexchange::Application.routes.draw do
   root to: 'welcome#index'
   get 'not_found' => 'welcome#not_found'
   get 'thanks' => 'welcome#thanks'
+  get 'mobile' => 'welcome#mobile'
 
   match '/auth/:provider/callback', :to => 'session#create'
   match '/auth/failure',            :to => 'session#failure'

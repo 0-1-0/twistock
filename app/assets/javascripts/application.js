@@ -72,6 +72,14 @@ $(".search-query").tooltip({
 
 
 
+//mobile redirect
+if (screen.width <= 1000) {
+document.location = "/mobile";
+}
+
+
+
+
 
 
 

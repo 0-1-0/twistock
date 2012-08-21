@@ -8,4 +8,8 @@ class WelcomeController < ApplicationController
 
   def thanks
   end
+
+  def mobile
+    render :layout=>false
+  end
 end
