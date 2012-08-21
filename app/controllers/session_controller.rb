@@ -10,8 +10,8 @@ class SessionController < ApplicationController
       @user.update_from_twitter_oauth(auth)
     end
 
-    if User.count < 250
-      session[:user_id] = @user.id
+    #if User.count < 250
+    session[:user_id] = @user.id
       
       #@user.activated = true
       #@user.save
