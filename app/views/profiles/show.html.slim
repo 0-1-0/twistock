@@ -60,6 +60,7 @@ end
   .row
     .span2.avatar= image_tag @user.profile_image
     .span5
+
       a[target='blank' href='http://twitter.com/#{@user.nickname}'] twitter profile
       - if signed_in?
         .btn-group.pull-right
