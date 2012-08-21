@@ -73,7 +73,7 @@ $(".search-query").tooltip({
 
 
 //mobile redirect
-if (screen.width <= 600) {
+if (screen.width <= 1000) {
 document.location = "/mobile";
 }
 
