@@ -9,8 +9,8 @@ Twitterexchange::Application.routes.draw do
 
   get "stream/infoline"
 
-  require 'sidekiq/web'
-  mount Sidekiq::Web => '/sidekiq'
+  #require 'sidekiq/web'
+  #mount Sidekiq::Web => '/sidekiq'
 
   root to: 'welcome#index'
   get 'not_found' => 'welcome#not_found'
