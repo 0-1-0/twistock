@@ -16,10 +16,10 @@ class SessionController < ApplicationController
       #@user.activated = true
       #@user.save
 
-      redirect_to root_path, notice: "Signed in!"
-    else
-      redirect_to '/thanks'
-    end
+    redirect_to root_path, notice: "Signed in!"
+    # else
+    #   redirect_to '/thanks'
+    # end
 
 
   end
