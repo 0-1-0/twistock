@@ -31,7 +31,7 @@ $("#most-valuable").tooltip({
 })
 
 $("#most-booming").tooltip({
-    title: 'Stocks of these users are on the rise. They are bought, and they grow in price.',
+    title: 'Stocks of these users are on the rise. They are growing in price because people buy them willingly.',
     'placement': 'bottom'
 })
 
