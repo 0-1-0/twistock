@@ -14,6 +14,19 @@ class SharesController < ApplicationController
     end
   end
 
+  def buy_followers
+    p = params[:buy]
+    target_user = User.find_by_nickname(p[:target_user])
+
+    begin
+      BuyFollowersWorker.perform_async(current_user, target_user)
+      redirect_to profile_path(target_user), notice: 'Success!'
+    rescue
+      redirect_to profile_path(target_user), alert: $!.to_s
+    end
+
+  end
+
   def sell
     p = params[:sell]
     owner = User.find_by_nickname(p[:owner])

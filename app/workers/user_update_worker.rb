@@ -35,7 +35,7 @@ class UserUpdateWorker
 
     d = Math::log10(user.my_shares.sum(:count)/1000.0 + 1)
     
-    price = 10*(a**6 + b**6 + c**6 + d**6)
+    price = a**6 + b**6 + c**6 + d**6
     
     user.share_price = price.round    
     user.save

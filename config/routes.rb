@@ -34,6 +34,7 @@ Twitterexchange::Application.routes.draw do
       post 'buy'
       post 'sell'
       post 'sell_retention'
+      post 'buy_followers'
     end
   end
 
