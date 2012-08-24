@@ -16,8 +16,8 @@ class User < ActiveRecord::Base
   START_MONEY            = 0
   START_SHARES           = 200
   START_RETENTION_SHARES = 100
-  MAXIMUM_PRICE          = 1005000 #сто пицот тыщ
-  STEP = 0.0003
+  MAXIMUM_PRICE          = 100500000 #сто пицот тыщ
+  STEP = 0.003
 
   def to_param
     nickname
