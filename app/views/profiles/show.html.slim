@@ -101,31 +101,33 @@ end
       /h3#available_shares #{@user.available_shares} shares available
 .well.block
   .row
-    .span5.offset1
+    .span5[style='margin-left:100px']
 
       br
       h2 Investment portfolio
       br
-      table.table
-        tr
-          th #
-          th Stock owner
-          th Count
-          th One share price
-          th Total cost
-          - if @my_page
-            th.mini
-        - i = 0
-        - @user.portfel.each do |bos|
+      table#history-datatable.table
+        thead
           tr
-            td= i += 1
-            td= link_to bos.owner.nickname, profile_path(bos.owner)
-            td= bos.count
-            td= bos.one_share_cost
-            td= bos.total_cost
-            - if signed_in? and @my_page
-              td
-                a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=bos.owner.nickname data-origin=current_user.nickname data-count=bos.count Sell
+            th #
+            th Stock owner
+            th Count
+            th One share price
+            th Total cost
+            - if @my_page
+              th.mini
+        tbody
+          - i = 0
+          - @user.portfel.each do |bos|
+            tr
+              td= i += 1
+              td= link_to bos.owner.nickname, profile_path(bos.owner)
+              td= bos.count
+              td= bos.one_share_cost
+              td= bos.total_cost
+              - if signed_in? and @my_page
+                td
+                  a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=bos.owner.nickname data-origin=current_user.nickname data-count=bos.count Sell
 
       br
       h2 Stock holders
