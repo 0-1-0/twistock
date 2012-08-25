@@ -263,7 +263,7 @@ class User < ActiveRecord::Base
 
   def popularity
     #'sell' starting shares
-    if retention_shares > 0 and share_price
+    if self.retention_shares > 0 and self.share_price > 0
       self.sell_retention self.retention_shares
     end
 
