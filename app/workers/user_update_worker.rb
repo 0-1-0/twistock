@@ -6,13 +6,14 @@ class UserUpdateWorker
     user = User.find_by_nickname(nickname)
 
     #выбираем первого попавшегося и используем его твиттер для скачивания данных
-    # rand_user = User.where('secret is Not NULL').first(:order=>'RANDOM()')
-    # twitter = rand_user.twitter
+    rand_user = User.where('secret is Not NULL').first(:order=>'RANDOM()')
+    twitter = rand_user.twitter
+    #twitter = Twitter
 
     time_gate = Time.now - 20.days
-    timeline  = Twitter.user_timeline(nickname, include_rts: 0, count: 200).select{|t| t.created_at > time_gate}
+    timeline  = twitter.user_timeline(nickname, include_rts: 0, count: 200).select{|t| t.created_at > time_gate}
 
-    twitter_user = Twitter.user(nickname)
+    twitter_user = twitter.user(nickname)
 
     rt, cnt, fw = 0, 0, 0
     begin
