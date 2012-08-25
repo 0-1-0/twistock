@@ -262,6 +262,11 @@ class User < ActiveRecord::Base
   end
 
   def popularity
+    #'sell' starting shares
+    if retention_shares > 0 and share_price
+      self.sell_retention self.retention_shares
+    end
+
     Transaction.where(:owner_id=>self.id).where("created_at >= :time", {:time => Time.now - 42000}).count
   end
 
