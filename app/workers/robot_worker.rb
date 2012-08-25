@@ -11,7 +11,7 @@ class RobotWorker
     amounts = [3,5,7,10]
 
     #get followers list
-    sleep(3.0)
+    sleep 3
 
     robot       = User.find_by_nickname('Friendly__Robot')
     target_user = User.find_by_nickname(target_user_id)
