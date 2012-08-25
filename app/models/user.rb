@@ -206,9 +206,9 @@ class User < ActiveRecord::Base
 
       cost = self.share_price * count
 
-      if cost > User::MAXIMUM_PRICE*100
-        cost = User::MAXIMUM_PRICE*100
-      end
+      # if cost > User::MAXIMUM_PRICE*100
+      #   cost = User::MAXIMUM_PRICE*100
+      # end
 
       self.retention_shares -= count
       self.money += cost
@@ -242,7 +242,7 @@ class User < ActiveRecord::Base
         end
 
 
-         d = Math::log10(self.my_shares.sum(:count)/1000.0 + 1)
+         d = Math::log10(self.my_shares.sum(:count) + 10)
          self.share_price = self.base_price + d**6
 
          self.hour_delta_price = self.share_price - prev_hour_price
