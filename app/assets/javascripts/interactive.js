@@ -37,7 +37,7 @@
 // var position = {}
 
 $(".scroll").each(function(index){
-  $(this).simplyScroll({orientation:'vertical',direction:'backwards',speed: 2*(index%2+1),customClass:'vert'});
+  $(this).simplyScroll({orientation:'vertical',direction:'backwards',speed: (index%2+1),customClass:'vert'});
 });
 
 
