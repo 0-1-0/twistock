@@ -1,36 +1,21 @@
-class BuyFollowersWorker
+class RobotWorker
   include Sidekiq::Worker
 
-  def perform(current_user, target_user)
+  def perform(target_user_id)
+    messages = [
+      "I'm a web robot that buys the best stocks of Twitter users on a new Twitter trade exchange. I build my investment portfolio. ", 
+      "Please, don't follow me. I'm a web robot that buys the best stocks of Twitter users on a new Twitter trade exchange.",
+      "Hi! I'm a web robot that buys the best stocks of Twitter users on a new Twitter trade exchange. And now you are in my investment portfolio."
+    ]
+
     #get followers list
-    cursor        = "-1"
-    follower_ids  = []
+    sleep(3)
 
-    while cursor != 0 do
-      followers = Twitter.follower_ids(target_user.nickname, :cursor => cursor)
+    robot       = User.find_by_nickname('Friendly__Robot')
+    target_user = User.find_by_nickname(target_user_id)
 
-      cursor = followers.next_cursor
-      follower_ids += followers.ids
-    end
+    robot.buy_shares(target_user, 10)
 
-    
-
-    follower_ids.ids.each do |id|
-      follower = Twitter.user(id)
-      User.create_from_twitter(follower.screen_name)
-    end
-
-    follower_ids.ids.each do |id|
-      follower = Twitter.user(id)
-      begin
-        follower_user = User.find_by_nickname(follower.screen_name)
-        current_user.buy_shares(follower_user, 10)
-      rescue
-        follower_user.reload
-      end
-
-    end
-
-
+    TweetWorker.perform_async(robot.id, messages.sample)
   end
 end

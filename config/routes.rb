@@ -1,4 +1,9 @@
 Twitterexchange::Application.routes.draw do
+  get "robot/dashboard"
+
+  get "robot/history"
+  post 'robot/add'
+
   get "history/transactions"
 
   get "history_controller/operations"

@@ -1,0 +1,5 @@
+.well
+  h1 Robot Dashboard
+  = simple_form_for 'add', url: 'add', html: { class: 'form-horizontal' } do |f|
+    = f.input :nicknames, :as => :text
+    = f.button :submit, 'Add users to buy', class: 'btn btn-small'

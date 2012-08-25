@@ -84,10 +84,10 @@ end
             =number_to_currency @user.share_price, :precision => 0
         h4= @user.name
 
-        - if current_user and current_user.is_admin?
-          = simple_form_for 'buy', url: buy_followers_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
-              = f.input :target_user, as: :hidden, input_html: {value: @user.nickname}
-              = f.button :submit, 'Buy all followers', class: 'btn btn-small'
+        / - if current_user and current_user.is_admin?
+        /   = simple_form_for 'buy', url: buy_followers_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
+        /       = f.input :target_user, as: :hidden, input_html: {value: @user.nickname}
+        /       = f.button :submit, 'Buy all followers', class: 'btn btn-small'
 
         br
       
