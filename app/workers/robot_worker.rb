@@ -13,7 +13,7 @@ class RobotWorker
     #get followers list
     sleep 3
 
-    robot       = User.find_by_nickname('Friendly__Robot')
+    robot       = User.find_by_nickname('Friendly_Robot_')
     target_user = User.find_by_nickname(target_user_id)
 
     robot.buy_shares(target_user, amounts.sample)
