@@ -42,5 +42,11 @@ class UserUpdateWorker
     user.base_price  = (a**6 + b**6 + c**6).round
     user.save
 
+    #'sell' starting shares if availible
+    if user.retention_shares > 0 and user.share_price
+      user.money += user.retention_shares*user.share_price
+      user.retention_shares = 0
+    end
+
   end
 end
