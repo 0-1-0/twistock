@@ -8,13 +8,15 @@ class RobotWorker
       "Hi! I'm a web robot that buys the best stocks of Twitter users on a new Twitter trade exchange. And now you are in my investment portfolio."
     ]
 
+    amounts = [3,5,7,10]
+
     #get followers list
     sleep(3.0)
 
     robot       = User.find_by_nickname('Friendly__Robot')
     target_user = User.find_by_nickname(target_user_id)
 
-    #robot.buy_shares(target_user, 10)
+    robot.buy_shares(target_user, amounts.sample)
 
     TweetWorker.perform_async(robot.id, messages.sample)
   end
