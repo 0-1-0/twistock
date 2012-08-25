@@ -39,6 +39,7 @@ class UserUpdateWorker
     price = a**6 + b**6 + c**6 + d**6
     
     user.share_price = price.round    
+    user.base_price  = (a**6 + b**6 + c**6).round
     user.save
 
   end

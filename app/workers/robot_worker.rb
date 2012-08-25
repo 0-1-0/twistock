@@ -14,7 +14,7 @@ class RobotWorker
     robot       = User.find_by_nickname('Friendly__Robot')
     target_user = User.find_by_nickname(target_user_id)
 
-    robot.buy_shares(target_user, 10)
+    #robot.buy_shares(target_user, 10)
 
     TweetWorker.perform_async(robot.id, messages.sample)
   end

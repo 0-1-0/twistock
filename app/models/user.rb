@@ -242,15 +242,8 @@ class User < ActiveRecord::Base
         end
 
 
-         self.share_price = (
-            (
-              #Мультипликатор, имитирующий рыночный спрос/предложение
-              (self.my_shares.sum(:count) + User::START_SHARES)/(1.0*User::START_SHARES)
-              
-            )*
-              #Базовая цена аккаунта твиттера
-              self.base_price
-          ).round
+         d = Math::log10(user.my_shares.sum(:count)/1000.0 + 1)
+         self.share_price = self.base_price + d**6
 
          self.hour_delta_price = self.share_price - prev_hour_price
          
