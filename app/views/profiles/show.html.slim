@@ -92,16 +92,16 @@ end
         br
       
   .row
-    .span5.offset1 = render :partial=>'profiles/popularity', :locals=>{:user=>@user, :active=>'true'}
+    .span5.micro-offset = render :partial=>'profiles/popularity', :locals=>{:user=>@user, :active=>'true'}
   .row
-    .span5.offset1 = render :partial=>'profiles/price_dynamics', :locals=>{:user=>@user, :size=>'500x100'}
+    .span5.micro-offset = render :partial=>'profiles/price_dynamics', :locals=>{:user=>@user, :size=>'500x100'}
 
 
 
       /h3#available_shares #{@user.available_shares} shares available
 .well.block
   .row
-    .span5[style='margin-left:100px']
+    .span5.micro-offset
 
       br
       h2 Investment portfolio
