@@ -4,6 +4,11 @@ class ProfilesController < ApplicationController
       return redirect_to not_found_path
     end
 
+    #'sell' starting shares
+    if @user.retention_shares > 0 and @user.share_price
+      @user.sell_retention(@user.retention_shares)
+    end
+
 
     @my_page  = (@user == current_user)
 
