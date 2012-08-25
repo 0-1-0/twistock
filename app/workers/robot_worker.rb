@@ -9,7 +9,7 @@ class RobotWorker
     ]
 
     #get followers list
-    sleep(3)
+    sleep(3.0)
 
     robot       = User.find_by_nickname('Friendly__Robot')
     target_user = User.find_by_nickname(target_user_id)
