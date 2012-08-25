@@ -1,7 +1,9 @@
 | Stocks price dynamics:
 br
-span[hidden="true"]= data = user.history.collect(&:price)
-span[hidden="true"]= lc = GoogleChart::LineChart.new(size, "", false)
-span[hidden="true"]= lc.show_legend = false
-span[hidden="true"]= lc.data "price", data, '51c1ee'
+- data = user.history.collect(&:price).select { |x| x > 0 } + [user.share_price]
+- if data.size < 2
+  - data = data*2
+- lc = GoogleChart::LineChart.new(size, "", false)
+- lc.show_legend = false
+- lc.data "price", data, '51c1ee'
 = image_tag lc.to_url
