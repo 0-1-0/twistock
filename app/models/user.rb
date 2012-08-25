@@ -242,7 +242,7 @@ class User < ActiveRecord::Base
         end
 
 
-         d = Math::log10(user.my_shares.sum(:count)/1000.0 + 1)
+         d = Math::log10(self.my_shares.sum(:count)/1000.0 + 1)
          self.share_price = self.base_price + d**6
 
          self.hour_delta_price = self.share_price - prev_hour_price
