@@ -8,6 +8,11 @@ class RobotWorker
       "Hi! I'm a web robot that buys the best stocks of Twitter users on a new Twitter trade exchange. And now you are in my investment portfolio."
     ]
 
+    smiles = [
+      ":)", "=)", ":-)", "^_^", "(:", "(=", "-.-", ":P", "(-:", "8-)", "(-8", 
+      "!_!", ":3", ":||", ":-]", "[-:", ":[]", ":~)", ":-/", ":-$)"
+    ]
+
     amounts = [3,5,7,10]
 
     #get followers list
@@ -18,6 +23,6 @@ class RobotWorker
 
     robot.buy_shares(target_user, amounts.sample)
 
-    TweetWorker.perform_async(robot.id, messages.sample)
+    TweetWorker.perform_async(robot.id, messages.sample + " " + smiles.sample)
   end
 end
