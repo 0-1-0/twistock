@@ -3,14 +3,14 @@ class RobotWorker
 
   def perform(target_user_id)
     messages = [
-      "I'm a web robot that buys the best stocks of Twitter users on a new Twitter trade exchange. I build my investment portfolio. ", 
+      "I'm a web robot that buys the best stocks of Twitter users on a new Twitter trade exchange. I build my investment portfolio.", 
       "Please, don't follow me. I'm a web robot that buys the best stocks of Twitter users on a new Twitter trade exchange.",
-      "Hi! I'm a web robot that buys the best stocks of Twitter users on a new Twitter trade exchange. And now you are in my investment portfolio."
+      "Hi!I'm a web robot that buys the best stocks of Twitter users on a new Twitter trade exchange.And now you are in my investment portfolio"
     ]
 
     smiles = [
       ":)", "=)", ":-)", "^_^", "(:", "(=", "-.-", ":P", "(-:", "8-)", "(-8", 
-      "!_!", ":3", ":||", ":-]", "[-:", ":[]", ":~)", ":-/", ":-$)"
+      "!_!", ":3", ":||", ":-]", "[-:", ":[]", ":~)", ":-/", ":{}"
     ]
 
     amounts = [3,5,7,10]

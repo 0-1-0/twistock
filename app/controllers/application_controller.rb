@@ -1,8 +1,22 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  #we must set up locale before performing any other actions
+  before_filter :set_locale
+
   helper_method :current_user
   helper_method :signed_in?
+
+  def set_locale
+    logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
+    
+    #http_accept_language.user_preferred_languages # => [ 'nl-NL', 'nl-BE', 'nl', 'en-US', 'en' ]
+    #available = %w{en ru}
+    I18n.locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+    #http_accept_language.preferred_language_from(available)
+
+    logger.debug "* Locale set to '#{I18n.locale}'"
+  end
 
   private
   def current_user

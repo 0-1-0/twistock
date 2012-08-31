@@ -1,14 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-# подключаем mongo
-#gem 'mongoid'
-#gem 'bson_ext'
-
 gem 'pg'
 
 # Gems used only for assets and not required
@@ -87,3 +79,6 @@ gem 'gchartrb', :require => 'google_chart'
 
 # мониторинг
 gem 'newrelic_rpm'
+
+# парсинг accept-language из запросов
+gem 'http_accept_language'

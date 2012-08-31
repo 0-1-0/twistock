@@ -1,10 +1,11 @@
-en:
+ru:
   your:
     money: 'Your money'
     stock_price: 'Your stock price'
     stock_price_tooltip: ''
     
-
+    popularity: 'Popularity'
+    popularity_tooltip: ''
 
   my:
     investment_portfolio: 'MY INVESTMENT PORTFOLIO'
@@ -31,15 +32,6 @@ en:
   most_booming_tooltip: ''
   most_falling: 'Most falling'
   most_falling_tooltip: ''
-
-  popularity: 'Popularity'
-  popularity_tooltip: ''
-
-  low: 'low'
-  high: 'high'
-  medium: 'medium'
-  abandoned: 'abandoned'
-  superstart: 'superstar'
 
 
 
