@@ -11,9 +11,6 @@ html lang="en"
     meta charset="utf-8"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
 
-    /Google Apps for doamin verification
-    meta name="google-site-verification" content="O7nQTKQUFwdyYqOxNwoCFknOCE6S7h5Xk5Sj1PKmTN8"
-
     title= content_for?(:title) ? yield(:title) : "Twistock"
     = csrf_meta_tags
 
@@ -33,6 +30,10 @@ html lang="en"
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
+
+
+    /Google Apps for doamin verification
+    meta name="google-site-verification" content="O7nQTKQUFwdyYqOxNwoCFknOCE6S7h5Xk5Sj1PKmTN8"
 
   body
 
