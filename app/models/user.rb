@@ -282,5 +282,22 @@ class User < ActiveRecord::Base
     Transaction.where(:owner_id=>self.id).where("created_at >= :time", {:time => Time.now - User::POPULARITY_UPDATE_DELAY}).count
   end
 
+  def price_dynamics_data
+    price_data = self.history.collect(&:price).select { |x| x > 0 } + [self.share_price || 0]
+    if price_data.size < 2
+      price_data = price_data*2 
+    end
+
+    initial_price_value = price_data[0]
+    data = []
+    price_data.each do |d|
+      if d > 0
+        data += [d - initial_price_value + 1]
+      end
+    end
+
+    data
+  end
+
 
 end
