@@ -21,13 +21,6 @@ class ProfilesController < ApplicationController
         render :json => @user.to_json
       }
     end
-
-    #рисуем график цены
-    
-    @data = @user.history.collect(&:price)
-
-    @lc = GoogleChart::LineChart.new("400x200", "Price History", false)
-    @lc.data "price", @data, '7777dd'
    
     
   end
