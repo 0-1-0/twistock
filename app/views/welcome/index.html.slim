@@ -32,7 +32,7 @@ end
   /Highest value
   .span3
     ul.scroll
-      - User.find(:all, :limit=> 10, :order=> 'share_price desc').each do |user|
+      - User.where('share_price is NOT NULL').find(:all, :limit=> 10, :order=> 'share_price desc').each do |user|
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
