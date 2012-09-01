@@ -1,11 +1,9 @@
 ru:
-  your:
-    money: 'Your money'
-    stock_price: 'Your stock price'
-    stock_price_tooltip: ''
-    
-    popularity: 'Popularity'
-    popularity_tooltip: ''
+  your_money: 'Мои деньги:'
+  your_stock_price: 'Цена одной акции:'
+  your_stock_price_tooltip: ''    
+  popularity: 'Popularity'
+  popularity_tooltip: ''
 
   my:
     investment_portfolio: 'MY INVESTMENT PORTFOLIO'
@@ -24,13 +22,13 @@ ru:
     title: 'TWISTOCK STORE'
     caption: 'Spend your social capital on great things - try them out and tell others'
 
-  random_person: 'Random person'
+  random_person: 'Случайные'
   random_person_tooltip: ''
-  most_valuable: 'Most valuable'
+  most_valuable: 'Самые дорогие'
   most_valuable_tooltip: ''
-  most_booming: 'Most booming'
+  most_booming: 'Растущие в цене'
   most_booming_tooltip: ''
-  most_falling: 'Most falling'
+  most_falling: 'Падающие в цене'
   most_falling_tooltip: ''
 
   price_dynamics: 'Динамика цены'

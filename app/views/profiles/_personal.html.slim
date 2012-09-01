@@ -15,13 +15,13 @@ ul.nav.nav-list
         td            
       tr
         td#yourmoney 
-          | Your money: 
+          =t :your_money
           = number_to_currency user.money, :precision => 0
         td                
           = link_to 'Spend in Twistock Store', '/products/showcase' 
       tr
         td#yourprice 
-          | Your stock price: 
+          =t :your_stock_price
           - if user.share_price
             = number_to_currency user.share_price, :precision => 0
           - else
