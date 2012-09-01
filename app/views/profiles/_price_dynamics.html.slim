@@ -6,7 +6,8 @@ p=t :price_dynamics
 - initial_price_value = price_data[0]
 - data = []
 - price_data.each do |d|
-  - data += [d - initial_price_value + 1]
+  - if d > 0
+    - data += [d - initial_price_value + 1]
 
 - lc = GoogleChart::LineChart.new(size, "", false)
 - lc.show_legend = false
