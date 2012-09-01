@@ -18,7 +18,7 @@ ul.nav.nav-list
           =t :your_money
           = number_to_currency user.money, :precision => 0
         td                
-          = link_to 'Spend in Twistock Store', '/products/showcase' 
+          = link_to t(:spend_in_twistock_store), '/products/showcase' 
       tr
         td#yourprice 
           =t :your_stock_price
@@ -40,7 +40,9 @@ ul.nav.nav-list
   li
     .nav-header
       i.icon-lock
-      span#iportfolio My Investment portfolio (#{user.portfel.count}) 
+      span#iportfolio 
+        =t :my_investment_portfolio 
+        | (#{user.portfel.count}) 
       
       
   li 
@@ -66,7 +68,9 @@ ul.nav.nav-list
   li
     .nav-header
       i.icon-user
-      span#stockholders My Stock holders (#{user.my_shares.count}) 
+      span#stockholders 
+        =t :my_stock_holders
+        | (#{user.my_shares.count}) 
 
       
   li 

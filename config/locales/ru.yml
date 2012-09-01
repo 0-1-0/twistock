@@ -5,12 +5,13 @@ ru:
   popularity: 'Popularity'
   popularity_tooltip: ''
 
-  my:
-    investment_portfolio: 'MY INVESTMENT PORTFOLIO'
-    investment_portfolio_tooltip: ''
-    stock_holders: 'MY STOCK HOLDERS'
-    stock_holder: 'Stock holder'
-    stock_holders_tooltip: ''
+  spend_in_twistock_store: 'Потратить в магазине'
+
+  my_investment_portfolio: 'МОЙ ИНВЕСТИЦИОННЫЙ ПОРТФЕЛЬ '
+  investment_portfolio_tooltip: ''
+  my_stock_holders: 'ДЕРЖАТЕЛИ МОИХ АКЦИЙ '
+  stock_holder: 'Stock holder'
+  stock_holders_tooltip: ''
 
 
   stock_owner: 'Stock owner'

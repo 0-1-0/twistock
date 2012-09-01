@@ -4,15 +4,15 @@ en:
   your_stock_price_tooltip: ''    
   popularity: 'Popularity'
   popularity_tooltip: ''
+
+  spend_in_twistock_store: 'Spend in Twistock Store'
     
 
-
-  my:
-    investment_portfolio: 'MY INVESTMENT PORTFOLIO'
-    investment_portfolio_tooltip: ''
-    stock_holders: 'MY STOCK HOLDERS'
-    stock_holder: 'Stock holder'
-    stock_holders_tooltip: ''
+  my_investment_portfolio: 'MY INVESTMENT PORTFOLIO '
+  investment_portfolio_tooltip: ''
+  my_stock_holders: 'MY STOCK HOLDERS '
+  stock_holder: 'Stock holder'
+  stock_holders_tooltip: ''
 
 
   stock_owner: 'Stock owner'
