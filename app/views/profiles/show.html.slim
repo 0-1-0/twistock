@@ -106,7 +106,7 @@ end
       br
       h2 Investment portfolio
       br
-      table#history-datatable.table
+      table.datatable.table
         thead
           tr
             th #
@@ -132,21 +132,23 @@ end
       br
       h2 Stock holders
       br
-      table.history-datatable.table
-        tr
-          th #
-          th Stocks holder
-          th Stocks count
-          th Total cost
-        - i = 0
-        - @user.my_shares.each do |bos|
+      table.datatable.table
+        thead
           tr
-            td= i += 1
-            td= link_to bos.holder.nickname, profile_path(bos.holder)
-            td= bos.count
-            - if @user.share_price
-              td= bos.count * @user.share_price
-            - else
-              td Calculating..
+            th #
+            th Stocks holder
+            th Stocks count
+            th Total cost
+        tbody
+          - i = 0
+          - @user.my_shares.each do |bos|
+            tr
+              td= i += 1
+              td= link_to bos.holder.nickname, profile_path(bos.holder)
+              td= bos.count
+              - if @user.share_price
+                td= bos.count * @user.share_price
+              - else
+                td Calculating..
 
   = javascript_include_tag "profiles/show"

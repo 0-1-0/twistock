@@ -9,6 +9,7 @@ section
           = image_tag user.avatar, :style=>'float:right', :size=>'48x48'          
           h5 Stock price:
           span.label.label-success = number_to_currency user.share_price, :precision => 0
+          br
           = render :partial=>'profiles/price_dynamics', :locals=>{:user=>user, :size=>'200x50'}
         .btn-center.btn=link_to 'Buy', '/profiles/' + user.nickname
     .front

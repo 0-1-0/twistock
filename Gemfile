@@ -20,6 +20,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'jquery-datatables-rails'
 
 # Оказывается SLIM быстрее HAML
 gem 'slim'

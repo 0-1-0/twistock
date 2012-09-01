@@ -1,0 +1,9 @@
+| Динамика цены акций:
+br
+- data = user.history.collect(&:price).select { |x| x > 0 } + [user.share_price || 0]
+- if data.size < 2
+  - data = data*2
+- lc = GoogleChart::LineChart.new(size, "", false)
+- lc.show_legend = false
+- lc.data "price", data, '51c1ee'
+= image_tag lc.to_url

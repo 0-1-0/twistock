@@ -15,9 +15,10 @@
 //= require jquery.dataTables.min
 //= require jscroll
 //= require bootstrap
-//= require DT_bootstrap
 //= require bootstrap-actions
+//= require DT_bootstrap
 //= require interactive
+
 
 $("#random-person").tooltip({
     title: 'This is a flow of random twitter users. Find the profitable one and buy some stocks for your Investment portfolio.',
@@ -79,7 +80,11 @@ document.location = "/mobile";
 
 
 
-
+// For fixed width containers
+$('.datatable').dataTable({
+  "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+  "sPaginationType": "bootstrap"
+});
 
 
 
