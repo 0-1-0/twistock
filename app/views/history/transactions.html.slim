@@ -13,8 +13,8 @@ end
         th #
         th Action
         th Date
-        th Stock owner
-        th Count
+        th=t(:stock_owner)
+        th=t(:count)
         th Cost
     tbody
       - i = current_user.transactions.count + 1

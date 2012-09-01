@@ -47,7 +47,7 @@
         = image_tag transaction.owner.avatar
         a[href="/profiles/#{transaction.owner.nickname}"] =transaction.owner.name
     span[style="float:right"]
-      h6 Total cost:
+      h6=t(:total_cost):
       - if transaction.action == 'buy'
         span.label.label-success   $ #{transaction.cost}
       - else

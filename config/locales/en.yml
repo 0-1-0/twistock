@@ -1,4 +1,5 @@
 en:
+  count: 'Count'
   your_money: 'Your money:'
   your_stock_price: 'Your stock price:'
   your_stock_price_tooltip: ''    
@@ -6,6 +7,8 @@ en:
   popularity_tooltip: ''
 
   spend_in_twistock_store: 'Spend in Twistock Store'
+
+  show_all: 'Show all'
     
 
   my_investment_portfolio: 'MY INVESTMENT PORTFOLIO '
@@ -16,7 +19,6 @@ en:
 
 
   stock_owner: 'Stock owner'
-  count: 'Count'
   one_stock_price: 'One stock price'
   total_cost: 'Total cost'
 
@@ -44,5 +46,13 @@ en:
 
   price_dynamics: 'Price dynamics'
 
+  how_it_works: 'How it works?'
+
+  my_history: 'My history '
+  show_all_transactions: 'Show all transactions'
+
+  buy_real_for_virtual: 'Buy the real goods for virtual money'
+
+  sign_out: 'Sign out'
 
 

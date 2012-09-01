@@ -110,10 +110,10 @@ end
         thead
           tr
             th #
-            th Stock owner
-            th Count
+            th=t(:stock_owner)
+            th=t(:count)
             th One share price
-            th Total cost
+            th=t(:total_cost)
             - if @my_page
               th.mini
         tbody
@@ -138,7 +138,7 @@ end
             th #
             th Stocks holder
             th Stocks count
-            th Total cost
+            th=t(:total_cost)
         tbody
           - i = 0
           - @user.my_shares.each do |bos|

@@ -11,9 +11,9 @@ end
     thead
       tr
         th #
-        th Stock holder
-        th Count
-        th Total cost
+        th=t(:stock_holder)
+        th=t(:count)
+        th=t(:total_cost)
     tbody
       - i = current_user.my_shares.count + 1
       - current_user.my_shares.each do |bos|

@@ -31,10 +31,10 @@ end
     thead
       tr
         th #
-        th Stock owner
-        th Count
+        th=t(:stock_owner)
+        th=t(:count)
         th Price
-        th Total cost
+        th=t(:total_cost)
         th 
     tbody
       - i = current_user.portfel.count + 1
