@@ -13,10 +13,11 @@ class User < ActiveRecord::Base
   attr_accessible :avatar, :money, :name, :nickname, :uid, :shares, :retention_shares, :token, :secret, :activated
 
 
-  START_MONEY            = 0
-  START_SHARES           = 200
-  START_RETENTION_SHARES = 100
-  STEP = 0.003
+  START_MONEY             = 0
+  START_SHARES            = 200
+  START_RETENTION_SHARES  = 100
+  POPULARITY_UPDATE_DELAY = 7*24*60*60
+  ANALYSES_UPDATE_DELAY   = 6.hours
 
   def to_param
     nickname
@@ -140,12 +141,20 @@ class User < ActiveRecord::Base
       t.save
 
       #Пишем о транзакции в твиттер
-      TweetWorker.perform_async(self.id, "@" + self.nickname + " bought " + t.count.to_s + " stocks of @" + owner.nickname + " on www.twistock.com #MonetizeSocialCapital")
+      TweetWorker.perform_async(
+      self.id, \
+        "@" +  self.nickname + \
+        " bought " + t.count.to_s + \
+        " stocks of @" + owner.nickname + \
+        " on www.twistock.com #MonetizeSocialCapital"\
+      )
 
       # return self
       self
     end
   end
+
+  
 
   def sell_shares(owner, count)
     raise "You cannot sell 0 shares" unless count > 0
@@ -188,9 +197,19 @@ class User < ActiveRecord::Base
     t.save
 
     #Пишем о транзакции в твиттер
-    TweetWorker.perform_async(self.id, "@" + self.nickname + " sold " + t.count.to_s + " stocks of @" + owner.nickname + " on www.twistock.com #MonetizeSocialCapital")
+    TweetWorker.perform_async(
+      self.id, 
+      "@" + self.nickname + \
+      " sold " + t.count.to_s + \
+      " stocks of @" + owner.nickname + \
+      " on www.twistock.com #MonetizeSocialCapital"
+    )
+
+
     self
   end
+
+
 
   def sell_retention(count)
     raise "You cannot sell 0 shares" unless count > 0
@@ -247,11 +266,9 @@ class User < ActiveRecord::Base
   end
 
   def update_stats
-    #if Time.now - (last_update || Time.now - 7.hours) > 6.hours
-    if Time.now - (last_update || Time.now - 7.hours) > 6.hours
+    if Time.now - (last_update || Time.now - ANALYSES_UPDATE_DELAY) >= ANALYSES_UPDATE_DELAY
       User.transaction do
         self.last_update = Time.now
-        #self.share_price = nil
         self.save
       end
       UserUpdateWorker.perform_async(nickname)
@@ -262,8 +279,7 @@ class User < ActiveRecord::Base
   end
 
   def popularity
-
-    Transaction.where(:owner_id=>self.id).where("created_at >= :time", {:time => Time.now - 42000}).count
+    Transaction.where(:owner_id=>self.id).where("created_at >= :time", {:time => Time.now - User::POPULARITY_UPDATE_DELAY}).count
   end
 
 
