@@ -15,10 +15,11 @@ ru:
   investment_portfolio_tooltip: ''
   my_stock_holders: 'ДЕРЖАТЕЛИ МОИХ АКЦИЙ '
   stock_holder: 'Акционер'
+  stock_count: 'Кол-во акций'
   stock_holders_tooltip: ''
 
 
-  stock_owner: 'Эмиссионер'
+  stock_owner: 'Эмитент'
   one_stock_price: 'Цена акции'
   total_cost: 'Итого'
 

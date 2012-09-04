@@ -247,7 +247,7 @@ class User < ActiveRecord::Base
 
 
 
-        prev_hour_transaction = Transaction.where(:user_id=>self.id).where("created_at <= :time", {:time => Time.now - 3600}).last
+        prev_hour_transaction = Transaction.where(:user_id=>self.id).where("created_at <= :time", {:time => Time.now - 1.hour}).last
 
         if prev_hour_transaction
           prev_hour_price = prev_hour_transaction.price
