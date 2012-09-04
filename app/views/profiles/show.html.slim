@@ -2,7 +2,7 @@
     ul.nav
       li.span2
         .topbar-link
-          =link_to 'Back to main page', :root
+          =link_to t(:back_to_main_page), :root
 end
 
 
@@ -19,7 +19,7 @@ end
         = f.input :price, as: :hidden, input_html: {value: @user.share_price.to_i}
         = f.input :total_cost, :disabled => true, input_html: {value: 0.9*(current_user.money.to_i)}
       .modal-footer
-        a.btn.btn-small data-dismiss="modal" Close
+        a.btn.btn-small data-dismiss="modal"=t(:close)
         = f.button :submit, 'Buy', class: 'btn btn-success'
 
 
@@ -36,7 +36,7 @@ end
         = f.input :price, as: :hidden, input_html: {value: current_user.share_price}
         = f.input :total_cost, :disabled => true, input_html: {value: current_user.retention_shares*current_user.share_price}
       .modal-footer
-        a.btn.btn-small data-dismiss="modal" Close
+        a.btn.btn-small data-dismiss="modal"=t(:close)
         = f.button :submit, 'Sell', class: 'btn btn-success'
 
   #sell_modal.modal.fade
@@ -53,7 +53,7 @@ end
         = f.input :base_price, as: :hidden, input_html: {value: @user.base_price}
         = f.input :total_cost, :disabled => true, input_html: {value: @user.share_price.to_i*@user.available_shares}
       .modal-footer
-        a.btn.btn-small data-dismiss="modal" Close
+        a.btn.btn-small data-dismiss="modal"=t(:close)
         = f.button :submit, 'Sell', class: 'btn btn-success'
 
 
@@ -104,7 +104,7 @@ end
     .span5.micro-offset
 
       br
-      h2 Investment portfolio
+      h2 =t :investment_portfolio
       br
       table.datatable.table
         thead
@@ -112,7 +112,7 @@ end
             th #
             th=t(:stock_owner)
             th=t(:count)
-            th One share price
+            th=t :one_stock_price
             th=t(:total_cost)
             - if @my_page
               th.mini
@@ -130,7 +130,7 @@ end
                   a.btn.btn-info.btn-sell data-toggle="modal" href="#sell_modal" data-owner=bos.owner.nickname data-origin=current_user.nickname data-count=bos.count Sell
 
       br
-      h2 Stock holders
+      h2=t :stock_holder
       br
       table.datatable.table
         thead

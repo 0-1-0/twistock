@@ -2,7 +2,7 @@
     ul.nav
       li
         .topbar-link
-          =link_to 'Back to main page', '/'
+          =link_to t(:back_to_main_page), '/'
 end
 
 - current_user.portfel.each do |bos|
@@ -21,12 +21,12 @@ end
         = f.input :base_price, as: :hidden, input_html: {value: user.base_price}
         = f.input :total_cost, :disabled => true, input_html: {value: user.share_price.to_i*bos.count}
       .modal-footer
-        a.btn data-dismiss="modal" Close
+        a.btn data-dismiss="modal"=t(:close)
         = f.button :submit, 'Sell', class: 'btn btn-success'
 
 
 #history-box.block.well
-  h2 Investment Postfolio
+  h2 =t :investment_portfolio
   table.datatable.table
     thead
       tr

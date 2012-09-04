@@ -4,7 +4,13 @@ en:
   your_stock_price: 'Your stock price:'
   your_stock_price_tooltip: ''    
   popularity: 'Popularity'
+  low: 'low'
+  medium: 'medium'
+  high: 'high'
+  superstar: 'superstar'
   popularity_tooltip: ''
+  close: 'Close'
+
 
   spend_in_twistock_store: 'Spend in Twistock Store'
 
@@ -15,8 +21,10 @@ en:
   investment_portfolio_tooltip: ''
   my_stock_holders: 'MY STOCK HOLDERS '
   stock_holder: 'Stock holder'
+  stock_holders: 'Stock holders'
   stock_count: 'Stock count'
   stock_holders_tooltip: ''
+  investment_portfolio: 'Investment Portfolio'
 
 
   stock_owner: 'Stock owner'
@@ -57,5 +65,7 @@ en:
   sign_out: 'Sign out'
 
   store_header: 'Spend your social capital on great things - try them out and tell others.'
+
+  back_to_main_page: 'Back to main page'
 
 

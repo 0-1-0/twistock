@@ -4,8 +4,13 @@ ru:
   your_money: 'Мои деньги:'
   your_stock_price: 'Цена одной акции:'
   your_stock_price_tooltip: ''    
-  popularity: 'Popularity'
+  popularity: 'Популярность'
+  low: 'низкая'
+  medium: 'средняя'
+  high: 'высокая'
+  superstar: 'супер'
   popularity_tooltip: ''
+  close: 'Закрыть'
 
   spend_in_twistock_store: 'Потратить в магазине'
 
@@ -15,8 +20,10 @@ ru:
   investment_portfolio_tooltip: ''
   my_stock_holders: 'ДЕРЖАТЕЛИ МОИХ АКЦИЙ '
   stock_holder: 'Акционер'
+  stock_holders: 'Держатели акций'
   stock_count: 'Кол-во акций'
   stock_holders_tooltip: ''
+  investment_portfolio: 'Инвестиционный портфель'
 
 
   stock_owner: 'Эмитент'
@@ -48,6 +55,8 @@ ru:
   sign_out: 'Выйти'
 
   store_header: 'Потрать свой социальный капитал на настоящие, осязаемые вещи. '
+
+  back_to_main_page: 'Назад на главную страницу'
 
 
   time:

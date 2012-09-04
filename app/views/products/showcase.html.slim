@@ -2,7 +2,7 @@
   ul.nav
     li
       .topbar-link
-        =link_to 'Back to main page', '/'
+        =link_to t(:back_to_main_page), '/'
 end
 
 - if signed_in?
@@ -26,7 +26,7 @@ end
           = f.input :phone, :as=> :string
           = f.input :total_cost, :disabled => true
       .modal-footer
-        a.btn.btn-small data-dismiss="modal" Close
+        a.btn.btn-small data-dismiss="modal"=t(:close)
         a.btn.btn-small#btn-order.pre-order href="javscript:void(0)" Buy this item
         = f.button :submit, 'Buy', class: 'btn btn-success order', id: 'btn-buy-finish'
 
