@@ -107,6 +107,12 @@ ul.nav.nav-list
       | Twistock store
     .btn.btn-small= link_to t(:buy_real_for_virtual), '/products/showcase'
   li
+    .nav-header
+      =t(:change_language)
+    .btn-group
+      .btn.btn-small=link_to 'English', '/profiles/change_language?locale=en'
+      .btn.btn-small=link_to 'Русский', '/profiles/change_language?locale=ru'
+  li
     br
   li
     .btn.btn-small

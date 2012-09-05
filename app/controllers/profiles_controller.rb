@@ -29,5 +29,14 @@ class ProfilesController < ApplicationController
     redirect_to profile_path(params[:nickname])
   end
 
+  def change_language
+    if (params[:locale] == 'ru' or params[:locale] == 'en') and current_user
+      current_user.locale = params[:locale]
+      current_user.save
+    end
+    
+    redirect_to :back
+  end
+
 
 end

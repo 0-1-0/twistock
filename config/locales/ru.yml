@@ -1,6 +1,8 @@
 ru:
   search_user_by_nickname: 'поиск пользователя но нику' 
 
+  change_language: 'Сменить язык'
+
   buy_stocks: 'Купить акции'
   sell_your_starting_shares: 'Продать свои начальные акции'
   sell_stocks: 'Продать акции'

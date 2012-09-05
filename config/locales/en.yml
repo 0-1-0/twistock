@@ -1,6 +1,8 @@
 en:
   search_user_by_nickname: 'search user by nickname' 
 
+  change_language: 'Change language'
+
   buy_stocks: 'Buy Stocks'
   sell_your_starting_shares: 'Sell your starting shares'
   sell_stocks: 'Sell Stocks'

@@ -30,6 +30,7 @@ Twitterexchange::Application.routes.draw do
     collection do
       post 'search'
       post 'show'
+      get  'change_language'
     end
   end
 
