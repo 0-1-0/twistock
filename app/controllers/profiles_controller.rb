@@ -35,6 +35,7 @@ class ProfilesController < ApplicationController
       current_user.save
     end
     
+
     redirect_to :back
   end
 
