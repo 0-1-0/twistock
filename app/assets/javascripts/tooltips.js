@@ -47,16 +47,3 @@ $(".search-query").tooltip({
     'placement': 'bottom'
     
 })
-
-setinterval_id = window.setInterval (function(){
-    $.get("/profiles/#{current_user.nickname}.json", 
-        (function(data){
-        if (data.user.share_price) {
-          $("#yourprice").html(I18n.t('your_stock_price') + ' $' + data.user.share_price.toMoney());
-          $("#yourmoney").html(I18n.t('your_money') + ' $' + data.user.money.toMoney());
-          clearInterval(setinterval_id);
-        }
-        }), 
-        "json"
-    );
-}, 1000);
