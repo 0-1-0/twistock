@@ -14,7 +14,7 @@ class UserUpdateWorker
     timeline  = twitter.user_timeline(nickname, include_rts: 0, count: 200).select{|t| t.created_at > time_gate}
 
     twitter_user = twitter.user(nickname)
-    if  twitter_user.protected != true
+    if not twitter_user.protected 
       rt, cnt, fw = 0, 0, 0
       begin
         # followers     = twitter.user(nickname).followers_count
