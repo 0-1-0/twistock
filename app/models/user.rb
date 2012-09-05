@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   START_MONEY             = 0
   START_SHARES            = 200
   START_RETENTION_SHARES  = 100
-  POPULARITY_UPDATE_DELAY = 7*24*60*60
+  POPULARITY_UPDATE_DELAY = 2*7*24*60*60
   ANALYSES_UPDATE_DELAY   = 6.hours
 
   def to_param
@@ -247,19 +247,20 @@ class User < ActiveRecord::Base
 
 
 
-        prev_hour_transaction = Transaction.where(:user_id=>self.id).where("created_at <= :time", {:time => Time.now - 1.hour}).last
+        prev_day_transaction = Transaction.where(:user_id=>self.id).where("created_at <= :time", {:time => Time.now - 1.day}).last
 
-        if prev_hour_transaction
-          prev_hour_price = prev_hour_transaction.price
+        if prev_day_transaction
+          prev_price = prev_day_transaction.price
         else
-          prev_hour_price = self.share_price
+          prev_price = self.share_price
         end
 
 
          d = Math::log10(self.my_shares.sum(:count) + 10)
-         self.share_price = self.base_price + d**6
+         new_price = self.base_price + d**6
 
-         self.hour_delta_price = self.share_price - prev_hour_price
+         self.hour_delta_price = new_price - prev_price
+         self.share_price = new_price
          
          self.save  
       end      
