@@ -247,7 +247,7 @@ class User < ActiveRecord::Base
 
 
 
-        prev_day_transaction = Transaction.where(:user_id=>self.id).where("created_at <= :time", {:time => Time.now - 1.day}).last
+        prev_day_transaction = self.history.where("created_at <= :time", {:time => Time.now - 1.day}).last
 
         if prev_day_transaction
           prev_price = prev_day_transaction.price
@@ -259,8 +259,10 @@ class User < ActiveRecord::Base
          d = Math::log10(self.my_shares.sum(:count) + 10)
          new_price = self.base_price + d**6
 
-         self.hour_delta_price = new_price - prev_price
-         self.share_price = new_price
+         self.hour_delta_price = (new_price - prev_price).to_i
+         self.save
+         
+         self.share_price = new_price.to_i
          
          self.save  
       end      
@@ -280,7 +282,7 @@ class User < ActiveRecord::Base
   end
 
   def popularity
-    Transaction.where(:owner_id=>self.id).where("created_at >= :time", {:time => Time.now - User::POPULARITY_UPDATE_DELAY}).count
+    self.history.where("created_at >= :time", {:time => Time.now - User::POPULARITY_UPDATE_DELAY}).count
   end
 
   def price_dynamics_data
