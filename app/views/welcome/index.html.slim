@@ -23,7 +23,7 @@ end
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
-            :price_tag=>'Stock price:',\
+            :price_tag=>t(:one_stock_price),\
             :price_value=>(user.share_price), \
             :category=>'#Random',\
             :label_class=>'label-info'\
@@ -36,7 +36,7 @@ end
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
-            :price_tag=>'Stock Price:',\
+            :price_tag=>t(:one_stock_price),\
             :price_value=>(user.share_price), \
             :category=>'#Pricy',\
             :label_class=>'label-warning'\
@@ -49,7 +49,7 @@ end
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
-            :price_tag=>'Growth:',\
+            :price_tag=>t(:growth),\
             :price_value=>(user.hour_delta_price || 0), \
             :category=>'#Booming',\
             :label_class=>'label-success'\
@@ -62,7 +62,7 @@ end
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
-            :price_tag=>'Decrease:',\
+            :price_tag=>t(:descrease),\
             :price_value=>(user.hour_delta_price || 0), \
             :category=>'#Falling',\
             :label_class=>'label-important'\

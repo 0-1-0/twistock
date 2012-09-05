@@ -5,6 +5,9 @@ ru:
   sell_your_starting_shares: 'Продать свои начальные акции'
   sell_stocks: 'Продать акции'
 
+  growth: 'Рост'
+  decrease: 'Падение'
+
   count: 'Кол-во'
 
   your_money: 'Мои деньги:'

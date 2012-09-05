@@ -5,6 +5,9 @@ en:
   sell_your_starting_shares: 'Sell your starting shares'
   sell_stocks: 'Sell Stocks'
 
+  growth: 'Growth'
+  decrease: 'Decrease'
+
   count: 'Count'
   your_money: 'Your money:'
   your_stock_price: 'Your stock price:'
