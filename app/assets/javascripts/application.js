@@ -1,15 +1,5 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// the compiled file.
-//
-// WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
-// GO AFTER THE REQUIRES BELOW.
-//
+//= require i18n
+//= require i18n/translations
 //= require jquery
 //= require jquery_ujs
 //= require jquery.dataTables.min
@@ -18,57 +8,6 @@
 //= require bootstrap-actions
 //= require DT_bootstrap
 //= require interactive
-
-
-$("#random-person").tooltip({
-    title: 'This is a flow of random twitter users. Find the profitable one and buy some stocks for your Investment portfolio.',
-    'placement': 'bottom'
-})
-
-
-$("#most-valuable").tooltip({
-    title: 'Explore twitter users with the highest stock price.',
-    'placement': 'bottom'
-})
-
-$("#most-booming").tooltip({
-    title: 'Stocks of these users are on the rise. They are growing in price because people buy them willingly.',
-    'placement': 'bottom'
-})
-
-$("#most-falling").tooltip({
-    title: 'Everybody in a hurry to sell the stocks of these users and they are falling in price.',
-    'placement': 'bottom'
-})
-
-
-$("#yourprice").tooltip({
-    title: 'This is a price of one stock of you. Twistock web-robots counted it value by assessing your social influence.',
-    'placement': 'bottom'
-})
-
-$("#popularity").tooltip({
-    title: 'Popularity of the stocks increases when users buy or sell them.',
-     'placement': 'bottom'
-    
-})
-
-
-$("#iportfolio").tooltip({
-    title: 'Look whose stocks you possess.'
-    
-})
-
-$("#stockholders").tooltip({
-    title: 'Look who bought your stocks.'
-    
-})
-
-$(".search-query").tooltip({
-    title: 'Here you can find users by their nicknames.',
-    'placement': 'bottom'
-    
-})
 
 
 

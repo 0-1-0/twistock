@@ -81,6 +81,8 @@ GEM
     hike (1.2.1)
     http_accept_language (1.0.2)
     i18n (0.6.0)
+    i18n-js (2.1.2)
+      i18n
     journey (1.0.4)
     jquery-datatables-rails (1.11.0)
       jquery-rails
@@ -250,6 +252,7 @@ DEPENDENCIES
   factory_girl_rails
   gchartrb
   http_accept_language
+  i18n-js
   jquery-datatables-rails
   jquery-rails
   less-rails

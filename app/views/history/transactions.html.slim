@@ -11,11 +11,11 @@ end
     thead
       tr
         th #
-        th Action
-        th Date
+        th=t :action
+        th=t :_date
         th=t(:stock_owner)
         th=t(:count)
-        th Cost
+        th=t :cost
     tbody
       - i = current_user.transactions.count + 1
       - current_user.transactions.each do |t|

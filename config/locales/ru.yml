@@ -1,4 +1,6 @@
 ru:
+  search_user_by_nickname: 'поиск пользователя но нику' 
+
   count: 'Кол-во'
 
   your_money: 'Мои деньги:'
@@ -29,6 +31,7 @@ ru:
   stock_owner: 'Эмитент'
   one_stock_price: 'Цена акции'
   total_cost: 'Итого'
+  cost: 'Цена'
 
   store:
     title: 'TWISTOCK STORE'
@@ -48,6 +51,8 @@ ru:
   how_it_works: 'Как это работает?'
 
   my_history: 'История '
+  action: 'Действие'
+  _date: 'Дата'
   show_all_transactions: 'Показать все транзакции'
 
   buy_real_for_virtual: 'Купить реальные товары за виртуальные деньги'
@@ -58,6 +63,11 @@ ru:
 
   back_to_main_page: 'Назад на главную страницу'
 
+
+  random_person_tooltip: ' Это поток случайных Twitter-пользователей. Найти "выгодного" игрока и купи несколько акция для своего инвестиционного портфеля. '
+  most_valuable_tooltip: 'Посмотри на самых дорогих Twitter пользователей. '
+  most_booming_tooltip: 'Акции этих пользователей растут в цене - люди торопятся скупить их.'
+  most_falling_tooltip: 'Эти акции обесцениваются, потому что другие распродают их.'
 
   time:
     am: утра

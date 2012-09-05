@@ -83,3 +83,6 @@ gem 'newrelic_rpm'
 
 # парсинг accept-language из запросов
 gem 'http_accept_language'
+
+#интернационализация js-кода
+gem 'i18n-js'

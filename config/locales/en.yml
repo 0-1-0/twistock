@@ -1,4 +1,6 @@
 en:
+  search_user_by_nickname: 'search user by nickname' 
+
   count: 'Count'
   your_money: 'Your money:'
   your_stock_price: 'Your stock price:'
@@ -30,6 +32,7 @@ en:
   stock_owner: 'Stock owner'
   one_stock_price: 'One stock price'
   total_cost: 'Total cost'
+  cost: 'Cost'
 
   store:
     title: 'TWISTOCK STORE'
@@ -58,6 +61,8 @@ en:
   how_it_works: 'How it works?'
 
   my_history: 'My history '
+  action: 'Action'
+  _date: 'Date'
   show_all_transactions: 'Show all transactions'
 
   buy_real_for_virtual: 'Buy the real goods for virtual money'
@@ -68,4 +73,9 @@ en:
 
   back_to_main_page: 'Back to main page'
 
+  random_person_tooltip: 'This is a flow of random twitter users. Find the profitable one and buy some stocks for your Investment portfolio.'
+
+  most_valuable_tooltip: 'Explore twitter users with the highest stock price.'
+  most_booming_tooltip: 'Stocks of these users are on the rise. They are growing in price because people buy them willingly.'
+  most_falling_tooltip: 'Everybody in a hurry to sell the stocks of these users and they are falling in price.'
 
