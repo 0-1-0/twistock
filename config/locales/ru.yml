@@ -20,6 +20,7 @@ ru:
 
   your_money: 'Мои деньги:'
   your_stock_price: 'Цена одной акции:'
+  stock_price: 'Цена акции'
   your_stock_price_tooltip: ''    
   popularity: 'Популярность'
   low: 'низкая'

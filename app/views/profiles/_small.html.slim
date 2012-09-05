@@ -11,7 +11,7 @@ section
         .thumbnail
           a[href="/profiles/#{user.nickname}" ] #{user.name.split[0]}
           = image_tag user.avatar, :style=>'float:right', :size=>'48x48'          
-          h5 =t :one_stock_price
+          h5 =t :stock_price
           span.label.label-success = number_to_currency user.share_price, :precision => 0
           br
           = render :partial=>'profiles/price_dynamics', :locals=>{:user=>user, :size=>'200x50'}
