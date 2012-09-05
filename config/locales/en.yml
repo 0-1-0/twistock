@@ -8,6 +8,12 @@ en:
   growth: 'Growth'
   decrease: 'Decrease'
 
+  buy_product: 'Buy Product'
+  buy_this_item: 'Buy this item'
+
+  you_havent_enough_money: "You haven't enough money to buy this item."
+  try_to_earn_more: 'Try to earn more!'
+
   count: 'Count'
   your_money: 'Your money:'
   your_stock_price: 'Your stock price:'

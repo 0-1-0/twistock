@@ -10,6 +10,12 @@ ru:
 
   count: 'Кол-во'
 
+  buy_product: 'Купить товар'
+  buy_this_item: 'Купить этот товар'
+
+  you_havent_enough_money: 'У вас недостаточно денег.'
+  try_to_earn_more: 'Попробуйте заработать больше!'
+
   your_money: 'Мои деньги:'
   your_stock_price: 'Цена одной акции:'
   your_stock_price_tooltip: ''    

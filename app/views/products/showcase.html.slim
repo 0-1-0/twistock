@@ -5,11 +5,15 @@
         =link_to t(:back_to_main_page), '/'
 end
 
+=content_for :javascripts do
+  = javascript_include_tag "products/showcase.js"
+end
+
 - if signed_in?
   #buy_modal.modal.fade.in
     .modal-header
       a.close data-dismiss="modal" x
-      h3#productname Buy Product
+      h3#productname =t(:buy_product)
     = simple_form_for 'create', url: '/product_invoices/create', html: { class: 'form-horizontal' } do |f|
       .modal-body
         .pre-order#description
@@ -27,8 +31,8 @@ end
           = f.input :total_cost, :disabled => true
       .modal-footer
         a.btn.btn-small data-dismiss="modal"=t(:close)
-        a.btn.btn-small#btn-order.pre-order href="javscript:void(0)" Buy this item
-        = f.button :submit, 'Buy', class: 'btn btn-success order', id: 'btn-buy-finish'
+        a.btn.btn-small#btn-order.pre-order href="javscript:void(0)" =t(:buy_this_item)
+        = f.button :submit, t(:buy), class: 'btn btn-success order', id: 'btn-buy-finish'
 
 
 
@@ -49,13 +53,13 @@ ul.thumbnails
           .btn.btn-small.btn-buy data-toggle="modal" href="#buy_modal" total_cost=product.price product_name=product.name product_id=product.id
             a href="javascript:void()"
               h5 $ #{product.price}          
-              | Buy this item
+              =t :buy_this_item
         - else
           .btn.btn-small.disabled.btn-cannot-buy
             h5 $ #{product.price}
-            ="You haven't enough money to buy this item."
+            =t :you_havent_enough_money
             br
-            | Try to earn more!
+            =t :try_to_earn_more
 
 
 
@@ -65,7 +69,3 @@ javascript:
   });
 
   $('.modal').hide();
-
-
-
-= javascript_include_tag "products/showcase.js"
