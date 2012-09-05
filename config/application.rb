@@ -55,6 +55,7 @@ module Twitterexchange
     config.assets.enabled = true
     config.assets.initialize_on_precompile = false
     config.assets.precompile += %w( jquery.js )
+    config.assets.precompile += %w( tooltips.js )
     config.assets.precompile += %w( profiles/show.js )
     config.assets.precompile += %w( products/showcase.js )
 
