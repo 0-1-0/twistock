@@ -12,7 +12,15 @@ class ApplicationController < ActionController::Base
     
     #http_accept_language.user_preferred_languages # => [ 'nl-NL', 'nl-BE', 'nl', 'en-US', 'en' ]
     #available = %w{en ru}
+
     I18n.locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+
+    if signed_in?
+      if currnet_user.locale
+        I18n.locale = current_user.locale
+      end
+    end
+
     #http_accept_language.preferred_language_from(available)
 
     logger.debug "* Locale set to '#{I18n.locale}'"

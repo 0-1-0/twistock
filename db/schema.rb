@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120821113449) do
+ActiveRecord::Schema.define(:version => 20120905141555) do
 
   create_table "block_of_shares", :force => true do |t|
     t.integer  "owner_id"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20120821113449) do
     t.string   "token"
     t.string   "secret"
     t.boolean  "acivated",                      :default => false
+    t.string   "locale",                        :default => "en"
   end
 
   add_index "users", ["name"], :name => "index_users_on_name", :unique => true
