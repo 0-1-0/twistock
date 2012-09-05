@@ -21,29 +21,42 @@ $("#most-falling").tooltip({
 
 
 $("#yourprice").tooltip({
-    title: 'This is a price of one stock of you. Twistock web-robots counted it value by assessing your social influence.',
+    title: I18n.t('your_price_tooltip'),
     'placement': 'bottom'
 })
 
 $("#popularity").tooltip({
-    title: 'Popularity of the stocks increases when users buy or sell them.',
+    title: I18n.t('popularity_tooltip'),
      'placement': 'bottom'
     
 })
 
 
 $("#iportfolio").tooltip({
-    title: 'Look whose stocks you possess.'
+    title: I18n.t('iportfolio_tooltip')
     
 })
 
 $("#stockholders").tooltip({
-    title: 'Look who bought your stocks.'
+    title: I18n.t('stock_holders_tooltip')
     
 })
 
 $(".search-query").tooltip({
-    title: 'Here you can find users by their nicknames.',
+    title: I18n.t('search-query_tooltip'),
     'placement': 'bottom'
     
 })
+
+setinterval_id = window.setInterval (function(){
+    $.get("/profiles/#{current_user.nickname}.json", 
+        (function(data){
+        if (data.user.share_price) {
+          $("#yourprice").html(I18n.t('your_stock_price') + ' $' + data.user.share_price.toMoney());
+          $("#yourmoney").html(I18n.t('your_money') + ' $' + data.user.money.toMoney());
+          clearInterval(setinterval_id);
+        }
+        }), 
+        "json"
+    );
+}, 1000);

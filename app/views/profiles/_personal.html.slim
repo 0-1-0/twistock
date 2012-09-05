@@ -122,17 +122,3 @@ ul.nav.nav-list
       =link_to 'Product invoices', '/product_invoices'
     li.nav-header
       =link_to 'Robot', '/robot/dashboard'
-
-javascript:
-    setinterval_id = window.setInterval (function(){
-        $.get("/profiles/#{current_user.nickname}.json", 
-            (function(data){
-            if (data.user.share_price) {
-              $("#yourprice").html('Your stock price:  $' + data.user.share_price.toMoney());
-              $("#yourmoney").html('Your money:  $' + data.user.money.toMoney());
-              clearInterval(setinterval_id);
-            }
-            }), 
-            "json"
-        );
-    }, 1000);
