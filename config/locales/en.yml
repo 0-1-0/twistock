@@ -1,6 +1,10 @@
 en:
   search_user_by_nickname: 'search user by nickname' 
 
+  buy_stocks: 'Buy Stocks'
+  sell_your_starting_shares: 'Sell your starting shares'
+  sell_stocks: 'Sell Stocks'
+
   count: 'Count'
   your_money: 'Your money:'
   your_stock_price: 'Your stock price:'
@@ -12,6 +16,10 @@ en:
   superstar: 'superstar'
   popularity_tooltip: ''
   close: 'Close'
+  buy: 'Buy'
+  sell: 'Sell'
+
+  twitter_profile: 'twitter profile'
 
 
   spend_in_twistock_store: 'Spend in Twistock Store'

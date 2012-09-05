@@ -7,11 +7,12 @@ section
         .thumbnail
           a[href="/profiles/#{user.nickname}" ] #{user.name.split[0]}
           = image_tag user.avatar, :style=>'float:right', :size=>'48x48'          
-          h5 Stock price:
+          h5 =t :one_stock_price
           span.label.label-success = number_to_currency user.share_price, :precision => 0
           br
           = render :partial=>'profiles/price_dynamics', :locals=>{:user=>user, :size=>'200x50'}
-        .btn-center.btn=link_to 'Buy', '/profiles/' + user.nickname
+        .center
+          .btn=link_to  t(:buy), '/profiles/' + user.nickname
     .front
       .well.block
         div[class='label #{label_class}']
@@ -22,4 +23,5 @@ section
           h5 =price_tag
           span.label.label-success = number_to_currency price_value.to_i, :precision => 0        
           = render :partial=>'profiles/popularity', :locals=>{:user=>user, :active=>false}
-        .btn-center.btn=link_to 'Buy', '/profiles/' + user.nickname
+        .center
+          .btn=link_to t(:buy), '/profiles/' + user.nickname

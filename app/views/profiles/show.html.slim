@@ -5,13 +5,17 @@
           =link_to t(:back_to_main_page), :root
 end
 
+=content_for :javascripts do
+  = javascript_include_tag "profiles/show"
+end
+
 
 
 - if signed_in?
   #buy_modal.modal.fade
     .modal-header
       a.close data-dismiss="modal" x
-      h3 Buy Stocks
+      h3 =t :buy_stocks
     = simple_form_for 'buy', url: buy_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
       .modal-body
         = f.input :owner, as: :hidden, input_html: {value: @user.nickname}
@@ -20,7 +24,7 @@ end
         = f.input :total_cost, :disabled => true, input_html: {value: 0.9*(current_user.money.to_i)}
       .modal-footer
         a.btn.btn-small data-dismiss="modal"=t(:close)
-        = f.button :submit, 'Buy', class: 'btn btn-success'
+        = f.button :submit, t(:buy), class: 'btn btn-success'
 
 
   javascript:
@@ -29,7 +33,7 @@ end
   #sell_retention_modal.modal.fade
     .modal-header
       a.close data-dismiss="modal" x
-      h3 Sell your starting shares
+      h3 =t :sell_your_starting_shares
     = simple_form_for 'sell', url: sell_retention_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
       .modal-body
         = f.input :count, as: :integer, input_html: {value: current_user.retention_shares}
@@ -42,7 +46,7 @@ end
   #sell_modal.modal.fade
     .modal-header
       a.close data-dismiss="modal" x
-      h3 Sell Stocks
+      h3 =t :sell_stocks
     = simple_form_for 'sell', url: sell_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
       .modal-body
         = f.input :owner, as: :hidden, input_html: {value: @user.nickname}
@@ -62,7 +66,8 @@ end
     .span2.avatar= image_tag @user.profile_image
     .span5
 
-      a[target='blank' href='http://twitter.com/#{@user.nickname}'] twitter profile
+      a[target='blank' href='http://twitter.com/#{@user.nickname}'] 
+        =t :twitter_profile
       - if signed_in?
         .btn-group.pull-right
           |&nbsp
@@ -70,17 +75,20 @@ end
             - if @user.retention_shares > 0
               a.btn.btn-success.btn-large data-toggle="modal" href="#sell_retention_modal" Sell your starting shares
           - else
-            a.btn.btn-buy.btn-success.btn-large data-toggle="modal" href="#buy_modal" data-price=(@user.share_price.to_i) Buy
+            a.btn.btn-buy.btn-success.btn-large data-toggle="modal" href="#buy_modal" data-price=(@user.share_price.to_i) 
+              =t(:buy)
             - if current_user.portfel.where(:owner_id=>@user.id).last
-              a.btn.btn-sell.btn-info.btn-sell.btn-large data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-origin=@user.nickname data-count=current_user.portfel.where(:owner_id=>@user.id).last.count Sell
+              a.btn.btn-sell.btn-info.btn-sell.btn-large data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-origin=@user.nickname data-count=current_user.portfel.where(:owner_id=>@user.id).last.count 
+                =t(:sell)
             -else
-              a.btn.btn-large.disabled Sell
+              a.btn.btn-large.disabled 
+                =t(:sell)
       .page-header
         h1
           | @#{@user.nickname}
         h1
           small.info 
-            | Stock Price: 
+            =t :one_stock_price
             =number_to_currency @user.share_price, :precision => 0
         h4= @user.name
 
@@ -151,4 +159,3 @@ end
               - else
                 td Calculating..
 
-  = javascript_include_tag "profiles/show"

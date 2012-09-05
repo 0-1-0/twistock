@@ -1,6 +1,10 @@
 ru:
   search_user_by_nickname: 'поиск пользователя но нику' 
 
+  buy_stocks: 'Купить акции'
+  sell_your_starting_shares: 'Продать свои начальные акции'
+  sell_stocks: 'Продать акции'
+
   count: 'Кол-во'
 
   your_money: 'Мои деньги:'
@@ -13,6 +17,10 @@ ru:
   superstar: 'супер'
   popularity_tooltip: ''
   close: 'Закрыть'
+  buy: 'Купить'
+  sell: 'Продать'
+
+  twitter_profile: 'профиль в твиттере'
 
   spend_in_twistock_store: 'Потратить в магазине'
 
@@ -61,7 +69,7 @@ ru:
 
   store_header: 'Потрать свой социальный капитал на настоящие, осязаемые вещи. '
 
-  back_to_main_page: 'Назад на главную страницу'
+  back_to_main_page: 'На главную страницу'
 
 
   random_person_tooltip: ' Это поток случайных Twitter-пользователей. Найти "выгодного" игрока и купи несколько акция для своего инвестиционного портфеля. '

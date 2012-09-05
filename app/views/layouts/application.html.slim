@@ -91,6 +91,8 @@ html lang="en"
     /Init tooltips with right locale
     = javascript_include_tag "tooltips"
 
+    =yield :javascripts
+
     - if current_user
       javascript:
         setinterval_id = window.setInterval (function(){
