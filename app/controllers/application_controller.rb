@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     I18n.locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
 
     if signed_in?
-      if currnet_user.locale
+      if current_user.locale
         I18n.locale = current_user.locale
       end
     end

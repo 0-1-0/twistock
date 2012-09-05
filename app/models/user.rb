@@ -243,28 +243,29 @@ class User < ActiveRecord::Base
 
   def update_share_price
       User.transaction do
-        prev_price = self.share_price
-
-
-
         prev_day_transaction = self.history.where("created_at <= :time", {:time => Time.now - 1.day}).last
 
         if prev_day_transaction
           prev_price = prev_day_transaction.price
         else
           prev_price = self.share_price
+        end         
+
+        if self.base_price
+          d = Math::log10(self.my_shares.sum(:count) + 10)
+          new_price = self.base_price + d**6
+        else
+          new_price = self.share_price
         end
 
-
-         d = Math::log10(self.my_shares.sum(:count) + 10)
-         new_price = self.base_price + d**6
-
-         self.hour_delta_price = (new_price - prev_price).to_i
-         self.save
-         
-         self.share_price = new_price.to_i
-         
-         self.save  
+        if new_price and prev_price
+          self.hour_delta_price = (new_price - prev_price).to_i
+          self.save
+           
+          self.share_price = new_price.to_i
+           
+          self.save  
+        end
       end      
   end
 
