@@ -42,15 +42,19 @@ html lang="en"
             .span2
               a href='/'
                 img#logo src='/assets/logo.png'
+
+            /Here we are replacing blocks
+            - if not signed_in?
+              .span7
+                =yield :upper_menu
               
             .span3
               = form_tag search_profiles_path, class: 'navbar-search', style: 'padding: 7px 0; margin: 0;' do
-                  = text_field_tag 'nickname', nil, class: 'search-query', placeholder: t(:search_user_by_nickname)
-                   
+                  = text_field_tag 'nickname', nil, class: 'search-query', placeholder: t(:search_user_by_nickname)              
 
-
-            .span7
-              =yield :upper_menu
+            - if signed_in?
+              .span7
+                =yield :upper_menu
 
 
     .container
@@ -63,17 +67,16 @@ html lang="en"
             a.btn.btn-small data-dismiss="modal"=t(:close)
 
       .row
-        .span5
-          .well.sidebar-nav.sidebar-nav-fixed
-            - if current_user
+        - if current_user
+          .span5          
+            .well.sidebar-nav.sidebar-nav-fixed            
               = render :partial=>'profiles/personal', :locals=>{:user=>current_user}
-            - else
-              = render :partial=>'welcome/sign_in'
+          .span7#main-content
+            =yield
+        - else
+          .span7.offset2
+            =yield
 
-
-
-        .span7#main-content
-          =yield
 
 
     

@@ -72,6 +72,8 @@ end
   /   #most-booming.emitter.span2[speed=2 url='/stream/most_booming']
   / .span3
   /   #most-falling.emitter.span2[speed=1 url='/stream/most_falling']
+  - if not signed_in?
+    = render :partial=>'welcome/sign_in'
 
 .row-fluid#for-iphone
   .iphone-emitter.span6 url='/stream/random_people'
