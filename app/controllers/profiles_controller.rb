@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
     end
 
     #'sell' starting shares
-    if @user.retention_shares > 0 and @user.share_price
+    if @user.retention_shares > 0 and @user.share_price > 0
       @user.sell_retention(@user.retention_shares)
     end
 
