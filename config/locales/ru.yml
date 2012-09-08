@@ -9,6 +9,9 @@ ru:
 
   change_language: 'Сменить язык'
 
+  user_not_found: 'Пользователь не найден.'
+  go_home: 'Вернуться на главную.'
+
   buy_stocks: 'Купить акции'
   sell_your_starting_shares: 'Продать свои начальные акции'
   sell_stocks: 'Продать акции'

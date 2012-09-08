@@ -7,6 +7,9 @@ en:
 
   search_user_by_nickname: 'search user by nickname' 
 
+  user_not_found: 'User not found.'
+  go_home: 'Go home.'
+
   change_language: 'Change language'
 
   buy_stocks: 'Buy Stocks'
