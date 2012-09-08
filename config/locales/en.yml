@@ -1,4 +1,10 @@
 en:
+  sign_in_text: >
+    Twistock is а simulator
+    of trade exchange where you can invest
+    in Twitter-accounts. By buying and selling their stocks, 
+    you can earn virtual money and then spend it on the real goods in Twistock Store.
+
   search_user_by_nickname: 'search user by nickname' 
 
   change_language: 'Change language'
