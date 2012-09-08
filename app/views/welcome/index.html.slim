@@ -26,7 +26,8 @@ end
             :price_tag=>t(:stock_price),\
             :price_value=>(user.share_price), \
             :category=>'#Random',\
-            :label_class=>'label-info'\
+            :label_class=>'label-info',\
+            :border_class=>'blue-border'\
             }
 
   /Highest value
@@ -39,7 +40,8 @@ end
             :price_tag=>t(:stock_price),\
             :price_value=>(user.share_price), \
             :category=>'#Pricy',\
-            :label_class=>'label-warning'\
+            :label_class=>'label-warning',\
+            :border_class=>'yellow-border'\
             }
 
   /Most booming
@@ -52,7 +54,8 @@ end
             :price_tag=>t(:growth),\
             :price_value=>(user.hour_delta_price || 0), \
             :category=>'#Booming',\
-            :label_class=>'label-success'\
+            :label_class=>'label-success',\
+            :border_class=>'green-border'\
             }
 
   /Most falling
@@ -65,7 +68,8 @@ end
             :price_tag=>t(:decrease),\
             :price_value=>(user.hour_delta_price || 0), \
             :category=>'#Falling',\
-            :label_class=>'label-important'\
+            :label_class=>'label-important',\
+            :border_class=>'red-border'\
             }
 
   / .span3

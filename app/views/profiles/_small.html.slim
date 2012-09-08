@@ -5,9 +5,7 @@
 section
   .card
     .back
-      .well.block
-        div[class='label #{label_class}']
-          h5 =category        
+      div[class='well block inner #{border_class}']       
         .thumbnail
           a[href="/profiles/#{user.nickname}" ] #{user.name.split[0]}
           = image_tag user.avatar, :style=>'float:right', :size=>'48x48'          
@@ -18,9 +16,7 @@ section
         .center
           .btn=link_to  t(:buy), '/profiles/' + user.nickname
     .front
-      .well.block
-        div[class='label #{label_class}']
-          h5 =category
+      div[class='well block inner #{border_class}']
         .thumbnail
           a[href="/profiles/#{user.nickname}"] @#{user.nickname}
           = image_tag user.avatar, :style=>'float:right', :size=>'48x48'          
