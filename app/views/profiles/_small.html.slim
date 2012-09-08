@@ -6,7 +6,7 @@ section
   .card
     .back
       div[class='well block inner #{border_class}']   
-        table
+        table[width='100%']
           tr
             td    
               = image_tag user.avatar, :size=>'48x48'   
@@ -28,7 +28,7 @@ section
         
     .front
       div[class='well block inner #{border_class}']  
-        table  
+        table[width='100%']
           tr
             td
               = image_tag user.avatar, :size=>'48x48'       
