@@ -5,23 +5,44 @@
 section
   .card
     .back
-      div[class='well block inner #{border_class}']       
-        .thumbnail
-          a[href="/profiles/#{user.nickname}" ] #{user.name.split[0]}
-          = image_tag user.avatar, :style=>'float:right', :size=>'48x48'          
-          h5 =t :stock_price
-          span.label.label-success = number_to_currency user.share_price, :precision => 0
-          br
-          = render :partial=>'profiles/price_dynamics', :locals=>{:user=>user, :size=>'200x50'}
-        .center
-          .btn=link_to  t(:buy), '/profiles/' + user.nickname
+      div[class='well block inner #{border_class}']   
+        table
+          tr
+            td    
+              = image_tag user.avatar, :size=>'48x48'   
+            td
+              h3 = number_to_currency user.share_price, :precision => 0
+              =t :stock_price
+          tr
+            td[colspan=2]
+              a[href="/profiles/#{user.nickname}" ] #{user.name.split[0]} 
+          tr
+            td[colspan=2]
+              = render :partial=>'profiles/price_dynamics', :locals=>{:user=>user, :size=>'200x50'}
+          tr
+            td[colspan=2]
+              .center
+                br
+                .btn=link_to  t(:buy), '/profiles/' + user.nickname
+        
+        
     .front
-      div[class='well block inner #{border_class}']
-        .thumbnail
-          a[href="/profiles/#{user.nickname}"] @#{user.nickname}
-          = image_tag user.avatar, :style=>'float:right', :size=>'48x48'          
-          h5 =price_tag
-          span.label.label-success = number_to_currency price_value.to_i, :precision => 0        
-          = render :partial=>'profiles/popularity', :locals=>{:user=>user, :active=>false}
-        .center
-          .btn=link_to t(:buy), '/profiles/' + user.nickname
+      div[class='well block inner #{border_class}']  
+        table  
+          tr
+            td
+              = image_tag user.avatar, :size=>'48x48'       
+            td
+              h3 = number_to_currency price_value.to_i, :precision => 0 
+              = price_tag 
+
+          tr
+            td[colspan=2]
+              a[href="/profiles/#{user.nickname}"] @#{user.nickname} 
+          tr 
+            td[colspan=2]       
+              small= render :partial=>'profiles/popularity', :locals=>{:user=>user, :active=>false}
+          tr
+            td[colspan=2]
+              .center
+                .btn=link_to t(:buy), '/profiles/' + user.nickname

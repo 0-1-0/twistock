@@ -21,7 +21,8 @@
 
 .inner{
   height: 180px;
-  width: 136px;
+  width: 120px;
+
 }
 
 section{
@@ -56,7 +57,7 @@ section:hover .front {
 
     .vert .simply-scroll-list li {
       width: 220px;
-      height: 220px;
+      height: 240px;
     }
     .vert .simply-scroll-list li img {}
 
