@@ -292,15 +292,15 @@ class User < ActiveRecord::Base
       price_data = price_data*2 
     end
 
-    initial_price_value = price_data[0]
-    data = []
+    min_price_value = price_data.min
+    result = []
     price_data.each do |d|
       if d > 0
-        data += [d - initial_price_value + 1]
+        result += [d - min_price_value + 1]
       end
     end
 
-    data
+    result
   end
 
 
