@@ -34,7 +34,7 @@ class UserUpdateWorker
       b = Math::log10(10 + flw)
       c = Math::log10(10 + rt)
 
-      d = Math::log10(user.my_shares.sum(:count) + 10)
+      d = user.popularity_stocks_coefficient
       
       price = a**6 + b**6 + c**6 + d**6
       

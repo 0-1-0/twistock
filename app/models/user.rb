@@ -241,6 +241,10 @@ class User < ActiveRecord::Base
     self
   end
 
+  def popularity_stocks_coefficient
+    Math::log10(100*self.my_shares.sum(:count) + 10)
+  end
+
   def update_share_price
       User.transaction do
         prev_day_transaction = self.history.where("created_at <= :time", {:time => Time.now - 1.day}).last
@@ -252,7 +256,7 @@ class User < ActiveRecord::Base
         end         
 
         if self.base_price
-          d = Math::log10(self.my_shares.sum(:count) + 10)
+          d = popularity_stocks_coefficient
           new_price = self.base_price + d**6
         else
           new_price = self.share_price
