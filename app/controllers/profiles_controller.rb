@@ -4,9 +4,9 @@ class ProfilesController < ApplicationController
       return redirect_to not_found_path
     end
 
-    #'sell' starting shares
-    if @user.retention_shares > 0 and @user.share_price > 0
-      @user.sell_retention(@user.retention_shares)
+    #'sell' starting stocks
+    if @user.has_starting_stocks
+      @user.sell_starting_stocks
     end
 
 

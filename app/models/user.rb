@@ -23,6 +23,23 @@ class User < ActiveRecord::Base
     nickname
   end
 
+
+
+  def has_starting_stocks
+    if @user.retention_shares and @user.share_price
+      return (@user.retention_shares > 0 and @user.share_price > 0)
+    else
+      return false
+    end
+  end
+
+  def sell_starting_stocks
+    self.sell_retention(self.retention_shares)
+  end
+
+
+  
+
   def profile_image
     return self.avatar.sub("_normal", "")
   end
@@ -300,7 +317,7 @@ class User < ActiveRecord::Base
     result = []
     price_data.each do |d|
       if d > 0
-        result += [d - min_price_value + 1]
+        result += [d - min_price_value]
       end
     end
 
