@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120905141555) do
+ActiveRecord::Schema.define(:version => 20120909182901) do
 
   create_table "block_of_shares", :force => true do |t|
     t.integer  "owner_id"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(:version => 20120905141555) do
 
   add_index "block_of_shares", ["holder_id"], :name => "index_block_of_shares_on_holder_id"
   add_index "block_of_shares", ["owner_id"], :name => "index_block_of_shares_on_owner_id"
+
+  create_table "main_page_streams", :force => true do |t|
+    t.string   "eng_name"
+    t.string   "ru_name"
+    t.text     "list_of_users"
+    t.string   "eng_tooltip"
+    t.string   "tu_tooltip"
+    t.integer  "priority",      :default => 0
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
 
   create_table "price_stamps", :force => true do |t|
     t.integer  "user_id"

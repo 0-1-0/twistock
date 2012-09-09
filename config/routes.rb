@@ -1,4 +1,6 @@
 Twitterexchange::Application.routes.draw do
+  resources :main_page_streams
+
   get "robot/dashboard"
 
   get "robot/history"

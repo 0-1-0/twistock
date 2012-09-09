@@ -1,0 +1,13 @@
+= simple_form_for(@main_page_stream) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :eng_name
+    = f.input :ru_name
+    = f.input :list_of_users
+    = f.input :eng_tooltip
+    = f.input :tu_tooltip
+    = f.input :priority
+
+  .form-actions
+    = f.button :submit
