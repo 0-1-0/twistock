@@ -26,8 +26,8 @@ class User < ActiveRecord::Base
 
 
   def has_starting_stocks
-    if @user.retention_shares and @user.share_price
-      return (@user.retention_shares > 0 and @user.share_price > 0)
+    if self.retention_shares and self.share_price
+      return (self.retention_shares > 0 and self.share_price > 0)
     else
       return false
     end
