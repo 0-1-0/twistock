@@ -36,30 +36,31 @@ end
 
 
 
-#store-header
-  h1 Twistock Store
-  h3 =t(:store_header)
-ul.thumbnails
-  - @products.each do |product|
-    li.span3.well.block
-      .product.thumbnail[style="height:250px"]
-        h4 = product.name
-        p = product.short_description.html_safe
+#store-wrapper
+  #store-header.well.block
+    h1 Twistock Store
+    h3 =t(:store_header)
+  ul.thumbnails
+    - @products.each do |product|
+      li.well.block.product-wrapper.blue-border-heavy
+        .thumbnail.product
+          h4 = product.name
+          p = product.short_description.html_safe
 
-      .center[style="height:60px"] 
-        - if signed_in? and current_user.money >= product.price   
-          .description-data
-            p=product.description.html_safe   
-          .btn.btn-small.btn-buy data-toggle="modal" href="#buy_modal" total_cost=product.price product_name=product.name product_id=product.id
-            a href="javascript:void()"
-              h5 $ #{number_to_currency(product.price)}          
-              =t :buy_this_item
-        - else
-          .btn.btn-small.disabled.btn-cannot-buy
-            h5 $ #{number_to_currency(product.price)}
-            =t :you_havent_enough_money
-            br
-            =t :try_to_earn_more
+        .center[style="height:60px"] 
+          - if signed_in? and current_user.money >= product.price   
+            .description-data
+              p=product.description.html_safe   
+            .btn.btn-small.btn-buy data-toggle="modal" href="#buy_modal" total_cost=product.price product_name=product.name product_id=product.id
+              a href="javascript:void()"
+                h5=number_to_currency product.price          
+                =t :buy_this_item
+          - else
+            .btn.btn-small.disabled.btn-cannot-buy
+              h5=number_to_currency product.price
+              =t :you_havent_enough_money
+              br
+              =t :try_to_earn_more
 
 
 
