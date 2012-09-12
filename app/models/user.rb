@@ -23,6 +23,24 @@ class User < ActiveRecord::Base
     nickname
   end
 
+  def self.find_or_create(id)
+    user = (User.find_by_nickname(id) or User.create_from_twitter(id))
+    user
+  end
+
+  def self.find_by_nicknames(ids)
+    result = []
+
+    ids.each do |id|
+      user = User.find_or_create id
+      if user
+        result += [user]
+      end
+    end
+
+    result
+  end
+
 
 
   def has_starting_stocks

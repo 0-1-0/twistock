@@ -9,10 +9,10 @@
           =link_to t(:most_valuable), '#', :id=>'most-valuable'
       li.span3
         .topbar-link
-          =link_to t(:most_booming), '#', :id=>'most-booming'
+          =link_to t(:celebrities), '#', :id=>'celebrities'
       li.span3
         .topbar-link
-          =link_to t(:most_falling), '#', :id=>'most-falling'
+          =link_to t(:politicians), '#', :id=>'politicians'
 end
 
 .row-fluid
@@ -45,30 +45,54 @@ end
             }
 
   /Most booming
+  / .span3
+  /   ul.scroll
+  /     - User.where("hour_delta_price >= 0").find(:all, :limit=> 10, :order=> 'hour_delta_price desc').each do |user|
+  /       li 
+  /         = render :partial=>'profiles/small', :locals=>{\
+  /           :user=>user,\ 
+  /           :price_tag=>t(:growth),\
+  /           :price_value=>(user.hour_delta_price || 0), \
+  /           :category=>'#Booming',\
+  /           :label_class=>'label-success',\
+  /           :border_class=>'green-border'\
+  /           }
+
+  /Most falling
+  / .span3
+  /   ul.scroll
+  /     - User.where("hour_delta_price < 0").find(:all, :limit=> 10, :order=> 'hour_delta_price asc').each do |user|
+  /       li 
+  /         = render :partial=>'profiles/small', :locals=>{\
+  /           :user=>user,\ 
+  /           :price_tag=>t(:decrease),\
+  /           :price_value=>(user.hour_delta_price || 0), \
+  /           :category=>'#Falling',\
+  /           :label_class=>'label-important',\
+  /           :border_class=>'red-border'\
+  /           }
+
+  /Celebrities
   .span3
     ul.scroll
-      - User.where("hour_delta_price >= 0").find(:all, :limit=> 10, :order=> 'hour_delta_price desc').each do |user|
+      - @celebrities.each do |user|
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
-            :price_tag=>t(:growth),\
-            :price_value=>(user.hour_delta_price || 0), \
-            :category=>'#Booming',\
-            :label_class=>'label-success',\
+            :price_tag=>t(:stock_price),\
+            :price_value=>(user.share_price || 0), \
             :border_class=>'green-border'\
             }
 
-  /Most falling
+  /Politicans
   .span3
     ul.scroll
-      - User.where("hour_delta_price < 0").find(:all, :limit=> 10, :order=> 'hour_delta_price asc').each do |user|
+      - @politicians.each do |user|
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
-            :price_tag=>t(:decrease),\
-            :price_value=>(user.hour_delta_price || 0), \
-            :category=>'#Falling',\
-            :label_class=>'label-important',\
+            :price_tag=>t(:stock_price),\
+            :price_value=>(user.share_price || 0), \
             :border_class=>'red-border'\
             }
 

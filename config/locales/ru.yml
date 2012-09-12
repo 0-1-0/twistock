@@ -7,6 +7,12 @@ ru:
 
   search_user_by_nickname: 'поиск пользователя но нику' 
 
+  celebrities: 'Знаменитости'
+  celebrities_tooltip: 'Знаменитости в Twitter. Стать их совладельцами очень просто. '
+
+  politicians: 'Политики'
+  politicians_tooltip: 'Самые яркие политики.'
+
   change_language: 'Сменить язык'
 
   user_not_found: 'Пользователь не найден.'

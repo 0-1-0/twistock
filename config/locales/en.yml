@@ -7,6 +7,12 @@ en:
 
   search_user_by_nickname: 'search user by nickname' 
 
+  celebrities: 'Celebrities'
+  celebrities_tooltip: 'Celebrities in Twitter.  Become a co-owner of your idol.'
+
+  politicians: 'Politicians'
+  politicians_toolti: 'The brightest politicians.'
+
   user_not_found: 'User not found.'
   go_home: 'Go home.'
 

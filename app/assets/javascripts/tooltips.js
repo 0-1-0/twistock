@@ -9,13 +9,13 @@ $("#most-valuable").tooltip({
     'placement': 'bottom'
 })
 
-$("#most-booming").tooltip({
-    title: I18n.t('most_booming_tooltip'),
+$("#politicians").tooltip({
+    title: I18n.t('politicians'),
     'placement': 'bottom'
 })
 
-$("#most-falling").tooltip({
-    title: I18n.t('most_falling_tooltip'),
+$("#celebrities").tooltip({
+    title: I18n.t('celebrities'),
     'placement': 'bottom'
 })
 
