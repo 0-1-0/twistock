@@ -178,11 +178,12 @@ class User < ActiveRecord::Base
       #Пишем о транзакции в твиттер
       TweetWorker.perform_async(
       self.id, \
-        "@" +  self.nickname + \
-        ' ' + t(:bought) + ' ' +\
+        "@" + self.nickname + ' ' +\
+        t(:bought) + ' ' +\
         t.count.to_s +  ' ' +\
-        t(:stocks_of) + " stocks of @" + owner.nickname + \
-        " on www.twistock.com #MonetizeSocialCapital"\
+        t(:stocks_of) + ' ' +\
+        "@" + owner.nickname + ' ' +\
+        t(:on_twistock_com)\
       )
 
       # return self

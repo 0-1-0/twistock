@@ -8,7 +8,9 @@ en:
   search_user_by_nickname: 'search user by nickname' 
 
 
-  bought: " bought "
+  bought: "bought"
+  stocks_of: 'stocks of'
+  on_twistock_com: 'on twistock.com #MonetizeSocialCapital'
 
   celebrities: 'Celebrities'
   celebrities_tooltip: 'Celebrities in Twitter.  Become a co-owner of your idol.'
