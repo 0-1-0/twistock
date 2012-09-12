@@ -5,7 +5,8 @@ ru:
     Играя на бирже, можно заработать виртуальную валюту, 
     чтобы потом потратить ее на реальные товары в Twistock Store.
 
-  search_user_by_nickname: 'поиск пользователя но нику' 
+  search_user_by_nickname: 'Поиск по нику' 
+  search-query_tooltip: 'Найдите интересного Twitter-пользователя по нику.'
 
   celebrities: 'Знаменитости'
   celebrities_tooltip: 'Знаменитости в Twitter. Стать их совладельцами очень просто. '
@@ -73,9 +74,13 @@ ru:
     caption: 'Spend your social capital on great things - try them out and tell others'
 
   random_person: 'Случайные'
-  random_person_tooltip: ''
+  random_person_tooltip: >
+    Это поток случайных Twitter-пользователей. 
+    Найти подходящие акции для своего инвестиционного портфеля.
+
+
   most_valuable: 'Самые дорогие'
-  most_valuable_tooltip: ''
+  most_valuable_tooltip: 'Посмотри на самых дорогих Twitter-пользователей.'
   most_booming: 'Растущие в цене'
   most_booming_tooltip: ''
   most_falling: 'Падающие в цене'
@@ -94,20 +99,16 @@ ru:
 
   sign_out: 'Выйти'
 
-  store_header: 'Потрать свой социальный капитал на настоящие, осязаемые вещи. '
+  store_header: 'Потрать свой социальный капитал на реальные товары.'
 
   back_to_main_page: 'На главную страницу'
 
-
-  random_person_tooltip: ' Это поток случайных Twitter-пользователей. Найти "выгодного" игрока и купи несколько акция для своего инвестиционного портфеля. '
-  most_valuable_tooltip: 'Посмотри на самых дорогих Twitter пользователей. '
   most_booming_tooltip: 'Акции этих пользователей растут в цене - люди торопятся скупить их.'
   most_falling_tooltip: 'Эти акции обесцениваются, потому что другие распродают их.'
   your_price_tooltip: 'Это цена твоих акций. Роботы Twistock посчитали ее, оценив твой "социальный" вес.'
   popularity_tooltip: 'Популярность акций растет, когда твои акции покупают или продают.'
   iportfolio_tooltip: 'Посмотри, чьи акции ты купил.'
   stock_holders_tooltip: 'Посмотри, кто владеет твоими акциями.'
-  search-query_tooltip: 'Здесь вы можете найти пользователей по их никнейму.'
 
   time:
     am: утра
