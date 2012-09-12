@@ -179,8 +179,9 @@ class User < ActiveRecord::Base
       TweetWorker.perform_async(
       self.id, \
         "@" +  self.nickname + \
-        " bought " + t.count.to_s + \
-        " stocks of @" + owner.nickname + \
+        ' ' + t(:bought) + ' ' +\
+        t.count.to_s +  ' ' +\
+        t(:stocks_of) + " stocks of @" + owner.nickname + \
         " on www.twistock.com #MonetizeSocialCapital"\
       )
 

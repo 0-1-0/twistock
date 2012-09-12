@@ -10,12 +10,12 @@ $("#most-valuable").tooltip({
 })
 
 $("#politicians").tooltip({
-    title: I18n.t('politicians'),
+    title: I18n.t('politicians_tooltip'),
     'placement': 'bottom'
 })
 
 $("#celebrities").tooltip({
-    title: I18n.t('celebrities'),
+    title: I18n.t('celebrities_tooltip'),
     'placement': 'bottom'
 })
 
