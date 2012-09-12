@@ -16,5 +16,5 @@ Twitter.configure do |config|
   config.consumer_secret    = ENV['TWITTER_CONSUMER_SECRET']
   config.oauth_token        = ENV['TWITTER_OAUTH_TOKEN']
   config.oauth_token_secret = ENV['TWITTER_OAUTH_TOKEN_SECRET']
-  #config.gateway            = ENV['APIGEE_TWITTER_API_ENDPOINT']
+  config.gateway            = ENV['APIGEE_TWITTER_API_ENDPOINT']
 end
