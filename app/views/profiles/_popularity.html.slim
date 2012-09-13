@@ -1,22 +1,23 @@
-=t :popularity
-| : 
+.center
+  =t :popularity
+  | : 
 - pr = user.popularity
 - if pr < 2
-  small=t :low
+  .center=t :low
   div[class='progress progress-danger progress-striped progress-bar #{active ? 'active': ''}']
     .bar[style="width: 25%"]
 
 - if pr >= 2 and pr < 10
-  small=t :medium
+  .center=t :medium
   div[class='progress progress-warning progress-striped progress-bar #{active ? 'active': ''}']
     .bar[style="width: 35%"]
 
 - if pr >= 10 and pr < 50
-  small=t :high
+  .center=t :high
   div[class='progress progress-alert progress-striped progress-bar #{active ? 'active': ''}']
     .bar[style="width: 50%"]
 
 - if pr > 50
-  small=t :superstar
+  .center=t :superstar
   div[class='progress progress-success progress-striped progress-bar #{active ? 'active': ''}']
     .bar[style="width: 80%"]

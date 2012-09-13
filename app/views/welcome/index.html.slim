@@ -23,10 +23,6 @@ end
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
-            :price_tag=>t(:stock_price),\
-            :price_value=>(user.share_price), \
-            :category=>'#Random',\
-            :label_class=>'label-info',\
             :border_class=>'blue-border'\
             }
 
@@ -37,10 +33,6 @@ end
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
-            :price_tag=>t(:stock_price),\
-            :price_value=>(user.share_price), \
-            :category=>'#Pricy',\
-            :label_class=>'label-warning',\
             :border_class=>'yellow-border'\
             }
 
@@ -79,8 +71,6 @@ end
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
-            :price_tag=>t(:stock_price),\
-            :price_value=>(user.share_price || 0), \
             :border_class=>'green-border'\
             }
 
@@ -91,8 +81,6 @@ end
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
-            :price_tag=>t(:stock_price),\
-            :price_value=>(user.share_price || 0), \
             :border_class=>'red-border'\
             }
 
