@@ -45,7 +45,7 @@ end
         = f.input :total_cost, :disabled => true, input_html: {value: @user.share_price.to_i*current_user.stocks_in_portfel(@user)}
       .modal-footer
         a.btn.btn-small data-dismiss="modal"=t(:close)
-        = f.button :submit, 'Sell', class: 'btn btn-success'
+        = f.button :submit, t(:sell), class: 'btn btn-info'
 
 
 .well.block
