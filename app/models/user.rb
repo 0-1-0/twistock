@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   POPULARITY_UPDATE_DELAY = 2*7*24*60*60
   ANALYSES_UPDATE_DELAY   = 6.hours
 
+  PROTECTED_PRICE = 1
+
   def to_param
     nickname
   end

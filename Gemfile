@@ -35,7 +35,7 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 
 # twitter API
-gem 'twitter'
+gem 'twitter','2.2.0'
 
 # очередь для обработки тяжелых запросов
 gem 'sidekiq'
@@ -79,7 +79,7 @@ gem 'gchartrb', :require => 'google_chart'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 # мониторинг
-gem 'newrelic_rpm'
+gem 'newrelic_rpm','3.4.1'
 
 # парсинг accept-language из запросов
 gem 'http_accept_language'

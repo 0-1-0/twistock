@@ -1,6 +1,8 @@
 class ProfilesController < ApplicationController
   def show
-    unless @user = ( User.find_by_nickname(params[:id]) or User.create_from_twitter(params[:id]) )
+    @user = User.find_or_create(params[:id])
+
+    unless @user
       return redirect_to not_found_path
     end
 

@@ -4,11 +4,10 @@ class UserUpdateWorker
 
 
   def perform(nickname)
-    begin
-      user = User.find_by_nickname(nickname)
-    rescue
-      logger.fatal 'User not found:' + nickname
-      return 1
+    user = User.find_by_nickname(nickname)
+    
+    if not user
+      break
     end
 
     #выбираем первого попавшегося и используем его твиттер для скачивания данных
@@ -18,39 +17,51 @@ class UserUpdateWorker
 
     time_gate = Time.now - 20.days
 
-    timeline  = twitter.user_timeline(nickname, include_rts: 0, count: 200).select{|t| t.created_at > time_gate}      
-    twitter_user = twitter.user(nickname)
+    begin
+      twitter_user = twitter.user(nickname)
+      timeline  = twitter.user_timeline(nickname, include_rts: 0, count: 200).select{|t| t.created_at > time_gate}   
+    rescue Twitter::Error::NotFound
+      break
+    rescue Twitter::Error::Unauthorized
+      break
+    rescue Twitter::Error::BadRequest
+      retry
+    rescue Twitter::Error::ServiceUnavailable
+      sleep(60*5)
+      retry
+    end   
 
-    if not twitter_user.protected 
-      rt, cnt, fw = 0, 0, 0
-      begin
-        # followers     = twitter.user(nickname).followers_count
-        # timeline      = twitter.user_timeline(nickname, include_rts: 0, count: 200).select{|t| t.created_at > time_gate}
-        # tweets        = timeline.count
-        # retweets      = timeline.inject(0){|a, b| a += b.retweet_count}
-        rt  = timeline.inject(0){|a, b| a += b.retweet_count}
-        cnt = timeline.count
-        flw = twitter_user.followers_count
-
-        pop = user.popularity_stocks_coefficient
-      rescue
-        rt, cnt, flw, pop = 0, 0, 0, 0
-      end
-
-      rt, cnt, flw = rt.to_f, cnt.to_f, flw.to_f
-
-      a = Math::log10(10 + 100*rt/(cnt+1))
-      b = Math::log10(10 + flw)
-      c = Math::log10(10 + rt)
-      d = pop       
-      
-      price = a**6 + b**6 + c**6 + d**6
-      
-      user.share_price = price.round    
-      user.base_price  = (a**6 + b**6 + c**6).round
-
+    if twitter_user.protected 
+      user.share_price = User::PROTECTED_PRICE
+      user.base_price  = User::PROTECTED_PRICE
       user.save
+      
+      break
     end
+
+    begin
+      rt  = timeline.inject(0){|a, b| a += b.retweet_count}
+      cnt = timeline.count
+      flw = twitter_user.followers_count
+
+      pop = user.popularity_stocks_coefficient
+    rescue
+      rt, cnt, flw, pop = 0, 0, 0, 0
+    end
+
+    rt, cnt, flw = rt.to_f, cnt.to_f, flw.to_f
+
+    a = Math::log10(10 + 100*rt/(cnt+1))
+    b = Math::log10(10 + flw)
+    c = Math::log10(10 + rt)
+    d = pop       
+    
+    price = a**6 + b**6 + c**6 + d**6
+    
+    user.share_price = price.round    
+    user.base_price  = (a**6 + b**6 + c**6).round
+
+    user.save
 
   end
 end
