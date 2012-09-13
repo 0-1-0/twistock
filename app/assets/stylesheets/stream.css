@@ -3,7 +3,7 @@
     -webkit-perspective: 1000;
     position: relative;
     width: 75%;
-    height: 240px;
+    height: 230px;
 }   
 .back, .front {
     position: absolute;
@@ -57,7 +57,7 @@ section:hover .front {
 
     .vert .simply-scroll-list li {
       width: 220px;
-      height: 250px;
+      height: 230px;
     }
     .vert .simply-scroll-list li img {}
 
