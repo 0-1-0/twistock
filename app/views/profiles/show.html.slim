@@ -84,7 +84,6 @@ end
         /       = f.input :target_user, as: :hidden, input_html: {value: @user.nickname}
         /       = f.button :submit, 'Buy all followers', class: 'btn btn-small'
 
-        br
       
   .row
     .span5.micro-offset = render :partial=>'profiles/popularity', :locals=>{:user=>@user, :active=>'true'}

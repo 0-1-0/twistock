@@ -31,6 +31,7 @@ ul.nav.nav-list
           /   =link_to 'Sell your startingg shares', '/profiles/' + user.nickname
 
   li
+    br
     hr
   li#popularity= render :partial=>'profiles/popularity', :locals=>{:user=>user, :active=>'true'}
   li= render :partial=>'profiles/price_dynamics', :locals=>{:user=>user, :size=>'400x100'}
