@@ -71,7 +71,7 @@ class UserUpdateWorker
     user.share_price = price.round    
     user.base_price  = (a**6 + b**6 + c**6).round
 
-    logger.info 'Saved user to database ' user.name
+    logger.info 'Saved user to database ' + user.name
 
     user.save
     user

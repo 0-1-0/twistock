@@ -132,7 +132,7 @@ class User < ActiveRecord::Base
     shares - retention_shares
   end
 
-  
+
 
   def buy_shares(owner, count)
     raise "You cannot buy 0 shares" unless count > 0
@@ -293,6 +293,8 @@ class User < ActiveRecord::Base
   end
 
   def update_share_price
+      self.update_stats
+      
       User.transaction do
         prev_day_transaction = self.history.where("created_at <= :time", {:time => Time.now - 1.day}).last
 
@@ -321,16 +323,27 @@ class User < ActiveRecord::Base
   end
 
   def update_stats
-    if Time.now - (last_update || Time.now - ANALYSES_UPDATE_DELAY) >= ANALYSES_UPDATE_DELAY
+    if price_is_obsolete
+      UserUpdateWorker.perform_async(nickname)
       User.transaction do
         self.last_update = Time.now
         self.save
       end
-      UserUpdateWorker.perform_async(nickname)
       
       self
     end
 
+  end
+
+
+  def price_is_obsolete
+    if not last_update
+      return true
+    elseif Time.now - last_update >= ANALYSES_UPDATE_DELAY
+      return true
+    end
+
+    return false
   end
 
   def popularity
