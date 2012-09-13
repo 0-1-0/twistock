@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.7'
 gem 'pg'
 
 # Gems used only for assets and not required

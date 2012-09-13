@@ -10,28 +10,38 @@ class UserUpdateWorker
       return nil
     end
 
+    logger.info 'Found user in database: ' + user.name
+
     #выбираем первого попавшегося и используем его твиттер для скачивания данных
     rand_user = User.where('secret is Not NULL').first(:order=>'RANDOM()')
     twitter = rand_user.twitter
     #twitter = Twitter
+
+    logger.info 'Found random user in database: ' + rand_user.name
 
     time_gate = Time.now - 20.days
 
     begin
       twitter_user = twitter.user(nickname)
       timeline  = twitter.user_timeline(nickname, include_rts: 0, count: 200).select{|t| t.created_at > time_gate}   
+      logger.info 'Fetched user profile and timeline from twitter'
     rescue Twitter::Error::NotFound
+      logger.info 'User not foud'
       return nil
     rescue Twitter::Error::Unauthorized
+      logger.info 'Unauthorized'
       return nil
     rescue Twitter::Error::BadRequest
+      logger.info 'Bad request'
       return nil
     rescue Twitter::Error::ServiceUnavailable
+      logger.info 'Service unavailible'
       sleep(60*5)
       retry
     end   
 
     if twitter_user.protected 
+      logger.info 'User is protected !!! =('
       user.share_price = User::PROTECTED_PRICE
       user.base_price  = User::PROTECTED_PRICE
       user.save
@@ -60,6 +70,8 @@ class UserUpdateWorker
     
     user.share_price = price.round    
     user.base_price  = (a**6 + b**6 + c**6).round
+
+    logger.info 'Saved user to database ' user.name
 
     user.save
     user
