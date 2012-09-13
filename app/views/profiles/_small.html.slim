@@ -18,11 +18,10 @@ section
               a[href="/profiles/#{user.nickname}" ] #{user.name.split[0]} 
           tr
             td[colspan=2]
-              = render :partial=>'profiles/price_dynamics', :locals=>{:user=>user, :size=>'200x50'}
+              small= render :partial=>'profiles/price_dynamics', :locals=>{:user=>user, :size=>'200x50'}
           tr
             td[colspan=2]
               .center
-                br
                 .btn=link_to  t(:buy), '/profiles/' + user.nickname
         
         
@@ -45,4 +44,4 @@ section
           tr
             td[colspan=2]
               .center
-                .btn=link_to t(:buy), '/profiles/' + user.nickname
+                .btn.btn-small=link_to t(:buy), '/profiles/' + user.nickname
