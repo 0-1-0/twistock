@@ -12,7 +12,6 @@ section
               = image_tag user.avatar, :size=>'48x48'   
             td
               h3 = number_to_currency user.share_price, :precision => 0
-              =t :stock_price
           tr
             td[colspan=2]
               a[href="/profiles/#{user.nickname}" ] #{user.name.split[0]} 
@@ -34,8 +33,6 @@ section
               = image_tag user.avatar, :size=>'48x48'       
             td
               h3 = number_to_currency price_value.to_i, :precision => 0 
-              = price_tag 
-
           tr
             td[colspan=2]
               a[href="/profiles/#{user.nickname}"] @#{user.nickname} 
