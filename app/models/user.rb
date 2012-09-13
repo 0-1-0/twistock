@@ -147,6 +147,7 @@ class User < ActiveRecord::Base
       raise "You cannot buy shares with zero price" if owner.share_price == 0
 
       cost = count*owner.share_price
+      price = owner.share_price
 
       # проверяем на валидность
       raise "There are no #{count} shares"   unless owner.available_shares >= count
@@ -162,43 +163,32 @@ class User < ActiveRecord::Base
         self.portfel << BlockOfShares.new(count: count, owner_id: owner.id)
       end
 
+      owner.update_share_price
+
       #доп эмиссия (если нужно)
       if owner.available_shares < User::START_SHARES
         owner.shares *= 2
         owner.save
-      end
-
-      owner.update_share_price
+      end      
 
       owner.save!
       self.save!
-
-
-      # теперь фигачим транзакцию
-      t = Transaction.create(
-      user:   self,
-      owner:  owner,
-      action: 'buy',
-      count:  count,
-      price:  owner.share_price,
-      cost:   cost)
-      t.price = owner.share_price
-      t.save
-
-      #Пишем о транзакции в твиттер
-      TweetWorker.perform_async(
-      self.id, \
-        "@" + self.nickname + ' ' +\
-        t(:bought) + ' ' +\
-        t.count.to_s +  ' ' +\
-        t(:stocks_of) + ' ' +\
-        "@" + owner.nickname + ' ' +\
-        t(:on_twistock_com)\
-      )
-
-      # return self
-      self
     end
+
+    # теперь фигачим транзакцию
+    t = Transaction.create(
+    user:   self,
+    owner:  owner,
+    action: 'buy',
+    count:  count,
+    price:  owner.share_price,
+    cost:   cost)
+
+
+    #Пишем о транзакции в твиттер
+    TweetWorker.buy_message(t)
+
+    self
   end
 
   
@@ -240,18 +230,9 @@ class User < ActiveRecord::Base
       count:  count,
       price:  owner.share_price,
       cost:   cost)
-    t.price = owner.share_price
-    t.save
 
     #Пишем о транзакции в твиттер
-    TweetWorker.perform_async(
-      self.id, 
-      "@" + self.nickname + \
-      " sold " + t.count.to_s + \
-      " stocks of @" + owner.nickname + \
-      " on www.twistock.com #MonetizeSocialCapital"
-    )
-
+    TweetWorker.sell_message(t)
 
     self
   end
@@ -293,7 +274,7 @@ class User < ActiveRecord::Base
   end
 
   def update_share_price
-      self.update_stats
+      #self.update_stats
       
       User.transaction do
         prev_day_transaction = self.history.where("created_at <= :time", {:time => Time.now - 1.day}).last
