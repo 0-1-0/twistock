@@ -3,7 +3,7 @@
     -webkit-perspective: 1000;
     position: relative;
     width: 75%;
-    height: 290px;
+    height: 240px;
 }   
 .back, .front {
     position: absolute;
