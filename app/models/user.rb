@@ -43,6 +43,10 @@ class User < ActiveRecord::Base
     result
   end
 
+  def stocks_in_portfel(user)
+    portfel.where(:owner_id=>user.id).first.count
+  end
+
 
 
   def has_starting_stocks

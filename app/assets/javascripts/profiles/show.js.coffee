@@ -8,17 +8,17 @@ $(document).ready ->
   $('#buy_modal #buy_count').change (e) ->
     $('#buy_modal #buy_total_cost').val  $('#buy_modal #buy_count').val()*$('#buy_modal #buy_price').val()
 
-  #Онлайн-обновление суммы при продаже своих акций
-  $('#sell_retention_modal #sell_count').change (e) ->
-    $('#sell_retention_modal #sell_total_cost').val  $('#sell_retention_modal #sell_count').val()*$('#sell_retention_modal #sell_price').val()
-
+  
   #Онлайн-обновление суммы при продаже чужих акций
   $('#sell_modal #sell_count').change (e) ->
-    curr_total_count = $('#sell_modal #sell_total_count').val()
+    total_count = $('#sell_modal #sell_total_count').val()
     curr_count = $('#sell_modal #sell_count').val()
     base_price = $('#sell_modal #sell_base_price').val()
+    curr_delta = (total_count - curr_count)
+    d = Math.pow(curr_delta, 6)
 
-    $('#sell_modal #sell_total_cost').val  Math.round(curr_count*base_price*(curr_total_count-curr_count+2000.0)/2000.0)
+    $('#sell_modal #sell_price').val(base_price + d)
+    $('#sell_modal #sell_total_cost').val $('#sell_modal #sell_price').val()*$('#sell_modal #sell_count').val()
     
 
   setinterval_id = window.setInterval (->
