@@ -2,6 +2,7 @@
 //= require i18n/translations
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require jquery.dataTables.min
 //= require jscroll
 //= require bootstrap

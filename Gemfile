@@ -13,11 +13,14 @@ group :assets do
   gem 'therubyracer', :platform => :ruby
 
   gem 'uglifier', '>= 1.0.3'
-
+  #gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
   # Я не умею верстать
-  gem "twitter-bootstrap-rails", "2.0.1.0"
-  #gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+  gem "twitter-bootstrap-rails", "2.1.0"
 end
+
+
+
+
 
 gem 'jquery-rails'
 gem 'jquery-datatables-rails'
