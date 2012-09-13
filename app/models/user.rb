@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
 
 
   def self.create_from_twitter_oauth(auth)
-    User.create(  uid:      auth.uid.to_i,
+    user = User.create(  uid:      auth.uid.to_i,
                   token:    auth.credentials.token,
                   secret:   auth.credentials.secret,
                   name:     auth.info.name,
@@ -95,8 +95,12 @@ class User < ActiveRecord::Base
                   money:    User::START_MONEY,
                   shares:   User::START_SHARES,
                   retention_shares: User::START_RETENTION_SHARES
-                ).update_stats
+                )
+    user.update_stats
+    user
   end
+
+
 
   def self.create_from_twitter(nickname)
     begin
@@ -104,14 +108,16 @@ class User < ActiveRecord::Base
     rescue
       return nil
     end
-    User.create(  uid:      info.id,
+    user = User.create(  uid:      info.id,
                   name:     info.name,
                   nickname: info.screen_name,
                   avatar:   info.profile_image_url,
                   money:    User::START_MONEY,
                   shares:   User::START_SHARES,
                   retention_shares: User::START_RETENTION_SHARES
-                ).update_stats
+                )
+    user.update_stats
+    user
   end
 
   def self.try_to_find(uid)
@@ -125,6 +131,8 @@ class User < ActiveRecord::Base
   def available_shares
     shares - retention_shares
   end
+
+  
 
   def buy_shares(owner, count)
     raise "You cannot buy 0 shares" unless count > 0
