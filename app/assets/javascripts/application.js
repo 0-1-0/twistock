@@ -5,8 +5,6 @@
 //= require twitter/bootstrap
 //= require jquery.dataTables.min
 //= require jscroll
-//= require bootstrap
-//= require bootstrap-actions
 //= require DT_bootstrap
 //= require interactive
 
