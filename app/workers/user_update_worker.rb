@@ -7,7 +7,7 @@ class UserUpdateWorker
     user = User.find_by_nickname(nickname)
     
     if not user
-      break
+      return nil
     end
 
     #выбираем первого попавшегося и используем его твиттер для скачивания данных
@@ -21,11 +21,11 @@ class UserUpdateWorker
       twitter_user = twitter.user(nickname)
       timeline  = twitter.user_timeline(nickname, include_rts: 0, count: 200).select{|t| t.created_at > time_gate}   
     rescue Twitter::Error::NotFound
-      break
+      return nil
     rescue Twitter::Error::Unauthorized
-      break
+      return nil
     rescue Twitter::Error::BadRequest
-      retry
+      return nil
     rescue Twitter::Error::ServiceUnavailable
       sleep(60*5)
       retry
@@ -36,7 +36,7 @@ class UserUpdateWorker
       user.base_price  = User::PROTECTED_PRICE
       user.save
       
-      break
+      return user
     end
 
     begin
@@ -62,6 +62,6 @@ class UserUpdateWorker
     user.base_price  = (a**6 + b**6 + c**6).round
 
     user.save
-
+    user
   end
 end
