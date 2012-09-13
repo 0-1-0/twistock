@@ -27,6 +27,7 @@ $(document).ready ->
         $(".info").html(I18n.t('one_stock_price') + ': $' + data.user.share_price.toMoney())
         $('#buy_modal #buy_price').val data.user.share_price
         $("#buy_modal #buy_count").val Math.round(0.9*current_money/data.user.share_price) 
+        $('#buy_modal #buy_total_cost').val $('#buy_modal #buy_price').val()*$("#buy_modal #buy_count").val()
         clearInterval(setinterval_id);
         
 
