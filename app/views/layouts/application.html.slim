@@ -33,6 +33,13 @@ html lang="en"
 
 
   body
+    #promo_modal.modal.fade
+      .modal-header
+        a.close data-dismiss="modal" x
+        h3.center =t(:how_it_works)
+        .modal-body = render :partial=>'welcome/promo'
+        .modal-footer
+          a.btn.btn-small data-dismiss="modal"=t(:close)
 
 
     .navbar.navbar-fixed-top.navbar-inverse
@@ -58,14 +65,6 @@ html lang="en"
 
 
     .container
-      #promo_modal.modal.fade
-        .modal-header
-          a.close data-dismiss="modal" x
-          h3.center =t(:how_it_works)
-          .modal-body = render :partial=>'welcome/promo'
-          .modal-footer
-            a.btn.btn-small data-dismiss="modal"=t(:close)
-
       .row
         - if current_user
           .span5          
@@ -93,6 +92,9 @@ html lang="en"
 
     /Init tooltips with right locale
     = javascript_include_tag "tooltips"
+
+    javascript:
+      $('.modal').hide()
 
     =yield :javascripts
 
