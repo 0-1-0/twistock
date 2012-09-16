@@ -17,11 +17,10 @@ section
               a[href="/profiles/#{user.nickname}" ] #{user.name.split[0]} 
           tr
             td[colspan=2]
-              small= render :partial=>'profiles/price_dynamics', :locals=>{:user=>user, :size=>'200x50'}
+              small= render :partial=>'profiles/price_dynamics', :locals=>{:user=>user, :size=>'200x98'}
           tr
             td[colspan=2]
               .center
-                br
                 .btn=link_to  t(:buy), '/profiles/' + user.nickname
         
         
