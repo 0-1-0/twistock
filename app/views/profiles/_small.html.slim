@@ -34,7 +34,7 @@ section
               h3 = number_to_currency user.share_price, :precision => 0 
           tr
             td[colspan=2]
-              a[href="/profiles/#{user.nickname}"] @#{user.nickname[1..15]} 
+              a[href="/profiles/#{user.nickname}"] @#{user.nickname[0..14]} 
           tr 
             td[colspan=2]       
               small= render :partial=>'profiles/popularity', :locals=>{:user=>user, :active=>false}
