@@ -348,7 +348,7 @@ class User < ActiveRecord::Base
     end
 
     min_price_value = price_data.min
-    result = []
+    result = [min_price_value]
     price_data.each do |d|
       if d > 0
         result += [d - min_price_value]

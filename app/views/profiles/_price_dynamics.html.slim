@@ -1,7 +1,7 @@
 .center=t :price_dynamics
 - data = user.price_dynamics_data
 - lc = GoogleChart::LineChart.new(size, "", false)
-- lc.axis :y, :range => [data.min, data.max], :font_size => 10, :alignment => :center
+- lc.axis :y, :range => [data.min+data[0], data.max+data[0]], :font_size => 10, :alignment => :center
 - lc.show_legend = false
-- lc.data "price", data, '51c1ee'
+- lc.data "price", data[1..-1], '51c1ee'
 = image_tag lc.to_url
