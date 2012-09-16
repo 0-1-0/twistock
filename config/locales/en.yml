@@ -5,7 +5,7 @@ en:
     in Twitter-accounts. By buying and selling their stocks, 
     you can earn virtual money and then spend it on the real goods in Twistock Store.
 
-  search_user_by_nickname: 'search user by nickname' 
+  search_user_by_nickname: 'Search user by nickname' 
 
 
   bought: "bought"
@@ -17,7 +17,7 @@ en:
   celebrities_tooltip: 'Celebrities in Twitter.  Become a co-owner of your idol.'
 
   politicians: 'Politicians'
-  politicians_toolti: 'The brightest politicians.'
+  politicians_tooltip: 'The brightest politicians.'
 
   user_not_found: 'User not found.'
   go_home: 'Go home.'
