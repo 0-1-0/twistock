@@ -1,4 +1,6 @@
 Twitterexchange::Application.routes.draw do
+  get "settings/twitter_translation"
+
   resources :main_page_streams
 
   get "robot/dashboard"

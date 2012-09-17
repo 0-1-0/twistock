@@ -11,6 +11,12 @@ ru:
   celebrities: 'Знаменитости'
   celebrities_tooltip: 'Знаменитости в Twitter. Стать их совладельцем очень просто. '
 
+  twitter_translation: 'Трансляция в твиттер'
+  _on: 'Вкл'
+  _off: 'Выкл'
+
+  english: 'Английский'
+  russian: 'Русский'
 
   bought: 'только что купил'
   sold: 'только что продал'

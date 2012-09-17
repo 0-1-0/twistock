@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120909182901) do
+ActiveRecord::Schema.define(:version => 20120917215740) do
 
   create_table "block_of_shares", :force => true do |t|
     t.integer  "owner_id"
@@ -92,20 +92,21 @@ ActiveRecord::Schema.define(:version => 20120909182901) do
     t.string   "name"
     t.string   "nickname"
     t.string   "avatar"
-    t.integer  "money",            :limit => 8
-    t.datetime "created_at",                                       :null => false
-    t.datetime "updated_at",                                       :null => false
+    t.integer  "money",               :limit => 8
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
     t.integer  "shares"
     t.integer  "retention_shares"
-    t.integer  "share_price",      :limit => 8
+    t.integer  "share_price",         :limit => 8
     t.datetime "last_update"
     t.integer  "base_price"
     t.integer  "hour_delta_price"
-    t.boolean  "is_admin",                      :default => false
+    t.boolean  "is_admin",                         :default => false
     t.string   "token"
     t.string   "secret"
-    t.boolean  "acivated",                      :default => false
-    t.string   "locale",                        :default => "en"
+    t.boolean  "acivated",                         :default => false
+    t.string   "locale",                           :default => "en"
+    t.boolean  "twitter_translation",              :default => true
   end
 
   add_index "users", ["name"], :name => "index_users_on_name", :unique => true

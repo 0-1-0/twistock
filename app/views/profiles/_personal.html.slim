@@ -109,10 +109,33 @@ ul.nav.nav-list
     .btn.btn-small= link_to t(:buy_real_for_virtual), '/products/showcase'
   li
     .nav-header
+      i.icon-globe
       =t(:change_language)
     .btn-group
-      .btn.btn-small=link_to 'English', '/profiles/change_language?locale=en'
-      .btn.btn-small=link_to 'Русский', '/profiles/change_language?locale=ru'
+      - if I18n.locale.to_s.downcase == User::EN_LOCALE    
+        .btn.btn-small.disabled =t :english
+        .btn.btn-small
+          =link_to t(:russian), '/profiles/change_language?locale=ru'
+      - else
+        .btn.btn-small
+          =link_to t(:english), '/profiles/change_language?locale=en'
+        .btn.btn-small.disabled =t :russian
+  li
+    .nav-header
+      i.icon-retweet
+      =t :twitter_translation
+    .btn-group
+      - if current_user.twitter_translation?
+        .btn.btn-small.disabled 
+          =t :_on
+        .btn.btn-small 
+          =link_to t(:_off), '/settings/twitter_translation?off=true'
+      - else
+        .btn.btn-small 
+          =link_to t(:_on), '/settings/twitter_translation?on=true'
+        .btn.btn-small.disabled 
+          =t :_off
+
   li
     br
   li

@@ -19,6 +19,9 @@ class User < ActiveRecord::Base
   POPULARITY_UPDATE_DELAY = 2*7*24*60*60
   ANALYSES_UPDATE_DELAY   = 6.hours
 
+  EN_LOCALE = 'en'
+  RU_LOCALE = 'ru'
+
   PROTECTED_PRICE = 1
 
   def to_param
@@ -196,7 +199,9 @@ class User < ActiveRecord::Base
 
 
     #Пишем о транзакции в твиттер
-    TweetWorker.buy_message(t)
+    if twitter_translation?
+      TweetWorker.buy_message(t)
+    end
 
     self
   end
@@ -223,6 +228,7 @@ class User < ActiveRecord::Base
         bos.save
       end
 
+
       #Важен порядок следующих 3 операций!
       owner.update_share_price
       owner.reload
@@ -243,7 +249,9 @@ class User < ActiveRecord::Base
       cost:   cost)
 
     #Пишем о транзакции в твиттер
-    TweetWorker.sell_message(t)
+    if twitter_translation?
+      TweetWorker.sell_message(t)
+    end
 
     self
   end
