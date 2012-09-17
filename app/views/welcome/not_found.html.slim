@@ -1,8 +1,9 @@
 .center
-  .block.well
-    h2
-      =t :user_not_found
-      
-    h2= link_to t(:go_home), root_path
+  .hero-unit.block.well
+    .block.well
+      h2
+        =t :user_not_found
+        
+      h2= link_to t(:go_home), root_path
 
-  =image_tag '/assets/biglogo.png', :class=>'img-polaroid'
+    #mobile-logo=image_tag '/assets/big_logo.png', :class=>'img-polaroid'

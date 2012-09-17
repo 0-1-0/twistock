@@ -128,3 +128,7 @@ en:
   stock_holders_tooltip: 'Look who bought your stocks.'
   search-query_tooltip: 'Here you can find users by their nicknames.'
 
+  sorry: >
+    Sorry, but Twistock is currently available in the web version only.
+    Invest in twitter accounts via laptop.
+
