@@ -215,9 +215,8 @@ class User < ActiveRecord::Base
       raise "You have not this shares" unless bos = self.portfel.where(owner_id: owner.id).first
       raise "You have not this shares" if bos.count < count
 
-      owner.shares  += count
+      #owner.shares  += count
       bos.count     -= count
-
       if bos.count == 0
         bos.delete
       else
@@ -226,6 +225,8 @@ class User < ActiveRecord::Base
 
       #Важен порядок следующих 3 операций!
       owner.update_share_price
+      owner.reload
+
       cost = count*owner.share_price
       self.money += cost
 
