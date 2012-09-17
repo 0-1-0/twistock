@@ -50,11 +50,8 @@ end
 
 .well.block
   .row
-    .span2.avatar= image_tag @user.profile_image
-    .span5
-
-      a[target='blank' href='http://twitter.com/#{@user.nickname}'] 
-        =t :twitter_profile
+    /.span2.avatar= image_tag @user.profile_image
+    .span6.micro-offset
       - if signed_in?
         .btn-group.pull-right
           |&nbsp
@@ -71,6 +68,7 @@ end
               a.btn.btn-large.disabled 
                 =t(:sell)
       .page-header
+        .avatar.pull-left= image_tag @user.profile_image
         h1
           | @#{@user.nickname}
         h1
@@ -79,6 +77,9 @@ end
             =number_to_currency @user.share_price, :precision => 0
         h4= @user.name
 
+        a.micro-offset[target='blank' href='http://twitter.com/#{@user.nickname}'] 
+          =t :twitter_profile
+
         / - if current_user and current_user.is_admin?
         /   = simple_form_for 'buy', url: buy_followers_shares_path(current_user), html: { class: 'form-horizontal' } do |f|
         /       = f.input :target_user, as: :hidden, input_html: {value: @user.nickname}
@@ -86,7 +87,7 @@ end
 
       
   .row
-    .span5.micro-offset = render :partial=>'profiles/popularity', :locals=>{:user=>@user, :active=>'true'}
+    .span5.offset1 = render :partial=>'profiles/popularity', :locals=>{:user=>@user, :active=>'true'}
   .row
     .span5.micro-offset = render :partial=>'profiles/price_dynamics', :locals=>{:user=>@user, :size=>'500x100'}
 
