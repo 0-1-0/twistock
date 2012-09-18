@@ -289,7 +289,7 @@ class User < ActiveRecord::Base
 
   def popularity_stocks_coefficient(count=0)
     d = Math::log10(2*(self.my_shares.sum(:count) + count) + 10)
-    d = d**6
+    d = d**2
 
     return d
   end
