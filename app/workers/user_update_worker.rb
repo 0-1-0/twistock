@@ -1,4 +1,6 @@
 class UserUpdateWorker
+  RETRY_DELAY = 60*5
+
   include Sidekiq::Worker
   sidekiq_options :queue => :user_updates
 
@@ -30,7 +32,8 @@ class UserUpdateWorker
       return nil
     rescue Twitter::Error::Unauthorized
       logger.info 'Unauthorized'
-      return nil
+      sleep(RETRY_DELAY)
+      retry
     rescue Twitter::Error::BadRequest
       logger.info 'Bad request'
       return nil
@@ -39,7 +42,7 @@ class UserUpdateWorker
       return nil
     rescue Twitter::Error::ServiceUnavailable
       logger.info 'Service unavailible'
-      sleep(60*5)
+      sleep(RETRY_DELAY)
       retry
     end   
 
@@ -52,15 +55,12 @@ class UserUpdateWorker
       return user
     end
 
-    begin
-      rt  = timeline.inject(0){|a, b| a += b.retweet_count}
-      cnt = timeline.count
-      flw = twitter_user.followers_count
+    rt  = timeline.inject(0){|a, b| a += b.retweet_count}
+    cnt = timeline.count
+    flw = twitter_user.followers_count
 
-      pop = user.popularity_stocks_coefficient
-    rescue
-      rt, cnt, flw, pop = 0, 0, 0, 0
-    end
+    pop = user.popularity_stocks_coefficient
+   
 
     rt, cnt, flw = rt.to_f, cnt.to_f, flw.to_f
 

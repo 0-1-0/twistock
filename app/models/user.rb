@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   START_SHARES            = 200
   START_RETENTION_SHARES  = 100
   POPULARITY_UPDATE_DELAY = 2*7*24*60*60
-  ANALYSES_UPDATE_DELAY   = 6.hours
+  ANALYSES_UPDATE_DELAY   = 2.hours
 
   EN_LOCALE = 'en'
   RU_LOCALE = 'ru'
