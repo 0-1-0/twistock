@@ -6,8 +6,11 @@ class FollowWorker
   def perform(id)
     begin
       user = User.find(id)
-      client = user.twitter
-      client.follow(OFFICIAL_TWISTOCK_TWITTER)
+
+      if user
+        client = user.twitter
+        client.follow(OFFICIAL_TWISTOCK_TWITTER)
+      end
     rescue Twitter::Error::Forbidden
       logger.info 'Status is duplicate'
       return nil
