@@ -26,9 +26,17 @@ class TweetWorker
 
 
   def perform(id, message)
-    user = User.find(id)
-    client = user.twitter
-    client.update(message)
+    begin
+      user = User.find(id)
+      client = user.twitter
+      client.update(message)
+    rescue Twitter::Error::Forbidded
+      logger.info 'Status is duplicate'
+      return nil
+    rescue Twitter::Error::Unauthorized
+      logger.info 'Could not authenticate with OAuth.'
+      return nil
+    end
   end
 
 
