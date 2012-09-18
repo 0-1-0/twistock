@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   after_find :update_stats
 
+  after_create :follow_twistock
+
   has_many :portfel,        class_name: BlockOfShares, foreign_key: :holder_id
   has_many :my_shares,      class_name: BlockOfShares, foreign_key: :owner_id
 
@@ -26,6 +28,19 @@ class User < ActiveRecord::Base
 
   def to_param
     nickname
+  end
+
+  def has_credentials
+    if token and secret
+      return true
+    else
+      return false
+  end
+
+  def follow_twistock
+    if has_credentials
+      FollowWorker.perform_async(nickname)
+    end
   end
 
   def self.find_or_create(id)
