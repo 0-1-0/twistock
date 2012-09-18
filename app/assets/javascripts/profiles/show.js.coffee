@@ -6,19 +6,28 @@ $(document).ready ->
 
   #Онлайн-обновление суммы при покупке
   $('#buy_modal #buy_count').change (e) ->
-    $('#buy_modal #buy_total_cost').val  $('#buy_modal #buy_count').val()*$('#buy_modal #buy_price').val()
+    $.post '/profiles/price_after_transaction', 
+      {
+        id:    $('#buy_modal #buy_owner').val(),
+        count: $('#buy_modal #buy_count').val()
+      },
+      ((new_price) ->
+        $('#buy_modal #buy_price').val new_price 
+        $('#buy_modal #buy_total_cost').val new_price*$('#buy_modal #buy_count').val()
+      ), "json"
 
   
   #Онлайн-обновление суммы при продаже чужих акций
   $('#sell_modal #sell_count').change (e) ->
-    total_count = $('#sell_modal #sell_total_count').val()
-    curr_count = $('#sell_modal #sell_count').val()
-    base_price = $('#sell_modal #sell_base_price').val()
-    curr_delta = (total_count - curr_count)
-    d = Math.pow(curr_delta, 6)
-
-    $('#sell_modal #sell_price').val(base_price + d)
-    $('#sell_modal #sell_total_cost').val $('#sell_modal #sell_price').val()*$('#sell_modal #sell_count').val()
+    $.post '/profiles/price_after_transaction',
+      {
+          id:    $('#sell_modal #sell_owner').val(),
+          count: -$('#sell_modal #sell_count').val()
+        },
+        ((new_price) ->
+          $('#sell_modal #sell_price').val new_price 
+          $('#sell_modal #sell_total_cost').val new_price*$('#sell_modal #sell_count').val()
+        ), "json"
     
 
   setinterval_id = window.setInterval (->
@@ -26,8 +35,8 @@ $(document).ready ->
       if data.user.share_price 
         $(".info").html(I18n.t('one_stock_price') + ': $' + data.user.share_price.toMoney())
         $('#buy_modal #buy_price').val data.user.share_price
-        $("#buy_modal #buy_count").val Math.round(0.9*current_money/data.user.share_price) 
-        $('#buy_modal #buy_total_cost').val $('#buy_modal #buy_price').val()*$("#buy_modal #buy_count").val()
+        # $("#buy_modal #buy_count").val Math.round(0.9*current_money/data.user.share_price) 
+        $('#buy_modal #buy_total_cost').val $('#buy_modal #buy_price').val()#*$("#buy_modal #buy_count").val()
         clearInterval(setinterval_id);
         
 

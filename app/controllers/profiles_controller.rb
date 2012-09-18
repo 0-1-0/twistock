@@ -27,6 +27,27 @@ class ProfilesController < ApplicationController
     
   end
 
+
+
+  def price_after_transaction
+    @answer = 0
+
+    user = User.find_or_create(params[:id])
+    count = params[:count].to_i
+
+    if user and count
+      @answer = user.price_after_transaction(count)
+      @answer = @answer.round
+    end
+
+    respond_to do |format|
+      format.json{
+        render :json => @answer
+      }
+    end
+  end
+
+
   def search
     redirect_to profile_path(params[:nickname])
   end

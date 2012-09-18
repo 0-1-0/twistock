@@ -159,16 +159,15 @@ class User < ActiveRecord::Base
       raise "Stocks aren't ready for selling yet" unless owner.share_price
       raise "You cannot buy shares with zero price" if owner.share_price == 0
 
-      cost = count*owner.share_price
-      price = owner.share_price
 
-      # проверяем на валидность
-      raise "There are no #{count} shares"   unless owner.available_shares >= count
-      raise "You haven't enough money"       unless self.money >= cost
+      price = owner.price_after_transaction(count)
+      cost = count*price
+
+      raise "You haven't enough money"       unless self.money >= cost      
 
       # проводим операцию
-      owner.shares  -= count
-      self.money    -= cost
+      #owner.shares  -= count
+      self.money   -= cost
       if bos = self.portfel.where(owner_id: owner.id).first
         bos.count += count
         bos.save
@@ -177,12 +176,12 @@ class User < ActiveRecord::Base
       end
 
       owner.update_share_price
-
+      owner.reload       
       #доп эмиссия (если нужно)
-      if owner.available_shares < User::START_SHARES
-        owner.shares *= 2
-        owner.save
-      end      
+      # if owner.available_shares < User::START_SHARES
+      #   owner.shares *= 2
+      #   owner.save
+      # end      
 
       owner.save!
       self.save!
@@ -288,8 +287,15 @@ class User < ActiveRecord::Base
     self
   end
 
-  def popularity_stocks_coefficient
-    Math::log10(100*self.my_shares.sum(:count) + 10)
+  def popularity_stocks_coefficient(count=0)
+    d = Math::log10(2*(self.my_shares.sum(:count) + count) + 10)
+    d = d**6
+
+    return d
+  end
+
+  def price_after_transaction(count)
+    return base_price + popularity_stocks_coefficient(count)
   end
 
   def update_share_price
@@ -305,8 +311,7 @@ class User < ActiveRecord::Base
         end         
 
         if self.base_price
-          d = popularity_stocks_coefficient
-          new_price = self.base_price + d**6
+          new_price = self.base_price + popularity_stocks_coefficient
         else
           new_price = self.share_price
         end

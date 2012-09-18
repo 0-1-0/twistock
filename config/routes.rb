@@ -35,6 +35,7 @@ Twitterexchange::Application.routes.draw do
       post 'search'
       post 'show'
       get  'change_language'
+      post 'price_after_transaction'
     end
   end
 

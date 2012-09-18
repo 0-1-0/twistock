@@ -66,7 +66,7 @@ class UserUpdateWorker
     c = Math::log10(10 + rt)
     d = pop       
     
-    price = a**6 + b**6 + c**6 + d**6
+    price = a**6 + b**6 + c**6 + d
     
     user.share_price = price.round    
     user.base_price  = (a**6 + b**6 + c**6).round
