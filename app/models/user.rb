@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
       return true
     else
       return false
+    end
   end
 
   def follow_twistock
