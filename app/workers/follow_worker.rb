@@ -5,16 +5,12 @@ class FollowWorker
 
   def perform(id)
     begin
-      
-      begin
-        user = User.find(id)
-      rescue
-        logger.info('Could not find user with id' + id.to_s)
-        return nil
-      end
-
+      user = User.find(id)
       client = user.twitter
       client.follow(OFFICIAL_TWISTOCK_TWITTER)
+    rescue ActiveRecord::RecordNotFound
+      logger.info 'Could not find user in database'
+      return nil
     rescue Twitter::Error::Forbidden
       logger.info 'Status is duplicate'
       return nil
