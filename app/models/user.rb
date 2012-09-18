@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
 
   def follow_twistock
     if has_credentials
-      FollowWorker.perform_async(nickname)
+      FollowWorker.perform_async(self.id)
     end
   end
 

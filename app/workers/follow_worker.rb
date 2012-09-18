@@ -3,7 +3,7 @@ class FollowWorker
 
   include Sidekiq::Worker
 
-  def perform(id, message)
+  def perform(id)
     begin
       user = User.find(id)
       client = user.twitter
