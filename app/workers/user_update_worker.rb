@@ -37,7 +37,7 @@ class UserUpdateWorker
     rescue Twitter::Error::BadRequest
       logger.info 'Bad request'
       return nil
-    rescue Twitter::Error::Forbidded
+    rescue Twitter::Error::Forbidden
       logger.info 'Forbidden'
       return nil
     rescue Twitter::Error::ServiceUnavailable

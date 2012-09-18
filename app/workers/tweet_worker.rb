@@ -30,7 +30,7 @@ class TweetWorker
       user = User.find(id)
       client = user.twitter
       client.update(message)
-    rescue Twitter::Error::Forbidded
+    rescue Twitter::Error::Forbidden
       logger.info 'Status is duplicate'
       return nil
     rescue Twitter::Error::Unauthorized
