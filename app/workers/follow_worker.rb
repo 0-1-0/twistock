@@ -7,7 +7,7 @@ class FollowWorker
     begin
       user = User.find(id)
       client = user.twitter
-      client.folow(OFFICIAL_TWISTOCK_TWITTER)
+      client.follow(OFFICIAL_TWISTOCK_TWITTER)
     rescue Twitter::Error::Forbidden
       logger.info 'Status is duplicate'
       return nil
