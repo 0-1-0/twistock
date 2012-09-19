@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   START_RETENTION_SHARES  = 100
   POPULARITY_UPDATE_DELAY = 2*7*24*60*60
   ANALYSES_UPDATE_DELAY   = 2.hours
+  POPULARITY_POWER        = 6
 
   EN_LOCALE = 'en'
   RU_LOCALE = 'ru'
@@ -305,7 +306,7 @@ class User < ActiveRecord::Base
 
   def popularity_stocks_coefficient(count=0)
     d = Math::log10(2*(self.my_shares.sum(:count) + count) + 10)
-    d = d**2
+    d = d**POPULARITY_POWER
 
     return d
   end
