@@ -1,7 +1,6 @@
 table.table.table-bordered
   tr
     th Full Name
-    th Product Name
     th status
     th cost
     th email
@@ -10,7 +9,6 @@ table.table.table-bordered
   - @product_invoices.each do |product_invoice|
     tr
       td = product_invoice.full_name
-      td = product_invoice.product.name
       td = product_invoice.status
       td = product_invoice.total_cost
       td = product_invoice.email
