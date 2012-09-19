@@ -7,7 +7,7 @@ common: &common
 development:
   <<: *common
   database: twitterexchange_dev
-  pool: 26
+  pool: 15
 
 test:
   <<: *common
@@ -19,4 +19,4 @@ production:
   username: twex 
   password: hello_k1tt3 
   database: twex1 
-  pool: 26
+  pool: 15
