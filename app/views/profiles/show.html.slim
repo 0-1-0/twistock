@@ -30,6 +30,11 @@ end
   javascript:
     current_money='#{current_user.money}';
 
+    owner = {
+      base_price: #{@user.base_price},
+      shares_count: #{@user.my_shares.sum(:count)}
+    };
+
   #sell_modal.modal.fade
     .modal-header
       a.close data-dismiss="modal" x
@@ -39,9 +44,7 @@ end
         = f.input :owner, as: :hidden, input_html: {value: @user.nickname}
         = f.input :origin, as: :hidden, input_html: {value: @user.nickname}
         = f.input :count, as: :integer, input_html: {value:  current_user.stocks_in_portfel(@user)}
-        = f.input :total_count, as: :hidden, input_html: {value: @user.my_shares.sum(:count)}
         = f.input :price, as: :hidden, input_html: {value: @user.share_price.to_i}
-        = f.input :base_price, as: :hidden, input_html: {value: @user.base_price}
         = f.input :total_cost, :disabled => true, input_html: {value: @user.share_price.to_i*current_user.stocks_in_portfel(@user)}
       .modal-footer
         a.btn.btn-small data-dismiss="modal"=t(:close)
