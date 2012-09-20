@@ -155,7 +155,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_nickname(nickname)
-    User.where("nickname = '#{nickname}'").first
+    User.where("upper(nickname) = upper('#{nickname})'").first
   end
 
   def available_shares
