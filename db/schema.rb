@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(:version => 20120917215740) do
     t.boolean  "twitter_translation",              :default => true
   end
 
-  add_index "users", ["name"], :name => "index_users_on_name", :unique => true
+  add_index "users", ["name"], :name => "index_users_on_name"
   add_index "users", ["nickname"], :name => "index_users_on_nickname", :unique => true
   add_index "users", ["uid"], :name => "index_users_on_uid", :unique => true
 
