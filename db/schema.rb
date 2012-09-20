@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120917215740) do
+ActiveRecord::Schema.define(:version => 20120920045552) do
 
   create_table "block_of_shares", :force => true do |t|
     t.integer  "owner_id"
@@ -109,7 +109,6 @@ ActiveRecord::Schema.define(:version => 20120917215740) do
     t.boolean  "twitter_translation",              :default => true
   end
 
-  add_index "users", ["name"], :name => "index_users_on_name"
   add_index "users", ["nickname"], :name => "index_users_on_nickname", :unique => true
   add_index "users", ["uid"], :name => "index_users_on_uid", :unique => true
 
