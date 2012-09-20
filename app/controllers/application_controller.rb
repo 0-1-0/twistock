@@ -13,11 +13,15 @@ class ApplicationController < ActionController::Base
     #http_accept_language.user_preferred_languages # => [ 'nl-NL', 'nl-BE', 'nl', 'en-US', 'en' ]
     #available = %w{en ru}
 
-    I18n.locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+   
 
-    if signed_in?
-      if current_user.locale
-        I18n.locale = current_user.locale
+    if signed_in? and current_user.locale
+      I18n.locale = current_user.locale
+    else
+      begin
+        I18n.locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+      rescue
+        I18n.locale = User::EN_LOCALE
       end
     end
 
