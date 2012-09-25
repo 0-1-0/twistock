@@ -30,3 +30,9 @@
 /reassets.sh
 
 /shared
+
+# Ignore files created by sublime
+/*sublime*
+
+# Ignore Mac trashes
+/.DS_Store
