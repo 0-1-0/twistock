@@ -55,21 +55,23 @@ class UserUpdateWorker
       return user
     end
 
-    rt  = timeline.inject(0){|a, b| a += b.retweet_count}
-    cnt = timeline.count
-    flw = twitter_user.followers_count
-
-    pop = user.popularity_stocks_coefficient
+    user.tweets_num    = timeline.count
+    user.retweets_num  = timeline.inject(0){|a, b| a += b.retweet_count}
+    user.followers_num = twitter_user.followers_count
+    user.pop           = user.popularity
+    user.save
    
 
-    rt, cnt, flw = rt.to_f, cnt.to_f, flw.to_f
+    rt   = user.retweets_num.to_f
+    cnt  = user.tweets_num.to_f
+    flw  = user.followers_num.to_f
+    pop  = user.popularity_stocks_coefficient
 
     a = Math::log10(10 + 100*rt/(cnt+1))
     b = Math::log10(10 + flw)
-    c = Math::log10(10 + rt)
-    d = pop       
+    c = Math::log10(10 + rt)     
     
-    price = a**6 + b**6 + c**6 + d
+    price = a**6 + b**6 + c**6 + pop
     
     user.share_price = price.round    
     user.base_price  = (a**6 + b**6 + c**6).round

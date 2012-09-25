@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120920045552) do
+ActiveRecord::Schema.define(:version => 20120925180839) do
 
   create_table "block_of_shares", :force => true do |t|
     t.integer  "owner_id"
@@ -107,6 +107,10 @@ ActiveRecord::Schema.define(:version => 20120920045552) do
     t.boolean  "acivated",                         :default => false
     t.string   "locale",                           :default => "en"
     t.boolean  "twitter_translation",              :default => true
+    t.integer  "tweets_num",                       :default => 0
+    t.integer  "retweets_num",                     :default => 0
+    t.integer  "followers_num",                    :default => 0
+    t.integer  "pop",                              :default => 0
   end
 
   add_index "users", ["nickname"], :name => "index_users_on_nickname", :unique => true
