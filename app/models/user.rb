@@ -73,8 +73,6 @@ class User < ActiveRecord::Base
     end
   end
 
-
-
   def has_starting_stocks
     if self.retention_shares and self.share_price
       return (self.retention_shares > 0 and self.share_price > 0)
@@ -87,8 +85,6 @@ class User < ActiveRecord::Base
     self.sell_retention(self.retention_shares)
   end
 
-
-  
 
   def profile_image
     return self.avatar.sub("_normal", "")

@@ -18,10 +18,6 @@ group :assets do
   gem "twitter-bootstrap-rails", "2.1.0"
 end
 
-
-
-
-
 gem 'jquery-rails'
 gem 'jquery-datatables-rails'
 

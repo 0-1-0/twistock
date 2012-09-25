@@ -30,3 +30,10 @@
 /reassets.sh
 
 /shared
+
+# added by ffloyd. Repo cleanup
+Capfile
+dump.rdbg
+Procfile
+*.sh
+twistock.sublime-workspace
