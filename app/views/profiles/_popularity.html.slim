@@ -7,17 +7,17 @@
   div[class='progress progress-danger progress-striped progress-bar #{active ? 'active': ''}']
     .bar[style="width: 25%"]
 
-- if pr >= 2 and pr < 10
+- if pr >= 2 and pr < 5
   .center=t :medium
   div[class='progress progress-warning progress-striped progress-bar #{active ? 'active': ''}']
     .bar[style="width: 35%"]
 
-- if pr >= 10 and pr < 50
+- if pr >= 5 and pr < 10
   .center=t :high
   div[class='progress progress-alert progress-striped progress-bar #{active ? 'active': ''}']
     .bar[style="width: 50%"]
 
-- if pr > 50
+- if pr > 10
   .center=t :superstar
   div[class='progress progress-success progress-striped progress-bar #{active ? 'active': ''}']
-    .bar[style="width: 80%"]
+    .bar[style="width: 100%"]
