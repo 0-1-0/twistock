@@ -84,7 +84,9 @@ en:
 
   store:
     title: 'TWISTOCK STORE'
-    caption: 'Spend your social capital on great things - try them out and tell others'
+    caption: >
+      Unfortunately, the prices for the goods are way too high. 
+      As soon as the test period is over, we will lower them.
 
   random_person: 'Random person'
   random_person_tooltip: ''
@@ -117,7 +119,8 @@ en:
 
   sign_out: 'Sign out'
 
-  store_header: 'Spend your social capital on great things - try them out and tell others.'
+  store_header: 'Unfortunately, the prices for the goods are way too high.'
+  store_header2: 'As soon as the test period is over, we will lower them.'
 
   back_to_main_page: 'Back to main page'
 

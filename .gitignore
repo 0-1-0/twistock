@@ -31,9 +31,8 @@
 
 /shared
 
-# added by ffloyd. Repo cleanup
-Capfile
-dump.rdbg
-Procfile
-*.sh
-twistock.sublime-workspace
+# Ignore files created by sublime
+/*sublime*
+
+# Ignore Mac trashes
+/.DS_Store
