@@ -1,0 +1,14 @@
+.well.block 
+  h1 Top Tweets
+
+#top-tweets
+  ul.thumbnails
+    - User.order('best_tweet_retweets_num DESC').limit(20).each do |user|
+      li.well.block.blue-border-heavy
+        .thumbnail.top-tweet
+          h3=user.nickname
+          p=user.best_tweet_text
+          h5
+            |retweets::
+            =user.best_tweet_retweets_num
+          h5=I18n.l(user.best_updated)

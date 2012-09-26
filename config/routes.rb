@@ -1,4 +1,6 @@
 Twitterexchange::Application.routes.draw do
+  get "tjournal/top_tweets"
+
   get "settings/twitter_translation"
 
   resources :main_page_streams
