@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120926175654) do
+ActiveRecord::Schema.define(:version => 20120926184434) do
 
   create_table "block_of_shares", :force => true do |t|
     t.integer  "owner_id"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(:version => 20120926175654) do
     t.datetime "best_updated"
   end
 
+  add_index "users", ["best_tweet_retweets_num"], :name => "index_users_on_best_tweet_retweets_num"
   add_index "users", ["nickname"], :name => "index_users_on_nickname", :unique => true
   add_index "users", ["uid"], :name => "index_users_on_uid", :unique => true
 
