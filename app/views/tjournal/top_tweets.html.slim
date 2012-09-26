@@ -15,9 +15,9 @@
                   small=user.name 
           br
           p=user.best_tweet_text
-          .pull-right
-            h5
-              =user.best_tweet_retweets_num
-              |  RT
-            h5
-              =((Time.now - user.best_updated)/1.hour).to_i
+          h5.pull-left
+            =user.best_tweet_retweets_num
+            |  RT
+          h5.pull-right
+            =((Time.now - user.best_updated)/1.hour).to_i
+            |  hours ago
