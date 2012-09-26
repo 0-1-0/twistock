@@ -60,6 +60,28 @@ class UserUpdateWorker
     user.followers_num = twitter_user.followers_count
     user.pop           = user.popularity
     user.save
+    user.reload
+
+    #Определяем самый популярный твит пользователя
+    max_tweet_num  = -1
+    max_tweet_text = ''
+
+    timeline.each do |tweet|
+      if tweet.retweet_count > max_tweet_num
+        #logger.info tweet.retweet_count
+        max_tweet_num  = tweet.retweet_count
+        max_tweet_text = tweet.text
+      end 
+    end
+
+    if (user.best_tweet_retweets_num < max_tweet_num) or user.best_tweet_obsolete
+      user.best_tweet_retweets_num = max_tweet_num
+      user.best_tweet_text         = max_tweet_text
+      user.best_updated            = Time.now
+
+      user.save
+    end
+
    
 
     rt   = user.retweets_num.to_f

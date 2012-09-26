@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120925180839) do
+ActiveRecord::Schema.define(:version => 20120926175654) do
 
   create_table "block_of_shares", :force => true do |t|
     t.integer  "owner_id"
@@ -92,25 +92,28 @@ ActiveRecord::Schema.define(:version => 20120925180839) do
     t.string   "name"
     t.string   "nickname"
     t.string   "avatar"
-    t.integer  "money",               :limit => 8
-    t.datetime "created_at",                                          :null => false
-    t.datetime "updated_at",                                          :null => false
+    t.integer  "money",                   :limit => 8
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
     t.integer  "shares"
     t.integer  "retention_shares"
-    t.integer  "share_price",         :limit => 8
+    t.integer  "share_price",             :limit => 8
     t.datetime "last_update"
     t.integer  "base_price"
     t.integer  "hour_delta_price"
-    t.boolean  "is_admin",                         :default => false
+    t.boolean  "is_admin",                             :default => false
     t.string   "token"
     t.string   "secret"
-    t.boolean  "acivated",                         :default => false
-    t.string   "locale",                           :default => "en"
-    t.boolean  "twitter_translation",              :default => true
-    t.integer  "tweets_num",                       :default => 0
-    t.integer  "retweets_num",                     :default => 0
-    t.integer  "followers_num",                    :default => 0
-    t.integer  "pop",                              :default => 0
+    t.boolean  "acivated",                             :default => false
+    t.string   "locale",                               :default => "en"
+    t.boolean  "twitter_translation",                  :default => true
+    t.integer  "tweets_num",                           :default => 0
+    t.integer  "retweets_num",                         :default => 0
+    t.integer  "followers_num",                        :default => 0
+    t.integer  "pop",                                  :default => 0
+    t.text     "best_tweet_text"
+    t.integer  "best_tweet_retweets_num",              :default => -1
+    t.datetime "best_updated"
   end
 
   add_index "users", ["nickname"], :name => "index_users_on_nickname", :unique => true

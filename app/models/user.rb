@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  after_find :update_stats
+  after_find :update_profile
 
   after_create :follow_twistock
 
@@ -16,14 +16,16 @@ class User < ActiveRecord::Base
   attr_accessible :uid, :shares, :retention_shares
   attr_accessible :token, :secret, :activated
   attr_accessible :pop, :tweets_num, :retweets_num, :followers_num
+  attr_accessible :best_tweet_text, :best_tweet_retweets_num, :best_updated
 
 
   START_MONEY             = 0
   START_SHARES            = 200
   START_RETENTION_SHARES  = 100
-  POPULARITY_UPDATE_DELAY = 2*7*24*60*60
+  POPULARITY_UPDATE_DELAY = 2.weeks
   ANALYSES_UPDATE_DELAY   = 2.hours
   POPULARITY_POWER        = 6
+  BEST_UPDATE_DELAY       = 2.weeks
 
   EN_LOCALE = 'en'
   RU_LOCALE = 'ru'
@@ -33,6 +35,11 @@ class User < ActiveRecord::Base
   def to_param
     nickname
   end
+
+  def best_tweet_obsolete
+    return (best_updated and (best_updated + User::BEST_UPDATE_DELAY < Time.now ))
+  end
+
 
   def has_credentials
     if token and secret
@@ -125,7 +132,7 @@ class User < ActiveRecord::Base
                   shares:   User::START_SHARES,
                   retention_shares: User::START_RETENTION_SHARES
                 )
-    user.update_stats
+    user.update_profile
     user
   end
 
@@ -145,7 +152,7 @@ class User < ActiveRecord::Base
                   shares:   User::START_SHARES,
                   retention_shares: User::START_RETENTION_SHARES
                 )
-    user.update_stats
+    user.update_profile
     user
   end
 
@@ -315,7 +322,7 @@ class User < ActiveRecord::Base
   end
 
   def update_share_price
-      #self.update_stats
+      #self.update_profile
       
       User.transaction do
         prev_day_transaction = self.history.where("created_at <= :time", {:time => Time.now - 1.day}).last
@@ -343,7 +350,7 @@ class User < ActiveRecord::Base
       end      
   end
 
-  def update_stats
+  def update_profile
     if price_is_obsolete
       UserUpdateWorker.perform_async(nickname)
       User.transaction do
