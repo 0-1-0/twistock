@@ -87,7 +87,7 @@ class User < ActiveRecord::Base
   end
 
   def stocks_in_portfel(user)
-    block_of_shares = portfel.where(:owner_id=>user.id).first
+    block_of_shares = portfel.where(owner_id: user.id).first
     
     if block_of_shares
       return block_of_shares.count
