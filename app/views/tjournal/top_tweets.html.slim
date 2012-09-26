@@ -4,11 +4,20 @@
 #top-tweets
   ul.thumbnails
     - User.order('best_tweet_retweets_num DESC').limit(20).each do |user|
-      li.well.block.blue-border-heavy
-        .thumbnail.top-tweet
-          h3=user.nickname
+      li.well.block.thumbnail
+        .top-tweet
+          table
+            tr
+              td=image_tag user.avatar
+              td
+                h3 @#{user.nickname}
+                h3 
+                  small=user.name 
+          br
           p=user.best_tweet_text
-          h5
-            |retweets::
-            =user.best_tweet_retweets_num
-          h5=I18n.l(user.best_updated)
+          .pull-right
+            h5
+              =user.best_tweet_retweets_num
+              |  RT
+            h5
+              =((Time.now - user.best_updated)/1.hour).to_i
