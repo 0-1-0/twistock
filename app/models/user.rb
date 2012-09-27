@@ -372,7 +372,7 @@ class User < ActiveRecord::Base
   end
 
   def update_profile
-    if price_is_obsolete
+    if price_is_obsolete or !share_price or !base_price
       UserUpdateWorker.perform_async(nickname)
       User.transaction do
         self.last_update = Time.now
