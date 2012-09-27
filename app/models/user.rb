@@ -182,7 +182,12 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_nickname(nickname)
-    User.where("upper(nickname) = upper('#{nickname}')").first
+    user = User.where("upper(nickname) = upper('#{nickname}')").first
+    # if !user.base_price or !user.share_price
+    #   user.update_profile
+    # end
+
+    return user
   end
 
   def available_shares
@@ -372,7 +377,7 @@ class User < ActiveRecord::Base
   end
 
   def update_profile
-    if price_is_obsolete or !share_price or !base_price
+    if price_is_obsolete
       UserUpdateWorker.perform_async(nickname)
       User.transaction do
         self.last_update = Time.now
