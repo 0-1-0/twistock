@@ -1,5 +1,5 @@
 class UserUpdateWorker
-  RETRY_DELAY = 60*5
+  RETRY_DELAY = 1
 
   include Sidekiq::Worker
   sidekiq_options :queue => :user_updates
@@ -32,6 +32,10 @@ class UserUpdateWorker
       return nil
     rescue Twitter::Error::Unauthorized
       logger.info 'Unauthorized'
+      sleep(RETRY_DELAY)
+      retry
+    rescue Twitter::Error::BadRequest
+      logger.info 'Bad request'
       sleep(RETRY_DELAY)
       retry
     rescue Twitter::Error::Forbidden
