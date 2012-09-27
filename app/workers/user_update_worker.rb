@@ -79,7 +79,10 @@ class UserUpdateWorker
 
         begin
           if tweet.media
-            media_url = tweet.urls[0].expanded_url
+            url = tweet.urls[0]
+            if url
+              media_url = url.expanded_url
+            end
           else
             media_url = nil
           end
