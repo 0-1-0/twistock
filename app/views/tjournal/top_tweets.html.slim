@@ -5,7 +5,7 @@
 .row#top-tweets
   .span11.offset1
     ul.thumbnails
-      - User.order('best_tweet_param DESC').limit(20).each do |user|
+      - User.where('best_tweet_retweets_num > 1').order('best_tweet_param DESC').limit(20).each do |user|
         li.well.block.thumbnail
           .top-tweet
             table
