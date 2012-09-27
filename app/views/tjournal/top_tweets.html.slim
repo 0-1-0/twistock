@@ -5,7 +5,7 @@
 .row#top-tweets
   .span11.offset1
     ul.thumbnails
-      - User.where('best_tweet_retweets_num > 1').order('best_tweet_param DESC').limit(20).each do |user|
+      - User.where('best_tweet_retweets_num > 100').order('best_tweet_param DESC').limit(20).each do |user|
         li.well.block.thumbnail
           .top-tweet
             table
@@ -17,14 +17,24 @@
                     small=user.name 
             br
             p=user.best_tweet_text
-            h5.pull-left
+            h5.center
               =user.best_tweet_retweets_num
               |  RT
+            .pull-right
+              .btn-group
+                .btn.disabled[style='font-size: 12px']
+                  =t(:one_stock_price) + ': $'
+                  =user.share_price
+                .btn=link_to t(:buy), '/profiles/' + user.nickname
 
 =content_for :javascripts do
   javascript:
     $('.thumbnails').masonry({
       itemSelector: '.thumbnail',
       columnWidth: 0
+    });
+
+    $('.thumbnail').each(function(){
+      $(this).linkify();
     });
 end

@@ -8,7 +8,7 @@
 //= require DT_bootstrap
 //= require interactive
 //= require masonry.min
-
+//= require linkify
 
 
 
