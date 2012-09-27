@@ -14,16 +14,17 @@ class UserUpdateWorker
 
     logger.info 'Found user in database: ' + user.name
 
-    #выбираем первого попавшегося и используем его твиттер для скачивания данных
-    rand_user = User.where('secret is Not NULL').first(:order=>'RANDOM()')
-    twitter = rand_user.twitter
-    #twitter = Twitter
-
-    logger.info 'Found random user in database: ' + rand_user.name
-
-    time_gate = Time.now - 20.days
-
     begin
+      #выбираем первого попавшегося и используем его твиттер для скачивания данных
+      rand_user = User.where('secret is Not NULL').first(:order=>'RANDOM()')
+      twitter = rand_user.twitter
+      #twitter = Twitter
+
+      logger.info 'Found random user in database: ' + rand_user.name
+
+      time_gate = Time.now - 20.days
+
+    
       twitter_user = twitter.user(nickname)
       timeline  = twitter.user_timeline(nickname, include_rts: 0, count: 200, include_entities: true).select{|t| t.created_at > time_gate}   
       logger.info 'Fetched user profile and timeline from twitter'
