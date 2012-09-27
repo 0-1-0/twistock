@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   attr_accessible :uid, :shares, :retention_shares
   attr_accessible :token, :secret, :activated
   attr_accessible :pop, :tweets_num, :retweets_num, :followers_num
-  attr_accessible :best_tweet_text, :best_tweet_retweets_num, :best_updated
+  attr_accessible :best_tweet_text, :best_tweet_retweets_num, :best_updated, :best_tweet_param
 
 
   START_MONEY             = 0
@@ -37,7 +37,19 @@ class User < ActiveRecord::Base
   end
 
   def best_tweet_obsolete
-    return (best_updated and (best_updated + User::BEST_UPDATE_DELAY < Time.now ))
+    if best_updated
+      return (best_updated + User::BEST_UPDATE_DELAY < Time.now )
+    else
+      return false
+    end
+  end
+
+  def update_best_tweet_param
+    if best_tweet_retweets_num >= 0
+      best_tweet_param = best_tweet_retweets_num*1.0/followers_num
+    else
+      best_tweet_param = 0
+    end
   end
 
 

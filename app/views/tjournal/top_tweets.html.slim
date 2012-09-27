@@ -5,7 +5,7 @@
 .row#top-tweets
   .span11.offset1
     ul.thumbnails
-      - User.order('best_tweet_retweets_num DESC').limit(20).each do |user|
+      - User.order('best_tweet_param DESC').limit(20).each do |user|
         li.well.block.thumbnail
           .top-tweet
             table
@@ -20,9 +20,6 @@
             h5.pull-left
               =user.best_tweet_retweets_num
               |  RT
-            h5.pull-right
-              =((Time.now - user.best_updated)/1.hour).to_i
-              |  hours ago
 
 =content_for :javascripts do
   javascript:
