@@ -1,7 +1,7 @@
 class TjournalController < ApplicationController
-  require 'action_view'
-  include ActionView::Helpers::DateHelper
-  
+  layout  'tjournal'
+
   def top_tweets
+
   end
 end

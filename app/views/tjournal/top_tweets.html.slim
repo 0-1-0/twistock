@@ -1,23 +1,33 @@
-.well.block 
-  h1 Top Tweets
+.row
+  .span10.offset1.well.block 
+    h1 Top Tweets
 
-#top-tweets
-  ul.thumbnails
-    - User.order('best_tweet_retweets_num DESC').limit(20).each do |user|
-      li.well.block.thumbnail
-        .top-tweet
-          table
-            tr
-              td=image_tag user.avatar
-              td
-                h3 @#{user.nickname}
-                h3 
-                  small=user.name 
-          br
-          p=user.best_tweet_text
-          h5.pull-left
-            =user.best_tweet_retweets_num
-            |  RT
-          h5.pull-right
-            =((Time.now - user.best_updated)/1.hour).to_i
-            |  hours ago
+.row#top-tweets
+  .span11.offset1
+    ul.thumbnails
+      - User.order('best_tweet_retweets_num DESC').limit(20).each do |user|
+        li.well.block.thumbnail
+          .top-tweet
+            table
+              tr
+                td=image_tag user.avatar
+                td
+                  h3 @#{user.nickname}
+                  h3 
+                    small=user.name 
+            br
+            p=user.best_tweet_text
+            h5.pull-left
+              =user.best_tweet_retweets_num
+              |  RT
+            h5.pull-right
+              =((Time.now - user.best_updated)/1.hour).to_i
+              |  hours ago
+
+=content_for :javascripts do
+  javascript:
+    $('.thumbnails').masonry({
+      itemSelector: '.thumbnail',
+      columnWidth: 0
+    });
+end
