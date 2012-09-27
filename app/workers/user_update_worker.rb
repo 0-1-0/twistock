@@ -25,7 +25,7 @@ class UserUpdateWorker
 
     begin
       twitter_user = twitter.user(nickname)
-      timeline  = twitter.user_timeline(nickname, include_rts: 0, count: 200).select{|t| t.created_at > time_gate}   
+      timeline  = twitter.user_timeline(nickname, include_rts: 0, count: 200, include_entities: true).select{|t| t.created_at > time_gate}   
       logger.info 'Fetched user profile and timeline from twitter'
     rescue Twitter::Error::NotFound
       logger.info 'User not foud'
@@ -34,9 +34,6 @@ class UserUpdateWorker
       logger.info 'Unauthorized'
       sleep(RETRY_DELAY)
       retry
-    rescue Twitter::Error::BadRequest
-      logger.info 'Bad request'
-      return nil
     rescue Twitter::Error::Forbidden
       logger.info 'Forbidden'
       return nil
@@ -65,18 +62,41 @@ class UserUpdateWorker
     #Определяем самый популярный твит пользователя
     max_tweet_num  = -1
     max_tweet_text = ''
+    tweet_id_str   = ''
+    media_url      = nil
 
     timeline.each do |tweet|
       if tweet.retweet_count > max_tweet_num
         #logger.info tweet.retweet_count
         max_tweet_num  = tweet.retweet_count
         max_tweet_text = tweet.text
+        tweet_id_str   = tweet.id.to_s
+
+
+        begin
+          if tweet.media
+            media_url = tweet.urls[0].expanded_url
+          else
+            media_url = nil
+          end
+        rescue Exception => e
+          logger.info "Broken loop."
+          logger.info "Reason: #{e}"
+          logger.info e.backtrace
+        end
+
+
+
       end 
     end
 
     if (user.best_tweet_retweets_num < max_tweet_num) or user.best_tweet_obsolete
       user.best_tweet_retweets_num = max_tweet_num
       user.best_tweet_text         = max_tweet_text
+      user.best_tweet_id           = tweet_id_str
+      if media_url
+        user.best_tweet_media_url  = media_url
+      end
       user.best_updated            = Time.now
 
       user.save

@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   attr_accessible :token, :secret, :activated
   attr_accessible :pop, :tweets_num, :retweets_num, :followers_num
   attr_accessible :best_tweet_text, :best_tweet_retweets_num, :best_updated, :best_tweet_param
+  attr_accessible :best_tweet_media_url
 
 
   START_MONEY             = 0

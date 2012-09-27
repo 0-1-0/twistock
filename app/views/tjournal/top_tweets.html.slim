@@ -17,12 +17,11 @@
                     small=user.name 
             br
             p=user.best_tweet_text
-            h5.center
-              =user.best_tweet_retweets_num
-              |  RT
+            - if user.best_tweet_media_url
+              =image_tag user.best_tweet_media_url
             .pull-right
               .btn-group
-                .btn.disabled[style='font-size: 12px']
+                .btn.disabled[style='font-size: 11px']
                   =t(:one_stock_price) + ': $'
                   =user.share_price
                 .btn=link_to t(:buy), '/profiles/' + user.nickname
