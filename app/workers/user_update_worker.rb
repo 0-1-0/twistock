@@ -35,7 +35,7 @@ class UserUpdateWorker
         
         return user
       end
-      
+
       timeline  = twitter.user_timeline(nickname, include_rts: 0, count: 200, include_entities: true).select{|t| t.created_at > time_gate}   
       logger.info 'Fetched user profile and timeline from twitter'
     rescue Twitter::Error::NotFound
@@ -100,7 +100,7 @@ class UserUpdateWorker
       end 
     end
 
-    if (user.best_tweet_retweets_num < max_tweet_num) or user.best_tweet_obsolete
+    if (user.best_tweet_retweets_num <= max_tweet_num) or user.best_tweet_obsolete
       user.best_tweet_retweets_num = max_tweet_num
       user.best_tweet_text         = max_tweet_text
       user.best_tweet_id           = tweet_id_str
@@ -109,6 +109,10 @@ class UserUpdateWorker
       end
       user.best_updated            = Time.now
 
+      user.save
+      user.reload
+
+      user.update_best_tweet_param
       user.save
     end
 
