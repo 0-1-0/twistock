@@ -26,6 +26,16 @@ class UserUpdateWorker
 
     
       twitter_user = twitter.user(nickname)
+
+      if twitter_user.protected 
+        logger.info 'User is protected !!! =('
+        user.share_price = User::PROTECTED_PRICE
+        user.base_price  = User::PROTECTED_PRICE
+        user.save
+        
+        return user
+      end
+      
       timeline  = twitter.user_timeline(nickname, include_rts: 0, count: 200, include_entities: true).select{|t| t.created_at > time_gate}   
       logger.info 'Fetched user profile and timeline from twitter'
     rescue Twitter::Error::NotFound
@@ -48,14 +58,6 @@ class UserUpdateWorker
       retry
     end   
 
-    if twitter_user.protected 
-      logger.info 'User is protected !!! =('
-      user.share_price = User::PROTECTED_PRICE
-      user.base_price  = User::PROTECTED_PRICE
-      user.save
-      
-      return user
-    end
 
     user.tweets_num    = timeline.count
     user.retweets_num  = timeline.inject(0){|a, b| a += b.retweet_count}
