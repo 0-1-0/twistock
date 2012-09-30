@@ -36,3 +36,6 @@
 
 # Ignore Mac trashes
 /.DS_Store
+
+# Ignore all local sh scripts
+/*.sh
