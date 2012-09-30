@@ -2,26 +2,12 @@ class SessionController < ApplicationController
   def create
     auth = request.env['omniauth.auth']
 
-    unless @user = User.try_to_find(auth.uid)
-      @user = User.create_from_twitter_oauth(auth)
-    end
+    @user = User.try_to_find(auth.uid) || User.create_from_twitter_oauth(auth)
+    @user.update_oauth_info_if_neccesary(auth)
 
-    if (not @user.token? or not @user.secret?)
-      @user.update_from_twitter_oauth(auth)
-    end
-
-    #if User.count < 250
     session[:user_id] = @user.id
-      
-      #@user.activated = true
-      #@user.save
-
+    
     redirect_to root_path, notice: "Signed in!"
-    # else
-    #   redirect_to '/thanks'
-    # end
-
-
   end
 
   def failure

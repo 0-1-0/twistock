@@ -1,18 +1,15 @@
 class ProfilesController < ApplicationController
   def show
-    @user = User.find_or_create(params[:id])
-
-    return redirect_to(not_found_path) unless @user
-
-    #'sell' starting stocks
-    if @user.has_starting_stocks
-      @user.sell_starting_stocks # TODO: may be duplicate
+    if @user = User.find_or_create(params[:id])
+      @user.sell_all_retention
+    else
+      return redirect_to(not_found_path)
     end
 
     @my_page  = (@user == current_user)
 
     #Определяем популярность пользователя
-    @popularity = Transaction.where(:owner_id=>@user.id).where("created_at >= :time", {:time => Time.now - 42000}).count
+    @popularity = @user.popularity
 
     respond_to do |format|
       format.html

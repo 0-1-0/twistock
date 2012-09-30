@@ -102,19 +102,6 @@ class User < ActiveRecord::Base
       return 0
     end
   end
-
-  def has_starting_stocks
-    if self.retention_shares and self.share_price
-      return (self.retention_shares > 0 and self.share_price > 0)
-    else
-      return false
-    end
-  end
-
-  def sell_starting_stocks
-    self.sell_retention(self.retention_shares)
-  end
-
   
   #Use with care!!!
   def self.update_all_profiles
@@ -128,11 +115,13 @@ class User < ActiveRecord::Base
     return self.avatar.sub("_normal", "")
   end
 
-  def update_from_twitter_oauth(auth)
-    self.token  = auth.credentials.token
-    self.secret = auth.credentials.secret
+  def update_oauth_info_if_neccesary(auth)
+    if (not self.token? or not self.secret?)
+      self.token  = auth.credentials.token
+      self.secret = auth.credentials.secret
 
-    self.save
+      self.save
+    end
   end
 
   #Twitter client methods  
@@ -196,12 +185,6 @@ class User < ActiveRecord::Base
 
     return user
   end
-
-  def available_shares
-    shares - retention_shares
-  end
-
-
 
   def buy_shares(owner, count)
     raise "You cannot buy 0 shares" unless count > 0
@@ -431,7 +414,7 @@ class User < ActiveRecord::Base
   # Если у пользователя есть его акции - их надо продать.
   # Используется чтобы инициировать
   # первичное получение денег игроком.
-  def sell_user_retention_shares
+  def sell_all_retention
     if retention_shares > 0 and share_price
       sell_retention(retention_shares)
     end

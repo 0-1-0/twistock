@@ -64,7 +64,7 @@ class WelcomeController < ApplicationController
     @random         = User.random(MAX_USERS_PER_PAGE)
     @highest_value  = User.highest_value(MAX_USERS_PER_PAGE)
 
-    current_user.sell_user_retention_shares if signed_in? 
+    current_user.sell_all_retention if signed_in? 
   end
 
   def not_found
