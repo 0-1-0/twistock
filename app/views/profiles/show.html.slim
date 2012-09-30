@@ -89,10 +89,10 @@ end
         /       = f.button :submit, 'Buy all followers', class: 'btn btn-small'
 
       
-  .row
-    .span5.offset1 = render :partial=>'profiles/popularity', :locals=>{:user=>@user, :active=>'true'}
-  .row
-    .span5.micro-offset = render :partial=>'profiles/price_dynamics', :locals=>{:user=>@user, :size=>'500x100'}
+  
+    .span6.micro-offset = render :partial=>'profiles/popularity', :locals=>{:user=>@user, :active=>'true'}
+  
+    .span6.micro-offset = render :partial=>'profiles/price_dynamics', :locals=>{:user=>@user, :size=>'500x100'}
 
 
 
