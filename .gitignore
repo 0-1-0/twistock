@@ -24,11 +24,6 @@
 /.rvmrc
 /.powenv
 
-/wrap.sh
-/start_server.sh
-/stop_server.sh
-/reassets.sh
-
 /shared
 
 # Ignore files created by sublime

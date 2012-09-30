@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120927151106) do
+ActiveRecord::Schema.define(:version => 20120930162501) do
 
   create_table "block_of_shares", :force => true do |t|
     t.integer  "owner_id"
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(:version => 20120927151106) do
     t.datetime "best_updated"
     t.float    "best_tweet_param",                     :default => 0.0
     t.string   "best_tweet_id"
-    t.string   "best_tweet_media_url"
+    t.text     "best_tweet_media_url"
   end
 
   add_index "users", ["best_tweet_retweets_num"], :name => "index_users_on_best_tweet_retweets_num"
