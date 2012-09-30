@@ -59,10 +59,10 @@ class WelcomeController < ApplicationController
 
 
   def index
-    @celebrities    = User.find_by_nicknames(CELEBRITIES_NAMES, shuffle: true, limit: MAX_USERS_PER_PAGE)
-    @politicians    = User.find_by_nicknames(POLITICIANS_NAMES, shuffle: true, limit: MAX_USERS_PER_PAGE)                      
-    @random         = User.random(MAX_USERS_PER_PAGE)
-    @highest_value  = User.highest_value(MAX_USERS_PER_PAGE)
+    @celebrities    = User.find_by_nicknames(CELEBRITIES_NAMES, shuffle: true, limit: MAX_USERS_PER_PAGE, history: true)
+    @politicians    = User.find_by_nicknames(POLITICIANS_NAMES, shuffle: true, limit: MAX_USERS_PER_PAGE, history: true)                      
+    @random         = User.includes(:history).random(MAX_USERS_PER_PAGE)
+    @highest_value  = User.includes(:history).highest_value(MAX_USERS_PER_PAGE)
 
     current_user.sell_all_retention if signed_in? 
   end

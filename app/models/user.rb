@@ -78,18 +78,33 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_nicknames(ids, opts = {})
-    result = []
+    # result = []
 
-    ids.each do |id|
-      user = User.find_or_create id
-      if user
-        result << user
-      end
+    # ids.each do |id|
+    #   user = User.find_or_create id
+    #   if user
+    #     result << user
+    #   end
+    # end
+
+    # result.shuffle! if opts[:shuffle]
+
+    # result = result[0..opts[:limit]] if opts[:limit]
+
+    ids.map!(&:upcase)
+
+    # создаем несуществующих
+    exists = User.where{upper(nickname).in ids}.select(:nickname)
+      .map(&:nickname).map(&:upcase)
+    (ids - exists).each do |id|
+      User.find_or_create id
     end
 
-    result.shuffle! if opts[:shuffle]
-
-    result = result[0..opts[:limit]] if opts[:limit]
+    # сама выборка
+    result = User.where{upper(nickname).in ids}
+    result = result.includes(:history)  if opts[:history]
+    result = result.order('RANDOM()')   if opts[:shuffle]
+    result = result.limit(opts[:limit]) if opts[:limit]
 
     result
   end
@@ -368,6 +383,13 @@ class User < ActiveRecord::Base
   end
 
   def update_profile
+    # хак для запросов использующих .select(:nickname) и подобных
+    begin
+      last_update
+    rescue
+      return
+    end 
+
     if price_is_obsolete
       UserUpdateWorker.perform_async(nickname)
       User.transaction do
