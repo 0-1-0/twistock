@@ -19,7 +19,7 @@ end
   /Random
   .span3 
     ul.scroll
-      - User.find(:all, :limit=> 20, :order=> 'RANDOM()').each do |user|
+      - @random.each do |user|
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
@@ -29,7 +29,7 @@ end
   /Highest value
   .span3
     ul.scroll
-      - User.where('share_price is NOT NULL').find(:all, :limit=> 10, :order=> 'share_price desc').each do |user|
+      - @highest_value.each do |user|
         li 
           = render :partial=>'profiles/small', :locals=>{\
             :user=>user,\ 
@@ -111,7 +111,7 @@ end
   .iphone-emitter.span6 url='/stream/most_booming'
   .iphone-emitter.span6 url='/stream/most_falling'
 
-
+/ TODO: вытащить в отдельную функцию
 javascript:
   if($(window).width() < 1024){
     $('#streamline').hide();

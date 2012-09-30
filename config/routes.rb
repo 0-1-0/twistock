@@ -18,8 +18,6 @@ Twitterexchange::Application.routes.draw do
   match '/products/showcase', :controller => 'products', :action => 'showcase'
   resources :products
 
-  get "stream/infoline"
-
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
@@ -42,7 +40,7 @@ Twitterexchange::Application.routes.draw do
   end
 
   resources :shares, only: [] do
-    resources :profiles
+    resources :profiles, only: [:show]
     collection do
       post 'buy'
       post 'sell'
@@ -51,7 +49,7 @@ Twitterexchange::Application.routes.draw do
     end
   end
 
-  resources :product_invoices
+  resources :product_invoices, only: [:create, :index]
   match '/product_invoices/create', :to => 'product_invoices#create'
 
   match '/history', :to => 'history#transactions'
