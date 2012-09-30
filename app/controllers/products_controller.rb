@@ -2,8 +2,9 @@ class ProductsController < ApplicationController
   before_filter :admin_required, :only=>[:index,:new,:edit,:create,:destroy,:update]
 
   def showcase
-    @products = Product.where('priority > 0').find(:all, :order => "priority")
+    @products = Product.prioritized
   end
+  
   # GET /products
   # GET /products.json
   def index

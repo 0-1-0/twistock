@@ -1,6 +1,6 @@
 class RemoveIndexFromNameUser < ActiveRecord::Migration
   def up
-    remove_index :users, :nameherhe
+    remove_index :users, :name
   end
 
   def down
