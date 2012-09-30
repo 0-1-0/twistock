@@ -24,11 +24,6 @@
 /.rvmrc
 /.powenv
 
-/wrap.sh
-/start_server.sh
-/stop_server.sh
-/reassets.sh
-
 /shared
 
 # Ignore files created by sublime
@@ -37,5 +32,5 @@
 # Ignore Mac trashes
 /.DS_Store
 
-# Ignore all local scripts
+# Ignore all local sh scripts
 /*.sh

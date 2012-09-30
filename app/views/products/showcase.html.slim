@@ -54,11 +54,11 @@ end
               p=product.description.html_safe   
             .btn.btn-small.btn-buy data-toggle="modal" href="#buy_modal" total_cost=product.price product_name=product.name product_id=product.id
               a href="javascript:void()"
-                h5=number_to_currency product.price          
+                h5=number_to_currency product.price, :precision => 0          
                 =t :buy_this_item
           - else
             .btn.btn-small.disabled.btn-cannot-buy
-              h5=number_to_currency product.price
+              h5=number_to_currency product.price, :precision => 0
               =t :you_havent_enough_money
               br
               =t :try_to_earn_more

@@ -31,7 +31,7 @@ section
             td
               = image_tag user.avatar, :size=>'48x48'       
             td
-              h3 = number_to_currency user.share_price, :precision => 0 
+              h4 = number_to_currency user.share_price, :precision => 0 
           tr
             td[colspan=2]
               a[href="/profiles/#{user.nickname}"] @#{user.nickname[0..14]} 
