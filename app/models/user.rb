@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
   RU_LOCALE = 'ru'
 
   PROTECTED_PRICE = 1
+  MINIMUM_PRICE   = 10
 
   def to_param
     nickname
