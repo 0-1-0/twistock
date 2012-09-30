@@ -128,6 +128,7 @@ class UserUpdateWorker
     b = user.followers_num.to_f**(0.5)
     b = b/25
     b = Math::log(Math::E + b)
+    b = b**(0.5)
     b = (1 + b)**11
     
     price = a + b - 10920
