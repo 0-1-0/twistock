@@ -41,6 +41,9 @@ gem 'sidekiq'
 # требуется для его веб-интерфейса
 gem 'sinatra'
 
+# более наглядный код запросов
+gem 'squeel'
+
 # полезные для разработки утилиты
 group :development do
   gem 'looksee'
