@@ -1,4 +1,6 @@
 class MainPageStreamsController < ApplicationController
+  before_filter :load_main_page_stream, only: [:show, :edit, :update, :destroy]
+
   # GET /main_page_streams
   # GET /main_page_streams.json
   def index
@@ -13,8 +15,6 @@ class MainPageStreamsController < ApplicationController
   # GET /main_page_streams/1
   # GET /main_page_streams/1.json
   def show
-    @main_page_stream = MainPageStream.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @main_page_stream }
@@ -34,7 +34,6 @@ class MainPageStreamsController < ApplicationController
 
   # GET /main_page_streams/1/edit
   def edit
-    @main_page_stream = MainPageStream.find(params[:id])
   end
 
   # POST /main_page_streams
@@ -47,7 +46,7 @@ class MainPageStreamsController < ApplicationController
         format.html { redirect_to @main_page_stream, notice: 'Main page stream was successfully created.' }
         format.json { render json: @main_page_stream, status: :created, location: @main_page_stream }
       else
-        format.html { render action: "new" }
+        format.html { render :new }
         format.json { render json: @main_page_stream.errors, status: :unprocessable_entity }
       end
     end
@@ -56,14 +55,12 @@ class MainPageStreamsController < ApplicationController
   # PUT /main_page_streams/1
   # PUT /main_page_streams/1.json
   def update
-    @main_page_stream = MainPageStream.find(params[:id])
-
     respond_to do |format|
       if @main_page_stream.update_attributes(params[:main_page_stream])
         format.html { redirect_to @main_page_stream, notice: 'Main page stream was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render :edit }
         format.json { render json: @main_page_stream.errors, status: :unprocessable_entity }
       end
     end
@@ -72,12 +69,16 @@ class MainPageStreamsController < ApplicationController
   # DELETE /main_page_streams/1
   # DELETE /main_page_streams/1.json
   def destroy
-    @main_page_stream = MainPageStream.find(params[:id])
     @main_page_stream.destroy
 
     respond_to do |format|
       format.html { redirect_to main_page_streams_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def load_main_page_stream
+    @main_page_stream = MainPageStream.find(params[:id])
   end
 end

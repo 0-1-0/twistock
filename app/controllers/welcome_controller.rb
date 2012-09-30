@@ -1,5 +1,10 @@
+# encoding: utf-8
 class WelcomeController < ApplicationController
 
+      # TODO: вытащить в YAML config + initilizer
+      # TODO: По хорошему вытащить в базу и агрессивно кэшировать,
+      #       но это с приходом нормальной адмики
+      #       где можно будет этот список редактировать.
       CELEBRITIES_NAMES = [ 
                           'SergeiMinaev',\
                           'shirokovr15',\
@@ -54,24 +59,12 @@ class WelcomeController < ApplicationController
 
 
   def index
-    @celebrities = User.find_by_nicknames(CELEBRITIES_NAMES)
-    @celebrities = @celebrities.shuffle
-    @celebrities = @celebrities[0..MAX_USERS_PER_PAGE]
+    @celebrities    = User.find_by_nicknames(CELEBRITIES_NAMES, shuffle: true, limit: MAX_USERS_PER_PAGE, history: true)
+    @politicians    = User.find_by_nicknames(POLITICIANS_NAMES, shuffle: true, limit: MAX_USERS_PER_PAGE, history: true)                      
+    @random         = User.includes(:history).random(MAX_USERS_PER_PAGE)
+    @highest_value  = User.includes(:history).highest_value(MAX_USERS_PER_PAGE)
 
-    @politicians = User.find_by_nicknames(POLITICIANS_NAMES)
-    @politicians = @politicians.shuffle
-    @politicians = @politicians[0..MAX_USERS_PER_PAGE]              
-
-
-
-
-    #redirect_to profile_path(current_user) if signed_in?
-    if signed_in?
-      #'sell' starting shares
-      if current_user.retention_shares > 0 and current_user.share_price
-        current_user.sell_retention(current_user.retention_shares)
-      end
-    end
+    current_user.sell_all_retention if signed_in? 
   end
 
   def not_found

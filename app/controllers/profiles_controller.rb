@@ -1,21 +1,15 @@
 class ProfilesController < ApplicationController
   def show
-    @user = User.find_or_create(params[:id])
-
-    unless @user
-      return redirect_to not_found_path
+    if @user = User.find_or_create(params[:id])
+      @user.sell_all_retention
+    else
+      return redirect_to(not_found_path)
     end
-
-    #'sell' starting stocks
-    if @user.has_starting_stocks
-      @user.sell_starting_stocks
-    end
-
 
     @my_page  = (@user == current_user)
 
     #Определяем популярность пользователя
-    @popularity = Transaction.where(:owner_id=>@user.id).where("created_at >= :time", {:time => Time.now - 42000}).count
+    @popularity = @user.popularity
 
     respond_to do |format|
       format.html
@@ -23,8 +17,6 @@ class ProfilesController < ApplicationController
         render :json => @user.to_json
       }
     end
-   
-    
   end
 
 
@@ -36,8 +28,7 @@ class ProfilesController < ApplicationController
     count = params[:count].to_i
 
     if user and count
-      @answer = user.price_after_transaction(count)
-      @answer = @answer.round
+      @answer = user.price_after_transaction(count).round
     end
 
     respond_to do |format|
@@ -57,7 +48,6 @@ class ProfilesController < ApplicationController
       current_user.locale = params[:locale]
       current_user.save
     end
-    
 
     redirect_to :back
   end

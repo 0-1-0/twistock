@@ -1,3 +1,4 @@
+# encoding: utf-8
 class User < ActiveRecord::Base
   after_find :update_profile
 
@@ -19,6 +20,8 @@ class User < ActiveRecord::Base
   attr_accessible :best_tweet_text, :best_tweet_retweets_num, :best_updated, :best_tweet_param
   attr_accessible :best_tweet_media_url
 
+  scope :random, ->(size) { order('RANDOM()').limit(size) }
+  scope :highest_value, ->(size) { where{share_price != nil}.order{share_price.desc}.limit(size) }
 
   START_MONEY             = 0
   START_SHARES            = 200
@@ -76,21 +79,40 @@ class User < ActiveRecord::Base
     user
   end
 
-  def self.find_by_nicknames(ids)
-    result = []
+  def self.find_by_nicknames(ids, opts = {})
+    # result = []
 
-    ids.each do |id|
-      user = User.find_or_create id
-      if user
-        result += [user]
-      end
+    # ids.each do |id|
+    #   user = User.find_or_create id
+    #   if user
+    #     result << user
+    #   end
+    # end
+
+    # result.shuffle! if opts[:shuffle]
+
+    # result = result[0..opts[:limit]] if opts[:limit]
+
+    ids.map!(&:upcase)
+
+    # создаем несуществующих
+    exists = User.where{upper(nickname).in ids}.select(:nickname)
+      .map(&:nickname).map(&:upcase)
+    (ids - exists).each do |id|
+      User.find_or_create id
     end
+
+    # сама выборка
+    result = User.where{upper(nickname).in ids}
+    result = result.includes(:history)  if opts[:history]
+    result = result.order('RANDOM()')   if opts[:shuffle]
+    result = result.limit(opts[:limit]) if opts[:limit]
 
     result
   end
 
   def stocks_in_portfel(user)
-    block_of_shares = portfel.where(:owner_id=>user.id).first
+    block_of_shares = portfel.where(owner_id: user.id).first
     
     if block_of_shares
       return block_of_shares.count
@@ -98,19 +120,6 @@ class User < ActiveRecord::Base
       return 0
     end
   end
-
-  def has_starting_stocks
-    if self.retention_shares and self.share_price
-      return (self.retention_shares > 0 and self.share_price > 0)
-    else
-      return false
-    end
-  end
-
-  def sell_starting_stocks
-    self.sell_retention(self.retention_shares)
-  end
-
   
   #Use with care!!!
   def self.update_all_profiles
@@ -124,11 +133,13 @@ class User < ActiveRecord::Base
     return self.avatar.sub("_normal", "")
   end
 
-  def update_from_twitter_oauth(auth)
-    self.token  = auth.credentials.token
-    self.secret = auth.credentials.secret
+  def update_oauth_info_if_neccesary(auth)
+    if (not self.token? or not self.secret?)
+      self.token  = auth.credentials.token
+      self.secret = auth.credentials.secret
 
-    self.save
+      self.save
+    end
   end
 
   #Twitter client methods  
@@ -192,12 +203,6 @@ class User < ActiveRecord::Base
 
     return user
   end
-
-  def available_shares
-    shares - retention_shares
-  end
-
-
 
   def buy_shares(owner, count)
     raise "You cannot buy 0 shares" unless count > 0
@@ -385,6 +390,13 @@ class User < ActiveRecord::Base
   end
 
   def update_profile
+    # хак для запросов использующих .select(:nickname) и подобных
+    begin
+      last_update
+    rescue
+      return
+    end 
+
     if price_is_obsolete
       UserUpdateWorker.perform_async(nickname)
       User.transaction do
@@ -429,5 +441,12 @@ class User < ActiveRecord::Base
     result
   end
 
-
+  # Если у пользователя есть его акции - их надо продать.
+  # Используется чтобы инициировать
+  # первичное получение денег игроком.
+  def sell_all_retention
+    if retention_shares > 0 and share_price
+      sell_retention(retention_shares)
+    end
+  end
 end
