@@ -117,24 +117,28 @@ class UserUpdateWorker
     end
 
    
+    #New Formula 
+    a = user.retweets_num/(user.tweets_num + 1.0)
+    a = a/36.7
+    a = Math::log(a + Math::E)
+    a = a**(0.5)
+    a = (a + 1)**7
+    a = 70*a
 
-    rt   = user.retweets_num.to_f
-    cnt  = user.tweets_num.to_f
-    flw  = user.followers_num.to_f
-    pop  = user.popularity_stocks_coefficient
-
-    a = Math::log10(10 + 100*rt/(cnt+1))
-    b = Math::log10(10 + flw)
-    c = Math::log10(10 + rt)     
+    b = user.followers_num.to_f**(0.5)
+    b = b/25
+    b = Math::log(Math::E + b)
+    b = (1 + b)**11
     
-    price = a**6 + b**6 + c**6 + pop
-    
-    user.share_price = price.round    
-    user.base_price  = (a**6 + b**6 + c**6).round
+    price = a + b - 10920
+    price = price/10
+    price = User::MINIMUM_PRICE if price < 0
 
+    user.base_price  = price.round
+    user.share_price = (price + user.popularity_stocks_coefficient).round
+    user.save
     logger.info 'Saved user to database ' + user.name
 
-    user.save
     user
   end
 end
