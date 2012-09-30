@@ -28,6 +28,8 @@ class User < ActiveRecord::Base
   POPULARITY_POWER        = 6
   BEST_UPDATE_DELAY       = 2.weeks
 
+  POPULARITY_CONSTANT = 100.0
+
   EN_LOCALE = 'en'
   RU_LOCALE = 'ru'
 
@@ -338,14 +340,19 @@ class User < ActiveRecord::Base
   end
 
   def popularity_stocks_coefficient(count=0)
-    d = Math::log10(2*(self.my_shares.sum(:count) + count) + 10)
-    d = d**POPULARITY_POWER
+    d = self.my_shares.sum(:count) + count
+
+    if d < POPULARITY_CONSTANT
+      d = (d + POPULARITY_CONSTANT)/POPULARITY_CONSTANT
+    else
+      d = Math::log10(d + 1)
+    end
 
     return d
   end
 
   def price_after_transaction(count)
-    return base_price + popularity_stocks_coefficient(count)
+    return (base_price*popularity_stocks_coefficient(count)).round
   end
 
   def update_share_price
@@ -361,7 +368,7 @@ class User < ActiveRecord::Base
         end         
 
         if self.base_price
-          new_price = self.base_price + popularity_stocks_coefficient
+          new_price = (self.base_price*popularity_stocks_coefficient).round
         else
           new_price = self.share_price
         end
