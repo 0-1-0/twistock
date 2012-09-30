@@ -2,11 +2,11 @@ class TweetWorker
   include Sidekiq::Worker
 
   def self.buy_message(transaction)
-    message =  "@" + transaction.user.nickname + ' '
+    message =  "@" + transaction.user_nickname + ' '
     message += I18n.t(:bought) + ' '
     message += transaction.count.to_s +  ' '
     message += I18n.t(:stocks_of) + ' '
-    message +=  "@" + transaction.owner.nickname + ' '
+    message +=  "@" + transaction.owner_nickname + ' '
     message +=  I18n.t(:on_twistock_com)
 
     TweetWorker.perform_async(transaction.user.id, message)
@@ -14,11 +14,11 @@ class TweetWorker
 
 
   def self.sell_message(transaction)
-    message =  "@" + transaction.user.nickname + ' '
+    message =  "@" + transaction.user_nickname + ' '
     message += I18n.t(:sold) + ' '
     message += transaction.count.to_s +  ' '
     message += I18n.t(:stocks_of) + ' '
-    message +=  "@" + transaction.owner.nickname + ' '
+    message +=  "@" + transaction.owner_nickname + ' '
     message +=  I18n.t(:on_twistock_com)
 
     TweetWorker.perform_async(transaction.user.id, message)

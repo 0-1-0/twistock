@@ -35,17 +35,6 @@ ActiveRecord::Schema.define(:version => 20120930162501) do
     t.datetime "updated_at",                   :null => false
   end
 
-  create_table "price_stamps", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "price"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "previous_price"
-    t.integer  "delta"
-  end
-
-  add_index "price_stamps", ["user_id"], :name => "index_price_stamps_on_user_id"
-
   create_table "product_invoices", :force => true do |t|
     t.string   "product"
     t.string   "country"
@@ -62,6 +51,9 @@ ActiveRecord::Schema.define(:version => 20120930162501) do
     t.integer  "user_id"
     t.string   "status"
   end
+
+  add_index "product_invoices", ["product_id"], :name => "index_product_invoices_on_product_id"
+  add_index "product_invoices", ["user_id"], :name => "index_product_invoices_on_user_id"
 
   create_table "products", :force => true do |t|
     t.string   "name"
@@ -85,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20120930162501) do
   end
 
   add_index "transactions", ["action"], :name => "index_transactions_on_action"
+  add_index "transactions", ["owner_id"], :name => "index_transactions_on_owner_id"
   add_index "transactions", ["user_id"], :name => "index_transactions_on_user_id"
 
   create_table "users", :force => true do |t|

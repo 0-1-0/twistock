@@ -2,15 +2,12 @@ class ProfilesController < ApplicationController
   def show
     @user = User.find_or_create(params[:id])
 
-    unless @user
-      return redirect_to not_found_path
-    end
+    return redirect_to(not_found_path) unless @user
 
     #'sell' starting stocks
     if @user.has_starting_stocks
-      @user.sell_starting_stocks
+      @user.sell_starting_stocks # TODO: may be duplicate
     end
-
 
     @my_page  = (@user == current_user)
 
@@ -23,8 +20,6 @@ class ProfilesController < ApplicationController
         render :json => @user.to_json
       }
     end
-   
-    
   end
 
 
@@ -36,8 +31,7 @@ class ProfilesController < ApplicationController
     count = params[:count].to_i
 
     if user and count
-      @answer = user.price_after_transaction(count)
-      @answer = @answer.round
+      @answer = user.price_after_transaction(count).round
     end
 
     respond_to do |format|
@@ -57,7 +51,6 @@ class ProfilesController < ApplicationController
       current_user.locale = params[:locale]
       current_user.save
     end
-    
 
     redirect_to :back
   end

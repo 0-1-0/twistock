@@ -1,3 +1,4 @@
+# encoding: utf-8
 class User < ActiveRecord::Base
   after_find :update_profile
 
@@ -19,6 +20,8 @@ class User < ActiveRecord::Base
   attr_accessible :best_tweet_text, :best_tweet_retweets_num, :best_updated, :best_tweet_param
   attr_accessible :best_tweet_media_url
 
+  scope :random, ->(size) { order('RANDOM()').limit(size) }
+  scope :highest_value, ->(size) { where{share_price != nil}.order{share_price.desc}.limit(size) }
 
   START_MONEY             = 0
   START_SHARES            = 200
@@ -74,21 +77,25 @@ class User < ActiveRecord::Base
     user
   end
 
-  def self.find_by_nicknames(ids)
+  def self.find_by_nicknames(ids, opts = {})
     result = []
 
     ids.each do |id|
       user = User.find_or_create id
       if user
-        result += [user]
+        result << user
       end
     end
+
+    result.shuffle! if opts[:shuffle]
+
+    result = result[0..opts[:limit]] if opts[:limit]
 
     result
   end
 
   def stocks_in_portfel(user)
-    block_of_shares = portfel.where(:owner_id=>user.id).first
+    block_of_shares = portfel.where(owner_id: user.id).first
     
     if block_of_shares
       return block_of_shares.count
@@ -422,5 +429,12 @@ class User < ActiveRecord::Base
     result
   end
 
-
+  # Если у пользователя есть его акции - их надо продать.
+  # Используется чтобы инициировать
+  # первичное получение денег игроком.
+  def sell_user_retention_shares
+    if retention_shares > 0 and share_price
+      sell_retention(retention_shares)
+    end
+  end
 end
