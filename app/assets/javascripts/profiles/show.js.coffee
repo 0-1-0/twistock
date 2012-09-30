@@ -6,10 +6,13 @@ $(document).ready ->
 
 
   CalculatePrice = (base_price,shares_count)->
-    d = (Math.log(2*shares_count + 10))/Math.LN10
-    d = d*d*d
-    d = d*d
-    return Math.round(base_price + d)
+    d = parseFloat(shares_count)
+    if d < 100
+      d = (d+100.0)/100.0
+    else
+      d = (Math.log(d+1))/Math.LN10
+
+    return Math.round(base_price*d)
 
   #Онлайн-обновление суммы при покупке
   $('#buy_modal #buy_count').change (e) ->

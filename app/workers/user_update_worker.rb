@@ -136,7 +136,7 @@ class UserUpdateWorker
     price = User::MINIMUM_PRICE if price < 0
 
     user.base_price  = price.round
-    user.share_price = (price + user.popularity_stocks_coefficient).round
+    user.share_price = (price*user.popularity_stocks_coefficient).round
     user.save
     logger.info 'Saved user to database ' + user.name
 
