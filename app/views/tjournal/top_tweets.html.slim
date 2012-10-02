@@ -1,39 +1,82 @@
 .row
-  .span10.offset1.well.block 
+  .span10.well.block.offset1
     h1 Top Tweets
+    h3.pull-left #{t(:categories)}: 
+    ul.nav.nav-pills.offset1.menu
+      li.active
+        a#category-all[href='#']=t :all
+      - @categories.each do |category|
+        - if category != nil
+          li.category-link[class_to_switch='#{category}']
+            a[href='#']=category
 
 .row#top-tweets
   .span11.offset1
-    ul.thumbnails
-      - User.where('best_tweet_retweets_num > 100').order('best_tweet_param DESC').limit(20).each do |user|
-        li.well.block.thumbnail
+    ul.thumbnails#tweet-container
+      - @users_with_top_tweets.each do |user|
+        li[class='well block masonry-item thumbnail #{user.tweet_category}']
           .top-tweet
             table
               tr
                 td=image_tag user.avatar
                 td
-                  h3 @#{user.nickname}
+                  
                   h3 
-                    small=user.name 
+                    a[href='http://twitter.com/#{user.nickname}' target='blank'] @#{user.nickname}
+                  h5
+                    small=user.name
+                  h5 
+                    small=t(:one_stock_price) + ': $' + user.share_price.to_s
+                  
+              
+            .center
+              small
+                a[href='/profiles/#{user.nickname}'] =t :buy 
+                  
+
+                  
+
             br
             p=user.best_tweet_text
-            - if user.best_tweet_media_url
-              =image_tag user.best_tweet_media_url
-            .pull-right
-              .btn-group
-                .btn.disabled[style='font-size: 11px']
-                  =t(:one_stock_price) + ': $'
-                  =user.share_price
-                .btn=link_to t(:buy), '/profiles/' + user.nickname
 
 =content_for :javascripts do
   javascript:
-    $('.thumbnails').masonry({
-      itemSelector: '.thumbnail',
+    $('#tweet-container').masonry({
+      itemSelector: 'masonry-item',
       columnWidth: 0
     });
 
     $('.thumbnail').each(function(){
       $(this).linkify();
+    });
+
+    $('#category-all').click(function(){
+      $('.masonry-item').show();
+      $('#tweet-container').masonry({
+        itemSelector: '.masonry-item',
+        columnWidth: 0
+      });
+    });
+
+    $('.menu li').click(function(e) {
+      $('.menu li').removeClass('active');
+      var $this = $(this);
+      if (!$this.hasClass('active')) {
+        $this.addClass('active');
+      }
+      e.preventDefault();
+    });
+
+    $('.category-link').click(function(){
+      $('.thumbnail').hide();
+
+      var xclass = '.' + $(this).attr('class_to_switch');
+      $(xclass).show();
+
+      $('#tweet-container').masonry({
+        itemSelector: '.masonry-item',
+        columnWidth: 0
+      });
+
     });
 end
