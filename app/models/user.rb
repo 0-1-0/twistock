@@ -346,14 +346,13 @@ class User < ActiveRecord::Base
 
   def popularity_stocks_coefficient(count=0)
     t = self.my_shares.sum(:count) + count
-    current_price = share_price.to_f
+    current_price = base_price.to_f || 0
 
     a = current_price/134000.0
-    a *= t*t
+    a *= t
+    a *= t
 
-    m = 1 + Math::log10(a)
-    m *= 0.1
-    m += 1
+    m = 1 + 0.1*Math::log10(a+1)
 
     return m
   end

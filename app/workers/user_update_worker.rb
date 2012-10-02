@@ -59,10 +59,10 @@ class UserUpdateWorker
     end   
 
 
-    user.tweets_num    = timeline.count
-    user.retweets_num  = timeline.inject(0){|a, b| a += b.retweet_count}
-    user.followers_num = twitter_user.followers_count
-    user.pop           = user.popularity
+    user.tweets_num    = timeline.count || 0
+    user.retweets_num  = timeline.inject(0){|a, b| a += b.retweet_count} || 0
+    user.followers_num = twitter_user.followers_count || 0
+    user.pop           = user.popularity || 0
     user.save
     user.reload
 
@@ -127,7 +127,7 @@ class UserUpdateWorker
     a = 7*a
 
     b = user.followers_num.to_f**(0.5)
-    b = b/25
+    b = b/25.0
     b = Math::log(Math::E + b)
     b = b**(0.5)
     b = (1 + b)**11
@@ -137,6 +137,9 @@ class UserUpdateWorker
     price = User::MINIMUM_PRICE if price < 0
 
     user.base_price  = price.round
+    user.save
+    user.reload
+
     user.share_price = (price*user.popularity_stocks_coefficient).round
     user.save
     logger.info 'Saved user to database ' + user.name
