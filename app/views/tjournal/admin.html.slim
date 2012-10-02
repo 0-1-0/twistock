@@ -1,0 +1,23 @@
+.well
+  table.table.table-bordered
+    thead
+      tr
+        th User nickname
+        th User name
+        th Tweet text
+        th Tweet Rank
+        th Current category
+        th Edit category
+    - @users_with_top_tweets.each do |user|
+      tr
+        td @#{user.nickname}
+        td=user.name
+        td=user.best_tweet_text
+        td=user.best_tweet_param
+        td=user.tweet_category || ''
+        td 
+          = simple_form_for 'new_category', url: '/tjournal/update', html: { class: 'form-horizontal' } do |f|
+            = f.input :user_id, :as=>:hidden, input_html: {value: user.id}
+            = f.input :category, :as=> :string
+            .pull-right
+              = f.button :submit
