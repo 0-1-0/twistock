@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
 
   def update_best_tweet_param
     if best_tweet_retweets_num > 0 and followers_num > 0
-      best_tweet_param = best_tweet_retweets_num*1.0/(followers_num + 1)
+      best_tweet_param = best_tweet_retweets_num*1.0/(followers_num + 1.0)
     else
       best_tweet_param = 0.0
     end
