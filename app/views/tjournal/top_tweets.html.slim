@@ -1,5 +1,5 @@
 .row
-  .span10.well.block.offset1
+  .span10.offset1.well.block
     h1 Top Tweets
     h3.pull-left #{t(:categories)}: 
     ul.nav.nav-pills.offset1.menu
@@ -10,11 +10,10 @@
           li.category-link[class_to_switch='#{category}']
             a[href='#']=category
 
-.row#top-tweets
-  .span11.offset1
-    ul.thumbnails#tweet-container
+.row
+  .span10.offset1#top-tweets
       - @users_with_top_tweets.each do |user|
-        li[class='well block masonry-item thumbnail #{user.tweet_category}']
+        div[class='well block masonry-item #{user.tweet_category}']
           .top-tweet
             table
               tr
@@ -27,35 +26,40 @@
                     small=user.name
                   h5 
                     small=t(:one_stock_price) + ': $' + user.share_price.to_s
-                  
-              
             .center
               small
-                a[href='/profiles/#{user.nickname}'] =t :buy 
-                  
-
-                  
-
+                a[href='/profiles/#{user.nickname}'] 
+                  .btn.btn-small=t :buy   
             br
             p=user.best_tweet_text
 
 =content_for :javascripts do
   javascript:
-    $('#tweet-container').masonry({
-      itemSelector: '.masonry-item',
-      columnWidth: 0
-    });
+    var init_masonry = function(selector_class){
+      $('#top-tweets').masonry({
+        itemSelector: selector_class,
+        columnWidth: 0,
+        singleMode: true,
+        isResizable: true,
+        isAnimated: true,
+        animationOptions: {
+          duration: 750,
+          easing: 'linear',
+          queue: false
+        }
+      });
+    };
 
-    $('.thumbnail').each(function(){
+    init_masonry('.masonry-item');
+
+    $('.masonry-item').each(function(){
       $(this).linkify();
     });
 
     $('#category-all').click(function(){
       $('.masonry-item').show();
-      $('#tweet-container').masonry({
-        itemSelector: '.masonry-item',
-        columnWidth: 0
-      });
+      $('#top-tweets').masonry('destroy');
+      init_masonry('.masonry-item');
     });
 
     $('.menu li').click(function(e) {
@@ -68,15 +72,13 @@
     });
 
     $('.category-link').click(function(){
-      $('.thumbnail').hide();
+      $('.masonry-item').hide();
 
-      var xclass = '.' + $(this).attr('class_to_switch');
+      var  xclass = '.' + $(this).attr('class_to_switch');
       $(xclass).show();
+      $('#top-tweets').masonry('destroy');
+      init_masonry(xclass);
 
-      $('#tweet-container').masonry({
-        itemSelector: '.masonry-item',
-        columnWidth: 0
-      });
 
     });
 end
