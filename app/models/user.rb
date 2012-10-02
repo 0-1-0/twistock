@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   RU_LOCALE = 'ru'
 
   PROTECTED_PRICE = 1
-  MINIMUM_PRICE   = 10
+  MINIMUM_PRICE   = 2
 
   def to_param
     nickname
@@ -345,15 +345,17 @@ class User < ActiveRecord::Base
   end
 
   def popularity_stocks_coefficient(count=0)
-    d = self.my_shares.sum(:count) + count
+    t = self.my_shares.sum(:count) + count
+    current_price = share_price.to_f
 
-    if d < POPULARITY_CONSTANT
-      d = (d + POPULARITY_CONSTANT)/POPULARITY_CONSTANT
-    else
-      d = Math::log10(d + 1)
-    end
+    a = current_price/134000.0
+    a *= t*t
 
-    return d
+    m = 1 + Math::log10(a)
+    m *= 0.1
+    m += 1
+
+    return m
   end
 
   def price_after_transaction(count)
