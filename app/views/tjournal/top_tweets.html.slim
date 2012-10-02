@@ -30,6 +30,8 @@
                 a[href='/profiles/#{user.nickname}'] 
                   .btn.btn-small=t :buy   
             br
+            - if user.best_tweet_media_url
+              =image_tag user.best_tweet_media_url
             p.justify=user.best_tweet_text
 
 =content_for :javascripts do

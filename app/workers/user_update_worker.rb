@@ -82,9 +82,11 @@ class UserUpdateWorker
 
         begin
           if tweet.media
-            url = tweet.urls[0]
-            if url
-              media_url = url.expanded_url
+            tweet.media.each do |m|
+              url = m.media_url
+              if url.index('jpg') or url.index('jpeg') or url.index('png')
+                media_url = url
+              end
             end
           else
             media_url = nil
