@@ -12,8 +12,12 @@ en:
   _on: 'On'
   _off: 'Off'
 
+  all: 'All'
+
   english: 'English'
   russian: 'Russian'
+
+  categories: 'Categories:'
 
   bought: "bought"
   sold: 'sold'
