@@ -113,6 +113,7 @@ class UserUpdateWorker
       user.reload
 
       user.update_best_tweet_param
+      user.tweet_category = nil
       user.save
     end
 
