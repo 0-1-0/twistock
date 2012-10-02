@@ -48,6 +48,8 @@ gem 'squeel'
 group :development do
   gem 'looksee'
   gem 'rails_best_practices'
+  gem 'bullet'
+  gem 'quiet_assets'
 end
 
 # --- BDD фреймворки

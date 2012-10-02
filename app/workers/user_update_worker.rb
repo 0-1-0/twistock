@@ -123,16 +123,16 @@ class UserUpdateWorker
     a = Math::log(a + Math::E)
     a = a**(0.5)
     a = (a + 1)**7
-    a = 70*a
+    a = 7*a
 
     b = user.followers_num.to_f**(0.5)
     b = b/25
     b = Math::log(Math::E + b)
     b = b**(0.5)
     b = (1 + b)**11
+    b = b*0.1
     
-    price = a + b - 10920
-    price = price/10
+    price = a + b - 1092
     price = User::MINIMUM_PRICE if price < 0
 
     user.base_price  = price.round

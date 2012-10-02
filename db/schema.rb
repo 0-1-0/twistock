@@ -93,12 +93,12 @@ ActiveRecord::Schema.define(:version => 20120930162501) do
     t.integer  "share_price",             :limit => 8
     t.datetime "last_update"
     t.integer  "base_price"
-    t.integer  "hour_delta_price"
+    t.integer  "hour_delta_price",                     :default => 0
     t.boolean  "is_admin",                             :default => false
     t.string   "token"
     t.string   "secret"
     t.boolean  "acivated",                             :default => false
-    t.string   "locale",                               :default => "en"
+    t.string   "locale"
     t.boolean  "twitter_translation",                  :default => true
     t.integer  "tweets_num",                           :default => 0
     t.integer  "retweets_num",                         :default => 0
