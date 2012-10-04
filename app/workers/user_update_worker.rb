@@ -4,6 +4,14 @@ class UserUpdateWorker
   include Sidekiq::Worker
   sidekiq_options :queue => :user_updates
 
+  def is_image(url)
+    return (url.index('.jpg') or url.index('.jpeg') or url.index('.png') or url.index('.gif'))
+  end
+
+  def is_youtube(url)
+    return (url.index('youtube'))
+  end
+
 
   def perform(nickname)
     user = User.find_by_nickname(nickname)
@@ -72,31 +80,40 @@ class UserUpdateWorker
     tweet_id_str   = ''
     media_url      = nil
 
-    timeline.each do |tweet|
+    top_time_gate = Time.now - BEST_UPDATE_DELAY
+    top_time_line = timeline.select{|t| t.created_at > top_time_gate}
+
+    top_time_line.each do |tweet|
       if tweet.retweet_count > max_tweet_num
         #logger.info tweet.retweet_count
         max_tweet_num  = tweet.retweet_count
         max_tweet_text = tweet.text
         tweet_id_str   = tweet.id.to_s
 
+        #Обработка медиаданных твита
+        media_url      = nil
+        # if tweet.urls
+        #   begin
+        #     url = tweet.urls[0].expanded_url
+        #     if is_image(url)
+        #       media_url = url
+        #     end
+        #   rescue
+        #     logger.info 'Cannot find media url in tweet'
+        #   end
+        # end
 
-        begin
-          if tweet.media
-            tweet.media.each do |m|
-              url = m.media_url
-              if url.index('jpg') or url.index('jpeg') or url.index('png')
-                media_url = url
+        if tweet.media
+          tweet.media.each do |entity|
+            begin
+              if is_image(entity.media_url) or is_youtube(entity.media_url)
+                media_url = entity.media_url
               end
+            rescue
+              logger.info 'Cannot find media url in tweet'
             end
-          else
-            media_url = nil
           end
-        rescue Exception => e
-          logger.info "Broken loop."
-          logger.info "Reason: #{e}"
-          logger.info e.backtrace
         end
-
 
 
       end 
@@ -109,14 +126,18 @@ class UserUpdateWorker
       if media_url
         user.best_tweet_media_url  = media_url
       end
-      user.best_updated            = Time.now
-
+      user.best_updated            = Time.now      
+      user.tweet_category = nil
       user.save
       user.reload
 
+      # if (user.best_tweet_retweets_num > 0) and (user.followers_num > 0)
+      #   user.best_tweet_param = user.best_tweet_retweets_num*1.0/(user.followers_num + 1.0)
+      # else
+      #   user.best_tweet_param = 0.0
+      # end
+      # user.save
       user.update_best_tweet_param
-      user.tweet_category = nil
-      user.save
     end
 
    

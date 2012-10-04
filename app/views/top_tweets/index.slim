@@ -31,7 +31,10 @@
               .btn.btn-small=t :buy   
         br
         - if user.best_tweet_media_url
-          =image_tag user.best_tweet_media_url
+          - if user.best_tweet_media_url.index('youtube')
+            iframe type="text/html" frameborder="0" width="200" height="200" src='#{user.best_tweet_media_url}'
+          - else
+            =image_tag user.best_tweet_media_url
         p=user.best_tweet_text
 
 =content_for :javascripts do

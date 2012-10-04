@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   POPULARITY_UPDATE_DELAY = 2.weeks
   ANALYSES_UPDATE_DELAY   = 2.hours
   POPULARITY_POWER        = 6
-  BEST_UPDATE_DELAY       = 2.weeks
+  BEST_UPDATE_DELAY       = 1.day
 
   POPULARITY_CONSTANT = 100.0
 
@@ -43,6 +43,16 @@ class User < ActiveRecord::Base
     nickname
   end
 
+  def clear_best_tweet_data
+    self.best_tweet_id = nil
+    self.best_tweet_text = nil
+    self.best_tweet_retweets_num = -1
+    self.best_tweet_media_url = nil
+    self.best_tweet_param = 0.0
+
+    self.save
+  end
+
   def best_tweet_obsolete
     if best_updated
       return (best_updated + User::BEST_UPDATE_DELAY < Time.now )
@@ -52,8 +62,8 @@ class User < ActiveRecord::Base
   end
 
   def update_best_tweet_param
-    if best_tweet_retweets_num > 0 and followers_num > 0
-      self.best_tweet_param = best_tweet_retweets_num*1.0/(followers_num + 1.0)
+    if (self.best_tweet_retweets_num > 0) and (self.followers_num > 0)
+      self.best_tweet_param = self.best_tweet_retweets_num*1.0/(self.followers_num + 1.0)
     else
       self.best_tweet_param = 0.0
     end
