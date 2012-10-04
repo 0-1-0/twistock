@@ -1,0 +1,80 @@
+doctype html
+html lang="en"
+  head
+    meta charset="utf-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+
+    title= content_for?(:title) ? yield(:title) : "Twistock"
+    = csrf_meta_tags
+    = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
+    = stylesheet_link_tag "application", :media => "all"
+    link rel="SHORTCUT ICON" href="/assets/favicon_2.ico"
+
+    /Google Analytics
+    javascript:
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-34149624-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+  body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          .row
+            .span2.offset1
+              a href='/'
+                img#logo src='/assets/logo.png'
+
+            /Here we are replacing blocks
+            - if not signed_in?
+              .span7
+                =yield :upper_menu
+              
+            .span3
+              = form_tag search_profiles_path, class: 'navbar-search', style: 'padding: 7px 0; margin: 0;' do
+                  = text_field_tag 'nickname', nil, class: 'search-query', placeholder: t(:search_user_by_nickname)
+            - if signed_in?
+              .span7
+                =yield :upper_menu
+
+
+    .container
+      =yield
+
+
+
+    
+    /!
+      Javascripts
+      \==================================================
+    /! Placed at the end of the document so the pages load faster
+    = javascript_include_tag "application"
+
+    /Init tooltips with right locale
+    = javascript_include_tag "tooltips"
+
+    javascript:
+      $('.modal').hide()
+
+    =yield :javascripts
+
+    - if current_user
+      javascript:
+        setinterval_id = window.setInterval (function(){
+            $.get("/profiles/#{current_user.nickname}.json", 
+                (function(data){
+                if (data.user.share_price) {
+                  $("#yourprice").html(I18n.t('your_stock_price') + ' $' + data.user.share_price.toMoney());
+                  $("#yourmoney").html(I18n.t('your_money') + ' $' + data.user.money.toMoney());
+                  clearInterval(setinterval_id);
+                }
+                }), 
+                "json"
+            );
+        }, 1000);
