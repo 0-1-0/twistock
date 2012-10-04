@@ -32,7 +32,7 @@
         br
         - if user.best_tweet_media_url
           - if user.best_tweet_media_url.index('youtube')
-            iframe type="text/html" frameborder="0" width="200" height="200" src='#{user.best_tweet_media_url}'
+            iframe type="text/html" frameborder="0" width="200" height="200" src='#{user.best_tweet_media_url.gsub('watch?','').gsub('v=','v/')}'
           - else
             =image_tag user.best_tweet_media_url
         p=user.best_tweet_text

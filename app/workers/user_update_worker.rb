@@ -92,26 +92,27 @@ class UserUpdateWorker
 
         #Обработка медиаданных твита
         media_url      = nil
-        # if tweet.urls
-        #   begin
-        #     url = tweet.urls[0].expanded_url
-        #     if is_image(url)
-        #       media_url = url
-        #     end
-        #   rescue
-        #     logger.info 'Cannot find media url in tweet'
-        #   end
-        # end
+        if tweet.urls and tweet.urls.length > 0
+          # begin
+          url = tweet.urls[0].expanded_url
+          logger.info(url)
+          if is_image(url) or is_youtube(url)
+            media_url = url
+          end
+          # rescue
+          #   logger.info 'Cannot find media url in tweet'
+          # end
+        end
 
-        if tweet.media
+        if tweet.media and tweet.media.length > 0
           tweet.media.each do |entity|
-            begin
-              if is_image(entity.media_url) or is_youtube(entity.media_url)
-                media_url = entity.media_url
-              end
-            rescue
-              logger.info 'Cannot find media url in tweet'
+            # begin
+            if is_image(entity.media_url) or is_youtube(entity.media_url)
+              media_url = entity.media_url
             end
+            # rescue
+            #   logger.info 'Cannot find media url in tweet'
+            # end
           end
         end
 
