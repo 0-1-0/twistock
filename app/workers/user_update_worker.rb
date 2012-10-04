@@ -80,7 +80,7 @@ class UserUpdateWorker
     tweet_id_str   = ''
     media_url      = nil
 
-    top_time_gate = Time.now - BEST_UPDATE_DELAY
+    top_time_gate = Time.now - User::BEST_UPDATE_DELAY
     top_time_line = timeline.select{|t| t.created_at > top_time_gate}
 
     top_time_line.each do |tweet|
