@@ -1,5 +1,5 @@
 .row
-  .span10.offset1.well.block
+  .well.block[style='margin-right: 25px']
     h1 Top Tweets
     h3.pull-left #{t(:categories)}: 
     ul.nav.nav-pills.offset1.menu
@@ -10,45 +10,39 @@
           li.category-link[class_to_switch='#{category}']
             a[href='#']=category
 
-.row
-  .span10.offset1#top-tweets
-      - @users_with_top_tweets.each do |user|
-        div[class='well block masonry-item #{user.tweet_category}']
-          .top-tweet
-            table
-              tr
-                td=image_tag user.avatar
-                td[style='padding-left: 22px']                  
-                  h3 
-                    a[href='http://twitter.com/#{user.nickname}' target='blank'] @#{user.nickname}
-                  h5
-                    small=user.name
-                  h5 
-                    small=t(:one_stock_price) + ': $' + user.share_price.to_s
-            .center
-              small
-                a[href='/profiles/#{user.nickname}'] 
-                  .btn.btn-small=t :buy   
-            br
-            - if user.best_tweet_media_url
-              =image_tag user.best_tweet_media_url
-            p.justify=user.best_tweet_text
+.row#top-tweets  
+  - @users_with_top_tweets.each do |user|
+    div[class='well block masonry-item #{user.tweet_category}']
+      .top-tweet
+        table
+          tr
+            td=image_tag user.avatar
+            td[style='padding-left: 22px']                  
+              h3 
+                a[href='http://twitter.com/#{user.nickname}' target='blank'] @#{user.nickname}
+              h5
+                small=user.name
+              h5 
+                small=t(:one_stock_price) + ': $' + user.share_price.to_s
+        .center
+          br
+          small
+            a[href='/profiles/#{user.nickname}'] 
+              .btn.btn-small=t :buy   
+        br
+        - if user.best_tweet_media_url
+          =image_tag user.best_tweet_media_url
+        p=user.best_tweet_text
 
 =content_for :javascripts do
   javascript:
     var init_masonry = function(selector_class){
       $('#top-tweets').masonry({
         itemSelector: selector_class,
-        columnWidth: 0,
-        singleMode: true,
-        isResizable: true,
-        isAnimated: true,
-        animationOptions: {
-          duration: 750,
-          easing: 'linear',
-          queue: false
-        }
+        columnWidth: 14
       });
+
+      $('#header').attr('width', $('#top-tweets').attr('width'))
     };
 
     init_masonry('.masonry-item');
