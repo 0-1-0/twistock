@@ -16,7 +16,7 @@
         td=user.best_tweet_param
         td=user.tweet_category || ''
         td 
-          = simple_form_for 'new_category', url: '/tjournal/update', html: { class: 'form-horizontal' } do |f|
+          = simple_form_for 'new_category', url: update_top_tweets_path, html: { class: 'form-horizontal' } do |f|
             = f.input :user_id, :as=>:hidden, input_html: {value: user.id}
             = f.input :category, :as=> :string
             .pull-right

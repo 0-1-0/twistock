@@ -1,7 +1,7 @@
 Twitterexchange::Application.routes.draw do
-  get  "tjournal/top_tweets"
-  get  "tjournal/admin"
-  post "tjournal/update"
+  get  "top_tweets/index"
+  get  "top_tweets/admin"
+  post "top_tweets/update"
 
   get "settings/twitter_translation"
 
