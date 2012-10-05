@@ -18,13 +18,20 @@ ru:
   all: 'Все'
 
   retweet: 'Ретвитнуть'
-  tweet_link: 'Ссылка на Твиттер'
+  tweet_link: 'Ссылка на твит'
+  language: 'Язык'
 
   top_tweets_text: >
     Изучив миллионы твитов, наш робот выбрал лучшие. Будьте в курсе.
 
   english: 'Английский'
   russian: 'Русский'
+  german: 'Немецкий'
+  dutch:  'Фламандский' 
+  portuguese: 'Португальский'
+  farsi: 'Фарси'
+  spanish: 'Испанский'
+  french: 'Французский'
 
   most_popular_tweet: 'Самый популярный твит'
   top_tweets_worldwide: 'Топ твитов'

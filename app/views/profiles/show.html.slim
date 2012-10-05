@@ -5,12 +5,6 @@
           =link_to t(:back_to_main_page), :root
 end
 
-=content_for :javascripts do
-  = javascript_include_tag "profiles/show"
-end
-
-
-
 - if signed_in?
   #buy_modal.modal.fade
     .modal-header
@@ -158,6 +152,8 @@ end
                 td Calculating..
 
 =content_for :javascripts do
+  = javascript_include_tag "profiles/show"
+  
   javascript:
     $('#his-top-tweet').linkify();
 end

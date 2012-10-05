@@ -253,6 +253,7 @@ GEM
       rack
       raindrops (~> 0.7)
     uniform_notifier (1.1.0)
+    whatlanguage (1.0.0)
     xpath (0.1.4)
       nokogiri (~> 1.3)
 
@@ -293,3 +294,4 @@ DEPENDENCIES
   twitter-bootstrap-rails (= 2.1.0)
   uglifier (>= 1.0.3)
   unicorn
+  whatlanguage

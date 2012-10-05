@@ -2,6 +2,16 @@
   .well.block[style='margin-right: 25px']
     h1 Top Tweets
     h3=t :top_tweets_text
+    br
+    h3.pull-left 
+      =t :language
+      | : 
+    ul.nav.nav-pills.offset1.lang-menu
+      li.active#ru-btn lang_class='.#{:russian}'
+        a href='#'  =t :russian
+      li#en-btn lang_class='.#{:english}'
+        a href='#'  =t :english
+
     h3.pull-left #{t(:categories)}: 
     ul.nav.nav-pills.offset1.menu
       li.active
@@ -13,7 +23,7 @@
 
 .row#top-tweets  
   - @users_with_top_tweets.each do |user|
-    div[class='well block masonry-item #{user.tweet_category}']
+    div[class='well block masonry-item #{user.tweet_category}  #{user.best_tweet_text.language}']
       .top-tweet
         table
           tr
@@ -45,25 +55,44 @@
 
 =content_for :javascripts do
   javascript:
-    var init_masonry = function(selector_class){
+    var lang_class = '.russian';
+    var category_class = '';
+
+
+    $(document).ready(function(){   
+
+        if(I18n.defaultLocale == 'en'){
+          lang_class = '.english';
+          $('#en-btn').click();
+        };
+
+       $('.masonry-item').each(function(){
+          $(this).linkify();
+        });
+
+        init_masonry();
+    })
+
+
+    var init_masonry = function(){
+      $('.masonry-item').hide();
+      $(category_class+lang_class).show();
+
       $('#top-tweets').masonry({
-        itemSelector: selector_class,
+        itemSelector: category_class + lang_class,
         columnWidth: 14
       });
 
       $('#header').attr('width', $('#top-tweets').attr('width'))
-    };
+    };   
 
-    init_masonry('.masonry-item');
 
-    $('.masonry-item').each(function(){
-      $(this).linkify();
-    });
 
     $('#category-all').click(function(){
-      $('.masonry-item').show();
+      category_class = '';
+
       $('#top-tweets').masonry('destroy');
-      init_masonry('.masonry-item');
+      init_masonry();
     });
 
     $('.menu li').click(function(e) {
@@ -75,13 +104,29 @@
       e.preventDefault();
     });
 
+
+    $('.lang-menu li').click(function(e) {
+      $('.lang-menu li').removeClass('active');
+      var $this = $(this);
+      if (!$this.hasClass('active')) {
+        $this.addClass('active');
+        lang_class = $(this).attr('lang_class');
+
+        $('#top-tweets').masonry('destroy');
+        init_masonry();
+      }
+      e.preventDefault();
+    });
+
+
     $('.category-link').click(function(){
       $('.masonry-item').hide();
 
-      var  xclass = '.' + $(this).attr('class_to_switch');
-      $(xclass).show();
+      category_class = '.' + $(this).attr('class_to_switch');
+  
+  
       $('#top-tweets').masonry('destroy');
-      init_masonry(xclass);
+      init_masonry();
 
 
     });

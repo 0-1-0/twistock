@@ -9,6 +9,7 @@
 //= require interactive
 //= require masonry.min
 //= require linkify
+//= require job
 
 
 
@@ -26,9 +27,8 @@ $('.datatable').dataTable({
 });
 
 
-
-
-
+I18n.defaultLocale = "#{I18n.locale}";
+I18n.locale = "#{I18n.locale}";
 
 
 
