@@ -2,6 +2,14 @@
   .well.block[style='margin-right: 25px']
     h1 Top Tweets
     h3=t :top_tweets_text
+    br
+    h3.pull-left Languages: 
+    ul.nav.nav-pills.offset1
+      li.active 
+        a Russian
+      li 
+        a English
+
     h3.pull-left #{t(:categories)}: 
     ul.nav.nav-pills.offset1.menu
       li.active
@@ -40,6 +48,7 @@
         a[href='http://twitter.com/#{user.nickname}/status/#{user.best_tweet_id}' target='blank']
           =t :tweet_link
         .pull-right
+          p=t user.best_tweet_text.language
           a[href='http://twitter.com/intent/retweet?tweet_id=#{user.best_tweet_id}&related=twistockcom' target='blank']
             =t :retweet
 

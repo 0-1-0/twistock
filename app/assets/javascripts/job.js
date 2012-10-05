@@ -1,0 +1,1 @@
+console.log('Familiar with backbone, html5 and slim/sass? If so, we are looking for you! Please, write to job@twistock.com :)');

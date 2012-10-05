@@ -1,3 +1,5 @@
+require 'whatlanguage'
+
 class TopTweetsController < ApplicationController
   layout  'top_tweets'
   before_filter :admin_required, only: [:admin,:update]

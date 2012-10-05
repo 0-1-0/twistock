@@ -21,6 +21,12 @@ en:
 
   english: 'English'
   russian: 'Russian'
+  german: 'German'
+  dutch:  'Dutch' 
+  portuguese: 'Portuguese'
+  farsi: 'Farsi'
+  spanish: 'Spanish'
+  french: 'French'
 
   most_popular_tweet: 'Most popular tweet'
   top_tweets_worldwide: 'Top Tweets Worldwide'
