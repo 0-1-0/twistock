@@ -1,6 +1,7 @@
 .row
   .well.block[style='margin-right: 25px']
     h1 Top Tweets
+    h3=t :top_tweets_text
     h3.pull-left #{t(:categories)}: 
     ul.nav.nav-pills.offset1.menu
       li.active
@@ -36,6 +37,11 @@
           - else
             =image_tag user.best_tweet_media_url
         p=user.best_tweet_text
+        a[href='http://twitter.com/#{user.nickname}/status/#{user.best_tweet_id}' target='blank']
+          =t :tweet_link
+        .pull-right
+          a[href='http://twitter.com/intent/retweet?tweet_id=#{user.best_tweet_id}&related=twistockcom' target='blank']
+            =t :retweet
 
 =content_for :javascripts do
   javascript:

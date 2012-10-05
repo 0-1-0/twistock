@@ -6,7 +6,7 @@ ul.nav.nav-list
           = image_tag user.profile_image , size: '80x80', class: 'avatar' 
         td colspan=2
           h3 
-            | @ #{user.nickname}
+            | @#{user.nickname}
             small.pull-right
               .btn.btn-small
                 a data-toggle="modal" href="#promo_modal"  =t(:how_it_works)                
@@ -31,10 +31,13 @@ ul.nav.nav-list
           /   =link_to 'Sell your startingg shares', '/profiles/' + user.nickname
 
   li
-    br
     hr
-  li#popularity= render :partial=>'profiles/popularity', :locals=>{:user=>user, :active=>'true'}
-  li= render :partial=>'profiles/price_dynamics', :locals=>{:user=>user, :size=>'400x100'}
+  li#popularity
+    = render :partial=>'profiles/popularity', :locals=>{:user=>user, :active=>'true'}
+  li
+    = render :partial=>'profiles/price_dynamics', :locals=>{:user=>user, :size=>'400x100'}
+  li
+    = render :partial=>'profiles/most_popular_tweet', :locals=>{:user=>user}
   li
     br
     br

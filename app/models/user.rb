@@ -434,7 +434,7 @@ class User < ActiveRecord::Base
   end
 
   def popularity
-    self.history.count#.where("created_at >= :time", {:time => Time.now - User::POPULARITY_UPDATE_DELAY}).count
+    self.history.where("created_at >= :time", {:time => Time.now - User::POPULARITY_UPDATE_DELAY}).count
   end
 
   def price_dynamics_data
