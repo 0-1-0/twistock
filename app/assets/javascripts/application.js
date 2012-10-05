@@ -27,6 +27,10 @@ $('.datatable').dataTable({
 });
 
 
+I18n.defaultLocale = "#{I18n.locale}";
+I18n.locale = "#{I18n.locale}";
+
+
 
 
 /* 
