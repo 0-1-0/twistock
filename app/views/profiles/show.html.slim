@@ -55,32 +55,34 @@ end
   .row
     /.span2.avatar= image_tag @user.profile_image
     .span6.micro-offset
-      - if signed_in?
-        .btn-group.pull-right
-          |&nbsp
-          - if @my_page
-            - if @user.retention_shares > 0
-              a.btn.btn-success.btn-large data-toggle="modal" href="#sell_retention_modal" Sell your starting shares
-          - else
-            a.btn.btn-buy.btn-success.btn-large data-toggle="modal" href="#buy_modal" data-price=(@user.share_price.to_i) 
-              =t(:buy)
-            - if current_user.portfel.where(:owner_id=>@user.id).last
-              a.btn.btn-sell.btn-info.btn-sell.btn-large data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-origin=@user.nickname data-count=current_user.portfel.where(:owner_id=>@user.id).last.count 
-                =t(:sell)
-            -else
-              a.btn.btn-large.disabled 
-                =t(:sell)
       .page-header
+        - if signed_in?
+          .btn-group.pull-right[style='margin-right:0px; padding-right:0px']
+            |&nbsp
+            - if @my_page
+              - if @user.retention_shares > 0
+                a.btn.btn-success.btn-large data-toggle="modal" href="#sell_retention_modal" Sell your starting shares
+            - else
+              a.btn.btn-buy.btn-success.btn-large data-toggle="modal" href="#buy_modal" data-price=(@user.share_price.to_i) 
+                =t(:buy)
+              - if current_user.portfel.where(:owner_id=>@user.id).last
+                a.btn.btn-sell.btn-info.btn-sell.btn-large data-toggle="modal" href="#sell_modal" data-owner=@user.nickname data-origin=@user.nickname data-count=current_user.portfel.where(:owner_id=>@user.id).last.count 
+                  =t(:sell)
+              -else
+                a.btn.btn-large.disabled 
+                  =t(:sell)
+
+      
         .avatar.pull-left= image_tag @user.profile_image
-        h1
+        h3
           | @#{@user.nickname}
-        h1
+        h3
           small.info 
             =t :one_stock_price
             =number_to_currency @user.share_price, :precision => 0
         h4= @user.name
 
-        a.micro-offset[target='blank' href='http://twitter.com/#{@user.nickname}'] 
+        a[target='blank' href='http://twitter.com/#{@user.nickname}'] 
           =t :twitter_profile
 
         / - if current_user and current_user.is_admin?
@@ -88,18 +90,24 @@ end
         /       = f.input :target_user, as: :hidden, input_html: {value: @user.nickname}
         /       = f.button :submit, 'Buy all followers', class: 'btn btn-small'
 
-      
-  
-    .span6.micro-offset = render :partial=>'profiles/popularity', :locals=>{:user=>@user, :active=>'true'}
-  
-    .span6.micro-offset = render :partial=>'profiles/price_dynamics', :locals=>{:user=>@user, :size=>'500x100'}
+  .row   
+    ul.nav.nav-list.span6.micro-offset[style='margin-left:50px']
+      li
+         = render :partial=>'profiles/popularity', :locals=>{:user=>@user, :active=>'true'}
+      li
+         = render :partial=>'profiles/price_dynamics', :locals=>{:user=>@user, :size=>'600x100'}
+      li#his-top-tweet
+        = render :partial=>'profiles/most_popular_tweet', :locals=>{:user=>@user}
+      li
+        br
+        br
 
 
 
       /h3#available_shares #{@user.available_shares} shares available
 .well.block
   .row
-    .span5.micro-offset
+    .span6.micro-offset
 
       br
       h2 =t :investment_portfolio
@@ -148,4 +156,9 @@ end
                 td= bos.count * @user.share_price
               - else
                 td Calculating..
+
+=content_for :javascripts do
+  javascript:
+    $('#his-top-tweet').linkify();
+end
 

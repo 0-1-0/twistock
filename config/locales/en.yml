@@ -9,13 +9,23 @@ en:
 
   twitter_translation: 'Posting to twitter'
 
+  top_tweets_text: >
+    Of the millions of tweets our robot picked the most trendy. Just explore and enjoy.
+
   _on: 'On'
   _off: 'Off'
+
+  retweet: 'Retweet'
 
   all: 'All'
 
   english: 'English'
   russian: 'Russian'
+
+  most_popular_tweet: 'Most popular tweet'
+  top_tweets_worldwide: 'Top Tweets Worldwide'
+
+  tweet_link: 'Tweet link'
 
   categories: 'Categories:'
 
