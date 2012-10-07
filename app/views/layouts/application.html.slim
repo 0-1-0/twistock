@@ -92,6 +92,8 @@ html lang="en"
 
     javascript:
       $('.modal').hide()
+      I18n.defaultLocale = "#{I18n.locale}";
+      I18n.locale = "#{I18n.locale}";
 
     =yield :javascripts
 

@@ -14,10 +14,10 @@
 
   - if pr >= 5 and pr < 10
     =t :high
-    .pop-bar[class='progress progress-alert progress-striped progress-bar #{active ? 'active': ''}']
+    .pop-bar[class='progress progress-info progress-striped progress-bar #{active ? 'active': ''}']
       .bar[style="width: 50"]
 
-  - if pr > 10
+  - if pr >= 10
     =t :superstar
     .pop-bar[class='progress progress-success progress-striped progress-bar #{active ? 'active': ''}']
       .bar[style="width: 100%"]
