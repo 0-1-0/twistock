@@ -1,4 +1,4 @@
-:concurrency:  18
+:concurrency:  12
 :queues:
   - [user_updates, 4]
   - [user_mass_updates, 1]
