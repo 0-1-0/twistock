@@ -5,7 +5,7 @@ task :update_users => :environment do
   counter = 0
 
   puts 'Updating potentially bad users with hour_delta_price > 1000'
-  Users.where('hour_delta_price > 1000').each do |user|
+  User.where('hour_delta_price > 1000').each do |user|
     old_delta = user.hour_delta_price
     user.update_share_price
     new_delta = user.hour_delta_price
@@ -24,7 +24,7 @@ task :update_users => :environment do
 
 
   puts 'Updating potentially bad users with hour_delta_price < -1000'
-  Users.where('hour_delta_price < -1000').each do |user|
+  User.where('hour_delta_price < -1000').each do |user|
     old_delta = user.hour_delta_price
     user.update_share_price
     new_delta = user.hour_delta_price

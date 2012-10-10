@@ -74,7 +74,7 @@ class UserUpdateWorker
     user.save
     user.reload
 
-    #Определяем самый популярный твит пользователя
+    # Определяем самый популярный твит пользователя
     max_tweet_num  = -1
     max_tweet_text = ''
     tweet_id_str   = ''
