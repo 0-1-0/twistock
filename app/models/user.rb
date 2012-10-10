@@ -136,7 +136,7 @@ class User < ActiveRecord::Base
   #Use with care!!!
   def self.update_all_profiles
     User.find(:all).each do |u|
-      UserUpdateWorker.perform_async(u.nickname)
+      UserMassUpdateWorker.perform_async(u.nickname)
     end
   end
   
