@@ -112,6 +112,7 @@ GEM
     mime-types (1.19)
     multi_json (1.3.6)
     multipart-post (1.1.5)
+    mustang (0.2.2)
     newrelic_rpm (3.4.1)
     nokogiri (1.5.5)
     oauth (0.4.7)
@@ -274,6 +275,7 @@ DEPENDENCIES
   jquery-rails
   less-rails
   looksee
+  mustang
   newrelic_rpm (= 3.4.1)
   omniauth
   omniauth-twitter
@@ -289,7 +291,6 @@ DEPENDENCIES
   slim
   slim-rails
   squeel
-  therubyracer
   twitter (= 2.2.0)
   twitter-bootstrap-rails (= 2.1.0)
   uglifier (>= 1.0.3)
