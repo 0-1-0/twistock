@@ -1,8 +1,6 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
   # CALLBACKS
-  # TODO: is it necessary?
-  after_find :update_profile
   after_create :follow_twistock
 
   # RELATIONS
@@ -32,29 +30,37 @@ class User < ActiveRecord::Base
       User.where("upper(nickname) = upper('#{nickname}')").first
     end
 
-    def find_by_nicknames(ids, opts = {})
-      ids.map!(&:upcase)
+    # По заданному списку ников выдает массив пользователей.
+    # Если пользователя нет в базе - пытается его завести.
+    # Регистронезависим. Имеет следующие опции:
+    #
+    # limit: int - выдать только указанное число пользователй
+    # shuffle: bool - случайный порядок
+    # history: bool - подгрузить history (includes)
+    def find_by_nicknames(nicknames, opts = {})
+      nicknames.map!(&:upcase)
 
       # создаем несуществующих
-      exists = User.where{upper(nickname).in ids}.select(:nickname)
+      exists = User.where{upper(nickname).in nicknames}.select(:nickname)
         .map(&:nickname).map(&:upcase)
-      (ids - exists).each do |id|
-        User.find_or_create id
+      (nicknames - exists).each do |nick|
+        User.find_or_create nick
       end
 
       # сама выборка
-      result = User.where{upper(nickname).in ids}
+      result = User.where{upper(nickname).in nicknames}
       result = result.includes(:history)  if opts[:history]
       result = result.order('RANDOM()')   if opts[:shuffle]
       result = result.limit(opts[:limit]) if opts[:limit]
       result
     end
 
-    def find_or_create(id)
-      user = (User.find_by_nickname(id) or User.create_from_twitter(id))
+    # Регистронезависимый поиск по нику. В случае отсутсвия - создает пользователя.
+    def find_or_create(nick)
+      User.find_by_nickname(nick) or User.create_from_twitter_nickname(nick)
     end
 
-    #Use with care!!!
+    # Обновляет все профили в низкоприоритетной очереди.
     def update_all_profiles
       User.all.each do |u|
         UserMassUpdateWorker.perform_async(u.nickname)
@@ -76,7 +82,7 @@ class User < ActiveRecord::Base
       user
     end
 
-    def create_from_twitter(nickname)
+    def create_from_twitter_nickname(nickname)
       begin
         info = Twitter.user(nickname)
       rescue
@@ -92,10 +98,6 @@ class User < ActiveRecord::Base
       )
       user.update_profile
       user
-    end
-
-    def try_to_find(uid)
-      User.where(uid: uid).first
     end
   end # class << self
 
@@ -113,35 +115,34 @@ class User < ActiveRecord::Base
     self.best_tweet_param = 0.0
 
     self.save
+    self
   end
 
   def best_tweet_obsolete
-    if best_updated
-      (best_updated + Settings.best_update_delay < Time.now )
-    else
-      false
-    end
+    best_updated and (best_updated + Settings.best_update_delay < Time.now )
   end
 
   def update_best_tweet_param
-    if (self.best_tweet_retweets_num > 0) and (self.followers_num > 0)
-      self.best_tweet_param = self.best_tweet_retweets_num*1.0/(self.followers_num + 1.0)
+    if (best_tweet_retweets_num > 0) and (followers_num > 0)
+      self.best_tweet_param = best_tweet_retweets_num * 1.0/(followers_num + 1.0)
     else
       self.best_tweet_param = 0.0
     end
 
     self.save
+    self
   end
 
 
-  def has_credentials
-    token and secret and true or false # чтобы всегда возвращало bool
+  def has_credentials?
+    token? and secret?
   end
 
   def follow_twistock
-    if has_credentials
-      FollowWorker.perform_async(self.id)
+    if has_credentials?
+      FollowWorker.perform_async(id)
     end
+    self
   end
 
   def stocks_in_portfel(user)
@@ -154,16 +155,18 @@ class User < ActiveRecord::Base
     self.avatar.sub("_normal", "")
   end
 
-  def update_oauth_info_if_neccesary(auth)
+  def update_oauth_info_if_necessary(auth)
     unless token? and secret?
       self.token  = auth.credentials.token
       self.secret = auth.credentials.secret
 
       self.save
     end
+
+    self
   end
 
-  #Twitter client methods  
+  # Twitter client methods
   def twitter
     consumer_key    = ENV['TWITTER_CONSUMER_KEY']    || 'Jr8mGbKWWCgHr99rzjHa3g'
     consumer_secret = ENV['TWITTER_CONSUMER_SECRET'] || 'a86Mfo1t4du7NVgFyplFfEhJ5j80esEUuknKRRtPJ60'
@@ -175,6 +178,8 @@ class User < ActiveRecord::Base
       :oauth_token_secret => secret
       )
   end
+
+  # TODO: возможно, покупку/продажу имеет смысл выделить в mixin
 
   def buy_shares(owner, count)
     raise "You cannot buy 0 shares" unless count > 0
@@ -214,16 +219,19 @@ class User < ActiveRecord::Base
 
       owner.save!
       self.save!
+
+      self
     end
 
     # теперь фигачим транзакцию
     t = Transaction.create(
-    user:   self,
-    owner:  owner,
-    action: 'buy',
-    count:  count,
-    price:  owner.share_price,
-    cost:   cost)
+                            user:   self,
+                            owner:  owner,
+                            action: 'buy',
+                            count:  count,
+                            price:  owner.share_price,
+                            cost:   cost
+                          )
 
 
     #Пишем о транзакции в твиттер
@@ -246,7 +254,6 @@ class User < ActiveRecord::Base
       raise "You have not this shares" unless bos = self.portfel.where(owner_id: owner.id).first
       raise "You have not this shares" if bos.count < count
 
-      #owner.shares  += count
       bos.count     -= count
       if bos.count == 0
         bos.delete
@@ -284,7 +291,7 @@ class User < ActiveRecord::Base
 
   def sell_retention(count)
     raise "You cannot sell 0 shares" unless count > 0
-    
+
     cost = 0
 
     User.transaction do
@@ -317,8 +324,7 @@ class User < ActiveRecord::Base
     current_price = base_price.to_f || 0
 
     a = current_price/134000.0
-    a *= t
-    a *= t
+    a *= t*t
 
     m = 1 + 0.1*Math::log10(a+1)
 
@@ -375,7 +381,6 @@ class User < ActiveRecord::Base
       
       self
     end
-
   end
 
 

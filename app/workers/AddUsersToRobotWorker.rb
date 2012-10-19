@@ -8,7 +8,7 @@ class AddUsersToRobotWorker
 
     delay = 0
     @ids.each do |id|
-      user = (User.find_by_nickname(id) or User.create_from_twitter(id))
+      user = (User.find_by_nickname(id) or User.create_from_twitter_nickname(id))
       if user
         delay += 1
 

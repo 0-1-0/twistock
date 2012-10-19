@@ -17,7 +17,7 @@ class BuyFollowersWorker
 
     follower_ids.ids.each do |id|
       follower = Twitter.user(id)
-      User.create_from_twitter(follower.screen_name)
+      User.create_from_twitter_nickname(follower.screen_name)
     end
 
     follower_ids.ids.each do |id|
