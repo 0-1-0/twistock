@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
       begin
         I18n.locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
       rescue
-        I18n.locale = User::EN_LOCALE
+        I18n.locale = Settings.en_locale
       end
     end
 

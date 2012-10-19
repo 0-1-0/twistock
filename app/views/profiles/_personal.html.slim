@@ -115,7 +115,7 @@ ul.nav.nav-list
       i.icon-globe
       =t(:change_language)
     .btn-group
-      - if I18n.locale.to_s.downcase == User::EN_LOCALE    
+      - if I18n.locale.to_s.downcase == Settings.en_locale
         .btn.btn-small.disabled =t :english
         .btn.btn-small
           =link_to t(:russian), '/profiles/change_language?locale=ru'

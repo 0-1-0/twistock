@@ -37,8 +37,8 @@ class UserUpdateWorker
 
       if twitter_user.protected 
         logger.info 'User is protected !!! =('
-        user.share_price = User::PROTECTED_PRICE
-        user.base_price  = User::PROTECTED_PRICE
+        user.share_price = Settings.protected_price
+        user.base_price  = Settings.protected_price
         user.save
         
         return user
@@ -80,7 +80,7 @@ class UserUpdateWorker
     tweet_id_str   = ''
     media_url      = nil
 
-    top_time_gate = Time.now - User::BEST_UPDATE_DELAY
+    top_time_gate = Time.now - Settings.best_update_delay
     top_time_line = timeline.select{|t| t.created_at > top_time_gate}
 
     top_time_line.each do |tweet|
@@ -158,7 +158,7 @@ class UserUpdateWorker
     b = b*0.1
     
     price = a + b - 1092
-    price = User::MINIMUM_PRICE if price < 0
+    price = Settings.minimum_price if price < 0
 
     user.base_price  = price.round
     user.save

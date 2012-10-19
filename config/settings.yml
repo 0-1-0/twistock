@@ -1,0 +1,25 @@
+defaults: &defaults
+  start_money:    0
+  start_shares:   200
+  start_retention_shares:   100
+  popularity_update_delay:  <%= 2.weeks %>
+  analyses_update_delay:    <%= 2.hours %>
+  popularity_power:   6
+  best_update_delay:  <%= 1.day %>
+
+  popularity_constant:  100.0
+
+  en_locale: en
+  ru_locale: ru
+
+  protected_price:  1
+  minimum_price:    2
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

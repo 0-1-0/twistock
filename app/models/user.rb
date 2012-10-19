@@ -26,32 +26,10 @@ class User < ActiveRecord::Base
   scope :random,        ->(size) { order('RANDOM()').limit(size) }
   scope :highest_value, ->(size) { where{share_price != nil}.order{share_price.desc}.limit(size) }
 
-  # TODO: extract to initializer class
-  START_MONEY             = 0
-  START_SHARES            = 200
-  START_RETENTION_SHARES  = 100
-  POPULARITY_UPDATE_DELAY = 2.weeks
-  ANALYSES_UPDATE_DELAY   = 2.hours
-  POPULARITY_POWER        = 6
-  BEST_UPDATE_DELAY       = 1.day
-
-  POPULARITY_CONSTANT = 100.0
-
-  EN_LOCALE = 'en'
-  RU_LOCALE = 'ru'
-
-  PROTECTED_PRICE = 1
-  MINIMUM_PRICE   = 2
-
   # CLASS METHODS
   class << self
     def find_by_nickname(nickname)
-      user = User.where("upper(nickname) = upper('#{nickname}')").first
-      # if !user.base_price or !user.share_price
-      #   user.update_profile
-      # end
-
-      return user
+      User.where("upper(nickname) = upper('#{nickname}')").first
     end
 
     def find_by_nicknames(ids, opts = {})
@@ -59,7 +37,7 @@ class User < ActiveRecord::Base
 
       # создаем несуществующих
       exists = User.where{upper(nickname).in ids}.select(:nickname)
-      .map(&:nickname).map(&:upcase)
+        .map(&:nickname).map(&:upcase)
       (ids - exists).each do |id|
         User.find_or_create id
       end
@@ -69,7 +47,6 @@ class User < ActiveRecord::Base
       result = result.includes(:history)  if opts[:history]
       result = result.order('RANDOM()')   if opts[:shuffle]
       result = result.limit(opts[:limit]) if opts[:limit]
-
       result
     end
 
@@ -91,9 +68,9 @@ class User < ActiveRecord::Base
                            name:     auth.info.name,
                            nickname: auth.info.nickname,
                            avatar:   auth.info.image,
-                           money:    User::START_MONEY,
-                           shares:   User::START_SHARES,
-                           retention_shares: User::START_RETENTION_SHARES
+                           money:    Settings.start_money,
+                           shares:   Settings.start_shares,
+                           retention_shares: Settings.start_retention_shares
       )
       user.update_profile
       user
@@ -109,9 +86,9 @@ class User < ActiveRecord::Base
                            name:     info.name,
                            nickname: info.screen_name,
                            avatar:   info.profile_image_url,
-                           money:    User::START_MONEY,
-                           shares:   User::START_SHARES,
-                           retention_shares: User::START_RETENTION_SHARES
+                           money:    Settings.start_money,
+                           shares:   Settings.start_shares,
+                           retention_shares: Settings.start_retention_shares
       )
       user.update_profile
       user
@@ -140,7 +117,7 @@ class User < ActiveRecord::Base
 
   def best_tweet_obsolete
     if best_updated
-      (best_updated + User::BEST_UPDATE_DELAY < Time.now )
+      (best_updated + Settings.best_update_delay < Time.now )
     else
       false
     end
@@ -405,7 +382,7 @@ class User < ActiveRecord::Base
   def price_is_obsolete
     unless last_update
       return true
-    elseif Time.now - last_update >= ANALYSES_UPDATE_DELAY
+    elseif Time.now - last_update >= Settings.analyses_update_delay
       return true
     end
 
@@ -413,7 +390,7 @@ class User < ActiveRecord::Base
   end
 
   def popularity
-    self.history.where("created_at >= :time", {:time => Time.now - User::POPULARITY_UPDATE_DELAY}).count
+    self.history.where("created_at >= :time", {:time => Time.now - Settings.popularity_update_delay}).count
   end
 
   def price_dynamics_data
