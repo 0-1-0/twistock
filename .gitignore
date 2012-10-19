@@ -34,3 +34,6 @@
 
 # Ignore all local sh scripts
 /*.sh
+
+# Ignore RubyMine Idea files
+/.idea
