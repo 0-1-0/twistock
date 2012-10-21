@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121002151924) do
+ActiveRecord::Schema.define(:version => 20121019185145) do
 
   create_table "block_of_shares", :force => true do |t|
     t.integer  "owner_id"
@@ -34,17 +34,6 @@ ActiveRecord::Schema.define(:version => 20121002151924) do
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
   end
-
-  create_table "price_stamps", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "price"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "previous_price"
-    t.integer  "delta"
-  end
-
-  add_index "price_stamps", ["user_id"], :name => "index_price_stamps_on_user_id"
 
   create_table "product_invoices", :force => true do |t|
     t.string   "product"
@@ -99,17 +88,15 @@ ActiveRecord::Schema.define(:version => 20121002151924) do
     t.integer  "money",                   :limit => 8
     t.datetime "created_at",                                              :null => false
     t.datetime "updated_at",                                              :null => false
-    t.integer  "shares"
-    t.integer  "retention_shares"
     t.integer  "share_price",             :limit => 8
     t.datetime "last_update"
     t.integer  "base_price"
-    t.integer  "hour_delta_price"
+    t.integer  "hour_delta_price",                     :default => 0
     t.boolean  "is_admin",                             :default => false
     t.string   "token"
     t.string   "secret"
     t.boolean  "acivated",                             :default => false
-    t.string   "locale",                               :default => "en"
+    t.string   "locale"
     t.boolean  "twitter_translation",                  :default => true
     t.integer  "tweets_num",                           :default => 0
     t.integer  "retweets_num",                         :default => 0
@@ -122,6 +109,7 @@ ActiveRecord::Schema.define(:version => 20121002151924) do
     t.string   "best_tweet_id"
     t.text     "best_tweet_media_url"
     t.string   "tweet_category"
+    t.boolean  "retention_done"
   end
 
   add_index "users", ["best_tweet_retweets_num"], :name => "index_users_on_best_tweet_retweets_num"

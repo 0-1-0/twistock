@@ -1,7 +1,6 @@
 defaults: &defaults
   start_money:    0
-  start_shares:   200
-  start_retention_shares:   100
+  shares_for_sell_on_start:   100
   popularity_update_delay:  <%= 2.weeks %>
   analyses_update_delay:    <%= 2.hours %>
   popularity_power:   6

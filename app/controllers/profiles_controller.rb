@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
   def show
     if @user = User.find_or_create(params[:id])
-      @user.sell_all_retention
+      @user.init_first_money
     else
       return redirect_to(not_found_path)
     end
