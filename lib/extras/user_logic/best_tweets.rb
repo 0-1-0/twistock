@@ -11,7 +11,7 @@ module UserLogic
       self
     end
 
-    def best_tweet_obsolete
+    def best_tweet_obsolete?
       best_updated and (best_updated + Settings.best_update_delay < Time.now )
     end
 

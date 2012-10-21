@@ -29,7 +29,7 @@ module UserLogic
       end
     end
 
-    def price_is_obsolete
+    def price_is_obsolete?
       unless last_update
         return true
         elseif Time.now - last_update >= Settings.analyses_update_delay

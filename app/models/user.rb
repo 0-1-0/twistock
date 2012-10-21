@@ -103,6 +103,7 @@ class User < ActiveRecord::Base
 
   # INSTANCE METHODS
 
+  # для красивых урлов
   def to_param
     nickname
   end
@@ -160,7 +161,7 @@ class User < ActiveRecord::Base
       return
     end 
 
-    if price_is_obsolete
+    if price_is_obsolete?
       UserUpdateWorker.perform_async(nickname)
       User.transaction do
         self.last_update = Time.now

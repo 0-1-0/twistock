@@ -120,7 +120,7 @@ class UserUpdateWorker
       end 
     end
 
-    if (user.best_tweet_retweets_num <= max_tweet_num) or user.best_tweet_obsolete
+    if (user.best_tweet_retweets_num <= max_tweet_num) or user.best_tweet_obsolete?
       user.best_tweet_retweets_num = max_tweet_num
       user.best_tweet_text         = max_tweet_text
       user.best_tweet_id           = tweet_id_str
