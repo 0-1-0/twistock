@@ -54,16 +54,9 @@ end
 
 # --- BDD фреймворки
 
-# cucumber для интерфейса
-group :test do
-  gem 'cucumber-rails'
-  gem 'capybara'
-end
-
 # rspec для тестирования моделей и контроллеров
 group :test, :development do
   gem 'rspec-rails'
-  gem 'database_cleaner'
   gem 'factory_girl_rails'
 end
 
