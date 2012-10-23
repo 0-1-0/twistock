@@ -1,11 +1,19 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
+  sequence(:user_uid) {|n| n }
+
   factory :user do
-    uid 1
-    name "MyString"
-    nickname "MyString"
-    avatar "MyString"
-    money 1
+    uid  { generate(:user_uid) }
+    name { "#{Faker::Name.first_name} #{Faker::Name.last_name}" }
+    nickname { Faker::Lorem.word }
+    avatar  "TODO: correct avatar testing"
+    token   'asddsadas'
+    secret  'sfdasdffads'
+
+    trait :without_creds do
+      token   nil
+      secret  nil
+    end
+
+    factory :user_without_creds, traits: [:without_creds]
   end
 end

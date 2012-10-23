@@ -58,6 +58,18 @@ end
 group :test, :development do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'capybara'
+
+  gem 'faker'
+  gem 'shoulda-matchers'
+
+  gem 'database_cleaner'
+
+  gem 'spork', '~> 1.0rc'
+  gem "guard-spork"
+  gem 'guard-rspec'
+  gem 'terminal-notifier-guard'
+  gem 'rb-fsevent'
 end
 
 # To use ActiveModel has_secure_password

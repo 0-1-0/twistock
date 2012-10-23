@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
                   :best_tweet_text, :best_tweet_retweets_num, :best_updated,
                   :best_tweet_param, :best_tweet_media_url
 
+  # VALIDATIONS
+  validates :name, :nickname, :uid, :avatar,
+            presence: true
+
   # SCOPES
   scope :random,        ->(size) { order('RANDOM()').limit(size) }
   scope :highest_value, ->(size) { where{share_price != nil}.order{share_price.desc}.limit(size) }
@@ -126,7 +130,7 @@ class User < ActiveRecord::Base
   end
 
   def profile_image
-    self.avatar.sub("_normal", "")
+    avatar.sub("_normal", "")
   end
 
   def update_oauth_info_if_necessary(auth)
