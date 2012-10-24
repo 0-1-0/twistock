@@ -96,7 +96,7 @@ describe User do
   end
 
   context ".create_from_twitter_oauth" do
-    pending
+    pending 'Запилить шаблонный ответ от twitter API и на основе его запилить подобные тесты'
   end
 
   context ".create_from_twitter_nickname" do
@@ -169,6 +169,74 @@ describe User do
       it 'should update if no secret or token' do
         expect {user_without_creds.update_oauth_info_if_necessary(auth)}
           .to change {user_without_creds.token and user_without_creds.secret}
+      end
+    end
+
+    context "#twitter" do
+      pending 'Запилить шаблонный ответ от twitter API и на основе его запилить подобные тесты'
+    end
+
+    context "#update_profile!" do
+      it 'should do nothing if price isn\'t obsolete' do
+        user.stub!(price_is_obsolete?: false)
+        expect {user.update_profile!}
+          .to_not change {user.last_update}
+      end
+
+      it 'should update if price obsolete' do
+        user.stub!(price_is_obsolete?: true)
+        expect {user.update_profile!}
+          .to change {user.last_update}
+      end
+
+      it 'should invoke UserUpdate' do
+        user.stub!(price_is_obsolete?: true)
+        UserUpdateWorker.should_receive(:perform_async).once.with(user.nickname).and_return(true)
+        user.update_profile!
+      end
+    end
+
+    context "#popularity" do
+      it 'should be 0 when no one buy your stocks' do
+        user.popularity.should == 0
+      end
+
+      it 'should be equal to count of recent operations' do
+        user2 = FactoryGirl.create(:user)
+        User.any_instance.stub(price_after_transaction: 1, share_price: 1, money: 1000) # stub magic =/
+
+        3.times { user2.buy_shares user, 10 }
+        user.popularity.should == 3
+      end
+
+      it 'should ignore old operations' do
+        user2 = FactoryGirl.create(:user)
+        User.any_instance.stub(price_after_transaction: 1, share_price: 1, money: 1000) # stub magic =/
+
+        3.times { user2.buy_shares user, 10 }
+        t = user.history.first
+        t.created_at = Time.now - 5.years
+        t.save
+
+        user.popularity.should == 2
+      end
+    end
+
+    context "init_first_money" do
+      it "shouldn't init if price isn't calculated" do
+        expect {user.init_first_money}.to_not change {user.money}
+      end
+
+      it "should init if share_price exists and it's first time" do
+        User.any_instance.stub(share_price: 2)
+        user.init_first_money
+        user.money.should == 2 * Settings.shares_for_sell_on_start
+        user.retention_done.should == true
+      end
+
+      it "shouldn't init if already done" do
+        User.any_instance.stub(share_price: 2, retention_done: true)
+        expect {user.init_first_money}.to_not change {user.money}
       end
     end
   end

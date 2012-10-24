@@ -84,7 +84,7 @@ class User < ActiveRecord::Base
                            avatar:   auth.info.image,
                            money:    Settings.start_money
       )
-      user.update_profile
+      user.update_profile!
       user
     end
 
@@ -100,7 +100,7 @@ class User < ActiveRecord::Base
                            avatar:   info.profile_image_url,
                            money:    Settings.start_money
       )
-      user.update_profile
+      user.update_profile!
       user
     end
   end # class << self
@@ -157,33 +157,26 @@ class User < ActiveRecord::Base
       )
   end
 
-  def update_profile
-    # хак для запросов использующих .select(:nickname) и подобных
-    begin
-      last_update
-    rescue
-      return
-    end 
-
+  def update_profile!
     if price_is_obsolete?
       UserUpdateWorker.perform_async(nickname)
       User.transaction do
         self.last_update = Time.now
         self.save
       end
-      
-      self
     end
+    self
   end
 
   def popularity
-    self.history.where("created_at >= :time", {:time => Time.now - Settings.popularity_update_delay}).count
+    self.history.where("created_at >= :time", {time: Time.now - Settings.popularity_update_delay}).count
   end
 
   # Инициализация первичного получения денег игроком
   def init_first_money
     if not retention_done and share_price
       self.money = share_price * Settings.shares_for_sell_on_start
+      self.retention_done = true
       save
     end
     self

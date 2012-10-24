@@ -1,10 +1,11 @@
 FactoryGirl.define do
-  sequence(:user_uid) {|n| n }
+  sequence(:user_uid)       {|n| n }
+  sequence(:user_nickname)  {|n| Faker::Lorem.word + n.to_s }
 
   factory :user do
     uid  { generate(:user_uid) }
     name { "#{Faker::Name.first_name} #{Faker::Name.last_name}" }
-    nickname { Faker::Lorem.word }
+    nickname { generate(:user_nickname) }
     avatar  "TODO: correct avatar testing"
     token   'asddsadas'
     secret  'sfdasdffads'
