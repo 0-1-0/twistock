@@ -88,6 +88,7 @@ describe User do
     end
 
     it 'should affect all users' do
+      UserMassUpdateWorker.stub(:perform_async)
       nicknames.each do |nick|
         UserMassUpdateWorker.should_receive(:perform_async).once.with(nick)
       end
