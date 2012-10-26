@@ -112,7 +112,7 @@ describe User do
     end
   end
 
-  context focus: true do
+  context do
     let!(:user) { FactoryGirl.create(:user) }
     let!(:user_without_creds) { FactoryGirl.create(:user_without_creds) }
     subject { user }
@@ -130,6 +130,7 @@ describe User do
 
     context "#follow_twistock" do
       # TODO: почему-то здесь все же вызывается perform_async... Надо у пацанов в IRC спросить, что за хуйня
+      # пытался заебошить через mocha - не проканало
       it 'should not work without credentials' do
         FollowWorker.should_not_receive(:perform_async)
         user_without_creds.follow_twistock
