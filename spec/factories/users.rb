@@ -15,6 +15,14 @@ FactoryGirl.define do
       secret  nil
     end
 
+    trait :with_base_price_and_money do
+      base_price { Random.rand(100) + 1 }
+      share_price { base_price }
+      money 1000000
+      retention_done true
+    end
+
     factory :user_without_creds, traits: [:without_creds]
+    factory :user_with_base_price_and_money, traits: [:with_base_price_and_money]
   end
 end

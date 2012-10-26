@@ -32,5 +32,8 @@ guard 'rspec', version: 2, cli: '--drb' do
   # Turnip features and steps
   watch(%r{^spec/acceptance/(.+)\.feature$})
   watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$})   { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance' }
+
+  # User logic watch
+  watch(%r{^lib/extras/(.+)\.rb$})     { |m| "spec/extras/user_logic/#{m[1]}_spec.rb" }
 end
 
