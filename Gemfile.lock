@@ -34,19 +34,20 @@ GEM
     builder (3.0.4)
     bullet (4.2.0)
       uniform_notifier
-    capybara (1.1.2)
+    capybara (1.1.3)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
-    celluloid (0.12.2)
+    celluloid (0.12.3)
       facter (>= 1.6.12)
       timers (>= 1.0.0)
     childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
-    code_analyzer (0.2.0)
+    chunky_png (1.2.6)
+    code_analyzer (0.3.0)
       sexp_processor
     coderay (1.0.8)
     coffee-rails (3.2.2)
@@ -55,16 +56,21 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.3.3)
+    coffee-script-source (1.4.0)
     colored (1.2)
-    commonjs (0.2.6)
+    compass (0.12.2)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
+    compass-rails (1.0.3)
+      compass (>= 0.12.2, < 0.14)
     connection_pool (0.9.2)
-    database_cleaner (0.8.0)
+    database_cleaner (0.9.1)
     diff-lcs (1.1.3)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    facter (1.6.13)
+    facter (1.6.14)
     factory_girl (4.1.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.1.0)
@@ -75,16 +81,16 @@ GEM
     faraday (0.8.4)
       multipart-post (~> 1.1)
     ffi (1.1.5)
-    gchartrb (0.8)
-    guard (1.5.0)
+    fssm (0.2.9)
+    guard (1.5.4)
       listen (>= 0.4.2)
       lumberjack (>= 1.0.2)
       pry (>= 0.9.10)
       thor (>= 0.14.6)
-    guard-rspec (2.1.0)
+    guard-rspec (2.1.1)
       guard (>= 1.1)
       rspec (~> 2.11)
-    guard-spork (1.2.1)
+    guard-spork (1.2.3)
       childprocess (>= 0.2.3)
       guard (>= 1.1)
       spork (>= 0.8.4)
@@ -96,18 +102,11 @@ GEM
     i18n-js (2.1.2)
       i18n
     journey (1.0.4)
-    jquery-datatables-rails (1.11.1)
-      jquery-rails
     jquery-rails (2.1.3)
       railties (>= 3.1.0, < 5.0)
       thor (~> 0.14)
     json (1.7.5)
     kgio (2.7.4)
-    less (2.2.2)
-      commonjs (~> 0.2.6)
-    less-rails (2.2.4)
-      actionpack (>= 3.1)
-      less (~> 2.2.0)
     libv8 (3.3.10.4)
     libwebsocket (0.1.5)
       addressable
@@ -120,9 +119,11 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.1)
     mime-types (1.19)
-    multi_json (1.3.6)
+    modular-scale (1.0.2)
+      compass (>= 0.11.5)
+      sassy-math (>= 1.2)
+    multi_json (1.3.7)
     multipart-post (1.1.5)
-    newrelic_rpm (3.4.1)
     nokogiri (1.5.5)
     oauth (0.4.7)
     omniauth (1.1.1)
@@ -162,7 +163,7 @@ GEM
       activesupport (= 3.2.8)
       bundler (~> 1.0)
       railties (= 3.2.8)
-    rails_best_practices (1.11.1)
+    rails_best_practices (1.12.0)
       activesupport
       awesome_print
       code_analyzer
@@ -199,20 +200,22 @@ GEM
       railties (>= 3.0)
       rspec (~> 2.11.0)
     rubyzip (0.9.9)
-    sass (3.2.1)
+    sass (3.2.2)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    selenium-webdriver (2.25.0)
+    sassy-math (1.2)
+      compass (~> 0.11)
+    selenium-webdriver (2.26.0)
       childprocess (>= 0.2.5)
       libwebsocket (~> 0.1.3)
       multi_json (~> 1.0)
       rubyzip
-    sexp_processor (4.0.1)
+    sexp_processor (4.1.2)
     shoulda-matchers (1.4.1)
       activesupport (>= 3.0.0)
-    sidekiq (2.4.0)
+    sidekiq (2.5.2)
       celluloid (~> 0.12.0)
       connection_pool (~> 0.9.2)
       multi_json (~> 1)
@@ -252,7 +255,7 @@ GEM
     thor (0.16.0)
     tilt (1.3.3)
     timers (1.0.1)
-    treetop (1.4.11)
+    treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
     twitter (2.2.0)
@@ -260,12 +263,7 @@ GEM
       faraday (~> 0.7)
       multi_json (~> 1.0)
       simple_oauth (~> 0.1)
-    twitter-bootstrap-rails (2.1.0)
-      actionpack (>= 3.1)
-      less-rails (~> 2.2.2)
-      railties (>= 3.1)
-      therubyracer (~> 0.10.1)
-    tzinfo (0.3.33)
+    tzinfo (0.3.35)
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
@@ -277,6 +275,11 @@ GEM
     whatlanguage (1.0.0)
     xpath (0.1.4)
       nokogiri (~> 1.3)
+    zurb-foundation (3.2.0)
+      compass (>= 0.12.2)
+      modular-scale (>= 1.0.2)
+      rake
+      sass (>= 3.2.0)
 
 PLATFORMS
   ruby
@@ -285,19 +288,16 @@ DEPENDENCIES
   bullet
   capybara
   coffee-rails (~> 3.2.2)
+  compass-rails
   database_cleaner
   factory_girl_rails
   faker
-  gchartrb
   guard-rspec
   guard-spork
   http_accept_language
   i18n-js
-  jquery-datatables-rails
   jquery-rails
-  less-rails
   looksee
-  newrelic_rpm (= 3.4.1)
   omniauth
   omniauth-twitter
   pg
@@ -311,14 +311,13 @@ DEPENDENCIES
   sidekiq
   simple_form
   sinatra
-  slim
   slim-rails
   spork (~> 1.0rc)
   squeel
   terminal-notifier-guard
   therubyracer
   twitter (= 2.2.0)
-  twitter-bootstrap-rails (= 2.1.0)
   uglifier (>= 1.0.3)
   unicorn
   whatlanguage
+  zurb-foundation

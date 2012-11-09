@@ -1,24 +1,21 @@
-doctype html
 html lang="en"
   head
-
-  
-    /Да, здесь ломается assets pipeline, но это НУЖНО чтобы все работало. Грязный хак, но без него никуда
-    =javascript_include_tag 'jquery.js' 
-
-
-
     meta charset="utf-8"
-    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    
+    /! Uncomment to make IE8 render like IE7
+    /! <meta http-equiv="X-UA-Compatible" content="IE=7" />
 
-    title= content_for?(:title) ? yield(:title) : "Twistock"
+    /! Set the viewport width to device width for mobile
+    meta content="width=(device-width,)initial-scale=1.0" name="viewport"
+    
+    title= content_for?(:title) ? yield(:title) : "Untitled"
+
+    /! Included CSS Files
+    = stylesheet_link_tag    "application"
+    /! Included JS Files
+    = javascript_include_tag "application"
+    
     = csrf_meta_tags
-
-    /! Le HTML5 shim, for IE6-8 support of HTML elements
-    /[if lt IE 9]
-    = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
-    = stylesheet_link_tag "application", :media => "all"
-    link rel="SHORTCUT ICON" href="/assets/favicon_2.ico"
 
     /Google Analytics
     javascript:
@@ -31,83 +28,5 @@ html lang="en"
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
-
-
   body
-    #promo_modal.modal.fade
-      .modal-header
-        a.close data-dismiss="modal" x
-        h3.center =t(:how_it_works)
-        .modal-body = render :partial=>'welcome/promo'
-        .modal-footer
-          a.btn.btn-small data-dismiss="modal"=t(:close)
-
-
-    .navbar.navbar-fixed-top.navbar-inverse
-      .navbar-inner
-        .container
-          .row
-            .span2
-              a href='/'
-                img#logo src='/assets/logo.png'
-
-            /Here we are replacing blocks
-            - if not signed_in?
-              .span7
-                =yield :upper_menu
-              
-            .span3
-              = form_tag search_profiles_path, class: 'navbar-search', style: 'padding: 7px 0; margin: 0;' do
-                  = text_field_tag 'nickname', nil, class: 'search-query', placeholder: t(:search_user_by_nickname)              
-
-            - if signed_in?
-              .span7
-                =yield :upper_menu
-
-
-    .container
-      .row
-        - if current_user
-          .span5          
-            .well.sidebar-nav.sidebar-nav-fixed            
-              = render :partial=>'profiles/personal', :locals=>{:user=>current_user}
-          .span7#main-content
-            =yield
-        - else
-          .span7.offset2
-            =yield
-
-
-
-    
-    /!
-      Javascripts
-      \==================================================
-    /! Placed at the end of the document so the pages load faster
-    = javascript_include_tag "application"
-      
-
-    /Init tooltips with right locale
-    = javascript_include_tag "tooltips"
-
-    javascript:
-      $('.modal').hide()
-      I18n.defaultLocale = "#{I18n.locale}";
-      I18n.locale = "#{I18n.locale}";
-
-    =yield :javascripts
-
-    - if current_user
-      javascript:
-        setinterval_id = window.setInterval (function(){
-            $.get("/profiles/#{current_user.nickname}.json", 
-                (function(data){
-                if (data.user.share_price) {
-                  $("#yourprice").html(I18n.t('your_stock_price') + ' $' + data.user.share_price.toMoney());
-                  $("#yourmoney").html(I18n.t('your_money') + ' $' + data.user.money.toMoney());
-                  clearInterval(setinterval_id);
-                }
-                }), 
-                "json"
-            );
-        }, 1000);
+    = yield

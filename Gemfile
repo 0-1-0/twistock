@@ -1,3 +1,4 @@
+# This's magic string. It makes code faster, better and annihilate bugs! >_<
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
@@ -7,27 +8,26 @@ gem 'pg'
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.4'
+  gem 'compass-rails'
+  gem 'zurb-foundation'
   gem 'coffee-rails', '~> 3.2.2'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', platform: :ruby
 
   gem 'uglifier', '>= 1.0.3'
-  #gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
-  # Я не умею верстать
-  gem "twitter-bootstrap-rails", "2.1.0"
 end
 
 gem 'jquery-rails'
-gem 'jquery-datatables-rails'
 
 # Оказывается SLIM быстрее HAML
-gem 'slim'
 gem 'slim-rails'
-gem 'less-rails'
 
 # simple_form избавляет от головной боли
 gem 'simple_form'
+
+#интернационализация js-кода
+gem 'i18n-js'
 
 # аутентификация
 gem 'omniauth'
@@ -81,19 +81,15 @@ end
 # Use unicorn as the app server
 gem 'unicorn'
 
-#для графиков
-gem 'gchartrb', :require => 'google_chart'
-
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-# мониторинг
-gem 'newrelic_rpm','3.4.1'
+
+# POSSIBLE DEPRECATION BLOCK
+# нужно уточнить необходимость этих gem'ов
 
 # парсинг accept-language из запросов
 gem 'http_accept_language'
 
-#интернационализация js-кода
-gem 'i18n-js'
 # Автодетекция языка
 gem 'whatlanguage'
