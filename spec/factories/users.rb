@@ -1,9 +1,9 @@
 FactoryGirl.define do
-  sequence(:user_uid)       {|n| n }
-  sequence(:user_nickname)  {|n| Faker::Lorem.word + n.to_s }
+  sequence(:user_twitter_id) {|n| n }
+  sequence(:user_nickname)   {|n| Faker::Lorem.word + n.to_s }
 
   factory :user do
-    uid  { generate(:user_uid) }
+    twitter_id  { generate(:user_twitter_id) }
     name { "#{Faker::Name.first_name} #{Faker::Name.last_name}" }
     nickname { generate(:user_nickname) }
     avatar  "TODO: correct avatar testing"
@@ -17,9 +17,8 @@ FactoryGirl.define do
 
     trait :with_base_price_and_money do
       base_price { Random.rand(100) + 1 }
-      share_price { base_price }
       money 1000000
-      retention_done true
+      activated true
     end
 
     factory :user_without_creds, traits: [:without_creds]

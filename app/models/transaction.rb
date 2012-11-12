@@ -6,4 +6,7 @@ class Transaction < ActiveRecord::Base
 
   delegate :nickname, to: :user,  prefix: true
   delegate :nickname, to: :owner, prefix: true
+
+  # TODO: вот тут будет прикольно сбрасывать кэши цен
+  # TODO: покупку и продажу можно вложить в этот класс (подумать, может удобнее)
 end

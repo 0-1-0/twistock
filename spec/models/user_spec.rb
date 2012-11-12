@@ -1,13 +1,16 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe User do
+describe User, focus: true do
 
   # trivial checks: validations and relations
   context "model" do
-    %w(uid name nickname avatar).each do |attr|
+
+    %w(twitter_id name nickname avatar).each do |attr|
       it {should validate_presence_of(attr)}
     end
+
+    it {should validate_uniqueness_of(:twitter_id)}
 
     [
         [:portfel, BlockOfShares],

@@ -4,20 +4,21 @@ class UserUpdateWorker
   include Sidekiq::Worker
   sidekiq_options :queue => :user_updates
 
-  def is_image(url)
-    return (url.index('.jpg') or url.index('.jpeg') or url.index('.png') or url.index('.gif'))
+  def is_image?(url)
+    url.index('.jpg') or url.index('.jpeg') or url.index('.png') or url.index('.gif') or false
   end
 
-  def is_youtube(url)
-    return (url.index('youtube'))
+  def is_youtube?(url)
+    url.index('youtube') or false
   end
 
 
+  #TODO: дохуя упростить
   def perform(nickname)
     user = User.find_by_nickname(nickname)
     
-    if not user
-      return nil
+    unless user
+      return nil #TODO: в логгер
     end
 
     logger.info 'Found user in database: ' + user.name
@@ -96,7 +97,7 @@ class UserUpdateWorker
           # begin
           url = tweet.urls[0].expanded_url
           logger.info(url)
-          if is_image(url) or is_youtube(url)
+          if is_image?(url) or is_youtube?(url)
             media_url = url
           end
           # rescue
@@ -107,7 +108,7 @@ class UserUpdateWorker
         if tweet.media and tweet.media.length > 0
           tweet.media.each do |entity|
             # begin
-            if is_image(entity.media_url) or is_youtube(entity.media_url)
+            if is_image?(entity.media_url) or is_youtube?(entity.media_url)
               media_url = entity.media_url
             end
             # rescue

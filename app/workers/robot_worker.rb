@@ -1,3 +1,4 @@
+# TODO: он вообще нужен?
 class RobotWorker
   include Sidekiq::Worker
 

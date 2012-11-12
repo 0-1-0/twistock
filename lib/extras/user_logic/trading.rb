@@ -1,5 +1,7 @@
 module UserLogic
   module Trading
+
+    # TODO: перевод ошибок, выдача их пользователю
     def buy_shares(owner, count)
       raise "You cannot buy 0 shares" unless count > 0
 

@@ -2,6 +2,7 @@ class Product < ActiveRecord::Base
   attr_accessible :description, :name, :price, :short_description, :priority
   has_many :product_invoices
 
+  # TODO: приоритет может быть 0 или nil? Может добавить published?
   scope :prioritized, where{priority > 0}.order(:priority)
 
   def self.create_invoice(user, p) # p means params

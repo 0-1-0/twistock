@@ -4,6 +4,7 @@ class BlockOfShares < ActiveRecord::Base
 
   attr_accessible :count, :holder_id, :owner_id
 
+  # TODO: прикрутить i18n на оба метода
   def one_share_cost
     self.owner.share_price || 'calculating...'
   end

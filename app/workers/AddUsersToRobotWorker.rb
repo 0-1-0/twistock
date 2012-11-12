@@ -1,3 +1,4 @@
+#TODO: это вообще используется?
 class AddUsersToRobotWorker
   include Sidekiq::Worker
 

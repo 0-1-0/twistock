@@ -1,3 +1,4 @@
+# TODO: ошибки складывать в БД
 class FollowWorker
   OFFICIAL_TWISTOCK_TWITTER = 'Twistock_com'
 

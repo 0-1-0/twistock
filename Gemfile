@@ -1,4 +1,6 @@
 # This's magic string. It makes code faster, better and annihilate bugs! >_<
+# TODO: складывать важные ошибки в БД и сделать интерфейс их просмотра
+
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'

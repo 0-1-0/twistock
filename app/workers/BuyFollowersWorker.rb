@@ -1,3 +1,4 @@
+# TODO: это вообще используется?
 class BuyFollowersWorker
   include Sidekiq::Worker
 

@@ -1,7 +1,7 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
   # CALLBACKS
-  after_create :follow_twistock
+  after_create :follow_twistock # TODO: а если создается по никнейму? баг
 
   # RELATIONS
   has_many :portfel,    class_name: BlockOfShares, foreign_key: :holder_id
@@ -9,19 +9,17 @@ class User < ActiveRecord::Base
 
   has_many :history,    class_name: Transaction, foreign_key: :owner_id
   has_many :transactions
+  has_one  :best_tweet
 
   has_many :product_invoices
 
   # ACCESSORS
-  attr_accessible :avatar, :money, :name, :nickname,
-                  :uid, :token, :secret, :activated,
-                  :pop, :tweets_num, :retweets_num, :followers_num,
-                  :best_tweet_text, :best_tweet_retweets_num, :best_updated,
-                  :best_tweet_param, :best_tweet_media_url
+  # TODO: temporary access to all
 
   # VALIDATIONS
-  validates :name, :nickname, :uid, :avatar,
+  validates :name, :nickname, :twitter_id, :avatar,
             presence: true
+  validates :twitter_id, uniqueness: true
 
   # SCOPES
   scope :random,        ->(size) { order('RANDOM()').limit(size) }
@@ -30,7 +28,6 @@ class User < ActiveRecord::Base
   # INCLUDE MODULES (/lib/extras)
   include UserLogic::Trading
   include UserLogic::Pricing
-  include UserLogic::BestTweets
 
   # CLASS METHODS
   class << self
@@ -76,13 +73,13 @@ class User < ActiveRecord::Base
     end
 
     def create_from_twitter_oauth(auth)
-      user = User.create(  uid:      auth.uid.to_i,
-                           token:    auth.credentials.token,
-                           secret:   auth.credentials.secret,
-                           name:     auth.info.name,
-                           nickname: auth.info.nickname,
-                           avatar:   auth.info.image,
-                           money:    Settings.start_money
+      user = User.create(  twitter_id:  auth.uid.to_i,
+                           token:       auth.credentials.token,
+                           secret:      auth.credentials.secret,
+                           name:        auth.info.name,
+                           nickname:    auth.info.nickname,
+                           avatar:      auth.info.image,
+                           money:       Settings.start_money
       )
       user.update_profile!
       user
@@ -92,13 +89,13 @@ class User < ActiveRecord::Base
       begin
         info = Twitter.user(nickname)
       rescue
-        return nil
+        return nil # см TODO в Gemfile
       end
-      user = User.create(  uid:      info.id,
-                           name:     info.name,
-                           nickname: info.screen_name,
-                           avatar:   info.profile_image_url,
-                           money:    Settings.start_money
+      user = User.create(  twitter_id:  info.id,
+                           name:        info.name,
+                           nickname:    info.screen_name,
+                           avatar:      info.profile_image_url,
+                           money:       Settings.start_money
       )
       user.update_profile!
       user
@@ -133,6 +130,7 @@ class User < ActiveRecord::Base
     avatar.sub("_normal", "")
   end
 
+  # TODO: а вообще этот метод имеет смысл при правильном построении?
   def update_oauth_info_if_necessary(auth)
     unless token? and secret?
       self.token  = auth.credentials.token
@@ -157,6 +155,7 @@ class User < ActiveRecord::Base
       )
   end
 
+  # TODO: а нужен ли он теперь вообще?
   def update_profile!
     if price_is_obsolete?
       UserUpdateWorker.perform_async(nickname)
@@ -168,13 +167,14 @@ class User < ActiveRecord::Base
     self
   end
 
+  # TODO: в кэш
   def popularity
     self.history.where("created_at >= :time", {time: Time.now - Settings.popularity_update_delay}).count
   end
 
-  # Инициализация первичного получения денег игроком
+  # Инициализация первичного получения денег игроком TODO: продумать условия исключения
   def init_first_money
-    if not retention_done and share_price
+    if not activated? and share_price
       self.money = share_price * Settings.shares_for_sell_on_start
       self.retention_done = true
       save
