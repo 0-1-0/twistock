@@ -1,5 +1,19 @@
 Twitterexchange::Application.routes.draw do
+  get "top_tweets/index"
+
+  get "top_tweets/edit_tags"
+
+  get "top_tweets/set_tags"
+
   get "main/index"
+
+  resources :top_tweets, only: [:index] do
+    collection do
+      get 'index'
+      get 'edit_tags'
+      post 'set_tags'
+    end
+  end
 
   resources :tag, only: [:index, :destroy, :create, :update] do
     collection do
