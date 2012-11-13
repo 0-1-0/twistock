@@ -1,4 +1,13 @@
 Twitterexchange::Application.routes.draw do
+  resources :tag, only: [:index, :destroy, :create, :update] do
+    collection do
+      get 'index'
+      delete 'destroy'
+      post 'create'
+      post 'update'
+    end
+  end
+
   get  "top_tweets/index"
   get  "top_tweets/admin"
   post "top_tweets/update"

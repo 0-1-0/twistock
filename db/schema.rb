@@ -37,6 +37,17 @@ ActiveRecord::Schema.define(:version => 20121112012256) do
   add_index "block_of_shares", ["holder_id"], :name => "index_block_of_shares_on_holder_id"
   add_index "block_of_shares", ["owner_id"], :name => "index_block_of_shares_on_owner_id"
 
+  create_table "price_stamps", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "price"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "previous_price"
+    t.integer  "delta"
+  end
+
+  add_index "price_stamps", ["user_id"], :name => "index_price_stamps_on_user_id"
+
   create_table "product_invoices", :force => true do |t|
     t.string   "product"
     t.string   "country"
@@ -95,7 +106,7 @@ ActiveRecord::Schema.define(:version => 20121112012256) do
     t.string   "token"
     t.string   "secret"
     t.boolean  "activated",                        :default => false
-    t.string   "locale"
+    t.string   "locale",                           :default => "en"
     t.boolean  "twitter_translation",              :default => true
   end
 
