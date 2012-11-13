@@ -1,4 +1,6 @@
 Twitterexchange::Application.routes.draw do
+  get "main/index"
+
   resources :tag, only: [:index, :destroy, :create, :update] do
     collection do
       get 'index'
