@@ -1,4 +1,5 @@
 Twitterexchange::Application.routes.draw do
+  resources :invoice
   resources :blog
   resources :product
   resources :store, only: [:index, :show]
