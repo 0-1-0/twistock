@@ -1,9 +1,17 @@
 Twitterexchange::Application.routes.draw do
 
-  resourses :exchange, :only [] do
+  resources :user, only: [:show] do
     collection do
-      post buy
-      post sell
+      get 'show'
+      post 'set_mail'
+      post 'set_preferences'
+    end
+  end
+
+  resources :exchange, only: [] do
+    collection do
+      post 'buy'
+      post 'sell'
     end
   end
 
