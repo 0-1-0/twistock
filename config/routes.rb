@@ -1,8 +1,9 @@
 Twitterexchange::Application.routes.draw do
+  resources :product
+  resources :store, only: [:index, :show]
 
   resources :user, only: [:show] do
     collection do
-      get 'show'
       post 'set_mail'
       post 'set_preferences'
     end
@@ -20,20 +21,12 @@ Twitterexchange::Application.routes.draw do
 
   resources :top_tweets, only: [:index] do
     collection do
-      get 'index'
       get 'edit_tags'
       post 'set_tags'
     end
   end
 
-  resources :tag, only: [:index, :destroy, :create, :update] do
-    collection do
-      get 'index'
-      delete 'destroy'
-      post 'create'
-      post 'update'
-    end
-  end
+  resources :tag, only: [:index, :destroy, :create, :update]
 
 
   get "settings/twitter_translation"
