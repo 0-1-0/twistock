@@ -1,22 +1,39 @@
 .row
-  =render :partial=> 'shared/tile'
-  =render :partial=> 'shared/tile'
-  =render :partial=> 'shared/tile'
-  =render :partial=> 'shared/tile'
-  =render :partial=> 'shared/tile'
-  =render :partial=> 'shared/tile'
+  .ten.columns
+    dl.tabs.pill
+      dd
+        a.active href='/' Top
+      dd
+        a href='#' My investments
+      dd
+        a href='#' My stock holders
+      dd
+        a href='#' Friends
+      dd
+        a href='#' Most valueable
+      dd
+        a href='#' Celebrities
+  .two.columns
+    form
+      input type='text' placeholder='Search'
 .row
-  =render :partial=> 'shared/tile'
-  =render :partial=> 'shared/tile'
-  =render :partial=> 'shared/tile'
-  =render :partial=> 'shared/tile'
-  =render :partial=> 'shared/tile'
-  =render :partial=> 'shared/tile'
+  =render :partial=> 'tile'
+  =render :partial=> 'tile'
+  =render :partial=> 'tile'
+  =render :partial=> 'tile'
+  =render :partial=> 'tile'
+  =render :partial=> 'tile'
 .row
-  =render :partial=> 'shared/tile'
-  =render :partial=> 'shared/tile'
-  =render :partial=> 'shared/tile'
-  =render :partial=> 'shared/tile'
-  =render :partial=> 'shared/tile'
-  =render :partial=> 'shared/tile'
-
+  =render :partial=> 'tile'
+  =render :partial=> 'tile'
+  =render :partial=> 'tile'
+  =render :partial=> 'tile'
+  =render :partial=> 'tile'
+  =render :partial=> 'tile'
+.row
+  =render :partial=> 'tile'
+  =render :partial=> 'tile'
+  =render :partial=> 'tile'
+  =render :partial=> 'tile'
+  =render :partial=> 'tile'
+  =render :partial=> 'tile'

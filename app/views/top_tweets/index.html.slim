@@ -1,2 +1,34 @@
-h1 TopTweets#index
-p Find me in app/views/top_tweets/index.html.slim
+.row
+  .ten.columns
+    dl.tabs.pill
+      dd
+        a.active href='#' All
+      dd
+        a href='#' Russian
+      dd
+        a href='#' English
+      dd
+        a href='#' Friends
+      dd
+        a href='#' Most valueable
+      dd
+        a href='#' Celebrities
+  .two.columns
+    form
+      input type='text' placeholder='Search'
+.row
+  .eleven.columns
+    dl.tabs.pill
+      dd
+        a.active href='#' All
+      dd
+        a href='#' Technology
+      dd
+        a href='#' Politics
+      dd
+        a href='#' Instagram
+
+.row
+  - 10.times do
+    - 3.times do
+      =render :partial=>'tile'
