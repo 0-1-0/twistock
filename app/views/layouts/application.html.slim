@@ -6,7 +6,7 @@ html lang="en"
     /! <meta http-equiv="X-UA-Compatible" content="IE=7" />
 
     /! Set the viewport width to device width for mobile
-    meta content="width=(device-width,)initial-scale=1.0" name="viewport"
+    /meta content="width=(device-width,)initial-scale=1.0" name="viewport"
     
     title= content_for?(:title) ? yield(:title) : "Untitled"
 
@@ -29,4 +29,69 @@ html lang="en"
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
   body
-    = yield
+    .container
+      .row
+        .two.columns
+          h3 Логотип
+        .six.columns
+          p
+            a href='#' How it works
+            ||
+            a href='#' Twistock store
+            ||
+            a href='#' Top tweets
+            ||
+            a href='#' blog and news
+        .four.columns
+          .promote
+            h3
+              a href='#' Акция
+
+      .row
+        .two.column
+          h3 User Photo
+        .two.columns
+          ul
+            li
+              | Nickname (Name)
+              ||
+              a href='#' options
+            li
+              h5 Price: 100500$
+        .two.columns
+          ul
+            li Money: xxxx
+            li Today
+            li
+              h5 +20
+        .two.columns
+          ul
+            li a href='#' History
+            li Week
+            li 
+              h5 -200
+
+        .four-columns
+          h1 График
+
+      .row
+        hr
+      .row
+        .ten.columns
+          a href='#' Top
+          ||
+          a href='#' My investments
+          ||
+          a href='#' My stock holders
+          ||
+          a href='#' Friends
+          ||
+          a href='#' Most valueable
+          ||
+          a href='#' Celebrities
+        .two.columns
+          form
+            input type='text' placeholder='Search'
+
+      .row
+        =yield
