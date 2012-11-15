@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121112012256) do
+ActiveRecord::Schema.define(:version => 20121115131225) do
 
   create_table "best_tweets", :force => true do |t|
     t.integer  "user_id"
@@ -37,16 +37,22 @@ ActiveRecord::Schema.define(:version => 20121112012256) do
   add_index "block_of_shares", ["holder_id"], :name => "index_block_of_shares_on_holder_id"
   add_index "block_of_shares", ["owner_id"], :name => "index_block_of_shares_on_owner_id"
 
-  create_table "price_stamps", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "price"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "previous_price"
-    t.integer  "delta"
+  create_table "events", :force => true do |t|
+    t.string   "tag"
+    t.string   "source"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "price_stamps", ["user_id"], :name => "index_price_stamps_on_user_id"
+  create_table "price_logs", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "price"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "price_logs", ["user_id"], :name => "index_price_logs_on_user_id"
 
   create_table "product_invoices", :force => true do |t|
     t.string   "product"
@@ -76,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20121112012256) do
     t.integer  "price"
     t.text     "short_description", :default => "0"
     t.integer  "priority",          :default => 0
+    t.boolean  "published"
   end
 
   create_table "transactions", :force => true do |t|
@@ -106,8 +113,9 @@ ActiveRecord::Schema.define(:version => 20121112012256) do
     t.string   "token"
     t.string   "secret"
     t.boolean  "activated",                        :default => false
-    t.string   "locale",                           :default => "en"
+    t.string   "locale"
     t.boolean  "twitter_translation",              :default => true
+    t.integer  "share_price"
   end
 
   add_index "users", ["nickname"], :name => "index_users_on_nickname", :unique => true

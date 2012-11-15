@@ -1,25 +1,33 @@
-# TODO: ошибки складывать в БД
+# APPROVED
 class FollowWorker
-  OFFICIAL_TWISTOCK_TWITTER = 'Twistock_com'
-
   include Sidekiq::Worker
 
   def perform(id)
     begin
       user = User.find(id)
       client = user.twitter
-      client.follow(OFFICIAL_TWISTOCK_TWITTER)
+      client.follow(Settings.twistock_twitter)
     rescue ActiveRecord::RecordNotFound
-      logger.info 'Could not find user in database'
+      msg = "Could not find user with id #{id} in database"
+      logger.info msg
+      Event.create tag: 'error',
+                   source: 'FollowWorker',
+                   content: msg
       return nil
     rescue Twitter::Error::Forbidden
-      logger.info 'Status is duplicate'
+      msg = "403 from twitter (user id = #{id})"
+      logger.info msg
+      Event.create tag: 'error',
+                   source: 'FollowWorker',
+                   content: msg
       return nil
     rescue Twitter::Error::Unauthorized
-      logger.info 'Could not authenticate with OAuth.'
+      msg = "Could not authenticate with OAuth (user id = #{id})"
+      logger.info msg
+      Event.create tag: 'error',
+                   source: 'FollowWorker',
+                   content: msg
       return nil
     end
   end
-
-
 end

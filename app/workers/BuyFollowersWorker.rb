@@ -1,4 +1,4 @@
-# TODO: это вообще используется?
+# INFO: старье
 class BuyFollowersWorker
   include Sidekiq::Worker
 

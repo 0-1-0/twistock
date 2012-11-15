@@ -2,8 +2,7 @@ class SessionController < ApplicationController
   def create
     auth = request.env['omniauth.auth']
 
-    @user = User.find_by_uid(auth.uid) || User.create_from_twitter_oauth(auth)
-    @user.update_oauth_info_if_necessary(auth)
+    @user = User.init_from_twitter_oauth(auth)
 
     session[:user_id] = @user.id
     

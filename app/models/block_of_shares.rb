@@ -4,16 +4,16 @@ class BlockOfShares < ActiveRecord::Base
 
   attr_accessible :count, :holder_id, :owner_id
 
-  # TODO: прикрутить i18n на оба метода
   def one_share_cost
-    self.owner.share_price || 'calculating...'
+    return I18n.t('status.share_price.unavaible') if owner.share_price == -1
+    owner.share_price || I18n.t('status.share_price.calculating')
   end
 
   def total_cost
-    if self.owner.share_price
-      self.owner.share_price * self.count
+    if owner.share_price
+      owner.share_price * self.count
     else
-      'calculating...'
+      I18n.t('status.share_price.calculating')
     end
   end
 end

@@ -200,6 +200,8 @@ GEM
       railties (>= 3.0)
       rspec (~> 2.11.0)
     rubyzip (0.9.9)
+    russian (0.6.0)
+      i18n (>= 0.5.0)
     sass (3.2.2)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -306,6 +308,7 @@ DEPENDENCIES
   rails_best_practices
   rb-fsevent
   rspec-rails
+  russian
   sass-rails (~> 3.2.4)
   shoulda-matchers
   sidekiq

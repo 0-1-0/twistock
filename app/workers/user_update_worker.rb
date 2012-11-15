@@ -1,174 +1,120 @@
 class UserUpdateWorker
-  RETRY_DELAY = 1
-
   include Sidekiq::Worker
   sidekiq_options :queue => :user_updates
 
   def is_image?(url)
-    url.index('.jpg') or url.index('.jpeg') or url.index('.png') or url.index('.gif') or false
+    url.index('.jpg') or url.index('.jpeg') or url.index('.png') or url.index('.gif')
   end
 
   def is_youtube?(url)
-    url.index('youtube') or false
+    url.index('youtube')
   end
 
+  # Дает подключение к твиттеру. Использует случайные token и secret из базы.
+  def get_twitter
+    rand_user = User.where{secret != nil}.order('RANDOM()').first
+    logger.info 'Found random user in database: ' + rand_user.name
+    rand_user.twitter
+  end
 
-  #TODO: дохуя упростить
+  def get_timeline(twitter, nickname)
+    time_gate = Time.now - (Settings.users_timegate).days
+    twitter.user_timeline(nickname, include_rts: 0, count: 200, include_entities: true)
+      .select{|t| t.created_at > time_gate}
+      .tap { logger.info 'Fetched user timeline from twitter' }
+  end
+
+  def get_best_tweet(timeline, prev_best_retweets)
+    best_tweet = BestTweet.new(retweets: 0)
+
+    top_time_gate     = Time.now - Settings.best_tweet_update_delay
+    top_time_line     = timeline.select{|t| t.created_at > top_time_gate}
+    best_tweet_index  = nil
+
+    top_time_line.each.with_index do |tweet, i|
+      if tweet.retweet_count > best_tweet.retweets
+        best_tweet.retweets = tweet.retweet_count
+        best_tweet_index    = i
+      end
+    end
+
+    if prev_best_retweets <= best_tweet.retweets
+      tweet = top_time_line[best_tweet_index]
+
+      best_tweet.twitter_id = tweet.id.to_s
+      best_tweet.content    = tweet.text
+      best_tweet.param      = best_tweet.retweets * 1.0/(followers_num + 1.0)
+
+      if tweet.urls and tweet.urls.length > 0
+        url = tweet.urls[0].expanded_url
+        if is_image?(url) or is_youtube?(url)
+          best_tweet.media_url = url
+        end
+      end
+
+      if tweet.media and tweet.media.length > 0
+        tweet.media.each do |entity|
+          if is_image?(entity.media_url) or is_youtube?(entity.media_url)
+            best_tweet.media_url = entity.media_url
+          end
+        end
+      end
+
+      return best_tweet
+    end
+
+    nil
+  end
+
   def perform(nickname)
     user = User.find_by_nickname(nickname)
-    
+
     unless user
-      return nil #TODO: в логгер
+      Event.create tag: 'error',
+                   source: 'UserUpdateWorker',
+                   content: "user #{nickname} not found"
+      return nil
     end
 
     logger.info 'Found user in database: ' + user.name
 
     begin
       #выбираем первого попавшегося и используем его твиттер для скачивания данных
-      rand_user = User.where('secret is Not NULL').first(:order=>'RANDOM()')
-      twitter = rand_user.twitter
-      #twitter = Twitter
+      twitter       = get_twitter
+      twitter_user  = twitter.user(nickname)
 
-      logger.info 'Found random user in database: ' + rand_user.name
-
-      time_gate = Time.now - 20.days
-
-    
-      twitter_user = twitter.user(nickname)
-
-      if twitter_user.protected 
+      if twitter_user.protected # запрещать покупку таких пользователей
         logger.info 'User is protected !!! =('
-        user.share_price = Settings.protected_price
-        user.base_price  = Settings.protected_price
+        user.base_price  = -1 # -1 - значит нельзя покупать
         user.save
-        
+
         return user
       end
 
-      timeline  = twitter.user_timeline(nickname, include_rts: 0, count: 200, include_entities: true).select{|t| t.created_at > time_gate}   
-      logger.info 'Fetched user profile and timeline from twitter'
-    rescue Twitter::Error::NotFound
-      logger.info 'User not foud'
+      timeline = get_timeline(twitter, nickname)
+    rescue Twitter::Error::ClientError => e
+      msg = "#{nickname}: twitter says '#{e.message}'"
+      logger.info msg
+      Event.create tag: 'error',
+                   source: 'UserUpdateWorker',
+                   content: msg
       return nil
-    rescue Twitter::Error::Unauthorized
-      logger.info 'Unauthorized'
-      sleep(RETRY_DELAY)
-      retry
-    rescue Twitter::Error::BadRequest
-      logger.info 'Bad request'
-      sleep(RETRY_DELAY)
-      retry
-    rescue Twitter::Error::Forbidden
-      logger.info 'Forbidden'
-      return nil
-    rescue Twitter::Error::ServiceUnavailable
-      logger.info 'Service unavailible'
-      sleep(RETRY_DELAY)
-      retry
-    end   
-
-
-    user.tweets_num    = timeline.count || 0
-    user.retweets_num  = timeline.inject(0){|a, b| a += b.retweet_count} || 0
-    user.followers_num = twitter_user.followers_count || 0
-    user.pop           = user.popularity || 0
-    user.save
-    user.reload
+    end
+    tweets_count    = timeline.count || 0
+    retweets_count  = timeline.inject(0){|a, b| a += b.retweet_count} || 0
+    followers_count = twitter_user.followers_count || 0
 
     # Определяем самый популярный твит пользователя
-    max_tweet_num  = -1
-    max_tweet_text = ''
-    tweet_id_str   = ''
-    media_url      = nil
+    best_tweet_retweets = ( (user.best_tweet and user.best_tweet.retweets) or 0 )
+    user.best_tweet.destroy
+    user.best_tweet = get_best_tweet(timeline, best_tweet_retweets)
 
-    top_time_gate = Time.now - Settings.best_update_delay
-    top_time_line = timeline.select{|t| t.created_at > top_time_gate}
-
-    top_time_line.each do |tweet|
-      if tweet.retweet_count > max_tweet_num
-        #logger.info tweet.retweet_count
-        max_tweet_num  = tweet.retweet_count
-        max_tweet_text = tweet.text
-        tweet_id_str   = tweet.id.to_s
-
-        #Обработка медиаданных твита
-        media_url      = nil
-        if tweet.urls and tweet.urls.length > 0
-          # begin
-          url = tweet.urls[0].expanded_url
-          logger.info(url)
-          if is_image?(url) or is_youtube?(url)
-            media_url = url
-          end
-          # rescue
-          #   logger.info 'Cannot find media url in tweet'
-          # end
-        end
-
-        if tweet.media and tweet.media.length > 0
-          tweet.media.each do |entity|
-            # begin
-            if is_image?(entity.media_url) or is_youtube?(entity.media_url)
-              media_url = entity.media_url
-            end
-            # rescue
-            #   logger.info 'Cannot find media url in tweet'
-            # end
-          end
-        end
-
-
-      end 
-    end
-
-    if (user.best_tweet_retweets_num <= max_tweet_num) or user.best_tweet_obsolete?
-      user.best_tweet_retweets_num = max_tweet_num
-      user.best_tweet_text         = max_tweet_text
-      user.best_tweet_id           = tweet_id_str
-      if media_url
-        user.best_tweet_media_url  = media_url
-      end
-      user.best_updated            = Time.now      
-      user.tweet_category = nil
-      user.save
-      user.reload
-
-      # if (user.best_tweet_retweets_num > 0) and (user.followers_num > 0)
-      #   user.best_tweet_param = user.best_tweet_retweets_num*1.0/(user.followers_num + 1.0)
-      # else
-      #   user.best_tweet_param = 0.0
-      # end
-      # user.save
-      user.update_best_tweet_param
-    end
-
-   
-    #New Formula 
-    a = user.retweets_num/(user.tweets_num + 1.0)
-    a = a/36.7
-    a = Math::log(a + Math::E)
-    a = a**(0.5)
-    a = (a + 1)**7
-    a = 7*a
-
-    b = user.followers_num.to_f**(0.5)
-    b = b/25.0
-    b = Math::log(Math::E + b)
-    b = b**(0.5)
-    b = (1 + b)**11
-    b = b*0.1
-    
-    price = a + b - 1092
-    price = Settings.minimum_price if price < 0
-
-    user.base_price  = price.round
+    user.base_price  = StockMath.base_price(retweets_count, tweets_count, followers_count)
+    user.update_share_price
     user.save
-    user.reload
+    logger.info 'Save user to database: ' + user.name
 
-    user.share_price = (price*user.popularity_stocks_coefficient).round
-    user.save
-    logger.info 'Saved user to database ' + user.name
-
-    user
+    # на случай, если новенький
+    user.init_first_money
   end
 end

@@ -1,0 +1,165 @@
+en:
+  sign_in_text: >
+    Twistock is а simulator
+    of trade exchange where you can invest
+    in Twitter-accounts. By buying and selling their stocks, 
+    you can earn virtual money and then spend it on the real goods in Twistock Store.
+
+  search_user_by_nickname: 'Search user by nickname' 
+
+  twitter_translation: 'Posting to twitter'
+
+  top_tweets_text: >
+    Of the millions of tweets our robot picked the most trendy. Just explore and enjoy.
+
+  _on: 'On'
+  _off: 'Off'
+
+  retweet: 'Retweet'
+  language: 'Language'
+
+  all: 'All'
+
+  english: 'English'
+  russian: 'Russian'
+  german: 'German'
+  dutch:  'Dutch' 
+  portuguese: 'Portuguese'
+  farsi: 'Farsi'
+  spanish: 'Spanish'
+  french: 'French'
+
+  most_popular_tweet: 'Most popular tweet'
+  top_tweets_worldwide: 'Top Tweets Worldwide'
+
+  tweet_link: 'Tweet link'
+
+  categories: 'Categories:'
+
+  bought: "bought"
+  sold: 'sold'
+  stocks_of: 'stocks of'
+  on_twistock_com: 'on twistock.com #MonetizeSocialCapital'
+
+  celebrities: 'Celebrities'
+  celebrities_tooltip: 'Celebrities in Twitter.  Become a co-owner of your idol.'
+
+  politicians: 'Politicians'
+  politicians_tooltip: 'The brightest politicians.'
+
+  user_not_found: 'User not found.'
+  go_home: 'Go home.'
+
+  change_language: 'Change language'
+
+  buy_stocks: 'Buy Stocks'
+  sell_your_starting_shares: 'Sell your starting shares'
+  sell_stocks: 'Sell Stocks'
+
+  growth: 'Growth'
+  decrease: 'Decrease'
+
+  buy_product: 'Buy Product'
+  buy_this_item: 'Buy this item'
+
+  you_havent_enough_money: "You haven't enough money to buy this item."
+  try_to_earn_more: 'Try to earn more!'
+
+  count: 'Count'
+  your_money: 'Your money:'
+  your_stock_price: 'Your stock price:'
+  your_stock_price_tooltip: ''    
+  popularity: 'Popularity'
+  low: 'low'
+  medium: 'medium'
+  high: 'high'
+  superstar: 'superstar'
+  popularity_tooltip: ''
+  close: 'Close'
+  buy: 'Buy'
+  sell: 'Sell'
+
+  twitter_profile: 'twitter profile'
+
+
+  spend_in_twistock_store: 'Spend in Twistock Store'
+
+  show_all: 'Show all'
+    
+
+  my_investment_portfolio: 'MY INVESTMENT PORTFOLIO '
+  investment_portfolio_tooltip: ''
+  my_stock_holders: 'MY STOCK HOLDERS '
+  stock_holder: 'Stock holder'
+  stock_holders: 'Stock holders'
+  stock_count: 'Stock count'
+  stock_holders_tooltip: ''
+  investment_portfolio: 'Investment Portfolio'
+
+
+  stock_owner: 'Stock owner'
+  one_stock_price: 'One stock price'
+  stock_price: 'Stock price'
+  total_cost: 'Total cost'
+  cost: 'Cost'
+
+  store:
+    title: 'TWISTOCK STORE'
+    caption: >
+      Unfortunately, the prices for the goods are way too high. 
+      As soon as the test period is over, we will lower them.
+
+  random_person: 'Random person'
+  random_person_tooltip: ''
+  most_valuable: 'Most valuable'
+  most_valuable_tooltip: ''
+  most_booming: 'Most booming'
+  most_booming_tooltip: ''
+  most_falling: 'Most falling'
+  most_falling_tooltip: ''
+
+  popularity: 'Popularity'
+  popularity_tooltip: ''
+
+  low: 'low'
+  high: 'high'
+  medium: 'medium'
+  abandoned: 'abandoned'
+  superstart: 'superstar'
+
+  price_dynamics: 'Price dynamics'
+
+  how_it_works: 'How it works?'
+
+  my_history: 'My history '
+  action: 'Action'
+  _date: 'Date'
+  show_all_transactions: 'Show all transactions'
+
+  buy_real_for_virtual: 'Buy real goods for virtual money'
+
+  sign_out: 'Sign out'
+
+  store_header: 'Unfortunately, the prices for the goods are way too high.'
+  store_header2: 'As soon as the test period is over, we will lower them.'
+
+  back_to_main_page: 'Back to main page'
+
+  random_person_tooltip: 'This is a flow of random twitter users. Find the profitable one and buy some stocks for your Investment portfolio.'
+
+  most_valuable_tooltip: 'Explore twitter users with the highest stock price.'
+  most_booming_tooltip: 'Stocks of these users are on the rise. They are growing in price because people buy them willingly.'
+  most_falling_tooltip: 'Everybody in a hurry to sell the stocks of these users and they are falling in price.'
+
+  your_price_tooltip: 'This is a price of one stock of you. Twistock web-robots counted it value by assessing your social influence.'
+
+  popularity_tooltip: 'Popularity of the stocks increases when users buy or sell them.'
+
+  iportfolio_tooltip: 'Look whose stocks you possess.'
+  stock_holders_tooltip: 'Look who bought your stocks.'
+  search-query_tooltip: 'Here you can find users by their nicknames.'
+
+  sorry: >
+    Sorry, but Twistock is currently available in the web version only.
+    Invest in twitter accounts via laptop.
+
