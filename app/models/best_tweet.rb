@@ -4,6 +4,4 @@ class BestTweet < ActiveRecord::Base
 
   validates :twitter_id, uniqueness: true
   validates :content, :retweets, :user_id, :twitter_id, presence: true
-
-  # TODO: перенести и выправить логику из UserLogic::BestTweets
 end

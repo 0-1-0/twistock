@@ -1,5 +1,4 @@
 # This's magic string. It makes code faster, better and annihilate bugs! >_<
-# TODO: складывать важные ошибки в БД и сделать интерфейс их просмотра
 
 source 'https://rubygems.org'
 
@@ -30,6 +29,9 @@ gem 'simple_form'
 
 #интернационализация js-кода
 gem 'i18n-js'
+
+# хороший русификатор
+gem 'russian'
 
 # аутентификация
 gem 'omniauth'

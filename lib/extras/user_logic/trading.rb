@@ -1,9 +1,41 @@
 module UserLogic
   module Trading
+    module StandartError
+      def initialize(message)
+        super(message || @standart_message)
+      end
+    end
 
-    # TODO: перевод ошибок, выдача их пользователю
+    # Throws when uninitialized or protected user
+    class UninitializedUserError < Exception
+      @standart_message = "Shares aren't ready for selling yet"
+      include StandartError
+    end
+
+    class BuyZeroSharesError < Exception
+      @standart_message = "You cannot buy 0 shares"
+      include StandartError
+    end
+
+    class SellZeroSharesError < Exception
+      @standart_message = "You cannot sell 0 shares"
+      include StandartError
+    end
+
+    class NotEnoughMoneyError < Exception
+      @standart_message = "You haven't enough money"
+      include StandartError
+    end
+
+    class NotEnoughSharesError < Exception
+      @standart_message = "You haven't enough money"
+      include StandartError
+    end
+
+    # NOW WRITE THE METHODS!!!
+
     def buy_shares(owner, count)
-      raise "You cannot buy 0 shares" unless count > 0
+      raise BuyZeroSharesError unless count > 0
 
       cost = 0
 
@@ -11,19 +43,16 @@ module UserLogic
         owner.reload
         self.reload
 
-        raise "Stocks aren't ready for selling yet" unless owner.share_price
-        raise "You cannot buy shares with zero price" if owner.share_price == 0
+        raise UninitializedUserError  unless owner.share_price
 
-
-        price = owner.price_after_transaction(count)
+        price = StockMath.share_price(owner.base_price, owner.shares_in_stock + count)
         cost = count*price
 
-        raise "You haven't enough money"       unless self.money >= cost
+        raise NotEnoughMoneyError     unless self.money >= cost
 
         # проводим операцию
-        #owner.shares  -= count
         self.money   -= cost
-        if bos = self.portfel.where(owner_id: owner.id).first
+        if (bos = portfel.where(owner_id: owner.id).first)
           bos.count += count
           bos.save
         else
@@ -31,17 +60,9 @@ module UserLogic
         end
 
         owner.update_share_price
-        owner.reload
-        #доп эмиссия (если нужно)
-        # if owner.available_shares < User::START_SHARES
-        #   owner.shares *= 2
-        #   owner.save
-        # end
 
         owner.save!
         self.save!
-
-        self
       end
 
       # теперь фигачим транзакцию
@@ -64,7 +85,7 @@ module UserLogic
     end
 
     def sell_shares(owner, count)
-      raise "You cannot sell 0 shares" unless count > 0
+      raise SellZeroSharesError unless count > 0
 
       cost = 0
 
@@ -72,8 +93,8 @@ module UserLogic
         self.reload
         owner.reload
 
-        raise "You have not this shares" unless bos = self.portfel.where(owner_id: owner.id).first
-        raise "You have not this shares" if bos.count < count
+        raise NotEnoughSharesError unless bos = self.portfel.where(owner_id: owner.id).first
+        raise NotEnoughSharesError if bos.count < count
 
         bos.count     -= count
         if bos.count == 0
@@ -82,8 +103,7 @@ module UserLogic
           bos.save
         end
 
-
-        #Важен порядок следующих 3 операций!
+        # Важен порядок следующих 3 операций!
         owner.update_share_price
         owner.reload
 

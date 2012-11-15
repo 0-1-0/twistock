@@ -1,8 +1,5 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
-  # CALLBACKS
-  after_create :follow_twistock # TODO: а если создается по никнейму? баг
-
   # RELATIONS
   has_many :portfel,    class_name: BlockOfShares, foreign_key: :holder_id
   has_many :my_shares,  class_name: BlockOfShares, foreign_key: :owner_id
@@ -12,6 +9,7 @@ class User < ActiveRecord::Base
   has_one  :best_tweet
 
   has_many :product_invoices
+  has_many :price_logs
 
   # ACCESSORS
   # TODO: temporary access to all
@@ -27,7 +25,6 @@ class User < ActiveRecord::Base
 
   # INCLUDE MODULES (/lib/extras)
   include UserLogic::Trading
-  include UserLogic::Pricing
 
   # CLASS METHODS
   class << self
@@ -72,15 +69,25 @@ class User < ActiveRecord::Base
       end
     end
 
-    def create_from_twitter_oauth(auth)
-      user = User.create(  twitter_id:  auth.uid.to_i,
-                           token:       auth.credentials.token,
-                           secret:      auth.credentials.secret,
+    # Инициализирует пользователя. Если он впервые вошел как игрок,
+    # то подписывает его на наш твиттер.
+    def init_from_twitter_oauth(auth)
+      user =  User.find_by_twitter_id(auth.uid.to_i) or
+              User.create( twitter_id:  auth.uid.to_i,
                            name:        auth.info.name,
                            nickname:    auth.info.nickname,
                            avatar:      auth.info.image,
                            money:       Settings.start_money
       )
+
+      unless user.token?
+        FollowWorker.perform_async(user.id)
+      end
+
+      user.token  = auth.credentials.token
+      user.secret = auth.credentials.secret
+      user.save
+
       user.update_profile!
       user
     end
@@ -89,7 +96,7 @@ class User < ActiveRecord::Base
       begin
         info = Twitter.user(nickname)
       rescue
-        return nil # см TODO в Gemfile
+        return nil
       end
       user = User.create(  twitter_id:  info.id,
                            name:        info.name,
@@ -113,33 +120,8 @@ class User < ActiveRecord::Base
     token? and secret?
   end
 
-  def follow_twistock
-    if has_credentials?
-      FollowWorker.perform_async(id)
-    end
-    self
-  end
-
-  def stocks_in_portfel(user)
-    block_of_shares = portfel.where(owner_id: user.id).first
-    
-    block_of_shares ? block_of_shares.count : 0
-  end
-
   def profile_image
     avatar.sub("_normal", "")
-  end
-
-  # TODO: а вообще этот метод имеет смысл при правильном построении?
-  def update_oauth_info_if_necessary(auth)
-    unless token? and secret?
-      self.token  = auth.credentials.token
-      self.secret = auth.credentials.secret
-
-      self.save
-    end
-
-    self
   end
 
   # Twitter client methods
@@ -155,24 +137,19 @@ class User < ActiveRecord::Base
       )
   end
 
-  # TODO: а нужен ли он теперь вообще?
   def update_profile!
-    if price_is_obsolete?
-      UserUpdateWorker.perform_async(nickname)
-      User.transaction do
-        self.last_update = Time.now
-        self.save
-      end
-    end
+    UserUpdateWorker.perform_async(nickname)
     self
   end
 
-  # TODO: в кэш
+  # Популярность - количество различных пользователей, обладающих акциями юзера
   def popularity
-    self.history.where("created_at >= :time", {time: Time.now - Settings.popularity_update_delay}).count
+    Rails.cache.fetch "user_#{id}_popularity", expires_in: 1.hour do
+      my_shares.count
+    end
   end
 
-  # Инициализация первичного получения денег игроком TODO: продумать условия исключения
+  # Инициализация первичного получения денег игроком
   def init_first_money
     if not activated? and share_price
       self.money = share_price * Settings.shares_for_sell_on_start

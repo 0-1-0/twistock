@@ -1,17 +1,21 @@
 defaults: &defaults
+  shares_for_sell_on_start: 100
+  twistock_twitter:         Twistock_com
+  users_timegate:           20 # in days
+  best_tweet_update_delay:  <%= 1.day %>
+
+  protected_price:          1
+
   start_money:    0
-  shares_for_sell_on_start:   100
   popularity_update_delay:  <%= 2.weeks %>
   analyses_update_delay:    <%= 2.hours %>
   popularity_power:   6
-  best_update_delay:  <%= 1.day %>
 
   popularity_constant:  100.0
 
   en_locale: en
   ru_locale: ru
 
-  protected_price:  1
   minimum_price:    2
 
 development:
