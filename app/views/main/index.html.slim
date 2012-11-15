@@ -17,23 +17,6 @@
     form
       input type='text' placeholder='Search'
 .row
-  =render :partial=> 'tile'
-  =render :partial=> 'tile'
-  =render :partial=> 'tile'
-  =render :partial=> 'tile'
-  =render :partial=> 'tile'
-  =render :partial=> 'tile'
-.row
-  =render :partial=> 'tile'
-  =render :partial=> 'tile'
-  =render :partial=> 'tile'
-  =render :partial=> 'tile'
-  =render :partial=> 'tile'
-  =render :partial=> 'tile'
-.row
-  =render :partial=> 'tile'
-  =render :partial=> 'tile'
-  =render :partial=> 'tile'
-  =render :partial=> 'tile'
-  =render :partial=> 'tile'
-  =render :partial=> 'tile'
+  - 10.times do
+    - 6.times do
+      =render :partial=> 'tile'
