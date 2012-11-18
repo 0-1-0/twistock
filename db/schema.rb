@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121115131225) do
+ActiveRecord::Schema.define(:version => 20121118130243) do
 
   create_table "best_tweets", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "twitter_id"
+    t.string   "twitter_id"
     t.text     "media_url"
     t.integer  "retweets"
     t.text     "content"

@@ -39,6 +39,7 @@ class ApplicationController < ActionController::Base
     (true if session[:user_id]) or false
   end
 
+  # TODO: прокинуть сообщения через I18n
   def user_required
     redirect_to root_path, alert: 'You must be signed in to view that page =)' unless signed_in?
   end

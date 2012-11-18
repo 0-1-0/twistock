@@ -1,13 +1,7 @@
 html lang="en"
   head
     meta charset="utf-8"
-    
-    /! Uncomment to make IE8 render like IE7
-    /! <meta http-equiv="X-UA-Compatible" content="IE=7" />
 
-    /! Set the viewport width to device width for mobile
-    /meta content="width=(device-width,)initial-scale=1.0" name="viewport"
-    
     title= content_for?(:title) ? yield(:title) : "Untitled"
 
     /! Included CSS Files
@@ -28,6 +22,7 @@ html lang="en"
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
+
   body
     .container
       .row
@@ -36,53 +31,28 @@ html lang="en"
             h3 Логотип
         .six.columns
           p
-            a href='#' How it works
+            a href='#' = t 'main_page.top_menu.how_it_works'
             ||
-            a href='/store' Twistock store
+            a href='/store' = t 'main_page.top_menu.store'
             ||
-            a href='/top_tweets' Top tweets
+            a href='/top_tweets' = t 'main_page.top_menu.top_tweets'
             ||
-            a href='/blog' blog and news
+            a href='/blog' = t 'main_page.top_menu.blog'
+            - if current_user
+              ||
+              = link_to t('main_page.sign_out'), sign_out_path
         .four.columns
           .promote
             h3
               a href='#' Акция
 
-      .row
-        .two.column
-          a href='user/show'
-            h3 User Photo
-        .two.columns
-          ul
-            li
-              | Nickname (Name)
-              ||
-              a href='#' options
-            li
-              h5 Price: 100500$
-        .two.columns
-          ul
-            li Money: xxxx
-            li Today
-            li
-              h5 +20
-        .one.column
-          ul
-            li 
-              a href='#' History
-            li Week
-            li 
-              h5 -200
-        .one.column
-          ul
-            li
-              a href='/store' Buy real goods
-            li Month
-            li
-              h5 +5
-
-        .four-columns
-          h1 График
+      - if current_user
+        = render 'shared/user_info', user: current_user
+      - else #current user
+        .row
+          p= t 'main_page.welcome_text'
+        .row
+          = link_to t('main_page.sign_in'), '/auth/twitter', class: 'button'
 
       .row
         hr

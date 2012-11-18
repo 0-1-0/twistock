@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :product_invoices
   has_many :price_logs
 
+  has_one :best_tweet
+
   # ACCESSORS
   # TODO: temporary access to all
 
@@ -25,6 +27,7 @@ class User < ActiveRecord::Base
 
   # INCLUDE MODULES (/lib/extras)
   include UserLogic::Trading
+  include UserLogic::Pricing
 
   # CLASS METHODS
   class << self
@@ -80,7 +83,7 @@ class User < ActiveRecord::Base
                            money:       Settings.start_money
       )
 
-      unless user.token?
+      unless user.token
         FollowWorker.perform_async(user.id)
       end
 
@@ -117,7 +120,7 @@ class User < ActiveRecord::Base
   end
 
   def has_credentials?
-    token? and secret?
+    token and secret
   end
 
   def profile_image
@@ -153,7 +156,7 @@ class User < ActiveRecord::Base
   def init_first_money
     if not activated? and share_price
       self.money = share_price * Settings.shares_for_sell_on_start
-      self.retention_done = true
+      self.activated = true
       save
     end
     self

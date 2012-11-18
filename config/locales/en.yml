@@ -1,5 +1,40 @@
 en:
+
+  user:
+    price: price
+    money: money
+    today: today
+    history: history
+    week: week
+    month: month
+
   status:
     share_price:
       calculating: 'calculating...'
       unavaible:   'unavailable for sale'
+
+  main_page:
+    sign_in: Sign in with twitter
+    sign_out: Logout
+    options: options
+    buy_real_goods: buy real goods
+
+    top_menu:
+      how_it_works: How it works?
+      store: Twistock Store
+      top_tweets: Top Tweets
+      blog: Blog & News
+
+    welcome_text: >
+      Twistock is а simulator
+      of trade exchange where you can invest
+      in Twitter-accounts. By buying and selling their stocks,
+      you can earn virtual money and then spend it on the real goods in Twistock Store.
+
+    flows:
+      top: Top
+      my_invesntments: My investments
+      my_stock_holders: My stock holders
+      friends: Friends
+      most_valuable: Most valuable
+      celebreties: Celebreties

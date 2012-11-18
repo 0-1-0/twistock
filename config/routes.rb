@@ -37,5 +37,5 @@ Twitterexchange::Application.routes.draw do
 
   match '/auth/:provider/callback', :to => 'session#create'
   match '/auth/failure',            :to => 'session#failure'
-  get 'sign_out'  => 'session#destroy'
+  get   'sign_out'                      => 'session#destroy'
 end

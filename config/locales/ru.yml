@@ -1,5 +1,40 @@
 ru:
+
+  user:
+    price: цена
+    money: деньги
+    today: сегодня
+    history: история
+    week: неделя
+    month: месяц
+
   status:
     share_price:
       calculating: 'вычисляется...'
       unavaible:   'недоступно для продажи'
+
+  main_page:
+    sign_in: Войти с помощью twitter
+    sign_out: Выйти
+    options: настройки
+    buy_real_goods: купить реальные товары
+
+    top_menu:
+      how_it_works: Как это работает?
+      store: Магазин
+      top_tweets: Лучшие Твиты
+      blog: Блог и Новости
+
+    welcome_text: >
+      Twistock - это симулятор торговой биржи,
+      где продаются и покупаются акции Twitter-аккаунтов.
+      Играя на бирже, можно заработать виртуальную валюту,
+      чтобы потом потратить ее на реальные товары в Twistock Store.
+
+    flows:
+      top: Топ
+      my_invesntments: Мои инвестиции
+      my_stock_holders: Мои инвесторы
+      friends: Друзья
+      most_valuable: Самые дорогие
+      celebreties: Знаменитости

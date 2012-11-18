@@ -1,18 +1,18 @@
 .row
   .ten.columns
-    dl.tabs.pill
+    dl.tabs.pill style="font-size: 12px;"
       dd
-        a.active href='/' Top
+        = link_to t('main_page.flows.top'), '#'
       dd
-        a href='#' My investments
+        = link_to t('main_page.flows.my_invesntments'), '#'
       dd
-        a href='#' My stock holders
+        = link_to t('main_page.flows.my_stock_holders'), '#'
       dd
-        a href='#' Friends
+        = link_to t('main_page.flows.friends'), '#'
       dd
-        a href='#' Most valueable
+        = link_to t('main_page.flows.most_valuable'), '#'
       dd
-        a href='#' Celebrities
+        = link_to t('main_page.flows.celebreties'), '#'
   .two.columns
     form
       input type='text' placeholder='Search'

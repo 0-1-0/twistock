@@ -24,7 +24,7 @@ class UserUpdateWorker
       .tap { logger.info 'Fetched user timeline from twitter' }
   end
 
-  def get_best_tweet(timeline, prev_best_retweets)
+  def get_best_tweet(timeline, prev_best_retweets, followers_count)
     best_tweet = BestTweet.new(retweets: 0)
 
     top_time_gate     = Time.now - Settings.best_tweet_update_delay
@@ -32,18 +32,20 @@ class UserUpdateWorker
     best_tweet_index  = nil
 
     top_time_line.each.with_index do |tweet, i|
-      if tweet.retweet_count > best_tweet.retweets
+      if tweet.retweet_count >= best_tweet.retweets
         best_tweet.retweets = tweet.retweet_count
         best_tweet_index    = i
       end
     end
+
+    return nil unless best_tweet_index
 
     if prev_best_retweets <= best_tweet.retweets
       tweet = top_time_line[best_tweet_index]
 
       best_tweet.twitter_id = tweet.id.to_s
       best_tweet.content    = tweet.text
-      best_tweet.param      = best_tweet.retweets * 1.0/(followers_num + 1.0)
+      best_tweet.param      = best_tweet.retweets * 1.0/(followers_count + 1.0)
 
       if tweet.urls and tweet.urls.length > 0
         url = tweet.urls[0].expanded_url
@@ -106,8 +108,8 @@ class UserUpdateWorker
 
     # Определяем самый популярный твит пользователя
     best_tweet_retweets = ( (user.best_tweet and user.best_tweet.retweets) or 0 )
-    user.best_tweet.destroy
-    user.best_tweet = get_best_tweet(timeline, best_tweet_retweets)
+    user.best_tweet.destroy if user.best_tweet
+    user.best_tweet = get_best_tweet(timeline, best_tweet_retweets, followers_count)
 
     user.base_price  = StockMath.base_price(retweets_count, tweets_count, followers_count)
     user.update_share_price
