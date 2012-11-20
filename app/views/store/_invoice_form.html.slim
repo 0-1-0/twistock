@@ -1,0 +1,26 @@
+#InvoiceForm.reveal-modal
+  h2
+    =t :buy
+    |  
+    =product.name
+    |  
+    =t :for
+    |  
+    =product.price
+  .lead
+    = simple_form_for([product, product_invoice], :url=>create_invoice_product_path(product)) do |f|
+      = f.error_notification
+
+      .form-inputs    
+        = f.input :country, :as=>:string
+        = f.input :postal_code
+        = f.input :city
+        = f.input :full_name
+        = f.input :address
+        = f.input :email
+        = f.input :phone
+
+      .form-actions
+        = f.button :submit
+
+  a.close-reveal-modal x

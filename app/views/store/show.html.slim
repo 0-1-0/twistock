@@ -3,17 +3,26 @@
     .row
       .six.columns
         .panel
-          - 40.times do
-            |bydloplaceholder 
+          p=@product.description
       .six.columns
         ul
           li
-            h3 Product name
+            h3=@product.name
           li
-            h3 Product description
-          li
-            | TEXT TEXT TEXT
+            p=@product.short_description
 
-        h4 $564
+        h4
+          | $ 
+          =@product.price
         a href='#'
-          .button Buy
+          #openInvoiceForm.button Buy
+          
+- if signed_in?
+  =render :partial=>'invoice_form', :locals=>{:product=>@product, :product_invoice=>@product_invoice}
+
+  javascript:
+    $(document).ready(function() {
+      $("#openInvoiceForm").click(function() {
+        $("#InvoiceForm").reveal();
+      });
+    });

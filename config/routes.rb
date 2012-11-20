@@ -6,7 +6,13 @@ Twitterexchange::Application.routes.draw do
   end
 
   resources :invoice
-  resources :products
+  
+  resources :products do
+    member do
+      post 'create_invoice'
+    end
+  end
+
   resources :store, only: [:index, :show]
 
   require 'sidekiq/web'

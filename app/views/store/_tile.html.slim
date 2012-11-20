@@ -4,11 +4,10 @@
       .panel 
         p=product.short_description
     dd
-      =link_to product.name, '#'
+      =link_to product.name, store_path(product)
     dd
       h5=product.price
     dd
-      a href='/store/show'
-        .button Buy
+      =link_to 'Buy', store_path(product), class: 'button'
   br
   br

@@ -12,12 +12,12 @@ class Product < ActiveRecord::Base
       user.money -= price
       user.save
 
-      ProductInvoice.create(
-        product:        name,
-        user_id:        user.id,
-        product_id:     id,
+      product_invoice = ProductInvoice.new(
+        product_name:   name,
+        #user_id:        user.id,
+        #product_id:     id,
         country:        params[:country],
-        total_cost:     price,
+        #cost:           price,
         postal_code:    params[:postal_code],
         city:           params[:city],
         full_name:      params[:full_name],
@@ -26,6 +26,12 @@ class Product < ActiveRecord::Base
         phone:          params[:phone],
         status:         'pending'
       )
+
+      product_invoice.user_id = user.id
+      product_invoice.product_id = id      
+      product_invoice.cost = price
+
+      product_invoice.save
     end
   end
 end

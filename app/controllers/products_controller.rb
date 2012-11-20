@@ -33,4 +33,11 @@ class ProductsController < ApplicationController
   def edit
     @product = Product.find(params[:id])
   end
+
+  def create_invoice
+    @product = Product.find(params[:id])
+    @product.create_invoice(current_user, params[:product_invoice])
+
+    redirect_to :back
+  end
 end
