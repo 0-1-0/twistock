@@ -1,0 +1,19 @@
+.row
+  =link_to 'Back', invoices_path
+  hr
+.row
+  =simple_form_for(@invoice, :url=>edit_invoice_path(@invoice)) do |f|
+    .form-inputs
+      = f.input :status
+      = f.input :product_name
+      = f.input :cost
+      = f.input :full_name
+      = f.input :email
+      = f.input :phone
+      = f.input :country, :as=>:string
+      = f.input :city
+      = f.input :postal_code
+      = f.input :address
+      = f.input :status
+    .form-actions
+      = f.button :submit

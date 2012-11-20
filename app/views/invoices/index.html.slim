@@ -1,0 +1,37 @@
+.row
+  h3 Manage product invoices
+
+  =link_to 'Back to Store', '/store'
+
+  hr
+
+  table
+    thead
+      tr
+        th Product Name
+        th cost
+        th Full Name
+        th email
+        th phone
+        th Country
+        th City
+        th Postal code
+        th Address
+        th status
+        th
+        th
+      tbody
+        - @invoices.each do |invoice|
+          tr
+            td=invoice.product_name
+            td=invoice.cost
+            td=invoice.full_name
+            td=invoice.email
+            td=invoice.phone
+            td=invoice.country
+            td=invoice.city
+            td=invoice.postal_code
+            td=invoice.address
+            td=invoice.status
+            td=link_to 'Edit', edit_invoice_path(invoice)
+            td=link_to 'Destroy', invoice_path(invoice), confirm: 'Are you sure?', method: :delete

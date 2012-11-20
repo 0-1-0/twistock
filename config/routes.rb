@@ -5,7 +5,7 @@ Twitterexchange::Application.routes.draw do
     end
   end
 
-  resources :invoice
+  resources :invoices
   
   resources :products do
     member do
