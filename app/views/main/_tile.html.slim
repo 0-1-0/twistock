@@ -2,15 +2,15 @@
   .panel
     .row
       .one.column
-        h3 XX
+        = image_tag user.avatar, style: 'max-width: none;'
       .seven.column
         ul
           li
-            | $322234
+            | $#{maybe_calculating(user, :share_price)}
           li
-            h5 +256
+            h5= with_sign maybe_calculating(user, :monthly_price_change)
     .row
-      a href='#' Nickname (Name)
+      a href='#' #{user.nickname} (#{user.name})
     .row
       br
       .one.column.offset-by-one
