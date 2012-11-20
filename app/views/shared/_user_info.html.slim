@@ -11,33 +11,20 @@
           = link_to t('main_page.options'), '#'
       li
         h5
-          | #{t('user.price')}:
-          = ' '
-          - if user.share_price
-            | #{user.share_price}$
-          - else
-            - if user.is_protected?
-              = t('status.share_price.unavaible')
-            - else
-              = t('status.share_price.calculating')
+          | #{t('user.price')}: #{maybe_calculating(user, :share_price)}$
   .two.columns
     ul
-      li
-        = "#{t 'user.money'}: "
-        -if user.money
-          | #{user.money}$
-        - else
-          = t 'status.share_price.calculating'
+      li= "#{t 'user.money'}: #{maybe_calculating(user, :money)}$"
       li= t 'user.today'
       li
-        h5= with_sign(user.daily_price_change)
+        h5= with_sign maybe_calculating(user, :daily_price_change)
   .one.column
     ul
       li
         = link_to t('user.history'), '#'
       li= t('user.week')
       li
-        h5= with_sign(user.weekly_price_change)
+        h5= with_sign maybe_calculating(user, :weekly_price_change)
   .one.column
     ul
       - if user == current_user
@@ -45,7 +32,7 @@
           = link_to t('main_page.buy_real_goods'), store_index_path
       li= t('user.month')
       li
-        h5= with_sign(user.monthly_price_change)
+        h5= with_sign maybe_calculating(user, :monthly_price_change)
 
   .four-columns
     h1 График

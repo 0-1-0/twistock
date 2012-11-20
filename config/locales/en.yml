@@ -11,7 +11,7 @@ en:
   status:
     share_price:
       calculating: 'calculating...'
-      unavaible:   'unavailable for sale'
+      unavailable:   'unavailable for sale'
 
   main_page:
     sign_in: Sign in with twitter

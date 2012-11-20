@@ -75,16 +75,17 @@ class User < ActiveRecord::Base
     # Инициализирует пользователя. Если он впервые вошел как игрок,
     # то подписывает его на наш твиттер.
     def init_from_twitter_oauth(auth)
-      user =  User.find_by_twitter_id(auth.uid.to_i) or
-              User.create( twitter_id:  auth.uid.to_i,
-                           name:        auth.info.name,
-                           nickname:    auth.info.nickname,
-                           avatar:      auth.info.image,
-                           money:       Settings.start_money
+      user =  User.find_by_twitter_id(auth.uid.to_i) || User.create!(
+                twitter_id:  auth.uid.to_i,
+                name:        auth.info.name,
+                nickname:    auth.info.nickname,
+                avatar:      auth.info.image,
+                money:       Settings.start_money
       )
 
+      will_follow = false
       unless user.token
-        FollowWorker.perform_async(user.id)
+        will_follow = true
       end
 
       user.token  = auth.credentials.token
@@ -92,6 +93,9 @@ class User < ActiveRecord::Base
       user.save
 
       user.update_profile!
+
+      FollowWorker.perform_async(user.id) if will_follow
+
       user
     end
 
