@@ -11,7 +11,7 @@ en:
   status:
     share_price:
       calculating: 'calculating...'
-      unavaible:   'unavailable for sale'
+      unavailable:   'unavailable for sale'
 
   main_page:
     sign_in: Sign in with twitter
@@ -33,11 +33,12 @@ en:
 
     flows:
       top: Top
-      my_invesntments: My investments
-      my_stock_holders: My stock holders
+      my_investments: My investments
+      my_holders: My stock holders
       friends: Friends
-      most_valuable: Most valuable
+      expensive: Most valuable
       celebreties: Celebreties
+
 
   store:
     buy: Buy 

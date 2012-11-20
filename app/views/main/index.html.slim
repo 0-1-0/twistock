@@ -1,22 +1,7 @@
+= render 'shared/flows_menu', flow: @flow
 .row
-  .ten.columns
-    dl.tabs.pill style="font-size: 12px;"
-      dd
-        = link_to t('main_page.flows.top'), '#'
-      dd
-        = link_to t('main_page.flows.my_invesntments'), '#'
-      dd
-        = link_to t('main_page.flows.my_stock_holders'), '#'
-      dd
-        = link_to t('main_page.flows.friends'), '#'
-      dd
-        = link_to t('main_page.flows.most_valuable'), '#'
-      dd
-        = link_to t('main_page.flows.celebreties'), '#'
-  .two.columns
-    form
-      input type='text' placeholder='Search'
-.row
-  - 10.times do
-    - 6.times do
-      =render :partial=> 'tile'
+  - if @collection
+    - @collection.each do |user|
+      =render 'tile', user: user
+  - else
+    = t 'status.share_price.calculating'

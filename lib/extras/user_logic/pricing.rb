@@ -21,21 +21,21 @@ module UserLogic
     end
 
     def daily_price_change
-      Rails.cache.fetch "user_#{id}_dpc", expires_in: 6.hours do
+      Rails.cache.fetch "user_#{id}_dpc", expires_in: 10.minutes do
         delta = PriceLog.get_user_log(self, first_and_last: true, for: 1.day)
         delta[1][0] - delta[0][0]
       end
     end
 
     def weekly_price_change
-      Rails.cache.fetch "user_#{id}_dpc", expires_in: 6.hours do
+      Rails.cache.fetch "user_#{id}_dpc", expires_in: 10.minutes do
         delta = PriceLog.get_user_log(self, first_and_last: true, for: 1.week)
         delta[1][0] - delta[0][0]
       end
     end
 
     def monthly_price_change
-      Rails.cache.fetch "user_#{id}_mpc", expires_in: 6.hours do
+      Rails.cache.fetch "user_#{id}_mpc", expires_in: 10.minutes do
         delta = PriceLog.get_user_log(self, first_and_last: true, for: 1.month)
         delta[1][0] - delta[0][0]
       end

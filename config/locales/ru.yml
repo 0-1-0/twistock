@@ -11,7 +11,7 @@ ru:
   status:
     share_price:
       calculating: 'вычисляется...'
-      unavaible:   'недоступно для продажи'
+      unavailable:   'недоступно для продажи'
 
   main_page:
     sign_in: Войти с помощью twitter
@@ -33,10 +33,10 @@ ru:
 
     flows:
       top: Топ
-      my_invesntments: Мои инвестиции
-      my_stock_holders: Мои инвесторы
+      my_investments: Мои инвестиции
+      my_holders: Мои инвесторы
       friends: Друзья
-      most_valuable: Самые дорогие
+      expensive: Самые дорогие
       celebreties: Знаменитости
 
   store:

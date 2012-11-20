@@ -60,6 +60,7 @@ module UserLogic
         end
 
         owner.update_share_price
+        owner.update_popularity
 
         owner.save!
         self.save!
@@ -105,6 +106,7 @@ module UserLogic
 
         # Важен порядок следующих 3 операций!
         owner.update_share_price
+        owner.update_popularity
         owner.reload
 
         cost = count*owner.share_price

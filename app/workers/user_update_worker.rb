@@ -113,10 +113,15 @@ class UserUpdateWorker
 
     user.base_price  = StockMath.base_price(retweets_count, tweets_count, followers_count)
     user.update_share_price
+    user.update_popularity
+
     user.save
+
+    user.my_friends if user.has_credentials?
+
     logger.info 'Save user to database: ' + user.name
 
     # на случай, если новенький
-    user.init_first_money
+    user.init_first_money if user.has_credentials?
   end
 end
