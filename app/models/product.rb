@@ -1,5 +1,5 @@
 class Product < ActiveRecord::Base
-  attr_accessible :description, :name, :price, :short_description, :priority
+  attr_accessible :description, :name, :price, :short_description, :priority, :published
   has_many :product_invoices, dependent: :nullify
 
   scope :published,   where(published: true)

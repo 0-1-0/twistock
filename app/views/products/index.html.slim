@@ -1,0 +1,25 @@
+.row
+  table
+    thead
+      tr
+        th Name
+        th Price
+        th Short description
+        th Priority
+        th Published
+        th
+        th
+    tbody
+      - @products.each do |product|
+        tr
+          td=product.name
+          td=product.price
+          td=product.short_description
+          td=product.priority
+          td=product.published
+          td=link_to 'Edit', edit_product_path(product)
+          td=link_to 'Destroy', product, confirm: 'Are you sure?', method: :delete
+.row
+  hr
+  =link_to 'Create new product', new_product_path
+

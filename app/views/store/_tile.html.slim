@@ -2,16 +2,11 @@
   dl
     dd
       .panel 
-        |Bydlo-placeholder
-        |Bydlo-placeholder
-        |Bydlo-placeholder
+        p=product.short_description
     dd
-      div
-        a href='/store/show' Product name.
-      div
-        a href='/store/show' Product short desc.
+      =link_to product.name, '#'
     dd
-      h5 $650
+      h5=product.price
     dd
       a href='/store/show'
         .button Buy
