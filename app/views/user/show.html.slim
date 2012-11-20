@@ -1,55 +1,5 @@
-.row
-  .ten.columns
-    dl.tabs.pill
-      dd
-        a.active href='/' Top
-      dd
-        a href='#' My investments
-      dd
-        a href='#' My stock holders
-      dd
-        a href='#' Friends
-      dd
-        a href='#' Most valueable
-      dd
-        a href='#' Celebrities
-  .two.columns
-    form
-      input type='text' placeholder='Search'
-.row
-  .two.column
-    a href='user/show'
-      h3 User Photo
-  .two.columns
-    ul
-      li
-        | Nickname (Name)
-        ||
-        a href='#' options
-      li
-        h5 Price: 100500$
-  .two.columns
-    ul
-      li Money: xxxx
-      li Today
-      li
-        h5 +20
-  .one.column
-    ul
-      li 
-        a href='#' History
-      li Week
-      li 
-        h5 -200
-  .one.column
-    ul
-      li Month
-      li
-        h5 +5
-
-  .four-columns
-    h1 График
-
+= render 'shared/flows_menu', flow: nil
+= render 'shared/user_info', user: @user
 .row
   .button Buy
   .button Sell
@@ -59,11 +9,12 @@
 
 .row
   .four.columns
-    a href='#' Twitter
-    h5 Top Tweet
-    =render :partial=>'shared/random_text'
-    h5 160 RT
-    a href='/top_tweets' see all top tweets
+    = link_to 'Twitter', @user.twitter_url
+    - if @best_tweet
+      h5 Top Tweet
+      = @best_tweet.content
+      h5 #{@best_tweet.retweets} RT
+    = link_to 'see all top tweets', '/top_tweets'
   
   .four.columns
     h5 Investment portfolio
@@ -75,27 +26,27 @@
           td Onse stock
           td Total
       tbody
-        - 7.times do
+        - @portfel.each do |bos|
           tr
             td 
-              a href='#' Xui
-            td Pizda
-            td Dzhigurda
-            td olololo
+              = link_to bos.owner.nickname, bos.owner
+            td
+              = bos.count
+            td #{bos.owner.share_price}$
+            td #{bos.owner.share_price * bos.count}$
 
   .four.columns
     h5 Stock holder
     table
       thead
         tr
-          td Stock owner
+          td Stock holder
           td Count
           td Total
       tbody
-        - 7.times do
+        - @my_shares.each do |bos|
           tr
             td 
-              a href='#' Xui
-            td Pizda
-            td olololo
-
+              = link_to bos.holder.nickname, bos.holder
+            td= bos.count
+            td #{bos.count * @user.share_price}$

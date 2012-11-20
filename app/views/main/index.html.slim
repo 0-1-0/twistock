@@ -1,21 +1,4 @@
-.row
-  .ten.columns
-    dl.tabs.pill
-      dd
-        = link_to t('main_page.flows.top'), root_path(flow: 'top'), class: active_when(@flow == 'top')
-      dd
-        = link_to t('main_page.flows.my_invesntments'), root_path(flow: 'my_investments'), class: active_when(@flow == 'my_investments')
-      dd
-        = link_to t('main_page.flows.my_stock_holders'), root_path(flow: 'my_holders'), class: active_when(@flow == 'my_holders')
-      dd
-        = link_to t('main_page.flows.friends'), root_path(flow: 'friends'), class: active_when(@flow == 'friends')
-      dd
-        = link_to t('main_page.flows.most_valuable'), root_path(flow: 'expensive'), class: active_when(@flow == 'expensive')
-      dd
-        = link_to t('main_page.flows.celebreties'), root_path(flow: 'celebreties'), class: active_when(@flow == 'celebreties')
-  .two.columns
-    form
-      input type='text' placeholder='Search'
+= render 'shared/flows_menu', flow: @flow
 .row
   - if @collection
     - @collection.each do |user|

@@ -128,7 +128,6 @@ class User < ActiveRecord::Base
   # Популярность - количество различных пользователей, обладающих акциями юзера
   def update_popularity
     self.popularity = my_shares.count
-    save
   end
 
   # Инициализация первичного получения денег игроком
@@ -139,5 +138,9 @@ class User < ActiveRecord::Base
       save
     end
     self
+  end
+
+  def twitter_url
+    "https://twitter.com/#{nickname}"
   end
 end

@@ -1,0 +1,9 @@
+.row
+  .ten.columns
+    dl.tabs.pill
+      - %w{top my_investments my_holders friends expensive celebreties}.each do |el|
+        dd
+          = link_to t("main_page.flows.#{el}"), root_path(flow: el), class: active_when(flow == el)
+  .two.columns
+    form
+      input type='text' placeholder='Search'

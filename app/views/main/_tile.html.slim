@@ -10,7 +10,7 @@
           li
             h5= with_sign maybe_calculating(user, :monthly_price_change)
     .row
-      a href='#' #{user.nickname} (#{user.name})
+      = link_to "#{user.nickname} (#{user.name})", user
     .row
       br
       .one.column.offset-by-one
