@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121118130243) do
+ActiveRecord::Schema.define(:version => 20121120090007) do
 
   create_table "best_tweets", :force => true do |t|
     t.integer  "user_id"
@@ -37,6 +37,15 @@ ActiveRecord::Schema.define(:version => 20121118130243) do
   add_index "block_of_shares", ["holder_id"], :name => "index_block_of_shares_on_holder_id"
   add_index "block_of_shares", ["owner_id"], :name => "index_block_of_shares_on_owner_id"
 
+  create_table "blog_posts", :force => true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.string   "title"
+    t.boolean  "published",  :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
   create_table "events", :force => true do |t|
     t.string   "tag"
     t.string   "source"
@@ -44,6 +53,17 @@ ActiveRecord::Schema.define(:version => 20121118130243) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "post_comments", :force => true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "blog_post_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "post_comments", ["blog_post_id"], :name => "index_post_comments_on_blog_post_id"
+  add_index "post_comments", ["user_id"], :name => "index_post_comments_on_user_id"
 
   create_table "price_logs", :force => true do |t|
     t.integer  "user_id"
@@ -53,6 +73,17 @@ ActiveRecord::Schema.define(:version => 20121118130243) do
   end
 
   add_index "price_logs", ["user_id"], :name => "index_price_logs_on_user_id"
+
+  create_table "price_stamps", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "price"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "previous_price"
+    t.integer  "delta"
+  end
+
+  add_index "price_stamps", ["user_id"], :name => "index_price_stamps_on_user_id"
 
   create_table "product_invoices", :force => true do |t|
     t.string   "product"
@@ -113,7 +144,7 @@ ActiveRecord::Schema.define(:version => 20121118130243) do
     t.string   "token"
     t.string   "secret"
     t.boolean  "activated",                        :default => false
-    t.string   "locale"
+    t.string   "locale",                           :default => "en"
     t.boolean  "twitter_translation",              :default => true
     t.integer  "share_price"
   end

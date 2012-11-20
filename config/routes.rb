@@ -1,6 +1,11 @@
 Twitterexchange::Application.routes.draw do
+  resources :blog_posts, :path=>'blog' do
+    member do
+      post 'add_comment'
+    end
+  end
+
   resources :invoice
-  resources :blog
   resources :product
   resources :store, only: [:index, :show]
 

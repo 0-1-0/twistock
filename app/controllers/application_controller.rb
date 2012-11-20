@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :signed_in?
+  helper_method :signed_as_admin?
 
   def set_locale
     logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
@@ -37,6 +38,10 @@ class ApplicationController < ActionController::Base
 
   def signed_in?
     (true if session[:user_id]) or false
+  end
+
+  def signed_as_admin?
+    (true if signed_in? and current_user.is_admin?) or false
   end
 
   # TODO: прокинуть сообщения через I18n

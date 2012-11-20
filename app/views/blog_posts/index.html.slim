@@ -1,0 +1,34 @@
+.row
+  .ten.columns
+    dl.tabs.pill style="font-size: 12px;"
+      dd
+        = link_to t('All'), '#'
+      dd
+        = link_to t('News'), '#'
+      dd
+        = link_to t('Features'), '#'
+      dd
+        = link_to t('Something'), '#'
+
+  .two.columns
+    form
+      input type='text' placeholder='Search'
+
+- @blog_posts.each do |blog_post|
+  .row
+    .ten.columns
+      .row
+        h3=blog_post.title
+      .row
+        small=blog_post.created_at
+      .row
+        p=blog_post.content
+      .row
+        =link_to "Comments (#{blog_post.comments.count})", blog_post 
+
+- if signed_as_admin?
+  .row
+    br
+    br
+    hr
+    = link_to 'New Blog post', new_blog_post_path

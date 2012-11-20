@@ -1,0 +1,31 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @blog_post.title
+p
+  strong Content:
+  = @blog_post.content
+
+hr
+- @blog_post.comments.each do |comment|
+  p= comment.content
+  br
+
+- if signed_in?
+  = simple_form_for([@blog_post, @post_comment], :url =>  add_comment_blog_post_path(@blog_post) ) do |f|
+    = f.error_notification
+
+    .form-inputs    
+      = f.input :content
+
+
+    .form-actions
+      = f.button :submit
+
+
+
+- if signed_as_admin?
+  = link_to 'Edit', edit_blog_post_path(@blog_post)
+  '|
+= link_to 'Back', blog_posts_path
