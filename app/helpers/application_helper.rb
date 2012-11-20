@@ -16,4 +16,8 @@ module ApplicationHelper
       end
     end
   end
+
+  def active_when(condition)
+    condition ? 'active ' : ''
+  end
 end

@@ -23,41 +23,17 @@ class User < ActiveRecord::Base
 
   # SCOPES
   scope :random,        ->(size) { order('RANDOM()').limit(size) }
-  scope :highest_value, ->(size) { where{share_price != nil}.order{share_price.desc}.limit(size) }
 
   # INCLUDE MODULES (/lib/extras)
   include UserLogic::Trading
   include UserLogic::Pricing
+  extend  UserLogic::Flows::Global
+  include UserLogic::Flows::Local
 
   # CLASS METHODS
   class << self
     def find_by_nickname(nickname)
       User.where("upper(nickname) = upper('#{nickname}')").first
-    end
-
-    # По заданному списку ников выдает массив пользователей.
-    # Если пользователя нет в базе - пытается его завести.
-    # Регистронезависим. Имеет следующие опции:
-    #
-    # limit: int - выдать только указанное число пользователй
-    # shuffle: bool - случайный порядок
-    # history: bool - подгрузить history (includes)
-    def find_by_nicknames(nicknames, opts = {})
-      nicknames.map!(&:upcase)
-
-      # создаем несуществующих
-      exists = User.where{upper(nickname).in nicknames}.select(:nickname)
-        .map(&:nickname).map(&:upcase)
-      (nicknames - exists).each do |nick|
-        User.find_or_create nick
-      end
-
-      # сама выборка
-      result = User.where{upper(nickname).in nicknames}
-      result = result.includes(:history)  if opts[:history]
-      result = result.order('RANDOM()')   if opts[:shuffle]
-      result = result.limit(opts[:limit]) if opts[:limit]
-      result
     end
 
     # Регистронезависимый поиск по нику. В случае отсутсвия - создает пользователя.
@@ -150,10 +126,9 @@ class User < ActiveRecord::Base
   end
 
   # Популярность - количество различных пользователей, обладающих акциями юзера
-  def popularity
-    Rails.cache.fetch "user_#{id}_popularity", expires_in: 1.hour do
-      my_shares.count
-    end
+  def update_popularity
+    self.popularity = my_shares.count
+    save
   end
 
   # Инициализация первичного получения денег игроком
