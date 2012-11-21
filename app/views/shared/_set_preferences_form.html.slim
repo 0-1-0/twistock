@@ -1,0 +1,27 @@
+#SetPreferencesForm.reveal-modal
+  h5
+    =t 'main_page.set_preferences.social_network'
+    br   
+    |Twitter | Facebook
+    hr
+  .lead
+    =form_for current_user, :remote => true, :id=>'set-preferences-form' do |f|
+      =t('main_page.set_preferences.post_on_twitter')
+      =f.check_box :twitter_translation, :class => 'submittable'
+      hr
+      =t('main_page.set_preferences.mail')
+      =f.text_field :email, :class=>'submittable'
+
+    hr
+    = link_to t('main_page.sign_out'), sign_out_path, :class=>'button'
+
+javascript:
+  $(document).ready(function() {
+    $("#openPreferencesButton").click(function() {
+      $("#SetPreferencesForm").reveal();
+    });
+  });
+
+  $('.submittable').live('change', function() {
+    $(this).parents('form:first').submit();
+  });

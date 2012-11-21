@@ -35,6 +35,12 @@ ru:
       text: 'Введи свою почту и получи $100 000'
       label: 'Email:'
 
+    set_preferences:
+      social_network: Мои профили
+      post_on_twitter: Трансляция в Твиттер
+      mail: Моя почта
+      sign_out: Выйти
+
     flows:
       top: Топ
       my_investments: Мои инвестиции

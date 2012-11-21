@@ -18,10 +18,9 @@ Twitterexchange::Application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
-  resources :user, only: [:show] do
+  resources :user, only: [:show, :update] do
     member do
       post 'set_mail'
-      post 'set_preferences'
     end
   end
 

@@ -8,7 +8,9 @@
         | #{user.nickname} (#{user.name})
         - if user == current_user
           ||
-          = link_to t('main_page.options'), '#'
+          = link_to t('main_page.options'), '#', :id=>'openPreferencesButton'
+          =render :partial=>'shared/set_preferences_form'
+
       li
         h5
           | #{t('user.price')}: #{maybe_calculating(user, :share_price)}$

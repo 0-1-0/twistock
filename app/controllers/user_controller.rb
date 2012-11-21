@@ -17,7 +17,10 @@ class UserController < ApplicationController
     redirect_to :back
   end
 
-  def set_preferences
+  def update
+    @user = User.find_by_nickname params[:id]
+    @user.update_attributes params[:user]
+
     redirect_to :back
   end
 end

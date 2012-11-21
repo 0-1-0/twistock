@@ -35,6 +35,12 @@ en:
       text: 'Take $100 000 for my mail'
       label: 'My mail:'
 
+    set_preferences:
+      social_network: Social network
+      post_on_twitter: Post on Twitter
+      mail: Mail
+      sign_out: Sign out
+
     flows:
       top: Top
       my_investments: My investments

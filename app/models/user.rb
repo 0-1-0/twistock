@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
 
   has_one :best_tweet
 
+
   # ACCESSORS
   # TODO: temporary access to all
 
