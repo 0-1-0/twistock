@@ -13,6 +13,11 @@ class PriceLog < ActiveRecord::Base
         query = query.where{ created_at >= Time.now - opts[:for] }
       end
 
+      # Monkey patch
+      if query.size == 0
+        return [[0,0],[0,0]]
+      end
+
       query = [query.first, query.last] if opts[:first_and_last]
       query.map {|x| [x.price, x.created_at] }
     end

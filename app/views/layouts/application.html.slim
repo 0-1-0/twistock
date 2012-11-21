@@ -43,9 +43,10 @@ html lang="en"
               ||
               = link_to t('main_page.sign_out'), sign_out_path
         .three.columns
-          .promote
-            h3
-              a href='#' Акция
+          - if signed_in? and !current_user.has_email?
+            .promote
+              h3
+                a href='#' Акция
 
         .one.column
           br

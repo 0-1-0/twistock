@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120140749) do
+ActiveRecord::Schema.define(:version => 20121121155311) do
 
   create_table "best_tweets", :force => true do |t|
     t.integer  "user_id"
@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(:version => 20121120140749) do
     t.boolean  "twitter_translation",              :default => true
     t.integer  "share_price"
     t.integer  "popularity"
+    t.string   "email"
   end
 
   add_index "users", ["nickname"], :name => "index_users_on_nickname", :unique => true

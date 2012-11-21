@@ -143,4 +143,9 @@ class User < ActiveRecord::Base
   def twitter_url
     "https://twitter.com/#{nickname}"
   end
+
+  def has_email?
+    email 
+  end
+
 end
