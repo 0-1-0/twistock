@@ -42,11 +42,23 @@ html lang="en"
             - if current_user
               ||
               = link_to t('main_page.sign_out'), sign_out_path
+
+              
+        
         .three.columns
           - if signed_in? and !current_user.has_email?
             .promote
               h3
-                a href='#' Акция
+                a#openEmailForm href='#' Акция
+
+          =render :partial=>'shared/enter_email_form'
+          javascript:
+            $(document).ready(function() {
+              $("#openEmailForm").click(function() {
+                $("#EmailForm").reveal();
+              });
+            });
+
 
         .one.column
           br

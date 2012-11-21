@@ -1,0 +1,10 @@
+#EmailForm.reveal-modal
+  h2
+    =t 'main_page.enter_email.text'
+  .lead
+    =form_tag set_mail_user_path(current_user), :method=>'post' do
+      =label_tag :email, t('main_page.enter_email.label')
+      =text_field_tag :email
+      =submit_tag 'Ok'
+
+  a.close-reveal-modal x

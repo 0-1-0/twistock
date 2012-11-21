@@ -19,7 +19,7 @@ Twitterexchange::Application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   resources :user, only: [:show] do
-    collection do
+    member do
       post 'set_mail'
       post 'set_preferences'
     end

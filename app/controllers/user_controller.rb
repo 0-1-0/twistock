@@ -9,8 +9,15 @@ class UserController < ApplicationController
   end
 
   def set_mail
+    @user = User.find_by_nickname params[:id]
+    @user.email = params[:email]
+    @user.money += 100000
+    @user.save
+
+    redirect_to :back
   end
 
   def set_preferences
+    redirect_to :back
   end
 end

@@ -31,6 +31,10 @@ en:
       in Twitter-accounts. By buying and selling their stocks,
       you can earn virtual money and then spend it on the real goods in Twistock Store.
 
+    enter_email:
+      text: 'Take $100 000 for my mail'
+      label: 'My mail:'
+
     flows:
       top: Top
       my_investments: My investments
