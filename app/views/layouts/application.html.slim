@@ -43,21 +43,15 @@ html lang="en"
               ||
               = link_to t('main_page.sign_out'), sign_out_path
 
-              
+
         
         .three.columns
           - if signed_in? and !current_user.has_email?
-            .promote
+            .promote#EmailBadge
               h3
                 a#openEmailForm href='#' Акция
 
-          =render :partial=>'shared/enter_email_form'
-          javascript:
-            $(document).ready(function() {
-              $("#openEmailForm").click(function() {
-                $("#EmailForm").reveal();
-              });
-            });
+            =render :partial=>'shared/enter_email_form'
 
 
         .one.column

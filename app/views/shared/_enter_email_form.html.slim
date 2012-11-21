@@ -2,9 +2,21 @@
   h2
     =t 'main_page.enter_email.text'
   .lead
-    =form_tag set_mail_user_path(current_user), :method=>'post' do
+    =form_tag set_mail_user_path(current_user), :method=>'post', :remote => true, :id=>'set-email-form' do
       =label_tag :email, t('main_page.enter_email.label')
       =text_field_tag :email
       =submit_tag 'Ok'
 
   a.close-reveal-modal x
+
+javascript:
+  $(document).ready(function() {
+    $("#openEmailForm").click(function() {
+      $("#EmailForm").reveal();
+    });
+  });
+
+  $('form#set-email-form').bind('ajax:success', function(evt, data, status, xhr){
+    $('.close-reveal-modal','#EmailForm').click();
+    $("#EmailBadge").hide();
+  })
