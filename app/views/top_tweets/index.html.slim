@@ -1,34 +1,13 @@
 .row
-  .ten.columns
-    dl.tabs.pill
-      dd
-        a.active href='#' All
-      dd
-        a href='#' Russian
-      dd
-        a href='#' English
-      dd
-        a href='#' Friends
-      dd
-        a href='#' Most valueable
-      dd
-        a href='#' Celebrities
-  .two.columns
-    form
-      input type='text' placeholder='Search'
-.row
   .eleven.columns
     dl.tabs.pill
       dd
-        a.active href='#' All
+        = link_to 'All', top_tweets_path
       dd
-        a href='#' Technology
+        = link_to 'English', top_tweets_path(lang: 'en')
       dd
-        a href='#' Politics
-      dd
-        a href='#' Instagram
+        = link_to 'Russian', top_tweets_path(lang: 'ru')
 
 .row
-  - 10.times do
-    - 3.times do
-      =render :partial=>'tile'
+  - @tweets.each do |tweet|
+    =render 'tile', tweet: tweet

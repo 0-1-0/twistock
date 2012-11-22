@@ -1,0 +1,1 @@
+WtfLang::API.key = "d490caf0a5b22ab0328d9e2449185357"

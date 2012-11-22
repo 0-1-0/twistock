@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120090007) do
+ActiveRecord::Schema.define(:version => 20121122113007) do
 
   create_table "best_tweets", :force => true do |t|
     t.integer  "user_id"
@@ -22,9 +22,18 @@ ActiveRecord::Schema.define(:version => 20121120090007) do
     t.float    "param"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "lang"
   end
 
   add_index "best_tweets", ["user_id"], :name => "index_best_tweets_on_user_id"
+
+  create_table "best_tweets_tags", :id => false, :force => true do |t|
+    t.integer "tag_id"
+    t.integer "best_tweet_id"
+  end
+
+  add_index "best_tweets_tags", ["best_tweet_id", "tag_id"], :name => "index_best_tweets_tags_on_best_tweet_id_and_tag_id"
+  add_index "best_tweets_tags", ["tag_id", "best_tweet_id"], :name => "index_best_tweets_tags_on_tag_id_and_best_tweet_id"
 
   create_table "block_of_shares", :force => true do |t|
     t.integer  "owner_id"
@@ -103,6 +112,12 @@ ActiveRecord::Schema.define(:version => 20121120090007) do
     t.text     "short_description", :default => "0"
     t.integer  "priority",          :default => 0
     t.boolean  "published"
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "transactions", :force => true do |t|

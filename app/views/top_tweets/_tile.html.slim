@@ -3,20 +3,22 @@
     .row
       .twelve.columns
         div[style='word-wrap:break-word']
-          =(0...160).map{65.+(rand(26)).chr}.join
+          = tweet.content
         br
     .row
       .two.column
-        h3 XX
+        = image_tag tweet.user.avatar
       .six.columns
         dl
           dd
-            a href='#' Nickname (Name)
+            = link_to "#{tweet.user.nickname} (#{tweet.user.name})", tweet.user
           dd
             span
-              | $322234
+              | $#{tweet.user.share_price}
               ||
-              b +256 
+              b= with_sign tweet.user.weekly_price_change
+              ||
+              = tweet.param
       .one.column
         .button Buy
       .one.column
