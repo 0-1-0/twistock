@@ -1,2 +1,12 @@
-h1 Tag#index
-p Find me in app/views/tag/index.html.slim
+h2 Create tag
+= simple_form_for Tag.new, url: tag_index_path do |f|
+  = f.input :name
+  = f.submit
+
+h2 Tag list
+table
+  tr
+    td Name
+    td Actions
+  - @tags.each do |tag|
+    td= tag.name

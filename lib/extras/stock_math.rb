@@ -29,4 +29,8 @@ module StockMath
   def self.share_price(base_price, shares_in_stock)
     base_price * price_stock_coefficient(base_price, shares_in_stock)
   end
+
+  def self.tweet_param(retweets, followers)
+    retweets * 1.0/(followers/10_000 + 1.0)
+  end
 end
