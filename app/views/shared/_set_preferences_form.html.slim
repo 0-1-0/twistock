@@ -14,14 +14,3 @@
 
     hr
     = link_to t('main_page.sign_out'), sign_out_path, :class=>'button'
-
-javascript:
-  $(document).ready(function() {
-    $("#openPreferencesButton").click(function() {
-      $("#SetPreferencesForm").reveal();
-    });
-  });
-
-  $('.submittable').live('change', function() {
-    $(this).parents('form:first').submit();
-  });

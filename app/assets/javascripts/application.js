@@ -7,3 +7,4 @@
 //= require linkify
 //= require job
 //= require number-patch
+//= require_tree .

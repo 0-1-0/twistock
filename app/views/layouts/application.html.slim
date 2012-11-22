@@ -30,48 +30,45 @@ html lang="en"
       })();
 
   body
-    .container
-      .row
-        .two.columns
-          a href='/'
-            h3 Логотип
+    header#header
+      .row.collapse
         .six.columns
-          p
-            a href='#' = t 'main_page.top_menu.how_it_works'
-            ||
-            a href='/store' = t 'main_page.top_menu.store'
-            ||
-            a href='/top_tweets' = t 'main_page.top_menu.top_tweets'
-            ||
-            a href='/blog' = t 'main_page.top_menu.blog'              
+          .left
+            a href="/": img#logo.left src="/assets/logo.png" alt="Twistock" title="Twistock"
+              
+          nav#header-nav.left: ul
+            li=link_to t('main_page.top_menu.how_it_works'), '#'
+            li=link_to t('main_page.top_menu.store'), '/store'
+            li=link_to t('main_page.top_menu.top_tweets'), '/top_tweets'
+            li=link_to t('main_page.top_menu.blog'), '/blog'  
 
-
-        
-        .three.columns
-          - if signed_in? and !current_user.has_email?
-            .promote#EmailBadge
-              h3
-                a#openEmailForm href='#' Акция
-
-            =render :partial=>'shared/enter_email_form'
-
-
-        .one.column
-          br
-          a href="https://twitter.com/share" class="twitter-share-button" data-url="http://twistock.com" data-via="twistock" data-size="large"
-            | Tweet
+          .left
+            br
+            br
+            br
+            a href="https://twitter.com/share" class="twitter-share-button" data-url="http://twistock.com" data-via="twistock" data-size="large"
+              | Tweet
           javascript:
             !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
-      - if current_user
-        = render 'shared/user_info', user: current_user
-      - else #current user
-        .row
-          p= t 'main_page.welcome_text'
-        .row
-          = link_to t('main_page.sign_in'), '/auth/twitter', class: 'button'
+        
+        - if signed_in? and !current_user.has_email?
+          .tape
+            a#haction href="#"
+              | + $100 000 
+              span for you email
 
-      .row
-        hr
+          = render :partial=>'shared/enter_email_form'
+
+      - if signed_in?
+        =render 'shared/user_info', user: current_user
+      - else
+        .row.collapse.header-text
+          .six.columns
+            p= t 'main_page.welcome_text'
+            
+            a.tw.button.radius href="/auth/twitter"
+              i.icon-tw
+              =t('main_page.sign_in')
       
-      =yield
+      .container=yield

@@ -26,7 +26,7 @@
 		/* Default settings */
 		var settings = {
 			cls: 'cb-checkbox',  /* checkbox  */
-			empty: '/images/checkbox/empty.png'  /* checkbox  */
+			empty: '/assets/checkbox/empty.png'  /* checkbox  */
 		};
 		
 		/* Processing settings */

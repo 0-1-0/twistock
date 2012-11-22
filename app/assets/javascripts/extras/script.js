@@ -6,6 +6,17 @@ $(function(){
 		return false;
 	});
 
+	// Modal preferences
+  $('.submittable').live('change', function() {
+    $(this).parents('form:first').submit();
+  });
+
+  //Modal mail
+   $('form#set-email-form').bind('ajax:success', function(evt, data, status, xhr){
+    $('.close-reveal-modal','#modal-mail').click();
+    $("#haction").hide();
+  })
+
 
 	// Scroll
 	$(".scroll").mCustomScrollbar();

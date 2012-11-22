@@ -1,0 +1,106 @@
+.row.collapse.user-info
+  .two.mobile-two.columns.statw
+      
+    a.avatar href="#"
+      i
+      img src="/assets/avatar.jpg" alt=""
+
+    span.name
+      | @#{user.nickname}
+      a#header_change href="#": i.icon-change
+
+      - if user == current_user
+        / --- Dialog "Social network"
+        .network.arr-top.bg.dialog
+          =form_for current_user, :remote => true, :id=>'set-preferences-form' do |f|
+
+            a.close-dialog href="#": i.icon-close
+
+            .title Social network
+
+            .row
+              .two.columns
+                a.button.primary.button.radius.small href="#" twitter
+              .two.columns
+                a.button.disabled.secondary.button.radius.small href="#" Add facebook
+              .two.columns
+                a.button.disabled.secondary.button.radius.small href="#" Add Livejournal
+
+            .row
+              .three.columns =t('main_page.set_preferences.post_on_twitter')
+              .two.columns
+                | On
+                =f.check_box :twitter_translation, :class => 'checkbox submittable'
+                | Off
+
+            .row
+              .two.columns 
+                =t('main_page.set_preferences.mail')
+              .four.columns
+                =f.text_field :email, :class=>'submittable'
+
+            .row
+              .six.columns 
+                = link_to t('main_page.sign_out'), sign_out_path, :class=>'button secondary radius'
+
+
+            
+    .user-money
+      | $#{maybe_calculating(user, :share_price)}
+      span.green = with_sign maybe_calculating(user, :daily_price_change)
+
+
+  .two.mobile-two.columns.statw.pl20
+    .history-link
+      = "#{t 'user.money'}: $#{maybe_calculating(user, :money)}"
+      - if user == current_user
+        = link_to t('user.history'), '#', :id=>'header_history'
+
+        = link_to t('main_page.buy_real_goods'), store_index_path
+
+        / --- Dialog "History"
+        .history.arr-top.bg.dialog
+          a.close-dialog href="#": i.icon-close
+
+          .list-cont
+            ul.inline-list.sub-nav
+              li: a.active href="#" My investment
+              li: a href="#" My stock holders
+
+          .hconainer.scroll
+            table.default
+              thead
+                tr
+                  th Stock owner
+                  th Date
+                  th Count
+                  th One stock
+                  th Total
+              tbody
+                - 10.times do
+                  tr
+                    td: a href="#" AG_Bard
+                    td 01.03.12
+                    td 17
+                    td 8038
+                    td 136 646
+
+    .price-cont
+      = t 'user.today'
+      span.green
+        = with_sign maybe_calculating(user, :daily_price_change)
+    .price-cont
+      = t('user.week')
+      span.red
+        = with_sign maybe_calculating(user, :weekly_price_change)
+    .price-cont
+      = t('user.month')
+      span.green
+        = with_sign maybe_calculating(user, :monthly_price_change)
+
+
+
+  .two.columns.grafic
+    img.grafic.right src="/assets/grafic.png"
+
+
