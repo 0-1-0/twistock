@@ -8,6 +8,17 @@ en:
     week: week
     month: month
 
+  blog:
+    all: 'All'
+    news: 'News'
+    features: 'Features'
+    something: 'Something'
+    comments: 'Comments'
+    comment:
+      submit: 'Submit'
+      your_comment: Your comment
+
+
   status:
     share_price:
       calculating: 'calculating...'

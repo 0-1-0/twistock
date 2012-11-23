@@ -1,31 +1,53 @@
-p#notice = notice
+= render :partial=>'nav'
 
-p
-  strong Title:
-  = @blog_post.title
-p
-  strong Content:
-  = @blog_post.content
+article#blog.post
+.row
+  .five.columns
+    - if signed_as_admin?
+      = link_to 'Edit', edit_blog_post_path(@blog_post)
+    h1.title 
+      = @blog_post.title
+    h6.subheader 
+      =l @blog_post.created_at, :format=>:short
 
-hr
-- @blog_post.comments.each do |comment|
-  p= comment.content
-  br
+    p.text
+      =@blog_post.content.html_safe
 
-- if signed_in?
-  = simple_form_for([@blog_post, @post_comment], :url =>  add_comment_blog_post_path(@blog_post) ) do |f|
-    = f.error_notification
+#comments.row
+  .five.columns
 
-    .form-inputs    
-      = f.input :content
-
-
-    .form-actions
-      = f.button :submit
+    h4.title 
+      | #{t('blog.comments')} (#{@blog_post.comments.count})
 
 
+    - @blog_post.comments.each do |comment|
+      .row
+        .six.columns.user
+          a.avatar.small href="#{user_path(comment.user)}"
+            i
+            img src="#{comment.user.avatar}" alt=""
 
-- if signed_as_admin?
-  = link_to 'Edit', edit_blog_post_path(@blog_post)
-  '|
-= link_to 'Back', blog_posts_path
+          a.name href="#{user_path(comment.user)}"
+            =comment.user.nickname
+            br ( #{comment.user.name} )
+
+        .six.columns: p
+          =comment.content
+
+
+    - if signed_in?
+      / Form comment add
+      #add-comment.row
+        .six.columns
+          .avatar.small
+            i
+            img src="#{current_user.avatar}" alt=""
+
+          = simple_form_for([@blog_post, @post_comment], :url=>add_comment_blog_post_path(@blog_post) ) do |f|
+            table.comm-textarea: tr
+              td.tdw.form-inputs 
+                = f.input :content, :label=>false, :placeholder => t('blog.comment.your_comment')
+              td.form-actions
+                = f.button :submit, t('blog.comment.submit'), :class=>'secondary button radius small'
+                = f.button :submit, t('blog.comment.submit'), :class=>'secondary button radius small'
+             

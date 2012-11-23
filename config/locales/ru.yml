@@ -8,6 +8,16 @@ ru:
     week: неделя
     month: месяц
 
+  blog:
+    all: 'Все'
+    news: 'Новости'
+    features: 'Возможности'
+    something: 'Something'
+    comments: 'Комментарии'
+    comment:
+      submit: 'Написать'
+      your_comment: Ваш комментарий
+
   status:
     share_price:
       calculating: 'вычисляется...'

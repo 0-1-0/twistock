@@ -1,0 +1,16 @@
+#magellanNav.list-cont data-magellan-expedition="fixed"
+  .row
+    .four.columns
+      /ul.inline-list.sub-nav
+        li
+          =link_to t('blog.all'), '#', :class=>'active'
+        li
+          =link_to t('blog.news'), '#'
+        li
+          =link_to t('blog.features'), '#'
+        li
+          =link_to t('blog.something'), '#'
+
+    #search.two.columns
+      form
+        input.five.search.right type="text"

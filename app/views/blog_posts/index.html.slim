@@ -1,30 +1,17 @@
-.row
-  .ten.columns
-    dl.tabs.pill style="font-size: 12px;"
-      dd
-        = link_to t('All'), '#'
-      dd
-        = link_to t('News'), '#'
-      dd
-        = link_to t('Features'), '#'
-      dd
-        = link_to t('Something'), '#'
+= render :partial=>'nav'
 
-  .two.columns
-    form
-      input type='text' placeholder='Search'
+article#blog
+  - @blog_posts.each do |blog_post|
+    .row
+      .five.columns
+        h1.title 
+          =link_to blog_post.title, blog_post
+        h6.subheader
+          =l blog_post.created_at, :format => :short
+        p.text
+          =blog_post.content.html_safe
 
-- @blog_posts.each do |blog_post|
-  .row
-    .ten.columns
-      .row
-        h3=blog_post.title
-      .row
-        small=blog_post.created_at
-      .row
-        p=blog_post.content
-      .row
-        =link_to "Comments (#{blog_post.comments.count})", blog_post 
+        =link_to "#{t('blog.comments')} (#{blog_post.comments.count})", blog_post, :class=>'comm-link'
 
 - if signed_as_admin?
   .row
