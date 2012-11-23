@@ -1,9 +1,9 @@
 .row.collapse.user-info
   .two.mobile-two.columns.statw
       
-    a.avatar href="#"
+    a.avatar href="#{user_path(user)}"
       i
-      img src="/assets/avatar.jpg" alt=""
+      img src="#{user.avatar}" alt=""
 
     span.name
       | @#{user.nickname}
