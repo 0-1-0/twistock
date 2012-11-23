@@ -1,7 +1,31 @@
 = render 'shared/flows_menu', flow: @flow
 .row
   - if @collection
-    - @collection.each do |user|
-      =render 'tile', user: user
+    #main.row
+      ul.block-grid.six-up.mobile-four-up.min-two-up.center
+        - if @flow == 'my_investments'
+          li
+            .bg.blk.total.long
+              | Total cost
+              br
+              | of my investment
+
+              .tprice
+                | $#{@collection.map(&:total_cost).inject(&:+)}
+                span.green= with_sign(@collection.map(&:owner).map(&:daily_price_change).inject(&:+))
+
+              .period
+                | Today
+                span.green= with_sign(@collection.map(&:owner).map(&:daily_price_change).inject(&:+))
+
+              .period
+                | Week
+                span.red= with_sign(@collection.map(&:owner).map(&:monthly_price_change).inject(&:+))
+          - @collection.each do |bos|
+            = render 'investment_tile', bos: bos
+        - else
+          - @collection.each do |user|
+            = render 'tile', user: user
   - else
+    / TODO: нормальная плашка
     = t 'status.share_price.calculating'

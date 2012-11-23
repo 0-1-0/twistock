@@ -1,5 +1,6 @@
+- user = bos.owner
 li
-  .bg.blk
+  .bg.blk.long
     a.avatar.small href="#"
       i
       = image_tag user.avatar
@@ -10,5 +11,14 @@ li
 
     = link_to "@#{user.nickname} (#{user.name})", user, class: 'name'
 
-    .btn.center
-      a.disabled.secondary.button.radius.small href="/main" Buy
+    dl
+      dt Count
+      dd= bos.count
+
+      dt Total
+      dd
+        | $#{bos.total_cost}
+        span.green= with_sign(bos.owner.weekly_price_change)
+
+      .btn.center
+        a.secondary.button.radius.small href="#" Buy more

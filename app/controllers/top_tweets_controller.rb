@@ -1,7 +1,7 @@
 class TopTweetsController < ApplicationController
   def index
-    l = params[:lang]
-    @tweets = case l
+    @llang = params[:lang]
+    @tweets = case @llang
                 when 'ru'
                   BestTweet.where{lang == 'ru'}
                 when 'en'

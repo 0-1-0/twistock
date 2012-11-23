@@ -61,7 +61,7 @@ html lang="en"
           = render :partial=>'shared/enter_email_form'
 
       - if signed_in?
-        =render 'shared/user_info', user: current_user
+        =render 'shared/user_info', user: current_user, source: :header
       - else
         .row.collapse.header-text
           .six.columns
@@ -71,4 +71,4 @@ html lang="en"
               i.icon-tw
               =t('main_page.sign_in')
       
-      .container=yield
+    = yield

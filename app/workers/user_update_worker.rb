@@ -113,7 +113,7 @@ class UserUpdateWorker
     #user.best_tweet.update_retweets(twitter) if user.best_tweet
 
     best_tweet_retweets = ( (user.best_tweet and user.best_tweet.retweets) or -1 )
-    user.best_tweet.destroy
+    user.best_tweet.destroy if user.best_tweet
     user.best_tweet = get_best_tweet(timeline, best_tweet_retweets, followers_count)
 
 
