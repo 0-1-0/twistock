@@ -1,28 +1,18 @@
+#store.row.single
+  .two.columns.clearing-container
+    =@product.description.html_safe
+
+  .four.columns.clearing-container
+    h3.title
+      =@product.name
+
+    p=@product.short_description.html_safe
+
+    .info-down
+      .price $#{@product.price}
+      a.secondary.button.radius.buy-store href="#" onclick="$('#product-dialog-#{@product.id}').reveal();" Buy
+
 .row
-  .eight.columns
-    .row
-      .six.columns
-        .panel
-          p=@product.description
-      .six.columns
-        ul
-          li
-            h3=@product.name
-          li
-            p=@product.short_description
-
-        h4
-          | $ 
-          =@product.price
-        a href='#'
-          #openInvoiceForm.button Buy
-          
-- if signed_in?
-  =render :partial=>'invoice_form', :locals=>{:product=>@product, :product_invoice=>@product_invoice}
-
-  javascript:
-    $(document).ready(function() {
-      $("#openInvoiceForm").click(function() {
-        $("#InvoiceForm").reveal();
-      });
-    });
+  ul.block-grid.four-up.mobile-two-up
+    li
+      = render :partial=>'invoice_form', :locals=>{:product=>@product, :product_invoice=>@product_invoice}

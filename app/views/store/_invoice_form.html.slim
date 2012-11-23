@@ -1,26 +1,61 @@
-#InvoiceForm.reveal-modal
-  h2
-    =t :buy
+.reveal-modal.medium id='product-dialog-#{product.id}'
+  h3.title 
+    =t('store.buy')
     |  
     =product.name
     |  
-    =t :for
-    |  
+    =t('store.for')
+    |  $
     =product.price
-  .lead
-    = simple_form_for([product, product_invoice], :url=>create_invoice_product_path(product)) do |f|
-      = f.error_notification
 
-      .form-inputs    
-        = f.input :country, :as=>:string
-        = f.input :postal_code
-        = f.input :city
-        = f.input :full_name
-        = f.input :address
-        = f.input :email
-        = f.input :phone
+  = simple_form_for([product, @product_invoice], :url=>create_invoice_product_path(product)) do |f|
+    .row.clearing-container
+      .two.columns
+        label for="m_mail" Country
+      .four.columns
+        = f.input :country, :as=>:string, :label=>false
+        / span.error Wrong Country
+    .row
+      .two.columns
+        label for="m_mail" Postal code
+      .four.columns
+        = f.input :postal_code, :label=>false
+        / span.error Wrong Postal code
+    .row
+      .two.columns
+        label for="m_mail" Full name
+      .four.columns
+        = f.input :full_name, :label=>false
+        / span.error Wrong Full name
+    .row
+      .two.columns
+        label for="m_mail" City
+      .four.columns
+        = f.input :city, :label=>false
+        / span.error Wrong City
+    .row
+      .two.columns
+        label for="m_mail" Adress
+      .four.columns
+        = f.input :address, :label=>false
+        / span.error Wrong Adress
+    .row
+      .two.columns
+        label for="m_mail" E-mail
+      .four.columns
+        = f.input :email, :label=>false
+        / span.error Wrong E-mail
+    .row
+      .two.columns
+        label for="m_mail" Pnone
+      .four.columns
+        = f.input :phone, :label=>false
+        / span.error Wrong Pnone
+    .row
+      .four.offset-by-two.columns
+        a href="#" Term of use
+    .row
+      .four.offset-by-two.columns
+        = f.button :submit, t('store.buy'), :class=>'primary button radius'
 
-      .form-actions
-        = f.button :submit
-
-  a.close-reveal-modal x
+  a.close-reveal-modal: i.icon-close

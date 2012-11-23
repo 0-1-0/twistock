@@ -2,10 +2,14 @@
 //= require i18n/translations
 //= require jquery
 //= require jquery_ujs
+//= require jquery.checkbox
+//= require jquery.wookmark
+//= require jquery.mCustomScrollbar
+//= require jquery.mousewheel.min
+//= require jquery.imagesloaded
 //= require foundation
 //= require masonry.min
 //= require linkify
 //= require job
 //= require number-patch
 //= require script
-//= require_tree .

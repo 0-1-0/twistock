@@ -1,6 +1,19 @@
-.row
-  - Product.where(:published=>true).each do |product|
-    =render :partial=>'tile', :locals=> {:product=> product}
+#store
+  .row.center
+    .six.columns: p.about-shop 
+      =t 'store.about'
+
+  .row
+    ul.block-grid.four-up.mobile-two-up
+      - Product.where(:published=>true).each do |product|
+        li
+          p=product.short_description.html_safe
+          =link_to product.name, store_path(product), :class=>'title'
+          .price $#{product.price}
+          a.secondary.button.radius.buy-store href='#' onclick="$('#product-dialog-#{product.id}').reveal();"
+            =t('store.buy')
+
+        = render :partial=>'invoice_form', :locals=>{:product=>product, :product_invoice=>@product_invoice}
 
 - if signed_as_admin?
   .row
