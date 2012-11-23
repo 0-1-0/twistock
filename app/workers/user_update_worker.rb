@@ -32,7 +32,7 @@ class UserUpdateWorker
     best_tweet_index  = nil
 
     top_time_line.each.with_index do |tweet, i|
-      if tweet.retweet_count >= best_tweet.retweets
+      if tweet.retweet_count > best_tweet.retweets
         best_tweet.retweets = tweet.retweet_count
         best_tweet_index    = i
       end
@@ -45,7 +45,8 @@ class UserUpdateWorker
 
       best_tweet.twitter_id = tweet.id.to_s
       best_tweet.content    = tweet.text
-      best_tweet.param      = best_tweet.retweets * 1.0/(followers_count + 1.0)
+      best_tweet.lang       = tweet.text.lang
+      best_tweet.param      = StockMath.tweet_param(best_tweet.retweets, followers_count)
 
       if tweet.urls and tweet.urls.length > 0
         url = tweet.urls[0].expanded_url
@@ -107,9 +108,14 @@ class UserUpdateWorker
     followers_count = twitter_user.followers_count || 0
 
     # Определяем самый популярный твит пользователя
-    best_tweet_retweets = ( (user.best_tweet and user.best_tweet.retweets) or 0 )
-    user.best_tweet.destroy if user.best_tweet
+
+    # will be useful in future
+    #user.best_tweet.update_retweets(twitter) if user.best_tweet
+
+    best_tweet_retweets = ( (user.best_tweet and user.best_tweet.retweets) or -1 )
+    user.best_tweet.destroy
     user.best_tweet = get_best_tweet(timeline, best_tweet_retweets, followers_count)
+
 
     user.base_price  = StockMath.base_price(retweets_count, tweets_count, followers_count)
     user.update_share_price

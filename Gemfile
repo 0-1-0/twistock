@@ -96,4 +96,4 @@ gem 'unicorn'
 gem 'http_accept_language'
 
 # Автодетекция языка
-gem 'whatlanguage'
+gem 'wtf_lang'
