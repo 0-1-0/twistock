@@ -1,13 +1,16 @@
-.row
-  .eleven.columns
-    dl.tabs.pill
-      dd
-        = link_to 'All', top_tweets_path
-      dd
-        = link_to 'English', top_tweets_path(lang: 'en')
-      dd
-        = link_to 'Russian', top_tweets_path(lang: 'ru')
+#magellanNav.list-cont data-magellan-expedition="fixed"
+  .row
+    .four.columns
+      ul.inline-list.sub-nav
+        li= link_to 'All', top_tweets_path
+        li= link_to 'English', top_tweets_path(lang: 'en')
+        li= link_to 'Russian', top_tweets_path(lang: 'ru')
 
-.row
-  - @tweets.each do |tweet|
-    =render 'tile', tweet: tweet
+    #search.two.columns
+      form
+        input.five.search.right type="text"
+
+#top.row
+  ul#tiles.block-grid.three-up.mobile-one-up.tab-two-up.center
+    - @tweets.each do |tweet|
+      =render 'tile', tweet: tweet

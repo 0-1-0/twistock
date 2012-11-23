@@ -1,9 +1,23 @@
-.row
-  .ten.columns
-    dl.tabs.pill
-      - %w{top my_investments my_holders friends expensive celebreties}.each do |el|
-        dd
-          = link_to t("main_page.flows.#{el}"), root_path(flow: el), class: active_when(flow == el)
-  .two.columns
-    form
-      input type='text' placeholder='Search'
+#magellanNav.list-cont data-magellan-expedition="fixed"
+  .row
+    .four.columns
+      ul.inline-list.sub-nav
+        li= link_to t("main_page.flows.top"), root_path(flow: 'top'), class: active_when(flow == 'top')
+        - if signed_in?
+          li= link_to t("main_page.flows.my_investments") + " (#{current_user.portfel.count})", \
+            root_path(flow: 'my_investments'), class: active_when(flow == 'my_investments')
+          li= link_to t("main_page.flows.my_holders") + " (#{current_user.my_shares.count})", \
+            root_path(flow: 'my_holders'), class: active_when(flow == 'my_holders')
+          li= link_to t("main_page.flows.friends") + " (#{current_user.my_friends.count})", \
+            root_path(flow: 'friends'), class: active_when(flow == 'friends')
+        - else
+          li= link_to t("main_page.flows.my_investments"), '#', class: 'curr'
+          li= link_to t("main_page.flows.my_holders"), '#',     class: 'curr'
+          li= link_to t("main_page.flows.friends"), '#',        class: 'curr'
+
+        - %w{expensive celebreties}.each do |el|
+          li= link_to t("main_page.flows.#{el}"), root_path(flow: el), class: active_when(flow == el)
+
+    #search.two.columns
+      form
+        input.five.search.right type="text"

@@ -80,11 +80,13 @@ module UserLogic
         my_shares.includes(:holder).map {|x| x.holder}.uniq
       end
 
-      def my_friends
-        friend_ids = Rails.cache.fetch "user_#{id}_friend_ids", expires_in: 10.minutes do
+      def friend_ids
+        Rails.cache.fetch "user_#{id}_friend_ids", expires_in: 10.minutes do
           twitter.follower_ids.ids
         end
+      end
 
+      def my_friends
         User.find_by_twitter_ids(friend_ids).where{share_price != nil}.order{share_price.desc}
       end
     end

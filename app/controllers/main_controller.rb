@@ -5,7 +5,7 @@ class MainController < ApplicationController
     begin
       @collection = case @flow
                     when 'top'            then User.top
-                    when 'my_investments' then current_user.my_investments
+                    when 'my_investments' then current_user.portfel.includes(:owner)
                     when 'my_holders'     then current_user.my_holders
                     when 'friends'
                       if current_user.activated?

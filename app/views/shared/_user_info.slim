@@ -3,16 +3,15 @@
       
     a.avatar href="#{user_path(user)}"
       i
-      img src="#{user.avatar}" alt=""
+      = image_tag user.profile_image, width: '77px'
 
     span.name
       | @#{user.nickname}
-      a#header_change href="#": i.icon-change
-
-      - if user == current_user
+      - if source == :header and user == current_user
+        a#header_change href="#": i.icon-change
         / --- Dialog "Social network"
         .network.arr-top.bg.dialog
-          =form_for current_user, :remote => true, :id=>'set-preferences-form' do |f|
+          = form_for current_user, :remote => true, :id=>'set-preferences-form' do |f|
 
             a.close-dialog href="#": i.icon-close
 
@@ -30,7 +29,7 @@
               .three.columns =t('main_page.set_preferences.post_on_twitter')
               .two.columns
                 | On
-                =f.check_box :twitter_translation, :class => 'checkbox submittable'
+                = f.check_box :twitter_translation, :class => 'checkbox submittable'
                 | Off
 
             .row
@@ -47,44 +46,44 @@
             
     .user-money
       | $#{maybe_calculating(user, :share_price)}
-      span.green = with_sign maybe_calculating(user, :daily_price_change)
+      span.green = with_sign maybe_calculating(user, :weekly_price_change)
 
 
   .two.mobile-two.columns.statw.pl20
     .history-link
-      = "#{t 'user.money'}: $#{maybe_calculating(user, :money)}"
-      - if user == current_user
-        = link_to t('user.history'), '#', :id=>'header_history'
+      - if source == :header
+        = "#{t 'user.money'}: $#{maybe_calculating(user, :money)}"
+        - if user == current_user
+          = link_to t('user.history'), '#', :id=>'header_history'
 
-        = link_to t('main_page.buy_real_goods'), store_index_path
+          = link_to t('main_page.buy_real_goods'), store_index_path
 
-        / --- Dialog "History"
-        .history.arr-top.bg.dialog
-          a.close-dialog href="#": i.icon-close
+          / --- Dialog "History"
+          .history.arr-top.bg.dialog
+            a.close-dialog href="#": i.icon-close
 
-          .list-cont
-            ul.inline-list.sub-nav
-              li: a.active href="#" My investment
-              li: a href="#" My stock holders
+            .list-cont
+              ul.inline-list.sub-nav
+                li: a.active href="#" My investment
+                li: a href="#" My stock holders
 
-          .hconainer.scroll
-            table.default
-              thead
-                tr
-                  th Stock owner
-                  th Date
-                  th Count
-                  th One stock
-                  th Total
-              tbody
-                - 10.times do
+            .hconainer.scroll
+              table.default
+                thead
                   tr
-                    td: a href="#" AG_Bard
-                    td 01.03.12
-                    td 17
-                    td 8038
-                    td 136 646
-
+                    th Stock owner
+                    th Date
+                    th Count
+                    th One stock
+                    th Total
+                tbody
+                  - 10.times do
+                    tr
+                      td: a href="#" AG_Bard
+                      td 01.03.12
+                      td 17
+                      td 8038
+                      td 136 646
     .price-cont
       = t 'user.today'
       span.green
