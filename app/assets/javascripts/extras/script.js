@@ -1,11 +1,4 @@
 $(function(){
-
-	// Modal window Mail
-	$("#haction").click(function() {
-		$("#modal-mail").reveal();
-		return false;
-	});
-
 	// Modal preferences
   $('.submittable').live('change', function() {
     $(this).parents('form:first').submit();

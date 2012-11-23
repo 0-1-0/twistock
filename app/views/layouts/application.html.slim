@@ -54,7 +54,7 @@ html lang="en"
         
         - if signed_in? and !current_user.has_email?
           .tape
-            a#haction href="#"
+            a#haction href="javascript:$('#modal-mail').reveal();"
               | + $100 000 
               span for you email
 
