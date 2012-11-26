@@ -1,4 +1,13 @@
 en:
+  buy_dialog:
+    text:
+      buy: Buy
+      sell: sell
+      stok: stock
+    buy: Buy
+    sell: Sell
+    cancel: Cancel
+
   user:
     price: price
     money: money

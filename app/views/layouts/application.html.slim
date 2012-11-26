@@ -29,6 +29,11 @@ html lang="en"
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
 
+    /I18n
+    javascript:
+      I18n.defaultLocale = "#{ I18n.default_locale }";
+      I18n.locale = "#{ I18n.locale }";
+
   body
     header#header
       .row.collapse

@@ -4,10 +4,10 @@
   .row.buy-stock
     .six.columns
       span.btn-checkbox
-        a.btb.active href="#" Buy
+        a.btb.active href="#"= t 'buy_dialog.text.buy'
         input.checkbox type="checkbox"
-        a.bts href="#" sell
-      =" stock "
+        a.bts href="#"= t 'buy_dialog.text.sell'
+      =" #{t 'buy_dialog.text.stok'} "
       a.user_link
 
   .row
@@ -15,4 +15,4 @@
       .slide
         #slider-price
       .buy-price
-      a.button.primary.radius.action href="#" Buy
+      a.button.primary.radius.action href="#"= t 'buy_dialog.buy'

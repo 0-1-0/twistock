@@ -109,17 +109,17 @@ $(document).ready ->
     btn = $this.closest(".dialog").find(".button")
     block.find("a").toggleClass "active"
     if not $this.is(":checked")
-      btn.removeClass("secondary").addClass("primary").text("Buy")
+      btn.removeClass("secondary").addClass("primary").text(I18n.t("buy_dialog.buy"))
       init_buy_slider()
     else
-      btn.removeClass("primary").addClass("secondary").text("Sell")
+      btn.removeClass("primary").addClass("secondary").text(I18n.t("buy_dialog.sell"))
       init_sell_slider()
     false
 
   action =
     modal: $("#buy-dialog")
     open: (elem) ->
-      elem.removeClass("secondary buy-cancel").addClass("alert buy-cancel").text("Cancel").closest(".blk").addClass("active").append @modal.fadeIn()
+      elem.removeClass("secondary buy-cancel").addClass("alert buy-cancel").text(I18n.t("buy_dialog.cancel")).closest(".blk").addClass("active").append @modal.fadeIn()
 
     close: (elem) ->
       elem.removeClass("alert buy-cancel").addClass("secondary").text("Buy").closest(".blk").removeClass "active"
