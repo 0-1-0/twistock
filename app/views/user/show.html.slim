@@ -1,4 +1,4 @@
-= render 'shared/flows_menu', flow: nil
+== render 'shared/flows_menu', flow: nil
 #user.row.bg
   .row
     .six.columns.user-info
@@ -41,17 +41,16 @@
         li= link_to t('user.sell'), '#', class: 'secondary button radius'
 
   .two.columns.user-tw
-    /TODO: сделать почеловечней
-    - if bos = current_user.portfel.select{|x| x.owner.twitter_id == @user.twitter_id}.first
+    - if @bos
       .tw-blk
         = t 'user.count_stock'
-        span= bos.count
+        span= @bos.count
 
       .tw-blk
         = t 'user.investment_cost'
         span
-          | $#{bos.owner.share_price * bos.count}
-          = with_sign(bos.count * bos.owner.weekly_price_change)
+          | $#{@bos.owner.share_price * @bos.count}
+          = with_sign(@bos.count * @bos.owner.weekly_price_change)
 
     = link_to 'Twitter', @user.twitter_url, target: :blank
     - if @user.best_tweet

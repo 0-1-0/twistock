@@ -11,4 +11,11 @@ li
     = link_to "@#{user.nickname} (#{user.name})", user, class: 'name'
 
     .btn.center
-      = link_to t('user.buy'), '#', class: 'secondary button radius small btn-buy', 'data-id' => user.id
+      - if current_user
+        - if current_user.shares_of(user) > 0
+          - link_text = t 'user.buy_more'
+        - else
+          - link_text = t 'user.buy'
+        = link_to link_text, '#', class: 'secondary button radius small btn-buy', 'data-id' => user.id
+      - else
+        = link_to t('user.buy'), '#', class: 'secondary button radius small disabled'

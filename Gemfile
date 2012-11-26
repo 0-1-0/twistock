@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.9'
 gem 'pg'
 
 # Gems used only for assets and not required
@@ -54,6 +54,7 @@ group :development do
   gem 'rails_best_practices'
   gem 'bullet'
   gem 'quiet_assets'
+  gem 'thin'
 end
 
 # --- BDD фреймворки

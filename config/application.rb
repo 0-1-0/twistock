@@ -60,7 +60,7 @@ module Twitterexchange
     config.assets.precompile += %w( products/showcase.js )
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.0'
+    config.assets.version = '1.1'
 
     # отключаем генерацию helper'ов, js и css
     # настраиваем RSpec только на авгенерацию спеков к моделям, методам контроллеров и путям

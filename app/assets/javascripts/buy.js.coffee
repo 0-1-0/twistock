@@ -35,8 +35,8 @@ $(document).ready ->
       e.preventDefault()
       count = $("#slider-price").slider('value')
       user_id = $("#slider-price").data('user_id')
-      $.post "/user/#{user_id}/buy", { count: count }
-      window.location.reload()
+      $.post "/user/#{user_id}/buy", { count: count }, ->
+        window.location.reload()
 
 
   #
@@ -48,8 +48,8 @@ $(document).ready ->
       e.preventDefault()
       count = $("#slider-price").slider('value')
       user_id = $("#slider-price").data('user_id')
-      $.post "/user/#{user_id}/sell", { count: count }
-      window.location.reload()
+      $.post "/user/#{user_id}/sell", { count: count }, ->
+        window.location.reload()
 
   #
   init_buy_slider = ->

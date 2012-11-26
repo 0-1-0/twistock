@@ -105,7 +105,7 @@ class User < ActiveRecord::Base
   end
 
   def shares_of(user)
-    portfel.where{owner_id == user.id}.limit(1).map{|x| x.count}.first || 0
+    portfel.where{owner_id == user.id}.limit(1).map{|x| x.count}.first.to_i || 0
   end
 
   def profile_image
