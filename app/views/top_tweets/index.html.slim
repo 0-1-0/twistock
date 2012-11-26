@@ -2,9 +2,11 @@
   .row
     .four.columns
       ul.inline-list.sub-nav
-        li= link_to 'All', top_tweets_path
-        li= link_to 'English', top_tweets_path(lang: 'en')
-        li= link_to 'Russian', top_tweets_path(lang: 'ru')
+        li= link_to t('top_tweets.all'), top_tweets_path, class: active_when(!@type)
+        li= link_to t('top_tweets.english'), top_tweets_path(type: 'en'), class: active_when(@type == 'en')
+        li= link_to t('top_tweets.russian'), top_tweets_path(type: 'ru'), class: active_when(@type == 'ru')
+        - if signed_in?
+          li= link_to t('top_tweets.friends'), top_tweets_path(type: 'friends'), class: active_when(@type == 'friends')
 
     #search.two.columns
       form

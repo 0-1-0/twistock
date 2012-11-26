@@ -6,649 +6,874 @@
 $experimental-support-for-svg: true
 
 // Folder Img
-$f: "/assets"
+//$f: "assets/"
 
 
 // -------
 // Base
 // -------
 body
-	background-color: #dfdfe0
-	&.bg-white
-		background-color: #fbfbfc
+  background-color: #dfdfe0
+  &.bg-white
+    background-color: #fbfbfc
+
+hr
+  border-color: #c2c2c2
+  box-shadow: 0 1px 0 white
 
 // Center
 .center
-	text-align: center
+  text-align: center
+.text-right
+  text-align: right
 
 // Colors
 .green
-	color: #6ab400
+  color: #6ab400
 .red
-	color: #ed1c24
+  color: #ed1c24
 
 // Icons
 .icon-tw
-	background: url(#{$f}/btn-twitter.png)
-	width: 24px
-	height: 20px
-	+inline-block
-	margin: -5px 10px -5px 0
+  background: image-url("btn-twitter.png")
+  width: 24px
+  height: 20px
+  display: inline-block
+  margin: -5px 10px -5px 0
 .icon-change
-	background: url(#{$f}/icon-change.png)
-	width: 10px
-	height: 11px
-	display: inline-block
+  background: image-url("icon-change.png")
+  width: 10px
+  height: 11px
+  display: inline-block
 .icon-close
-	background: url(#{$f}/icon-close.png)
-	width: 14px
-	height: 14px
-	display: inline-block
+  background: image-url("icon-close.png")
+  width: 14px
+  height: 14px
+  display: inline-block
+.icon-pr
+  background: image-url("icon-pr.png")
+  width: 14px
+  height: 8px
+  display: inline-block
 
 // Grey Backround
 .bg
-	background: #e8e9e9
-	+background( linear-gradient(top, rgb(237,237,237) 0%, rgb(228,228,228) 100%) )
-	border-radius: 4px
-	box-shadow: 0 6px 10px -5px #444, 1px 1px 0 0 white inset
+  background: #e8e9e9
+  +background( linear-gradient(top, rgb(237,237,237) 0%, rgb(228,228,228) 100%) )
+  border-radius: 4px
+  box-shadow: 0 6px 10px -5px #444, 1px 1px 0 0 white inset
 
 // Header User Info
 .user-info
-	color: black
-	text-shadow: 1px 1px 0 white
-	font-size: 12px
+  color: black
+  text-shadow: 1px 1px 0 white
+  font-size: 12px
 
-	.avatar
-		margin-right: 20px
+  .avatar
+    margin-right: 20px
 
-	.name
-		margin-top: 6px
-		display: table
+  .name
+    margin-top: 6px
+    display: table
 
-	.icon-change
-		margin: 0 0 -1px 5px
+  .icon-change
+    margin: 0 0 -1px 5px
 
-	.user-money
-		margin-top: 15px
-		font-size: 40px
-		font-weight: bold
-		span
-			font-size: 20px
-			vertical-align: top
-			margin-left: 5px
+  .user-money
+    margin-top: 15px
+    font-size: 40px
+    font-weight: bold
+    span
+      font-size: 20px
+      vertical-align: top
+      margin-left: 5px
 
-	.history-link
-		margin: 7px 0 10px
-		& > a
-			border-bottom: 1px solid #0072bc
-			padding-bottom: 2px
-			box-shadow: 0 1px 0 white
-			margin-left: 20px
-			display: inline-block
-	.statw
-		width: 320px
-		margin-bottom: 20px
-	.price-cont
-		// width: 94px
-		width: 31%
-		max-width: 94px
-		float: left
-		span
-			display: block
-			font-size: 25px
-			font-weight: bold
-			padding-top: 4px
+  .history-link
+    margin: 7px 0 10px
+    & > a
+      border-bottom: 1px solid #0072bc
+      padding-bottom: 2px
+      box-shadow: 0 1px 0 white
+      margin-left: 20px
+      display: inline-block
+  .statw
+    width: 320px
+    margin-bottom: 20px
+  // z-index: 1
+  .price-cont
+    // width: 94px
+    width: 31%
+    max-width: 94px
+    float: left
+    span
+      display: block
+      font-size: 25px
+      font-weight: bold
+      padding-top: 4px
 
 // Grafic
 .grafic
-	margin-bottom: 15px
+  margin-bottom: 15px
 
 // Avatar Big & Small
 .avatar
-	overflow: hidden
-	display: inline-block
-	float: left
-	i
-		position: absolute
-		z-index: 1
-		box-shadow: inset 1px 2px 5px #838383
-	&, i
-		width: 77px
-		height: 77px
-		border-radius: 50px
-	&.small, &.small i
-		width: 40px
-		height: 40px
+  overflow: hidden
+  display: inline-block
+  float: left
+  img
+    border-radius: 50px
+  i
+    position: absolute
+    z-index: 1
+    box-shadow: inset 1px 2px 5px #838383
+  &, i
+    width: 77px
+    height: 77px
+    border-radius: 50px
+    &.small, &.small i
+      width: 40px
+      height: 40px
 
 // Buttons
 .button
-	+box-shadow( none )
-	&:hover
-		background-color: #1293c0
-	&:active, &:focus
-		+box-shadow(0 5px 6px -6px rgba(0,0,0,.5) inset !important)
+  +box-shadow( none )
+  &:hover
+    background-color: #1293c0
+  &:active, &:focus
+    +box-shadow(0 5px 6px -6px rgba(0,0,0,.5) inset !important)
 
-	&.primary
-		background-color: #ddd
-		+background-image( linear-gradient(bottom, rgba(20,160,206,.7) 0%, rgba(29,185,237,.8) 100%) )
-		border-color: rgb(29,185,237)
-		border-bottom-color: rgba(20,160,206,.7)
-		+text-shadow( 1px 1px 0 #10779b )
-		&:hover	
-			background-color: #aaa
-	
-	&.alert
-		background-color: white
-		+background-image( linear-gradient(top, rgba(221,17,18,.9) 0%, rgba(189,1,1,.9) 100%) )
-		border-color: rgb(221,17,18)
-		border-bottom-color: rgba(190,0,1,.7)
-		+text-shadow( 1px 1px 0 #840404 )
-		font-weight: normal
-		&:hover
-			background-color: #333
+  &.primary
+    background-color: #ddd
+    +background-image( linear-gradient(bottom, rgba(20,160,206,.7) 0%, rgba(29,185,237,.8) 100%) )
+    border-color: rgb(29,185,237)
+    border-bottom-color: rgba(20,160,206,.7)
+    +text-shadow( 1px 1px 0 #10779b )
+    &:hover
+      background-color: #aaa
 
-	&.secondary
-		background-color: white
-		+background-image( linear-gradient(top, rgba(247,247,247, .8) 0%, rgba(220,220,220, .7) 100%) )
-		color: #000
-		border-color: #c2c2c2
-		+text-shadow( 1px 1px 0 white )
-		font-weight: normal
-		&:hover
-			background-color: #ccc
+  &.alert
+    background-color: white
+    +background-image( linear-gradient(top, rgba(221,17,18,.9) 0%, rgba(189,1,1,.9) 100%) )
+    border-color: rgb(221,17,18)
+    border-bottom-color: rgba(190,0,1,.7)
+    +text-shadow( 1px 1px 0 #840404 )
+    font-weight: normal
+    &:hover
+      background-color: #333
 
-	&.tw
-		+box-shadow( 0 1px 0 rgba(255, 255, 255, 0.5) inset )
-		border-color: #4a9ba2
-		background-color: white
-		+background-image( linear-gradient(top, rgba(27,172,220,.7) 0%, rgba(18,144,190,.8) 100%) )
-		+text-shadow( 1px 1px 1px #0e6786 )
-		&:hover
-			background-color: #c0c0c0
+  &.secondary
+    background-color: white
+    +background-image( linear-gradient(top, rgba(247,247,247, .8) 0%, rgba(220,220,220, .7) 100%) )
+    color: #000
+    border-color: #c2c2c2
+    +text-shadow( 1px 1px 0 white )
+    font-weight: normal
+    &:hover
+      background-color: #ccc
+
+  &.tw
+    +box-shadow( 0 1px 0 rgba(255, 255, 255, 0.5) inset )
+    border-color: #4a9ba2
+    background-color: white
+    +background-image( linear-gradient(top, rgba(27,172,220,.7) 0%, rgba(18,144,190,.8) 100%) )
+    +text-shadow( 1px 1px 1px #0e6786 )
+    &:hover
+      background-color: #c0c0c0
 
 
 // ----------
 // Header
 // ----------
 #header
-	background: #edebee
-	border-bottom: 1px solid white
-	box-shadow: inset 0 -1px 0 0 #c2c2c2
-	min-height: 230px
-	// height: 230px
-	margin: 0 0 15px 0
-	.row
-		position: relative
-		padding: 0 10px
-	.user-info
-		margin-top: 35px
-	.header-text
-		p
-			margin: 30px 0 10px
-			font-size: 18px
-			line-height: 26px
-			text-shadow: 1px 1px 0 white
-		a.button
-			margin-bottom: 15px
+  background: #edebee
+  border-bottom: 1px solid white
+  box-shadow: inset 0 -1px 0 0 #c2c2c2
+  min-height: 230px
+  // height: 230px
+  margin: 0 0 15px 0
+  .row
+    position: relative
+    padding: 0 10px
+  .user-info
+    margin-top: 35px
+  .header-text
+    p
+      margin: 30px 0 10px
+      font-size: 18px
+      line-height: 26px
+      text-shadow: 1px 1px 0 white
+    a.button
+      margin-bottom: 15px
+  .twitter-share-button
+    position: absolute
+    right: 0
+    top: 55px
 
 // Logo
 #logo
-	margin: 30px 35px 0 0 
-	display: inline-block
-	float: left
+  margin: 30px 35px 0 0
+  display: inline-block
+  float: left
 
 // Header Navigation
 #header-nav
-	float: left
-	ul
-		list-style: none
-		margin: 45px 0 0 0
-	li
-		float: left
-		margin-right: 20px
-	a
-		color: black
-		padding-bottom: 1px
-		line-height: 26px
-		box-shadow: 0 1px 0 0 white
-		border-bottom: 1px solid black
-		text-shadow: 1px 1px 0 white
-		&.active, &.selected
-			font-weight: bold
-		&.active
-			border-bottom: 0
-			box-shadow: none
+  float: left
+  ul
+    list-style: none
+    margin: 45px 0 0 0
+  li
+    float: left
+    margin-right: 20px
+  a
+    color: black
+    padding-bottom: 1px
+    line-height: 26px
+    box-shadow: 0 1px 0 0 white
+    border-bottom: 1px solid black
+    text-shadow: 1px 1px 0 white
+    &.active, &.selected
+      font-weight: bold
+    &.active
+      border-bottom: 0
+      box-shadow: none
 
 // Tape
 .tape
-	background: url(#{$f}/tape-bg.png)
-	width: 124px
-	height: 102px
-	position: absolute
-	top: 0
-	left: 64%
-	font-size: 16px
-	color: white
-	text-shadow: 1px 1px 0 #146286
-	text-align: center
-	a
-		color: white
-		// outline: 1px solid red
-		display: block
-		margin: 15px 13px 0 0
-		span
-			display: block
-			padding-top: 3px
-			font-size: 0.875em
+  background: image-url("tape-bg.png")
+  width: 124px
+  height: 102px
+  position: absolute
+  top: 0
+  left: 70%
+  font-size: 16px
+  color: white
+  text-shadow: 1px 1px 0 #146286
+  text-align: center
+  a
+    color: white
+    // outline: 1px solid red
+    display: block
+    margin: 15px 13px 0 0
+    span
+      display: block
+      padding-top: 3px
+      font-size: 0.875em
 
 
 // -------------
 // Dropdown List
 // -------------
 .dropdown.sort
-	background: none
-	border: none
-	color: black
-	text-shadow: 1px 1px 0 white
-	font-size: 12px
-	font-weight: normal
-	padding: 5px 20px 5px 8px
-	+transition(0)
-	box-shadow: none
-	&:after
-		right: 8px
-		border-width: 4px
-		border-top-color: black
-	&.active
-		background: #585858
-		box-shadow: inset 1px 1px 3px 0 #222
-		color: white
-		text-shadow: 1px 1px 0 #3a3a3a
-		&:after
-			border-top-color: white
-	ul
-		margin-top: 5px
-	li
-		border-radius: 4px
-		a
-			color: black !important
-			text-shadow: 1px 1px 0 white
-			border-radius: 4px
-			padding-left: 30px !important
-			&.active
-				background: url(#{$f}/sort-arr.png) 11% 60% no-repeat
+  background: none
+  border: none
+  color: black
+  text-shadow: 1px 1px 0 white
+  font-size: 12px
+  font-weight: normal
+  padding: 5px 20px 5px 8px
+  +transition(0)
+  box-shadow: none
+  &:after
+    right: 8px
+    border-width: 4px
+    border-top-color: black
+  &.active
+    background: #585858
+    box-shadow: inset 1px 1px 3px 0 #222
+    color: white
+    text-shadow: 1px 1px 0 #3a3a3a
+    &:after
+      border-top-color: white
+  ul
+    margin-top: 5px
+  li
+    border-radius: 4px
+    a
+      color: black !important
+      text-shadow: 1px 1px 0 white
+      border-radius: 4px
+      padding-left: 30px !important
+      &.active
+        background: image-url("sort-arr.png") 11% 60% no-repeat
 
 
 // ----------
 // Navigation
 // ----------
 #magellanNav
-	background: rgb(223,223,224)
-	padding: 10px 0 0
-	margin-bottom: 5px
-	z-index: 50
-	width: 100%
-	min-height: 37px
-	&:after
-		content: ''
-		bottom: -20px
-		left: 0
-		height: 20px
-		+background( linear-gradient(top, rgb(223,223,224) 0%, rgba(223,223,224,0) 100%) )
-		position: absolute
-		width: 100%
-	// Search
-	.search
-		background: white url(#{$f}/search-bg.png) 6px 55% no-repeat
-		border-radius: 15px
-		+transition(0)
-		margin: -5px 0 0 0
-		padding-left: 23px
+  background: rgb(223,223,224)
+  padding: 10px 0 0
+  // margin-bottom: 5px
+  z-index: 50
+  width: 100%
+  min-height: 37px
+  ul
+    margin-bottom: 33px !important
+  &:after
+    content: ''
+    bottom: -20px
+    left: 0
+    height: 20px
+    +background( linear-gradient(top, rgb(223,223,224) 0%, rgba(223,223,224,0) 100%) )
+    position: absolute
+    width: 100%
+  // Search
+  .search
+    background: white image-url("search-bg.png") 6px 55% no-repeat
+    border-radius: 15px
+    +transition(0)
+    margin: -5px 0 0 0
+    padding-left: 23px
 
 
 // ---------
 // Nav Links
 // ---------
 .list-cont .sub-nav
-	display: block
-	width: auto
-	overflow: inherit
-	margin: -4px 0 10px -9px !important
-	padding-top: 4px
-	& > li
-		float: left
-		display: inline
-		margin: 0 4px 3px 10px
-		text-align: center
-		& > a
-			font-size: 12px
-			line-height: 18px
-			display: block
-			color: black
-			text-shadow: 1px 1px 0 white
-			&.active
-				background: #585858
-				border-radius: 10px
-				color: white
-				font-weight: bold
-				padding: 0 10px
-				box-shadow: inset 1px 1px 4px -1px #222
-				text-shadow: none
-			&.curr
-				color: #959595
-	.sort
-		display: inline-block
-		width: 105px
-		margin: 5px 0
+  display: block
+  width: auto
+  height: auto
+  overflow: inherit
+  border-bottom: 0
+  margin: -4px 0 10px -9px
+  padding: 4px 0 0 0
+  & > li
+    float: left
+    margin: 0 4px 3px 10px
+    padding: 0
+    text-align: center
+    &.active
+      border: 0
+      padding: 0
+      height: auto
+      a
+        background: #585858
+        border-radius: 10px
+        color: white
+        font-weight: bold
+        padding: 0 10px !important
+        box-shadow: inset 1px 1px 4px -1px #222
+        text-shadow: none
+    & > a
+      font-size: 12px
+      line-height: 18px
+      display: block
+      color: black
+      height: auto
+      text-shadow: 1px 1px 0 white
+      &.active
+        background: #585858
+        border-radius: 10px
+        color: white
+        font-weight: bold
+        padding: 0 10px
+        box-shadow: inset 1px 1px 4px -1px #222
+        text-shadow: none
+      &.curr
+        color: #959595
+  .sort
+    display: inline-block
+    width: 105px
+    margin: 5px 0
 
 
 // ---------
 // Block Buy
 // ---------
 .blk
-	width: 150px
-	height: 165px
-	display: inline-block
-	padding: 15px
-	margin: 0 0 12px
-	position: relative
-	text-shadow: 1px 1px 0 white
-	text-align: left
-	dl
-		font-size: 12px
-		line-height: 16px
-		margin-top: 6px
-		dt
-			float: left
-			color: #aaaaaa !important
-			width: 45px
-			margin-right: 5px
-		dd
-			display: table
-			margin-bottom: 5px
-		span
-			display: block
-			font-weight: bold
-	.avatar
-		margin-right: 8px
-		float: left
-	.price
-		margin-top: 4px
-		font-size: 18px
-		font-weight: bold
-		line-height: 18px
-		display: table
-		span
-			display: block
-			font-size: 14px
-	.name
-		font-size: 12px
-		line-height: 16px
-		display: inline-block
-		margin-top: 10px
-	.btn
-		width: 100%
-		position: absolute
-		bottom: 20px
-		left: 0
-	.tprice
-		font-size: 22px
-		font-weight: bold
-		margin: 8px 0 13px 0
-		span
-			font-size: 16px
-			vertical-align: top
-			margin: -2px 0 0 3px
-			display: inline-block
-	.period
-		font-size: 12px
-		margin-bottom: 10px
-		span
-			font-size: 16px
-			font-weight: bold
-			display: block
-	// Long block
-	&.total
-		background: #f7f5f5 !important
-		border-radius: 0
-		line-height: 17px
-	// Long block
-	&.long
-		height: 210px
-		.btn
-			bottom: 14px
-	// Active
-	&.active
-		background: #d4d4d4 !important
-		box-shadow: inset 2px 3px 7px -1px #858585, 0 1px 0 0 white
+  width: 150px
+  height: 165px
+  display: inline-block
+  padding: 15px
+  margin: 0 0 12px
+  position: relative
+  text-shadow: 1px 1px 0 white
+  text-align: left
+  dl
+    font-size: 12px
+    line-height: 16px
+    margin-top: 6px
+    dt
+      float: left
+      color: #aaaaaa !important
+      width: 45px
+      margin-right: 5px
+    dd
+      display: table
+      margin-bottom: 5px
+    span
+      display: block
+      font-weight: bold
+  .avatar
+    margin-right: 8px
+    float: left
+  .price
+    margin-top: 4px
+    font-size: 18px
+    font-weight: bold
+    line-height: 18px
+    display: table
+    span
+      display: block
+      font-size: 14px
+  .name
+    font-size: 12px
+    line-height: 16px
+    display: inline-block
+    margin-top: 10px
+  .btn
+    width: 100%
+    position: absolute
+    bottom: 20px
+    left: 0
+  .tprice
+    font-size: 22px
+    font-weight: bold
+    margin: 8px 0 13px 0
+    span
+      font-size: 16px
+      vertical-align: top
+      margin: -2px 0 0 3px
+      display: inline-block
+  .period
+    font-size: 12px
+    margin-bottom: 10px
+    span
+      font-size: 16px
+      font-weight: bold
+      display: block
+  // Long block
+  &.total
+    background: #f7f5f5 !important
+    border-radius: 0
+    line-height: 17px
+  // Long block
+  &.long
+    height: 210px
+    .btn
+      bottom: 14px
+  // Active
+  &.active
+    background: #d4d4d4 !important
+    box-shadow: inset 2px 3px 7px -1px #858585, 0 1px 0 0 white
 
 
 // ----
 // Main
 // ----
 #main .block-grid
-	margin-right: 0
-	overflow: inherit
+  margin-right: 0
+  overflow: inherit
 
 
 // ----
 // Blog
 // ----
 #blog
-	.row
-		margin-top: 30px
-		margin-bottom: 60px
-	.title
-		margin: 0
-		line-height: 45px
-		text-shadow: 1px 1px 0 white
-		color: black
-		a
-			color: black
-	h6.subheader
-		margin: 15px 0 10px
-	.text
-		margin-bottom: 10px
-	.comm-link
-		border-bottom: 1px solid #0072bc
-		padding-bottom: 1px
-	img
-		margin-bottom: 10px
-	// Blog Post
-	&.post .row
-		margin-bottom: 30px
+  .row
+    margin-top: 30px
+    margin-bottom: 60px
+  .title
+    margin: 0
+    line-height: 45px
+    text-shadow: 1px 1px 0 white
+    color: black
+    a
+      color: black
+  h6.subheader
+    margin: 15px 0 10px
+  .text
+    margin-bottom: 10px
+  .comm-link
+    border-bottom: 1px solid #0072bc
+    padding-bottom: 1px
+  img
+    margin-bottom: 10px
+  // Blog Post
+  &.post .row
+    margin-bottom: 30px
 
 
 // --------
 // Comments
 // --------
 #comments
-	.title
-		text-shadow: 1px 1px 0 white
-		margin: 0 0 20px 0
-		font-size: 20px
-	.user a
-		margin-right: 10px
-		text-shadow: 1px 1px 0 white
-		font-size: 12px
-		line-height: 15px
-		float: left
-		&.name
-			margin-top: 4px
-	p
-		margin: 10px 0 30px
-		line-height: 20px
+  .title
+    text-shadow: 1px 1px 0 white
+    margin: 0 0 20px 0
+    font-size: 20px
+  .user a
+    margin-right: 10px
+    text-shadow: 1px 1px 0 white
+    font-size: 12px
+    line-height: 15px
+    float: left
+    &.name
+      margin-top: 4px
+  p
+    margin: 10px 0 30px
+    line-height: 20px
 
 // 	Form add comment
 #add-comment
-	.avatar
-		float: left
-		margin-right: 10px
-	.comm-textarea
-		margin-left: 50px
-		background: white
-		box-shadow: inset 0px 1px 3px 0 #c0c0c0
-		padding: 4px 3px 3px
-		border-radius: 5px
-		display: block
-		position: relative
-		&:after
-			background: url(#{$f}/comm-arrow.png)
-			content: ''
-			position: absolute
-			left: -6px
-			top: 50%
-			margin-top: -5px
-			width: 7px
-			height: 11px
-		td
-			margin: 0
-			padding: 0 
-			&.tdw
-				width: 100%
-		textarea
-			resize: none
-			font-size: 14px
-			display: block
-			height: 25px
-			padding: 4px 5px 0
-			overflow: none
-			border: none
-			box-shadow: none
-			margin: 2px 0 0
-			color: #6f6f6f
-			&:focus
-				background: none
-		input
-			float: right
-			margin: 0
-			padding-left: 10px
-			padding-right: 10px
+  .avatar
+    float: left
+    margin-right: 10px
+  .comm-textarea
+    margin-left: 50px
+    background: white
+    box-shadow: inset 0px 1px 3px 0 #c0c0c0
+    padding: 4px 3px 3px
+    border-radius: 5px
+    display: block
+    position: relative
+    &:after
+      background: image-url("comm-arrow.png")
+      content: ''
+      position: absolute
+      left: -6px
+      top: 50%
+      margin-top: -5px
+      width: 7px
+      height: 11px
+    td
+      margin: 0
+      padding: 0
+      &.tdw
+        width: 100%
+    textarea
+      resize: none
+      font-size: 14px
+      display: block
+      height: 25px
+      padding: 4px 5px 0
+      overflow: none
+      border: none
+      box-shadow: none
+      margin: 2px 0 0
+      color: #6f6f6f
+      &:focus
+        background: none
+    input
+      float: right
+      margin: 0
+      padding-left: 10px
+      padding-right: 10px
 
 
 // -----
 // Store
 // -----
 #store
-	.about-shop
-		font-size: 18px
-		color: black
-		text-shadow: 1px 1px 0 white
-		margin: 15px 0 40px
-	.img
-		width: 360px
-		height: 150px
-		position: relative
-		display: table-cell
-		vertical-align: middle
-		&.big
-			max-width: 300px
-			width: 100%
-			height: 350px
-			text-align: center
-			float: left
-	.row
-		padding: 0 10px
+  .about-shop
+    font-size: 18px
+    color: black
+    text-shadow: 1px 1px 0 white
+    margin: 15px 0 40px
+  .img
+    width: 360px
+    height: 150px
+    position: relative
+    display: table-cell
+    vertical-align: middle
+    &.big
+      max-width: 300px
+      width: 100%
+      height: 350px
+      text-align: center
+      float: left
+  .row
+    padding: 0 10px
 
-	// List Store
-	.block-grid
-		text-align: left
-		li
-			height: 275px
-			margin-bottom: 30px
-		.title
-			text-decoration: underline
-			display: inline-block
-			line-height: 18px
-			margin: 8px 0 0
-		.price
-			font-size: 20px
-			font-weight: bold
-			margin: 0 0 8px
+  // List Store
+  .block-grid
+    text-align: left
+    li
+      height: 275px
+      margin-bottom: 30px
+    .title
+      text-decoration: underline
+      display: inline-block
+      line-height: 18px
+      margin: 8px 0 0
+    .price
+      font-size: 20px
+      font-weight: bold
+      margin: 0 0 8px
 
-	// Single Store
-	&.single
-		margin-top: 40px
-		margin-bottom: 40px
-		.title
-			font-weight: normal
-		.info-down
-			position: absolute
-			bottom: 0
-		.price
-			font-size: 40px
-			font-weight: bold
-			margin: -2px 10px 0 0
-			&, .button
-				float: left
-		.columns
-			min-height: 350px
+  // Single Store
+  &.single
+    margin-top: 40px
+    margin-bottom: 40px
+    .title
+      font-weight: normal
+    .info-down
+      position: absolute
+      bottom: 0
+    .price
+      font-size: 40px
+      font-weight: bold
+      margin: -2px 10px 0 0
+      &, .button
+      float: left
+    .columns
+      min-height: 350px
 
 
 // ----
 // Top
 // ----
 #top
-	position: relative
-	.block-grid
-		padding-left: 0
-		margin-left: -10px
-		margin-right: 30px
-		position: relative
-		height: auto !important
-		overflow: inherit
-		width: auto
-	li
-		display: none
-		list-style: none
-	.bg
-		width: 317px
-		display: inline-block
-		border-radius: 1px
-		box-shadow: inset 0 1px 0 white, 0 6px 10px -5px #444
-		padding: 13px 13px 15px
-		margin-bottom: -5px
-		color: #303030
-		text-shadow: 1px 1px 0 white
-		text-align: left
-		& > img
-			margin-bottom: 3px
-			display: block
-	p
-		line-height: 17px
-		margin: 0 0 8px
+  position: relative
+  .block-grid
+    padding-left: 0
+    margin-left: -10px
+    margin-right: 30px
+    position: relative
+    height: auto !important
+    overflow: inherit
+    width: auto
+  li
+    display: none
+    list-style: none
+  .bg
+    width: 317px
+    display: inline-block
+    border-radius: 1px
+    box-shadow: inset 0 1px 0 white, 0 6px 10px -5px #444
+    padding: 13px 13px 15px
+    margin-bottom: -5px
+    color: #303030
+    text-shadow: 1px 1px 0 white
+    text-align: left
+    & > img
+      margin-bottom: 3px
+      display: block
+  p
+    line-height: 17px
+    margin: 0 0 8px
 
-	.bott
-		min-height: 40px
-		a
-			font-size: 12px
-			line-height: 14px
-		span
-			font-weight: bold
-			margin-right: 5px
-			font-size: 16px
-			line-height: 18px
-			display: inline-block
-		.info
-			width: 185px
-			min-height: 40px
-			display: inline-block
-		.name
-			display: table
-			margin: 3px 0 2px
-		.avatar
-			float: left
-			margin-right: 8px
-		.button
-			float: right
-			margin-top: 5px
+  .bott
+    min-height: 40px
+    a
+      font-size: 12px
+      line-height: 14px
+    span
+      font-weight: bold
+      margin-right: 5px
+      font-size: 16px
+      line-height: 18px
+      display: inline-block
+    .info
+      width: 170px
+      min-height: 40px
+      display: inline-block
+    .name
+      display: table
+      margin: 3px 0 2px
+    .avatar
+      float: left
+      margin-right: 8px
+    .button
+      float: right
+      margin-top: 5px
 
 
 // ----------
 // Investment
 // ----------
 #investment .block-grid
-	margin-right: 0
+  margin-right: 0
+
+
+// -----
+// User
+// -----
+#user
+  text-shadow: 1px 1px 0 white
+  margin-bottom: 20px
+  padding-bottom: 20px
+  position: relative
+  z-index: 1
+  .row
+    margin-right: 0
+  .columns
+    padding-top: 13px
+  hr
+    margin-left: 10px
+  .button-group
+    margin-top: -53px
+    // margin-left: 11%
+    margin-left: 110px
+    width: 190px
+  .user-tw
+    margin-bottom: 5px
+    h6, p, a, span
+      font-size: 13px !important
+    h6
+      margin: 20px 0 5px
+    p
+      padding-right: 50px
+      margin-bottom: 5px
+    span
+      display: inline-block
+      margin-right: 10px
+    a
+      border-bottom: 1px solid #0072bc
+      box-shadow: 0 1px 0 white
+      padding-bottom: 1px
+    .icon-pr
+      margin-right: 3px
+  table
+    margin-top: 10px
+    td
+      padding: 3px 0
+  .tw-blk
+    font-size: 14px !important
+    margin-bottom: 13px
+    span
+      font-size: 26px !important
+      font-weight: bold
+      display: block
+      margin-top: 5px
+      span
+        font-size: 24px !important
+        margin-left: 5px
+        display: inline-block
+
+
+// -----
+// Help
+// -----
+#help
+  background: rgba(0,0,0,.7)
+  top: 0
+  left: 0
+  z-index: 300500
+  position: absolute
+  width: 100%
+  height: 100%
+  display: none
+  color: white
+  .columns
+    position: static
+  a
+    border-bottom: 1px solid white
+    padding-bottom: 1px
+    color: white
+  .six
+    position: relative
+  .video-blk, .made
+    width: 400px
+    position: absolute
+    left: 50%
+    margin-left: -200px
+    display: none
+  .video-blk
+    font-size: 26px
+    font-weight: bold
+    bottom: 22%
+  .made
+    bottom: 5%
+
+  .aic
+    background: image-url("aic.png") 100% 50% no-repeat
+    padding: 16px 61px 5px 0
+    display: inline-block
+    margin-top: 20%
+
+  .hlp
+    position: absolute
+    font-size: 12px
+    display: none
+    i
+      background: image-url("help-arrows.png")
+      position: absolute
+  .its-you
+    top: 74px
+    left: 117px
+    i
+      background-position: -25px -15px
+      width: 30px
+      height: 40px
+      bottom: -40px
+      left: -33px
+  .its-cost
+    top: 81px
+    left: 320px
+    i
+      background-position: -70px -15px
+      width: 60px
+      height: 60px
+      bottom: -55px
+      left: -61px
+  .its-dinamic
+    top: 82px
+    right: 330px
+    i
+      background-position: -157px -15px
+      width: 60px
+      height: 60px
+      bottom: -55px
+      right: -61px
+  .its-twitt
+    top: 23px
+    right: 160px
+    i
+      background-position: -233px -15px
+      width: 45px
+      height: 20px
+      bottom: -16px
+      right: -47px
+  .its-invest
+    top: 197px
+    left: 202px
+    i
+      background-position: -8px -67px
+      width: 40px
+      height: 40px
+      bottom: -40px
+      left: -40px
+  .its-search
+    top: 210px
+    right: 32%
+    i
+      background-position: -248px -60px
+      width: 48px
+      height: 32px
+      bottom: -32px
+      right: -48px
+  .its-invest-2
+    top: 305px
+    right: 87%
+    i
+      background-position: -60px -102px
+      width: 64px
+      height: 40px
+      bottom: -40px
+      right: -64px
+  .its-invest-3
+    top: 300px
+    left: 370px
+    i
+      background-position: -138px -77px
+      width: 85px
+      height: 95px
+      bottom: -95px
+      left: -85px
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -657,244 +882,258 @@ body
 // Dialog Windows
 // --------------
 .dialog
-	position: absolute
-	z-index: 1000
-	padding: 20px
-	border-radius: 5px
-	webkit-box-sizing: border-box
-	-moz-box-sizing: border-box
-	box-sizing: border-box	
-	.close-dialog
-		float: right
-		margin: -5px -5px 0 0
-	&:before
-		position: absolute
-		left: 50%
-		margin-left: -8px
-		content: ''
-		width: 16px
-		height: 8px
-	&.arr-top:before
-		top: -7px
-		background: url(#{$f}/modal-arrow-top.png)
-	&.arr-bottom:before
-		bottom: -8px
-		background: url(#{$f}/modal-arrow-bottom.png)
+  position: absolute
+  z-index: 1000
+  padding: 20px
+  border-radius: 5px
+  webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+  box-sizing: border-box
+  .close-dialog
+    float: right
+    margin: -5px -5px 0 0
+  &:before
+    position: absolute
+    left: 50%
+    margin-left: -8px
+    content: ''
+    width: 16px
+    height: 8px
+  &.arr-top:before
+    top: -7px
+    background: image-url("modal-arrow-top.png")
+  &.arr-bottom:before
+    bottom: -8px
+    background: image-url("modal-arrow-bottom.png")
 
 // Network
 .network
-	display: none
-	width: 370px
-	height: 305px
-	text-shadow: 1px 1px 0 white
-	top: 30px
-	margin-left: 8px
-	.row
-		height: 40px
-		margin-top: 10px
-	.title
-		margin-bottom: 15px
-	.button
-		width: 100%
-		padding-left: 0 
-		padding-right: 0 
-	.two .button
-		width: 97%
-	span
-		font-size: 12px
-		color: #5a5a5a
-	input
-		padding: 15px 7px
-		width: 99%
-		border-radius: 5px
-	input, .button-group
-		margin-top: -11px
-	.checkbox
-		margin: -3px 10px 0
-		display: inline-block
-		vertical-align: top
+  display: none
+  width: 370px
+  height: 305px
+  text-shadow: 1px 1px 0 white
+  top: 30px
+  margin-left: 8px
+  .row
+    height: 40px
+    margin-top: 10px
+  .title
+    margin-bottom: 15px
+  .button
+    width: 100%
+    padding-left: 0
+    padding-right: 0
+  .two .button
+    width: 97%
+  span
+    font-size: 12px
+    color: #5a5a5a
+  input
+    padding: 15px 7px
+    width: 99%
+    border-radius: 5px
+  input, .button-group
+    margin-top: -11px
+  .checkbox
+    margin: -3px 10px 0
+    display: inline-block
+    vertical-align: top
 
 // History
 .history
-	display: none
-	width: 410px
-	height: 230px
-	left: -73px
-	top: 35px
-	.list-cont
-		height: 35px
-	.hconainer
-		height: 155px
-		margin-right: -10px
-		overflow: hidden
-		text-shadow: 1px 1px 0 white
-		a
-			border-bottom: 1px solid #0072bc
-			box-shadow: 0 1px 0 white
-			padding-bottom: 1px
+  display: none
+  width: 410px
+  height: 230px
+  left: -73px
+  top: 35px
+  li a
+    padding: 0
+  .list-cont
+    height: 35px
+  .hconainer
+    margin-top: 7px
+    height: 140px
+    margin-right: -10px
+    overflow: hidden
+    text-shadow: 1px 1px 0 white
+    ul
+      margin-bottom: 3px
+    table
+      width: 98%
+  table
+    td, th
+      width: 18%
+      &:first-child
+        width: 24%
 
 // Table
 table.default
-	background: none
-	border-radius: 0
-	border: none
-	padding: 0
-	margin: 0 0 -5px
-	width: 100%
-	thead, tbody, tr, th, td
-		background: none
-		border: none
-		padding: 0
-		margin: 0
-		font-size: 12px
-		font-weight: normal
-	tr:nth-child(even)
-		background: none
-	th
-		color: #bcbcbc
-	td
-		padding: 2px 0
+  background: none
+  border-radius: 0
+  border: none
+  padding: 0
+  margin: 0 0 -5px
+  width: 100%
+  thead, tbody, tr, th, td
+    background: none
+    border: none
+    padding: 0
+    margin: 0
+    font-size: 12px
+    font-weight: normal
+  tr:nth-child(even)
+    background: none
+  th
+    color: #bcbcbc
+  td
+    padding: 2px 0
+  a
+    border-bottom: 1px solid #0072bc
+    box-shadow: 0 1px 0 white
+    padding-bottom: 1px
 
 // Buy & Sell
 .buy
-	width: 410px
-	height: 235px
-	text-shadow: 1px 1px 0 white
-	bottom: 96%
-	left: 50%
-	margin-left: -205px
-	.slide
-		padding: 45px 10px 0
-		height: 65px
-	.buy-price
-		text-align: center
-		font-size: 30px
-		font-weight: bold
-	.snum
-		position: absolute
-		width: 30px
-		top: -23px
-		left: 42%
-		margin-left: -15px
-		text-align: center
-		font-size: 16px
-		font-weight: bold
-	.buy-stock .columns
-		font-size: 18px
-		font-weight: bold
-		span
-			color: #0072bc
-		.checkbox
-			margin: 0 7px
-			
+  display: none
+  width: 410px
+  height: 235px
+  text-shadow: 1px 1px 0 white
+  bottom: 96%
+  left: 50%
+  margin-left: -205px
+  .slide
+    padding: 45px 10px 0
+    height: 65px
+  .buy-price
+    text-align: center
+    font-size: 30px
+    font-weight: bold
+  .snum
+    position: absolute
+    width: 30px
+    top: -23px
+    left: 42%
+    margin-left: -15px
+    text-align: center
+    font-size: 16px
+    font-weight: bold
+  .buy-stock .columns
+    font-size: 18px
+    font-weight: bold
+    span a
+      color: black
+      cursor: default
+      &.active
+        cursor: pointer
+        color: #0072bc
+    .checkbox
+      margin: 0 7px
 
 
 // ------------
 // Reveal Modal
 // ------------
 .reveal-modal-bg
-	z-index: 100400
+  z-index: 100400
 .reveal-modal
-	// width: 480px
-	background: #eaeaea
-	border-radius: 5px
-	box-shadow: inset 1px 1px 0 white
-	text-shadow: 1px 1px 0 white
-	z-index: 100500
-	label
-		margin-top: 12px
-	input[type=text]
-		// width: 320px
-		padding: 17px 9px
-		font-size: 14px
-		border-radius: 6px
-		margin-bottom: 3px
-		box-shadow: inset 1px 1px 3px -1px #b17c7e
-		margin-left: -1px
-	input.noval
-		border-color: #ed1c24
-	h4.title
-		padding-top: 15px
-		margin-bottom: 7px
-		font-size: 25px
-		font-weight: normal
-		text-align: center
-	h3.title
-		font-size: 25px
-		font-weight: normal
-		float: left
-		margin: -15px 0 30px -4px
-	.text
-		text-align: center
-	.icon-close
-		margin: 0px 2px 0 0
-	.mmailcont
-		margin-top: 40px
-		margin-bottom: 19px
-	.button
-		width: 105px
-	.row
-		margin-left: -10px
-	.offset-by-two
-		margin-left: 23%
-	.two
-		width: 23%
-	.four
-		width: 77%
-	a
-		font-size: 12px
-		display: inline-block
-		margin: 5px 0 10px
-		text-decoration: underline
+  // width: 480px
+  background: #eaeaea
+  border-radius: 5px
+  box-shadow: inset 1px 1px 0 white
+  text-shadow: 1px 1px 0 white
+  z-index: 100500
+  label
+    margin-top: 12px
+  input[type=text]
+    // width: 320px
+    padding: 17px 9px
+    font-size: 14px
+    border-radius: 6px
+    margin-bottom: 3px
+    box-shadow: inset 1px 1px 3px -1px #b17c7e
+    margin-left: -1px
+  input.noval
+    border-color: #ed1c24
+  h4.title
+    padding-top: 15px
+    margin-bottom: 7px
+    font-size: 25px
+    font-weight: normal
+    text-align: center
+  h3.title
+    font-size: 25px
+    font-weight: normal
+    float: left
+    margin: -15px 0 30px -4px
+  .text
+    text-align: center
+  .icon-close
+    margin: 0px 2px 0 0
+  .mmailcont
+    margin-top: 40px
+    margin-bottom: 19px
+  .button
+    width: 105px
+  .row
+    margin-left: -10px
+  .offset-by-two
+    margin-left: 23%
+  .two
+    width: 23%
+  .four
+    width: 77%
+  a
+    font-size: 12px
+    display: inline-block
+    margin: 5px 0 10px
+    text-decoration: underline
 
 span.error
-	color: #ed1c24
-	font-size: 12px
-	padding-left: 1px
-
+  color: #ed1c24
+  font-size: 12px
+  padding-left: 1px
 
 
 // ---------
 // CheckBox
 // ---------
 .checkbox
-	display: inline
-	font-size: 20px
-	line-height: 20px
-	cursor: pointer
-	cursor: hand
-	.mark
-		display: inline
-	img
-		background: transparent url(#{$f}/checkbox/checkbox.png) 0 0 no-repeat
-		vertical-align: middle
-		width: 46px
-		height: 22px
+  display: inline
+  font-size: 20px
+  line-height: 20px
+  cursor: pointer
+  cursor: hand
+  .mark
+    display: inline
+  img
+    background: transparent image-url("checkbox/checkbox.png") 0 0 no-repeat
+    vertical-align: middle
+    width: 46px
+    height: 22px
 
 .checkbox-hover img
-	background-position: 0px -0px
+  background-position: 0px -0px
 .checkbox-checked img
-	background-position: 0px -23px
+  background-position: 0px -23px
 .checkbox-checked .checkbox-hover img
-	background-position: 0px -23px
+  background-position: 0px -23px
 .checkbox-disabled img
-	background-position: 0px -0px
+  background-position: 0px -0px
 .checkbox-checked .checkbox-disabled img
-	background-position: 0px -23px
+  background-position: 0px -23px
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+// ----------
+// Clear Fix
+// ----------
+.clearfix
+  *zoom: 1
+  &:before,
+  &:after
+    content: " "
+    display: table
+  &:after
+    clear: both
 
 
 // ------------
@@ -903,86 +1142,87 @@ span.error
 
 // Smartphones (portrait and landscape)
 @media only screen and (max-width : 480px)
-	.block-grid.min-two-up > li
-		width: 50%
-		&:nth-child(2n+1)
-			clear: both
-	.tape
-		left: 55%
-	.user-info .columns
-		width: auto !important
-		float: none !important
-	#store.single
-		.columns
-			min-height: auto
-		.info-down
-			position: relative
-	#top
-		.bg
-			width: 285px !important
-		.bott .info
-			width: 155px !important
+  .block-grid.min-two-up > li
+    width: 50%
+    &:nth-child(2n+1)
+      clear: both
+  .tape
+    left: 55%
+  .user-info .columns
+    width: auto !important
+    float: none !important
+  #store.single
+    .columns
+      min-height: auto
+    .info-down
+      position: relative
+  #top
+    .bg
+      width: 285px !important
+    .bott .info
+      width: 155px !important
 
 // iPhone
 @media only screen and (min-width : 481px) and (max-width : 640px)
-	.tape
-		display: none
-	.pl20
-		padding-left: 20px !important
-	#top
-		padding-left: 4px !important
-		li
-			padding: 0 !important
-			margin: 0 !important
-		.bg
-			width: 310px !important
-			margin: 0
-		ul
-			float: left
-			position: static
- 
+  .tape
+    display: none
+  .pl20
+    padding-left: 20px !important
+  #top
+    padding-left: 4px !important
+    li
+      padding: 0 !important
+      margin: 0 !important
+    .bg
+      width: 310px !important
+      margin: 0
+    ul
+      float: left
+      position: static
+  #header
+    .twitter-share-button
+      top: 16px
+
 // iPad (landscape)
 @media only screen and (min-width : 641px) and (max-width : 960px)
-	.block-grid.mobile-four-up > li
-		width: 25%
-	.block-grid.mobile-four-up > li:nth-child(4n+1)
-		clear: both
-	.block-grid.six-up > li:nth-child(6n+1)
-		clear: none
-	.sub-nav li
-		margin-right: 0px !important
-	.tape
-		display: none
+  .block-grid.mobile-four-up > li
+    width: 25%
+  .block-grid.mobile-four-up > li:nth-child(4n+1)
+    clear: both
+  .block-grid.six-up > li:nth-child(6n+1)
+    clear: none
+  .sub-nav li
+    margin-right: 0px !important
+  .tape
+    display: none
 
-	.columns.statw
-		// width: 320px !important
-		width: 50% !important
-		float: left !important
+  .columns.statw
+    // width: 320px !important
+    width: 50% !important
+    float: left !important
 
-	.grafic
-		width: auto !important
-		float: none !important
+  .grafic
+    width: auto !important
+    float: left !important
 
-	#store.single .columns
-		float: left
-		&.two
-			width: 33.33333%
-		&.four
-			width: 66.66667%
+  #store.single .columns
+    float: left
+    &.two
+      width: 33.33333%
+    &.four
+      width: 66.66667%
 
-	.block-grid.tab-two-up > li
-		width: 50%
-		&:nth-child(2n+1)
-			clear: both
+  .block-grid.tab-two-up > li
+    width: 50%
+    &:nth-child(2n+1)
+      clear: both
 
-	#top ul
-		margin-left: -50px !important
-
-
+  #top ul
+    margin-left: -50px !important
 
 
 // ------------
 // Hacks for FF
 // ------------
-@-moz-document url-prefix()
+  @-moz-document url-prefix()
 

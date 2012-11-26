@@ -1,5 +1,4 @@
 en:
-
   user:
     price: price
     money: money
@@ -7,6 +6,30 @@ en:
     history: history
     week: week
     month: month
+
+    buy: Buy
+    sell: Sell
+
+    count_stock: Count stock
+    investment_cost: Cost my investment
+
+    info:
+      investment_portfolio: Investment Portfolio
+      stock_holders: Stock holder
+      owner: Stock owner
+      holder: Stock holder
+      count: Count
+      one: One stock
+      total: Total
+
+  top_tweets:
+    top_tweet: Top tweet
+    top_tweets: Top tweets
+
+    all: All
+    russian: Russian
+    english: English
+    friends: Friends
 
   blog:
     all: 'All'

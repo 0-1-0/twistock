@@ -22,31 +22,17 @@ module UserLogic
       my_shares.inject(0) { |a, b| a += b.count }
     end
 
-    def daily_price_change
-      Rails.cache.fetch "user_#{id}_dpc" do
-        delta = PriceLog.get_user_log(self, first_and_last: true, for: 1.day)
-        delta[1][0] - delta[0][0]
-      end
-    end
-
-    def weekly_price_change
-      Rails.cache.fetch "user_#{id}_wpc" do
-        delta = PriceLog.get_user_log(self, first_and_last: true, for: 1.week)
-        delta[1][0] - delta[0][0]
-      end
-    end
-
-    def monthly_price_change
-      Rails.cache.fetch "user_#{id}_mpc" do
-        delta = PriceLog.get_user_log(self, first_and_last: true, for: 1.month)
-        delta[1][0] - delta[0][0]
-      end
-    end
-
     def wipe_periodic_caches
-      %w{dpc wpc mpc}.each do |x|
-        Rails.cache.delete "user_#{id}_#{x}"
-      end
+      delta = PriceLog.get_user_log(self, first_and_last: true, for: 1.day)
+      self.daily_price_change   = delta[1][0] - delta[0][0]
+
+      delta = PriceLog.get_user_log(self, first_and_last: true, for: 1.week)
+      self.weekly_price_change  = delta[1][0] - delta[0][0]
+
+      delta = PriceLog.get_user_log(self, first_and_last: true, for: 1.month)
+      self.monthly_price_change = delta[1][0] - delta[0][0]
+
+      save
       self
     end
   end

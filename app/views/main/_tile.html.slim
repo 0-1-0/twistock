@@ -6,7 +6,7 @@ li
 
     .price
       | $#{maybe_calculating(user, :share_price)}
-      span.green= with_sign maybe_calculating(user, :weekly_price_change)
+      = with_sign maybe_calculating(user, :weekly_price_change)
 
     = link_to "@#{user.nickname} (#{user.name})", user, class: 'name'
 

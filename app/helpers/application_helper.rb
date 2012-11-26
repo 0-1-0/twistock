@@ -1,8 +1,12 @@
 module ApplicationHelper
   def with_sign(int)
     return int unless int.is_a? Fixnum
-    return "+#{int}" if int >= 0
-    int
+
+    if int >= 0
+      "<span class=\"green\">+#{int}</span>".html_safe
+    else
+      "<span class=\"red\">#{int}</span>".html_safe
+    end
   end
 
   def maybe_calculating(user, method_name)

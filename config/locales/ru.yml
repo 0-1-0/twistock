@@ -8,6 +8,31 @@ ru:
     week: неделя
     month: месяц
 
+    buy: Купить
+    sell: Продать
+
+    count_stock: Куплено акций
+    investment_cost: Суммарная стоимость
+
+    info:
+      investment_portfolio: Ивестиции
+      stock_holders: Держатели акций
+      owner: Владелец
+      holder: Держатель
+      count: Количество
+      one: Одна акция
+      total: Всего
+
+
+  top_tweets:
+    top_tweet: Лучший твит
+    top_tweets: Лучшие твиты
+
+    all: Все
+    russian: Русский
+    english: Английский
+    friends: Друзья
+
   blog:
     all: 'Все'
     news: 'Новости'

@@ -1,11 +1,14 @@
 class TopTweetsController < ApplicationController
   def index
-    @llang = params[:lang]
-    @tweets = case @llang
+    @type = params[:type]
+    @tweets = case @type
                 when 'ru'
                   BestTweet.where{lang == 'ru'}
                 when 'en'
                   BestTweet.where{lang == 'en'}
+                when 'friends'
+                  friend_ids = current_user.my_friends.select(:id)
+                  BestTweet.where{user_id.in(friend_ids)}
                 else
                   BestTweet
               end.order{param.desc}.limit(30)

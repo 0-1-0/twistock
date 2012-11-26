@@ -1,17 +1,18 @@
 li
   .bg
     - if tweet.media_url
-      = image_tag tweet.media_url
+      = link_to tweet.media_url, target: :blank do
+        = image_tag tweet.media_url
     p= tweet.content
 
     .bott
-      a.avatar.small
+      = link_to tweet.user, class: "avatar small" do
         i
         = image_tag tweet.user.avatar
 
-      a.secondary.button.radius.small href="/home" Buy
+      a.secondary.button.radius.small href="/home"= t('user.buy')
 
       .info
-        = link_to "@#{tweet.user.nickname} (#{tweet.user.name})", tweet.user
+        = link_to "@#{tweet.user.nickname} (#{tweet.user.name})", tweet.user, style: "display: block;"
         span $#{tweet.user.share_price}
-        span.green= with_sign(tweet.user.weekly_price_change)
+        = with_sign(tweet.user.weekly_price_change)

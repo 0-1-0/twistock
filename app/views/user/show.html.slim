@@ -1,52 +1,98 @@
 = render 'shared/flows_menu', flow: nil
-= render 'shared/user_info', user: @user, source: :show_user
-.row
-  .button Buy
-  .button Sell
+#user.row.bg
+  .row
+    .six.columns.user-info
+      .two.mobile-two.statw.columns
 
-.row
-  hr
+        a.avatar href="#"
+          i
+          = image_tag @user.profile_image
 
-.row
-  .four.columns
-    = link_to 'Twitter', @user.twitter_url
-    - if @best_tweet
-      h5 Top Tweet
-      = @best_tweet.content
-      h5 #{@best_tweet.retweets} RT
-    = link_to 'see all top tweets', top_tweets_path
-  
-  .four.columns
-    h5 Investment portfolio
-    table
+        span.name
+          | @#{@user.nickname} (#{@user.name})
+
+        .user-money
+          | $#{@user.share_price}
+          = with_sign(@user.weekly_price_change)
+
+
+      .two.mobile-two.columns.statw.pl20
+        .history-link
+          span
+
+        .price-cont
+          = t 'user.today'
+          = with_sign(@user.daily_price_change)
+        .price-cont
+          = t 'user.week'
+          = with_sign(@user.weekly_price_change)
+        .price-cont
+          = t 'user.month'
+          = with_sign(@user.monthly_price_change)
+
+      .two.columns.grafic
+        img.grafic.right src="/assets/grafic.png"
+
+  .row
+    hr
+    .six.columns
+      ul.button-group.radius.even.two-up
+        li= link_to t('user.buy'),  '#', class: 'primary button radius'
+        li= link_to t('user.sell'), '#', class: 'secondary button radius'
+
+  .two.columns.user-tw
+    /TODO: сделать почеловечней
+    - if bos = current_user.portfel.select{|x| x.owner.twitter_id == @user.twitter_id}.first
+      .tw-blk
+        = t 'user.count_stock'
+        span= bos.count
+
+      .tw-blk
+        = t 'user.investment_cost'
+        span
+          | $#{bos.owner.share_price * bos.count}
+          = with_sign(bos.count * bos.owner.weekly_price_change)
+
+    = link_to 'Twitter', @user.twitter_url, target: :blank
+    - if @user.best_tweet
+      h6 #{t 'top_tweets.top_tweet'}:
+      p= @user.best_tweet.content
+      span
+        i.icon-pr
+        | #{@user.best_tweet.retweets} RT
+      = link_to t('top_tweets.top_tweets'), top_tweets_path
+
+  .two.columns.link-border
+    = t 'user.info.investment_portfolio'
+    table.default
       thead
         tr
-          td Stock owner
-          td Count
-          td Onse stock
-          td Total
+          th= t 'user.info.owner'
+          th= t 'user.info.count'
+          th= t 'user.info.one'
+          th= t 'user.info.total'
       tbody
         - @portfel.each do |bos|
           tr
-            td 
+            td
               = link_to bos.owner.nickname, bos.owner
             td
               = bos.count
             td #{bos.owner.share_price}$
             td #{bos.owner.share_price * bos.count}$
 
-  .four.columns
-    h5 Stock holder
-    table
+  .two.columns
+    = t 'user.info.stock_holders'
+    table.default
       thead
         tr
-          td Stock holder
-          td Count
-          td Total
+          th= t 'user.info.holder'
+          th= t 'user.info.count'
+          th= t 'user.info.total'
       tbody
         - @my_shares.each do |bos|
           tr
-            td 
+            td
               = link_to bos.holder.nickname, bos.holder
             td= bos.count
             td #{bos.count * @user.share_price}$

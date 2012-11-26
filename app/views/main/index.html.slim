@@ -12,15 +12,15 @@
 
               .tprice
                 | $#{@collection.map(&:total_cost).inject(&:+)}
-                span.green= with_sign(@collection.map(&:owner).map(&:daily_price_change).inject(&:+))
+                = with_sign(@collection.map(&:owner).map(&:daily_price_change).inject(&:+))
 
               .period
                 | Today
-                span.green= with_sign(@collection.map(&:owner).map(&:daily_price_change).inject(&:+))
+                = with_sign(@collection.map(&:owner).map(&:daily_price_change).inject(&:+))
 
               .period
                 | Week
-                span.red= with_sign(@collection.map(&:owner).map(&:monthly_price_change).inject(&:+))
+                = with_sign(@collection.map(&:owner).map(&:monthly_price_change).inject(&:+))
           - @collection.each do |bos|
             = render 'investment_tile', bos: bos
         - else

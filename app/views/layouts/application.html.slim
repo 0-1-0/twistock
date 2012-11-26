@@ -38,9 +38,11 @@ html lang="en"
               
           nav#header-nav.left: ul
             li=link_to t('main_page.top_menu.how_it_works'), '#'
-            li=link_to t('main_page.top_menu.store'), '/store'
-            li=link_to t('main_page.top_menu.top_tweets'), '/top_tweets'
-            li=link_to t('main_page.top_menu.blog'), '/blog'  
+            li=link_to t('main_page.top_menu.store'), '/store', class: active_when(controller_name == 'store')
+            li=link_to t('main_page.top_menu.top_tweets'), '/top_tweets', class: active_when(controller_name == 'top_tweets')
+            li=link_to t('main_page.top_menu.blog'), '/blog', class: active_when(controller_name == 'blog_posts')
+            - if signed_in?
+              li= link_to t('main_page.sign_out'), sign_out_path
 
           .left
             br
@@ -61,7 +63,7 @@ html lang="en"
           = render :partial=>'shared/enter_email_form'
 
       - if signed_in?
-        =render 'shared/user_info', user: current_user, source: :header
+        =render 'shared/user_info', user: current_user
       - else
         .row.collapse.header-text
           .six.columns
