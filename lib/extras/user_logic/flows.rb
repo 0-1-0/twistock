@@ -82,7 +82,7 @@ module UserLogic
 
       def friend_ids
         Rails.cache.fetch "user_#{id}_friend_ids", expires_in: 10.minutes do
-          twitter.follower_ids.ids
+          twitter.follower_ids.ids[0..100]
         end
       end
 
