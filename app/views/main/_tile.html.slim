@@ -1,5 +1,5 @@
 li
-  .bg.blk
+  .bg.blk.dialog-pin
     = link_to user, class: 'avatar small' do
       i
       = image_tag user.avatar
@@ -13,9 +13,9 @@ li
     .btn.center
       - if current_user
         - if current_user.shares_of(user) > 0
-          - link_text = t 'user.buy_more'
+          = link_to t('user.buy_more'), '#', class: 'secondary button radius small btn-buy btn-buy-more', 'data-id' => user.id
         - else
-          - link_text = t 'user.buy'
-        = link_to link_text, '#', class: 'secondary button radius small btn-buy', 'data-id' => user.id
+          = link_to t('user.buy'), '#', class: 'secondary button radius small btn-buy', 'data-id' => user.id
+
       - else
         = link_to t('user.buy'), '#', class: 'secondary button radius small disabled'

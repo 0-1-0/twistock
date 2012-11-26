@@ -1,5 +1,5 @@
-= render 'shared/flows_menu', flow: nil
 = render 'shared/buy_dialog'
+= render 'shared/flows_menu', flow: nil
 #user.row.bg
   .row
     .six.columns.user-info
@@ -38,8 +38,11 @@
     hr
     .six.columns
       ul.button-group.radius.even.two-up
-        li= link_to t('user.buy'),  '#', class: 'primary button radius'
-        li= link_to t('user.sell'), '#', class: 'secondary button radius'
+        - if @bos
+          li= link_to t('user.buy_more'),  '#', style: "width: 120px;", class: 'button secondary radius btn-buy btn-buy-more dialog-pin', 'data-id' => @user.id
+        - else
+          li= link_to t('user.buy'),  '#', style: "width: 120px;", class: 'button secondary radius btn-buy btn-buy-more dialog-pin', 'data-id' => @user.id
+        /li= link_to t('user.sell'), '#', class: 'secondary button radius'
 
   .two.columns.user-tw
     - if @bos

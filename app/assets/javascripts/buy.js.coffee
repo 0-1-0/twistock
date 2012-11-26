@@ -119,10 +119,10 @@ $(document).ready ->
   action =
     modal: $("#buy-dialog")
     open: (elem) ->
-      elem.removeClass("secondary buy-cancel").addClass("alert buy-cancel").text(I18n.t("buy_dialog.cancel")).closest(".blk").addClass("active").append @modal.fadeIn()
+      elem.removeClass("secondary buy-cancel").addClass("alert buy-cancel").text(I18n.t("buy_dialog.cancel")).closest(".dialog-pin").addClass("active").append @modal.fadeIn()
 
     close: (elem) ->
-      elem.removeClass("alert buy-cancel").addClass("secondary").text("Buy").closest(".blk").removeClass "active"
+      elem.removeClass("alert buy-cancel").addClass("secondary").text(I18n.t("buy_dialog.buy")).closest(".dialog-pin").removeClass "active"
       @modal.hide()
 
   # Buy Btn
@@ -155,5 +155,7 @@ $(document).ready ->
     else
       action.close $(".btn-buy")
       action.open $(this)
+
+    $('.btn-buy-more:not(.buy-cancel)').text(I18n.t("user.buy_more"))
     false
 

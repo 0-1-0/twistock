@@ -1,6 +1,6 @@
 - user = bos.owner
 li
-  .bg.blk.long
+  .bg.blk.long.dialog-pin
     = link_to user, class: 'avatar small' do
       i
       = image_tag user.avatar
@@ -21,4 +21,4 @@ li
         = with_sign(bos.owner.weekly_price_change)
 
       .btn.center
-        = link_to t('user.buy_more'), '#', class: 'secondary button radius small btn-buy', 'data-id' => user.id
+        = link_to t('user.buy_more'), '#', class: 'secondary button radius small btn-buy btn-buy-more', 'data-id' => user.id
