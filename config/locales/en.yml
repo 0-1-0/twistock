@@ -8,7 +8,12 @@ en:
     month: month
 
     buy: Buy
+    buy_more: Buy more
     sell: Sell
+
+    inv_tile:
+      count: Count
+      total: Total
 
     count_stock: Count stock
     investment_cost: Cost my investment

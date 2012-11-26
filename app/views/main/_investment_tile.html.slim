@@ -1,7 +1,7 @@
 - user = bos.owner
 li
   .bg.blk.long
-    a.avatar.small href="#"
+    = link_to user, class: 'avatar small' do
       i
       = image_tag user.avatar
 
@@ -12,10 +12,10 @@ li
     = link_to "@#{user.nickname} (#{user.name})", user, class: 'name'
 
     dl
-      dt Count
+      dt= t('user.inv_tile.count')
       dd= bos.count
 
-      dt Total
+      dt= t('user.inv_tile.total')
       dd
         | $#{bos.total_cost}
         = with_sign(bos.owner.weekly_price_change)

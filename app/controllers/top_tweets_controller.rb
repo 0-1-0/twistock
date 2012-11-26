@@ -11,7 +11,7 @@ class TopTweetsController < ApplicationController
                   BestTweet.where{user_id.in(friend_ids)}
                 else
                   BestTweet
-              end.order{param.desc}.limit(30)
+              end.includes(:user).order{param.desc}.limit(30)
   end
 
   def edit_tags

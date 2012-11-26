@@ -1,5 +1,4 @@
 ru:
-
   user:
     price: цена
     money: деньги
@@ -9,7 +8,12 @@ ru:
     month: месяц
 
     buy: Купить
+    buy_more: Купить еще
     sell: Продать
+
+    inv_tile:
+      count: Акций
+      total: Суммой
 
     count_stock: Куплено акций
     investment_cost: Суммарная стоимость
@@ -22,7 +26,6 @@ ru:
       count: Количество
       one: Одна акция
       total: Всего
-
 
   top_tweets:
     top_tweet: Лучший твит
