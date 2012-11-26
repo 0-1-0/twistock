@@ -40,6 +40,9 @@ gem 'omniauth-twitter'
 # twitter API
 gem 'twitter','2.2.0'
 
+# для графиков
+gem "highcharts-rails", "~> 2.3.0"
+
 # очередь для обработки тяжелых запросов
 gem 'sidekiq'
 # требуется для его веб-интерфейса

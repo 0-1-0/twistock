@@ -93,6 +93,8 @@
       = with_sign maybe_calculating(user, :monthly_price_change)
 
   .two.columns.grafic
-    img.grafic.right src="/assets/grafic.png"
+    = render "shared/price_graph", user: current_user, container: 'user_graph'
+
+    /img.grafic.right src="/assets/grafic.png"
 
 
