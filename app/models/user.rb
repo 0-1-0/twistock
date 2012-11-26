@@ -104,6 +104,10 @@ class User < ActiveRecord::Base
     token and secret
   end
 
+  def shares_of(user)
+    portfel.where{owner_id == user.id}.limit(1).map{|x| x.count}.first || 0
+  end
+
   def profile_image
     avatar.sub("_normal", "")
   end

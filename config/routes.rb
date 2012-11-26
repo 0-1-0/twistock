@@ -20,7 +20,10 @@ Twitterexchange::Application.routes.draw do
 
   resources :user, only: [:show, :update] do
     member do
-      post 'set_mail'
+      post  'set_mail'
+      get   'get_info'
+      post  'buy'
+      post  'sell'
     end
   end
 
