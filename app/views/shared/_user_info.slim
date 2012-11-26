@@ -61,27 +61,59 @@
         a.close-dialog href="#": i.icon-close
 
         .list-cont
-          ul.inline-list.sub-nav
-            li: a.active href="#" My investment
-            li: a href="#" My stock holders
+          ul.inline-list.sub-nav.tabs.pill
+            li#historyBtnInvestment: a.active href="#" 
+              =t('user.info.investment_portfolio')
+            li#historyBtnHolders: a href="#" 
+              =t('user.info.stock_holders')
 
         .hconainer.scroll
-          table.default
-            thead
-              tr
-                th Stock owner
-                th Date
-                th Count
-                th One stock
-                th Total
-            tbody
-              - 10.times do
-                tr
-                  td: a href="#" AG_Bard
-                  td 01.03.12
-                  td 17
-                  td 8038
-                  td 136 646
+          ul.tabs-content
+            li#historyInvestmentTab.active
+              table.default
+                thead
+                  tr
+                    th =t 'user.info.holder'
+                    th =t 'user.info.date'
+                    th =t 'user.info.count'
+                    th =t 'user.info.one'
+                    th =t 'user.info.total'
+                tbody
+                  - current_user.portfel.each do |bos|
+                    tr
+                      td
+                        =link_to bos.owner.nickname, bos.owner
+                      td 
+                        =l(bos.updated_at, :format=>:short).split('.')[0]
+                      td 
+                        =bos.count
+                      td
+                        =bos.owner.share_price
+                      td
+                        =bos.owner.share_price*bos.count
+
+            li#historyHoldersTab
+              table.default
+                thead
+                  tr
+                    th =t 'user.info.owner'
+                    th =t 'user.info.date'
+                    th =t 'user.info.count'
+                    th =t 'user.info.one'
+                    th =t 'user.info.total'
+                tbody
+                  - current_user.my_shares.each do |bos|
+                    tr
+                      td
+                        =link_to bos.holder.nickname, bos.holder
+                      td 
+                        =l(bos.updated_at, :format=>:short).split('.')[0]
+                      td 
+                        =bos.count
+                      td
+                        =current_user.share_price
+                      td
+                        =current_user.share_price*bos.count
     .price-cont
       = t 'user.today'
       = with_sign maybe_calculating(user, :daily_price_change)

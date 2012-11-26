@@ -24,13 +24,13 @@ module UserLogic
 
     def wipe_periodic_caches
       delta = PriceLog.get_user_log(self, first_and_last: true, for: 1.day)
-      self.daily_price_change   = delta[1][0] - delta[0][0]
+      self.daily_price_change   = (delta[1][0] - delta[0][0]) || 0
 
       delta = PriceLog.get_user_log(self, first_and_last: true, for: 1.week)
-      self.weekly_price_change  = delta[1][0] - delta[0][0]
+      self.weekly_price_change  = (delta[1][0] - delta[0][0]) || 0
 
       delta = PriceLog.get_user_log(self, first_and_last: true, for: 1.month)
-      self.monthly_price_change = delta[1][0] - delta[0][0]
+      self.monthly_price_change = (delta[1][0] - delta[0][0]) || 0
 
       save
       self

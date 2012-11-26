@@ -101,7 +101,8 @@ class UserUpdateWorker
       Event.create tag: 'error',
                    source: 'UserUpdateWorker',
                    content: msg
-      return nil
+                   
+      raise 'rate limit exceed for random user, trying to perform analys with other one'
     end
     tweets_count    = timeline.count || 0
     retweets_count  = timeline.inject(0){|a, b| a += b.retweet_count} || 0

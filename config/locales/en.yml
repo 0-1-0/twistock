@@ -35,6 +35,7 @@ en:
       count: Count
       one: One stock
       total: Total
+      date: Date
 
   top_tweets:
     top_tweet: Top tweet

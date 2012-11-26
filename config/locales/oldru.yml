@@ -11,7 +11,7 @@ ru:
   celebrities: 'Знаменитости'
   celebrities_tooltip: 'Знаменитости в Twitter. Стать их совладельцем очень просто. '
 
-  twitter_translation: 'Трансляция в твиттер'
+  twitter_translation: Постинг в Твиттер
   _on: 'Вкл'
   _off: 'Выкл'
 

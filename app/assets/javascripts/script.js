@@ -29,6 +29,19 @@ $(document).ready(function(){
         return false;
     });
 
+    //TODO: fix this shit and make normal tabs plugin work
+    $('#historyBtnInvestment').click(function(){
+        $('#historyHoldersTab').removeClass('active');
+        $('#historyInvestmentTab').addClass('active');        
+    });
+
+    $('#historyBtnHolders').click(function(){
+        $('#historyInvestmentTab').removeClass('active');
+        $('#historyHoldersTab').addClass('active');
+    });
+
+
+
     // Change dialog
     $('#header_change').on('click', function(){
         var network = $('.network');

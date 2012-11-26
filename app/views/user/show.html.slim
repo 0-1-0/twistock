@@ -54,7 +54,7 @@
         = t 'user.investment_cost'
         span
           | $#{@bos.owner.share_price * @bos.count}
-          = with_sign(@bos.count * @bos.owner.weekly_price_change)
+          = with_sign(@bos.count * (@bos.owner.weekly_price_change || 0))
 
     = link_to 'Twitter', @user.twitter_url, target: :blank
     - if @user.best_tweet

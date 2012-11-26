@@ -35,6 +35,8 @@ ru:
       count: Количество
       one: Одна акция
       total: Всего
+      date: Дата
+
 
   top_tweets:
     top_tweet: Лучший твит
