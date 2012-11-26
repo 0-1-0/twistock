@@ -1,102 +1,110 @@
 = render 'shared/buy_dialog'
 = render 'shared/flows_menu', flow: nil
-#user.row.bg
-  .row
-    .six.columns.user-info
-      .two.mobile-two.statw.columns
 
-        a.avatar href="#"
-          i
-          = image_tag @user.profile_image
+- if @user
+  #user.row.bg
+    .row
+      .six.columns.user-info
+        .two.mobile-two.statw.columns
 
-        span.name
-          | @#{@user.nickname} (#{@user.name})
+          a.avatar href="#"
+            i
+            = image_tag @user.profile_image
 
-        .user-money
-          | $#{@user.share_price}
-          = with_sign(@user.weekly_price_change)
+          span.name
+            | @#{@user.nickname} (#{@user.name})
+
+          .user-money
+            | $#{@user.share_price}
+            = with_sign(@user.weekly_price_change)
 
 
-      .two.mobile-two.columns.statw.pl20
-        .history-link
+        .two.mobile-two.columns.statw.pl20
+          .history-link
+            span
+
+          .price-cont
+            = t 'user.today'
+            = with_sign(@user.daily_price_change)
+          .price-cont
+            = t 'user.week'
+            = with_sign(@user.weekly_price_change)
+          .price-cont
+            = t 'user.month'
+            = with_sign(@user.monthly_price_change)
+
+        .two.columns.grafic
+          = render "shared/price_graph", user: @user, container: 'show_user_graph'
+          /img.grafic.right src="/assets/grafic.png"
+
+    .row
+      hr
+      .six.columns
+        ul.button-group.radius.even.two-up
+          - if @bos
+            li= link_to t('user.buy_more'),  '#', style: "width: 120px;", class: 'button secondary radius btn-buy btn-buy-more dialog-pin', 'data-id' => @user.id
+          - else
+            li= link_to t('user.buy'),  '#', style: "width: 120px;", class: 'button secondary radius btn-buy btn-buy-more dialog-pin', 'data-id' => @user.id
+          /li= link_to t('user.sell'), '#', class: 'secondary button radius'
+
+    .two.columns.user-tw
+      - if @bos
+        .tw-blk
+          = t 'user.count_stock'
+          span= @bos.count
+
+        .tw-blk
+          = t 'user.investment_cost'
           span
+            | $#{@bos.owner.share_price * @bos.count}
+            = with_sign(@bos.count * (@bos.owner.weekly_price_change || 0))
 
-        .price-cont
-          = t 'user.today'
-          = with_sign(@user.daily_price_change)
-        .price-cont
-          = t 'user.week'
-          = with_sign(@user.weekly_price_change)
-        .price-cont
-          = t 'user.month'
-          = with_sign(@user.monthly_price_change)
-
-      .two.columns.grafic
-        = render "shared/price_graph", user: @user, container: 'show_user_graph'
-        /img.grafic.right src="/assets/grafic.png"
-
-  .row
-    hr
-    .six.columns
-      ul.button-group.radius.even.two-up
-        - if @bos
-          li= link_to t('user.buy_more'),  '#', style: "width: 120px;", class: 'button secondary radius btn-buy btn-buy-more dialog-pin', 'data-id' => @user.id
-        - else
-          li= link_to t('user.buy'),  '#', style: "width: 120px;", class: 'button secondary radius btn-buy btn-buy-more dialog-pin', 'data-id' => @user.id
-        /li= link_to t('user.sell'), '#', class: 'secondary button radius'
-
-  .two.columns.user-tw
-    - if @bos
-      .tw-blk
-        = t 'user.count_stock'
-        span= @bos.count
-
-      .tw-blk
-        = t 'user.investment_cost'
+      = link_to 'Twitter', @user.twitter_url, target: :blank
+      - if @user.best_tweet
+        h6 #{t 'top_tweets.top_tweet'}:
+        p= @user.best_tweet.content
         span
-          | $#{@bos.owner.share_price * @bos.count}
-          = with_sign(@bos.count * (@bos.owner.weekly_price_change || 0))
+          i.icon-pr
+          | #{@user.best_tweet.retweets} RT
+        = link_to t('top_tweets.top_tweets'), top_tweets_path
 
-    = link_to 'Twitter', @user.twitter_url, target: :blank
-    - if @user.best_tweet
-      h6 #{t 'top_tweets.top_tweet'}:
-      p= @user.best_tweet.content
-      span
-        i.icon-pr
-        | #{@user.best_tweet.retweets} RT
-      = link_to t('top_tweets.top_tweets'), top_tweets_path
-
-  .two.columns.link-border
-    = t 'user.info.investment_portfolio'
-    table.default
-      thead
-        tr
-          th= t 'user.info.owner'
-          th= t 'user.info.count'
-          th= t 'user.info.one'
-          th= t 'user.info.total'
-      tbody
-        - @portfel.each do |bos|
+    .two.columns.link-border
+      = t 'user.info.investment_portfolio'
+      table.default
+        thead
           tr
-            td
-              = link_to bos.owner.nickname, bos.owner
-            td
-              = bos.count
-            td #{bos.owner.share_price}$
-            td #{bos.owner.share_price * bos.count}$
+            th= t 'user.info.owner'
+            th= t 'user.info.count'
+            th= t 'user.info.one'
+            th= t 'user.info.total'
+        tbody
+          - @portfel.each do |bos|
+            tr
+              td
+                = link_to bos.owner.nickname, bos.owner
+              td
+                = bos.count
+              td #{bos.owner.share_price}$
+              td #{bos.owner.share_price * bos.count}$
 
-  .two.columns
-    = t 'user.info.stock_holders'
-    table.default
-      thead
-        tr
-          th= t 'user.info.holder'
-          th= t 'user.info.count'
-          th= t 'user.info.total'
-      tbody
-        - @my_shares.each do |bos|
+    .two.columns
+      = t 'user.info.stock_holders'
+      table.default
+        thead
           tr
-            td
-              = link_to bos.holder.nickname, bos.holder
-            td= bos.count
-            td #{bos.count * @user.share_price}$
+            th= t 'user.info.holder'
+            th= t 'user.info.count'
+            th= t 'user.info.total'
+        tbody
+          - @my_shares.each do |bos|
+            tr
+              td
+                = link_to bos.holder.nickname, bos.holder
+              td= bos.count
+              td #{bos.count * @user.share_price}$
+- else
+  #user.row.bg
+    .row
+      .six.columns.user-info
+        .center
+          h1=t('user.not_found')

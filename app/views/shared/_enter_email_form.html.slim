@@ -1,17 +1,19 @@
 #modal-mail.reveal-modal
   h4.title
     =t 'main_page.enter_email.text'
-  p.text Some text with more details.
+  /p.text Some text with more details.
 
   =form_tag set_mail_user_path(current_user), :method=>'post', :remote => true, :id=>'set-email-form' do
     .row.mmailcont
-      .two.columns
+      .two.mobile-one.columns
         =label_tag :email, t('main_page.enter_email.label')
 
       .four.columns
         =text_field_tag :email, '', :id=>'m_mail'
 
     .center
+      br
+      br
       button.primary.button.radius type="submit" Ok
 
   a.close-reveal-modal: i.icon-close

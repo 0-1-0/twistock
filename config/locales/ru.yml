@@ -20,6 +20,8 @@ ru:
     buy_more: Купить еще
     sell: Продать
 
+    not_found: Пользователь не найден
+
     inv_tile:
       count: Акций
       total: Суммой

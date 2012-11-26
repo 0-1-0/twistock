@@ -19,5 +19,5 @@
           li= link_to t("main_page.flows.#{el}"), root_path(flow: el), class: active_when(flow == el)
 
     #search.two.columns
-      form
-        input.five.search.right type="text"
+      =form_tag search_user_index_path do
+        =text_field_tag 'nickname', nil, class: 'five search right'

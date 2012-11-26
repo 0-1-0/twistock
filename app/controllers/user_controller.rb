@@ -2,7 +2,7 @@ class UserController < ApplicationController
   respond_to :json, only: [:get_info]
 
   def show
-    @user = User.find_by_nickname(params[:id])
+    @user = User.find_or_create(params[:id])
     if @user
       @best_tweet = @user.best_tweet
       @portfel    = @user.portfel.includes(:owner)
@@ -57,6 +57,10 @@ class UserController < ApplicationController
     rescue
       @result = false
     end
+  end
+
+  def search
+    redirect_to user_path(params[:nickname])
   end
 
   # post

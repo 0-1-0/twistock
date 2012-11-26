@@ -16,6 +16,8 @@ en:
     week: week
     month: month
 
+    not_found: User not found
+
     buy: Buy
     buy_more: Buy more
     sell: Sell

@@ -25,6 +25,10 @@ Twitterexchange::Application.routes.draw do
       post  'buy'
       post  'sell'
     end
+
+    collection do
+      post  'search'
+    end
   end
 
   resources :exchange, only: [] do
