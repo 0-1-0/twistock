@@ -8,7 +8,7 @@
 //= require_tree ./extras
 
 //= require highcharts
-//= require highcharts/adapters/mootools
+// require highcharts/adapters/mootools
 
 //= require job
 //= require script
