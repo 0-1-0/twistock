@@ -89,6 +89,8 @@ ru:
       post_on_twitter: Трансляция в Твиттер
       mail: Моя почта
       sign_out: Выйти
+      enable: Вкл
+      disable: Выкл
 
     flows:
       top: Топ

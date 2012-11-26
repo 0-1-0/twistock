@@ -89,6 +89,8 @@ en:
       post_on_twitter: Post on Twitter
       mail: Mail
       sign_out: Sign out
+      enable: On
+      disable: Off
 
     flows:
       top: Top

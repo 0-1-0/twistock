@@ -14,27 +14,29 @@
 
           a.close-dialog href="#": i.icon-close
 
-          .title Social network
+          .title
+            =t('main_page.set_preferences.social_network')
 
           .row
-            .two.columns
+            .two.mobile-one.columns
               a.button.primary.button.radius.small href="#" twitter
-            .two.columns
+            .two.mobile-two.columns
               a.button.disabled.secondary.button.radius.small href="#" Add facebook
-            .two.columns
+            .two.mobile-one.columns
               a.button.disabled.secondary.button.radius.small href="#" Add Livejournal
 
           .row
-            .three.columns =t('main_page.set_preferences.post_on_twitter')
-            .two.columns
-              | On
-              = f.check_box :twitter_translation, :class => 'checkbox submittable'
-              | Off
+            .three.mobile-two.columns
+              =t('main_page.set_preferences.post_on_twitter')
+            .two.mobile-two.columns.text-right
+              =t('main_page.set_preferences.enable')
+              =f.check_box :twitter_translation, :class => 'checkbox submittable'
+              =t('main_page.set_preferences.disable')
 
           .row
-            .two.columns
+            .two.mobile-one.columns 
               =t('main_page.set_preferences.mail')
-            .four.columns
+            .four.mobile-three.columns
               =f.text_field :email, :class=>'submittable', :id=>'preferences-email'
 
           .row
