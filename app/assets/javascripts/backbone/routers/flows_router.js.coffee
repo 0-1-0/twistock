@@ -1,5 +1,7 @@
 class Twitterexchange.Routers.FlowsRouter extends Backbone.Router
   initialize: (options) ->
+    @collection = new Twitterexchange.Collections.UsersCollection()
+
     $('#flows_menu a:not(.curr)').click (e) ->
       $('#flows_menu a').removeClass('active')
       $(@).addClass('active')
@@ -14,26 +16,26 @@ class Twitterexchange.Routers.FlowsRouter extends Backbone.Router
     "celebreties": "celebreties"
   
   top: ->
-    @view = new Twitterexchange.Views.Flows.TopView()
-    $("#main").html(@view.render().el)
+    @view = new Twitterexchange.Views.Flows.Flow(collection: @collection)
+    $("#main").html(@view.render('top').el)
 
   investments: ->
-    @view = new Twitterexchange.Views.Flows.InvestmentsView()
-    $("#main").html(@view.render().el)
+    @view = new Twitterexchange.Views.Flows.Flow(collection: @collection)
+    $("#main").html(@view.render('investments').el)
 
   investors: ->
-    @view = new Twitterexchange.Views.Flows.InvestorsView()
-    $("#main").html(@view.render().el)
+    @view = new Twitterexchange.Views.Flows.Flow(collection: @collection)
+    $("#main").html(@view.render('investors').el)
 
   friends: ->
-    @view = new Twitterexchange.Views.Flows.FriendsView()
-    $("#main").html(@view.render().el)
+    @view = new Twitterexchange.Views.Flows.Flow(collection: @collection)
+    $("#main").html(@view.render('friends').el)
 
   expensive: ->
-    @view = new Twitterexchange.Views.Flows.ExpensiveView()
-    $("#main").html(@view.render().el)
+    @view = new Twitterexchange.Views.Flows.Flow(collection: @collection)
+    $("#main").html(@view.render('expensive').el)
 
   celebreties: ->
-    @view = new Twitterexchange.Views.Flows.CelebretiesView()
-    $("#main").html(@view.render().el)
+    @view = new Twitterexchange.Views.Flows.Flow(collection: @collection)
+    $("#main").html(@view.render('celebreties').el)
 

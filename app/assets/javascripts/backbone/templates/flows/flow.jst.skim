@@ -1,0 +1,4 @@
+h1 hello!
+ul
+  - for user in @users.models
+    li= user.get('name')

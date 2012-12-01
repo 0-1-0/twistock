@@ -1,4 +1,8 @@
 Twitterexchange::Application.routes.draw do
+  namespace :api do
+    resources :users, only: [:index, :show, :update]
+  end
+
   resources :blog_posts, :path=>'blog' do
     member do
       post 'add_comment'
