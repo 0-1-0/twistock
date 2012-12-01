@@ -1,0 +1,34 @@
+.row.collapse.user-info
+  .two.mobile-two.columns.statw
+
+    a.avatar href=@user.url
+      i
+      img src=@user.get('profile_image')
+
+    span.name
+      | @#{@user.get('nickname')}
+      a#header_change href="#": i.icon-change
+
+    .user-money
+      | $#{maybe_calculating(@user, 'share_price')}
+      == with_sign maybe_calculating(@user, 'weekly_price_change')
+
+
+  .two.mobile-two.columns.statw.pl20
+    .history-link
+      == "#{I18n.t 'user.money'}: $#{maybe_calculating(@user, 'money')}"
+      a#header_history href="#" = I18n.t 'user.history'
+      a href="/store" = I18n.t 'main_page.buy_real_goods'
+
+    .price-cont
+      = I18n.t 'user.today'
+      == with_sign maybe_calculating(@user, 'daily_price_change')
+    .price-cont
+      = I18n.t('user.week')
+      == with_sign maybe_calculating(@user, 'weekly_price_change')
+    .price-cont
+      = I18n.t('user.month')
+      == with_sign maybe_calculating(@user, 'monthly_price_change')
+
+  .two.columns.grafic
+    /img class="grafic right" src="/images/grafic.png"

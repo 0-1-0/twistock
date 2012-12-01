@@ -61,12 +61,12 @@ gem 'wtf_lang'
 
 # Ебанем по неуклюжему JS!
 gem 'rails-backbone'
+gem 'masonry-rails'
 
 # полезные для разработки утилиты
 group :development do
   gem 'looksee'
   gem 'rails_best_practices'
-  #gem 'bullet'
   gem 'quiet_assets'
   gem 'thin'
 end

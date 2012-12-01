@@ -11,6 +11,10 @@
 // require backbone_datalink
 //= require backbone/twitterexchange
 
+// require masonry/jquery.masonry
+
+//= require helpers
+
 //= require_tree ./extras
 
 //= require highcharts
