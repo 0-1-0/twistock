@@ -45,14 +45,14 @@ html lang="en"
             li=link_to t('main_page.top_menu.store'), '/store', class: active_when(controller_name == 'store')
             li=link_to t('main_page.top_menu.top_tweets'), '/top_tweets', class: active_when(controller_name == 'top_tweets')
             li=link_to t('main_page.top_menu.blog'), '/blog', class: active_when(controller_name == 'blog_posts')
-            - if signed_in?
+            /- if signed_in?
               li= link_to t('main_page.sign_out'), sign_out_path
 
           .left
             br
             br
             br
-            a href="https://twitter.com/share" class="twitter-share-button" data-url="http://twistock.com" data-via="twistock" data-size="large"
+            a href="https://twitter.com/share" class="twitter-share-button" data-url="http://twistock.com" data-via="twistock" data-size="medium"
               | Tweet
           javascript:
             !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");

@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.9'
+gem 'rails', '3.2.8'
 gem 'pg'
 
 # Gems used only for assets and not required
@@ -51,11 +51,20 @@ gem 'sinatra'
 # более наглядный код запросов
 gem 'squeel'
 
+# парсинг accept-language из запросов
+gem 'http_accept_language'
+
+# Автодетекция языка
+gem 'wtf_lang'
+
+# Ебанем по неуклюжему JS!
+gem 'rails-backbone'
+
 # полезные для разработки утилиты
 group :development do
   gem 'looksee'
   gem 'rails_best_practices'
-  gem 'bullet'
+  #gem 'bullet'
   gem 'quiet_assets'
   gem 'thin'
 end
@@ -95,9 +104,3 @@ gem 'unicorn'
 
 # POSSIBLE DEPRECATION BLOCK
 # нужно уточнить необходимость этих gem'ов
-
-# парсинг accept-language из запросов
-gem 'http_accept_language'
-
-# Автодетекция языка
-gem 'wtf_lang'

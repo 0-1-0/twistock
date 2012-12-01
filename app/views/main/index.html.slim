@@ -1,32 +1,8 @@
+coffee:
+  $(document).ready ->
+    new Twitterexchange.Routers.FlowsRouter()
+    Backbone.history.start()
+
 = render 'shared/flows_menu', flow: @flow
-= render 'shared/buy_dialog'
 .row
-  - if @collection
-    #main.row
-      ul.block-grid.six-up.mobile-four-up.min-two-up.center
-        - if @flow == 'my_investments'
-          li
-            .bg.blk.total.long
-              | Total cost
-              br
-              | of my investment
-
-              .tprice
-                | $#{@collection.map(&:total_cost).inject(&:+)}
-                = with_sign(@collection.map(&:owner).map(&:daily_price_change).inject(&:+))
-
-              .period
-                | Today
-                = with_sign(@collection.map(&:owner).map(&:daily_price_change).inject(&:+))
-
-              .period
-                | Week
-                = with_sign(@collection.map(&:owner).map(&:monthly_price_change).inject(&:+))
-          - @collection.each do |bos|
-            = render 'investment_tile', bos: bos
-        - else
-          - @collection.each do |user|
-            = render 'tile', user: user
-  - else
-    / TODO: нормальная плашка
-    = t 'status.share_price.calculating'
+  #main.row
