@@ -247,8 +247,15 @@ GEM
       rack (~> 1.3, >= 1.3.6)
       rack-protection (~> 1.2)
       tilt (~> 1.3, >= 1.3.3)
-    slim (1.3.4)
-      temple (~> 0.5.5)
+    skim (0.8.6)
+      coffee-script
+      coffee-script-source (>= 1.2.0)
+      multi_json
+      slim (<= 1.2.2)
+      sprockets
+      temple (<= 0.4.1)
+    slim (1.2.2)
+      temple (~> 0.4.0)
       tilt (~> 1.3.3)
     slim-rails (1.0.3)
       actionpack (~> 3.0)
@@ -265,7 +272,7 @@ GEM
       activerecord (~> 3.0)
       activesupport (~> 3.0)
       polyamorous (~> 0.5.0)
-    temple (0.5.5)
+    temple (0.4.1)
     terminal-notifier-guard (1.5.3)
     therubyracer (0.10.2)
       libv8 (~> 3.3.10)
@@ -335,6 +342,8 @@ DEPENDENCIES
   sidekiq
   simple_form
   sinatra
+  skim
+  slim (~> 1.2.2)
   slim-rails
   spork (~> 1.0rc)
   squeel

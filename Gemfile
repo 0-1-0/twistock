@@ -12,6 +12,7 @@ group :assets do
   gem 'compass-rails'
   gem 'zurb-foundation'
   gem 'coffee-rails', '~> 3.2.2'
+  gem 'skim'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', platform: :ruby
@@ -23,6 +24,7 @@ gem 'jquery-rails'
 
 # Оказывается SLIM быстрее HAML
 gem 'slim-rails'
+gem 'slim', '~> 1.2.2'
 
 # simple_form избавляет от головной боли
 gem 'simple_form'
