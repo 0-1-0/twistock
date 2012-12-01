@@ -93,6 +93,11 @@ ru:
       sign_out: Выйти
       enable: Вкл
       disable: Выкл
+      money: Деньги
+      its_not_real:    (не настоящие)
+      language: Язык
+      ru: Рус
+      en: Англ
 
     flows:
       top: Топ

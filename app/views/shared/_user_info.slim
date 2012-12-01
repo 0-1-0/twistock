@@ -9,39 +9,58 @@
       | @#{user.nickname}
       a#header_change href="#": i.icon-change
       / --- Dialog "Social network"
-      .network.arr-top.bg.dialog
-        = form_for current_user, :remote => true, :id=>'set-preferences-form' do |f|
+      .network.bg.dialog
+        a.close-dialog href="#": i.icon-close
 
-          a.close-dialog href="#": i.icon-close
+        .title
+          =t('main_page.set_preferences.social_network')
 
-          .title
-            =t('main_page.set_preferences.social_network')
+        .row
+          .two.mobile-one.columns
+            a.button.primary.button.radius.small href="#" Twitter
+          .two.mobile-two.columns
+            a.button.disabled.secondary.button.radius.small href="#" Add Facebook
+          .two.mobile-one.columns
+            a.button.disabled.secondary.button.radius.small href="#" Add Linkedin        
+        .row
+          .three.mobile-two.columns
+            =t('main_page.set_preferences.post_on_twitter')
+          .three.mobile-two.columns.text-right
+            =t('main_page.set_preferences.enable')
+            input.checkbox.submittable type='checkbox'
+            =t('main_page.set_preferences.disable')
 
-          .row
-            .two.mobile-one.columns
-              a.button.primary.button.radius.small href="#" twitter
-            .two.mobile-two.columns
-              a.button.disabled.secondary.button.radius.small href="#" Add facebook
-            .two.mobile-one.columns
-              a.button.disabled.secondary.button.radius.small href="#" Add Livejournal
+        / .row
+        /   .three.mobile-two.columns
+        /     =t('main_page.set_preferences.language')
+        /   .three.mobile-two.columns.text-right
+        /     =t('main_page.set_preferences.ru')
+        /     input.checkbox.submittable type='checkbox'
+        /     =t('main_page.set_preferences.en')
 
-          .row
-            .three.mobile-two.columns
-              =t('main_page.set_preferences.post_on_twitter')
-            .two.mobile-two.columns.text-right
-              =t('main_page.set_preferences.enable')
-              =f.check_box :twitter_translation, :class => 'checkbox submittable'
-              =t('main_page.set_preferences.disable')
+        .row
+          .two.mobile-one.columns 
+            =t('main_page.set_preferences.mail')
+          .four.mobile-three.columns
+            input.submittable#preferences-email type='text'
+  
 
-          .row
-            .two.mobile-one.columns 
-              =t('main_page.set_preferences.mail')
-            .four.mobile-three.columns
-              =f.text_field :email, :class=>'submittable', :id=>'preferences-email'
+        .row
+          .three.mobile-two.columns 
+            =t('main_page.set_preferences.money')
+            span 
+              |  
+              |  
+              =t('main_page.set_preferences.its_not_real')
+          .three.mobile-two.columns: ul.button-group.radius.even.four-up
+            li: a.button.secondary.radius href="#" $
+            li: a.button.secondary.disabled.radius href="#" €
+            li: a.button.secondary.disabled.radius href="#" £
+            li: a.button.secondary.disabled.radius href="#" Ɏ
 
-          .row
-            .six.columns
-              = link_to t('main_page.sign_out'), sign_out_path, :class=>'button secondary radius'
+        .row.preferences-row
+          .six.columns
+            = link_to t('main_page.sign_out'), sign_out_path, :class=>'button secondary radius'
 
 
             
