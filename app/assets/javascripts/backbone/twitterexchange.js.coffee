@@ -11,8 +11,6 @@ window.Twitterexchange =
   Views: {}
 
   init: ->
-    user = new Twitterexchange.Models.User({id: 1})
-    user.fetch()
     true
 
 $(document).ready ->
