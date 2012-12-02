@@ -33,12 +33,16 @@ html lang="en"
       I18n.defaultLocale = "#{ I18n.default_locale }";
       I18n.locale = "#{ I18n.locale }";
 
-    javascript:
-      user_data             = #{current_user.to_json.html_safe}
-      user_data['url']      = '#{user_path(current_user).html_safe}'
-      user_data['profile_image'] = '#{current_user.profile_image.html_safe}'
-      user_data['its_you']  = true
-      window.current_user   = new Twitterexchange.Models.User(user_data)
+    - if signed_in?
+      javascript:
+        user_data             = #{current_user.to_json.html_safe}
+        user_data['url']      = '#{user_path(current_user).html_safe}'
+        user_data['profile_image'] = '#{current_user.profile_image.html_safe}'
+        user_data['its_you']  = true
+        window.current_user   = new Twitterexchange.Models.User(user_data)
+    - else
+      javascript:
+        window.current_user   = null
 
   body
     header#header
