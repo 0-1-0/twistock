@@ -1,7 +1,7 @@
 .row.collapse.user-info
   .two.mobile-two.columns.statw
 
-    a.avatar href=@user.url
+    a.avatar href=@user.get('url')
       i
       img src=@user.get('profile_image')
 

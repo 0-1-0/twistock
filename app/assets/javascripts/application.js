@@ -5,6 +5,8 @@
 //= require jquery-ui
 //= require foundation
 
+//= require skim
+
 //= require underscore
 //= require backbone
 // require backbone_rails_sync

@@ -1,1 +1,22 @@
-p inv_tile
+.bg.blk.long.dialog-pin
+  a.avatar.small href=@user.get('url')
+    i
+    img src=@user.get('avatar')
+
+  .price
+    | $#{maybe_calculating(@user, 'share_price')}
+    == with_sign maybe_calculating(@user, 'weekly_price_change')
+
+  a.name href=@user.get('url') @#{@user.get('nickname')} (#{@user.get('name')})
+
+  dl
+    dt= I18n.t('user.inv_tile.count')
+    dd= @user.get('purchased_shares')
+
+    dt= I18n.t('user.inv_tile.total')
+    dd
+      | $#{@user.get('share_price') * @user.get('purchased_shares')}
+      == with_sign(@user.get('weekly_price_change') * @user.get('purchased_shares'))
+
+    .btn.center
+      a.secondary.button.radius.small.btn-buy.btn-buy-more href="#"= I18n.t('user.buy_more')

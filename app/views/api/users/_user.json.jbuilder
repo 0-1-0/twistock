@@ -6,5 +6,12 @@ json.(user,
     :profile_image,
     :share_price,
     :base_price,
-    :weekly_price_change)
+    :daily_price_change,
+    :weekly_price_change,
+    :monthly_price_change)
+
+if signed_in?
+  json.purchased_shares current_user.shares_of(user)
+end
+
 json.url user_path(user)

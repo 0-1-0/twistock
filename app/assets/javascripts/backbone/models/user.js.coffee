@@ -5,6 +5,7 @@ class Twitterexchange.Models.User extends Backbone.Model
     name: null
     nickname: null
     its_you: null
+    purchased_shares: null
 
 class Twitterexchange.Collections.UsersCollection extends Backbone.Collection
   model: Twitterexchange.Models.User

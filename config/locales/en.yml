@@ -26,6 +26,12 @@ en:
       count: Count
       total: Total
 
+    inv_stats:
+      total_cost: Total cost
+      today: Today
+      week: Week
+      month: Month
+
     count_stock: Count stock
     investment_cost: Cost my investment
 

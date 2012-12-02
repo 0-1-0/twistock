@@ -26,6 +26,12 @@ ru:
       count: Акций
       total: Суммой
 
+    inv_stats:
+      total_cost: Итого
+      today: Сегодня
+      week: Неделя
+      month: Месяц
+
     count_stock: Куплено акций
     investment_cost: Суммарная стоимость
 

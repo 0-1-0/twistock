@@ -10,10 +10,13 @@
   a.name href=@user.get('url') @#{@user.get('nickname')} (#{@user.get('name')})
 
   .btn.center
-    /- if current_user
-      - if current_user.shares_of(user) > 0
-        = link_to t('user.buy_more'), '#', class: 'secondary button radius small btn-buy btn-buy-more', 'data-id' => user.id
+    - if current_user
+      - if @user.get('purchased_shares') > 0
+        a.secondary.button.radius.small.btn-buy.btn-buy-more href='#' data-id=@user.get('id')
+          = I18n.t 'user.buy_more'
       - else
-        = link_to t('user.buy'), '#', class: 'secondary button radius small btn-buy', 'data-id' => user.id
-
-    a.secondary.button.radius.small.disabled href='#'= I18n.t('user.buy')
+        a.secondary.button.radius.small.btn-buy href="#" data-id=@user.get('id')
+          = I18n.t 'user.buy'
+    - else
+      a.secondary.button.radius.small.disabled href='#'
+        = I18n.t('user.buy')

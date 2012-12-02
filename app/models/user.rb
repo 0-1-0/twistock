@@ -1,8 +1,11 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
   # RELATIONS
-  has_many :portfel,    class_name: BlockOfShares, foreign_key: :holder_id
-  has_many :my_shares,  class_name: BlockOfShares, foreign_key: :owner_id
+  has_many :portfel,        class_name: BlockOfShares, foreign_key: :holder_id
+  has_many :my_investments, through: :portfel, source: :owner
+
+  has_many :my_shares,    class_name: BlockOfShares,  foreign_key: :owner_id
+  has_many :my_holders,   through: :my_shares,        source: :holder
 
   has_many :history,    class_name: Transaction, foreign_key: :owner_id
   has_many :transactions
@@ -105,7 +108,8 @@ class User < ActiveRecord::Base
   end
 
   def shares_of(user)
-    portfel.where{owner_id == user.id}.limit(1).map{|x| x.count}.first.to_i || 0
+    #portfel.where{owner_id == user.id}.limit(1).map{|x| x.count}.first.to_i || 0
+    portfel.select{|x| x.owner_id == user.id}.map{|x| x.count}.first.to_i
   end
 
   def profile_image

@@ -2,7 +2,7 @@ Twitterexchange.Views.Flows ||= {}
 
 class Twitterexchange.Views.Flows.Tile extends Backbone.View
   std_template: JST["backbone/templates/flows/std_tile"]
-  inv_tepmlate: JST["backbone/templates/flows/inv_tile"]
+  inv_template: JST["backbone/templates/flows/inv_tile"]
 
   tagName: 'li'
 

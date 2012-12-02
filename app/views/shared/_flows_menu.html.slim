@@ -2,21 +2,21 @@
   .row
     .four.columns
       ul#flows_menu.inline-list.sub-nav
-        li= link_to t("main_page.flows.top"), root_path + '#top', class: active_when(flow == 'top')
+        li= link_to t("main_page.flows.top"), root_path + '#top', id: 'flow_top_link'
         - if signed_in?
           li= link_to t("main_page.flows.my_investments") + " (#{current_user.portfel.count})", \
-            root_path + '#investments', class: active_when(flow == 'my_investments')
+            root_path + '#investments', id: 'flow_investments_link'
           li= link_to t("main_page.flows.my_holders") + " (#{current_user.my_shares.count})", \
-            root_path + '#investors', class: active_when(flow == 'my_holders')
+            root_path + '#investors', id: 'flow_investors_link'
           li= link_to t("main_page.flows.friends") + " (#{current_user.my_friends.count})", \
-            root_path + '#friends', class: active_when(flow == 'friends')
+            root_path + '#friends', id: 'flow_friends_link'
         - else
           li= link_to t("main_page.flows.my_investments"), '#', class: 'curr'
           li= link_to t("main_page.flows.my_holders"), '#',     class: 'curr'
           li= link_to t("main_page.flows.friends"), '#',        class: 'curr'
 
         - %w{expensive celebreties}.each do |el|
-          li= link_to t("main_page.flows.#{el}"), root_path + "##{el}", class: active_when(flow == el)
+          li= link_to t("main_page.flows.#{el}"), root_path + "##{el}", id: "flow_#{el}_link"
 
     #search.two.columns
       =form_tag search_user_index_path do
