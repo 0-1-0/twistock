@@ -33,6 +33,17 @@ html lang="en"
       I18n.defaultLocale = "#{ I18n.default_locale }";
       I18n.locale = "#{ I18n.locale }";
 
+    - if signed_in?
+      javascript:
+        user_data             = #{current_user.to_json.html_safe}
+        user_data['url']      = '#{user_path(current_user).html_safe}'
+        user_data['profile_image'] = '#{current_user.profile_image.html_safe}'
+        user_data['its_you']  = true
+        window.current_user   = new Twitterexchange.Models.User(user_data)
+    - else
+      javascript:
+        window.current_user   = null
+
   body
     header#header
       .row.collapse
@@ -45,8 +56,6 @@ html lang="en"
             li=link_to t('main_page.top_menu.store'), '/store', class: active_when(controller_name == 'store')
             li=link_to t('main_page.top_menu.top_tweets'), '/top_tweets', class: active_when(controller_name == 'top_tweets')
             li=link_to t('main_page.top_menu.blog'), '/blog', class: active_when(controller_name == 'blog_posts')
-            /- if signed_in?
-              li= link_to t('main_page.sign_out'), sign_out_path
 
           .left
             br
@@ -67,7 +76,11 @@ html lang="en"
           = render :partial=>'shared/enter_email_form'
 
       - if signed_in?
-        =render 'shared/user_info', user: current_user
+        #user_panel
+        coffee:
+          $(document).ready ->
+            window.user_panel = new Twitterexchange.Views.Common.UserPanel()
+            $('#user_panel').html(user_panel.render().el)
       - else
         .row.collapse.header-text
           .six.columns

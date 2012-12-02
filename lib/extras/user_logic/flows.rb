@@ -72,13 +72,13 @@ module UserLogic
     end
 
     module Local
-      def my_investments
-        portfel.includes(:owner).map {|x| x.owner}.uniq
-      end
+      #def my_investments
+      #  portfel.includes(:owner).map {|x| x.owner}.uniq
+      #end
 
-      def my_holders
-        my_shares.includes(:holder).map {|x| x.holder}.uniq
-      end
+      #def my_holders
+      #  my_shares.includes(:holder).map {|x| x.holder}.uniq
+      #end
 
       def friend_ids
         Rails.cache.fetch "user_#{id}_friend_ids", expires_in: 10.minutes do

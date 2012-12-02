@@ -17,7 +17,7 @@ class Api::UsersController < ApplicationController
                     when 'expensive'      then User.most_expensive
                     when 'celebreties'    then User.celebreties
                     else User.top
-                  end
+                  end.includes(:portfel)
   end
 
   def show

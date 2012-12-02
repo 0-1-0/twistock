@@ -11,6 +11,7 @@ window.Twitterexchange =
   Views: {}
 
   init: ->
+    # load current_user
     true
 
 $(document).ready ->

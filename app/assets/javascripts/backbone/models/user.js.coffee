@@ -1,11 +1,11 @@
 class Twitterexchange.Models.User extends Backbone.Model
+  urlRoot: '/api/users'
+
   defaults:
     name: null
     nickname: null
-    money: null
-    share_price: null
-    base_price:  null
-    activated:   null
+    its_you: null
+    purchased_shares: null
 
 class Twitterexchange.Collections.UsersCollection extends Backbone.Collection
   model: Twitterexchange.Models.User
