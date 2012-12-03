@@ -1,0 +1,19 @@
+.buy.arr-bottom.bg.dialog.center
+  /style="color: black;"
+  a.close-dialog href="#": i.icon-close
+
+  .row.buy-stock
+    .six.columns
+      span.btn-checkbox
+        a.btb.active href="#"= I18n.t 'buy_dialog.text.buy'
+        input.checkbox type="checkbox"
+        a.bts href="#"= I18n.t 'buy_dialog.text.sell'
+      =" #{I18n.t 'buy_dialog.text.stock'} "
+      a.user_link
+
+  .row
+    .six.columns
+      .slide
+        #slider-price
+      .buy-price
+      a.button.primary.radius.action href="#"= I18n.t 'buy_dialog.buy'

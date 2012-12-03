@@ -1,0 +1,131 @@
+Twitterexchange.Views.Common ||= {}
+
+class Twitterexchange.Views.Common.TradeDialog extends Backbone.View
+  template: JST["backbone/templates/common/trade_dialog"]
+
+  events:
+    'click .close-dialog':        'destroy'
+    'change .btn-checkbox input': 'switchMode'
+
+  initialize: ->
+    @parent_btn = @.options.parent_btn
+
+  render: ->
+    $(@el).html(@template())
+    @init_buy_slider()
+    return this
+
+  show: ->
+    @$('.buy.dialog').fadeIn()
+    $(@el).closest('.dialog-pin').addClass('active')
+
+    @$('.checkbox').checkbox({cls:'checkbox'});
+
+    @parent_btn.removeClass("secondary").addClass('alert buy-cancel')
+    @parent_btn.data 'prev_text', @parent_btn.text()
+    @parent_btn.text I18n.t 'buy_dialog.cancel'
+
+    return this
+
+  destroy: (e) ->
+    if typeof e != 'undefined'
+      e.preventDefault()
+
+    @parent_btn.addClass("secondary").removeClass('alert buy-cancel')
+    @parent_btn.text @parent_btn.data('prev_text')
+
+    $(@el).closest('.dialog-pin').removeClass('active')
+    @$('.buy.dialog').hide()
+    $(@el).html ''
+
+    return this
+
+
+  switchMode: (e) ->
+    x = $('.btn-checkbox input')
+    block = x.parent()
+    btn = x.closest(".dialog").find(".button")
+    block.find("a").toggleClass "active"
+    if x.is(":checked")
+      btn.removeClass("primary").addClass("secondary").text(I18n.t("buy_dialog.sell"))
+      @init_sell_slider()
+    else
+      btn.removeClass("secondary").addClass("primary").text(I18n.t("buy_dialog.buy"))
+      @init_buy_slider()
+    false
+
+  #
+  init_buy_logic: ->
+    link = @$(".buy.dialog .action")
+    link.unbind()
+
+    link.click (e) =>
+      e.preventDefault()
+      count = $("#slider-price").slider('value')
+      user_id = @model.get('id')
+      $.post "/user/#{user_id}/buy", { count: count }, ->
+        window.location.reload()
+
+  #
+  init_buy_slider: ->
+    @$("#slider-price").unbind('slide')
+    @$("#snum").remove()
+
+    slide = @$("#slider-price")
+
+    base_price      = @model.get('base_price')
+    shares_in_stock = @model.get('shares_in_stock')
+    money           = current_user.get('money')
+
+    max_count       = StockMath.max_shares_to_buy(money, base_price, shares_in_stock)
+
+    slide.slider
+      value:  0
+      min:    0
+      max:    max_count
+      slide: (event, ui) ->
+        count           = parseInt(ui.value)
+        $("#snum").html count
+        $(".buy.dialog .buy-price").html "$#{ StockMath.buy_cost(count, base_price, shares_in_stock) }"
+
+    @$(".buy.dialog .buy-price").html "$#{ StockMath.buy_cost(0, base_price, shares_in_stock) }"
+    slide.find(".ui-slider-handle").append "<span id=\"snum\" class=\"snum\">" + slide.slider("value") + "</span>"
+
+    @init_buy_logic()
+
+  #
+  init_sell_logic: ->
+    link = $(".buy.dialog .action")
+    link.unbind()
+
+    link.click (e) =>
+      e.preventDefault()
+      count = $("#slider-price").slider('value')
+      user_id = @model.get('id')
+      $.post "/user/#{user_id}/sell", { count: count }, ->
+        window.location.reload()
+
+  #
+  init_sell_slider: ->
+    @$("#slider-price").unbind('slide')
+    @$("#snum").remove()
+
+    slide = @$("#slider-price")
+
+    base_price      = @model.get('base_price')
+    shares_in_stock = @model.get('shares_in_stock')
+    holded          = @model.get('purchased_shares')
+
+    slide.slider
+      value:  0
+      min:    0
+      max:    holded
+      slide: (event, ui) ->
+        count           = parseInt(ui.value)
+        $("#snum").html count
+        $(".buy.dialog .buy-price").html "$#{ StockMath.sell_cost(count, base_price, shares_in_stock) }"
+
+    @$(".buy.dialog .buy-price").html "$#{ StockMath.sell_cost(0, base_price, shares_in_stock) }"
+    slide.find(".ui-slider-handle").append "<span id=\"snum\" class=\"snum\">" + slide.slider("value") + "</span>"
+
+    @init_sell_logic()

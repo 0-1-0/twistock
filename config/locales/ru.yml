@@ -2,8 +2,8 @@ ru:
   buy_dialog:
     text:
       buy: Купить
-      sell: продать
-      stok: акции
+      sell: Продать
+      stock: акции
     buy: Купить
     sell: Продать
     cancel: Отмена

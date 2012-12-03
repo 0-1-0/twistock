@@ -6,6 +6,7 @@ json.(user,
     :profile_image,
     :share_price,
     :base_price,
+    :shares_in_stock,
     :daily_price_change,
     :weekly_price_change,
     :monthly_price_change)
