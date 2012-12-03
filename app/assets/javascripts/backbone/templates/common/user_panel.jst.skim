@@ -28,9 +28,9 @@
 
         .list-cont
           ul.inline-list.sub-nav.tabs.pill
-            li#historyBtnInvestment: a.active href="#" 
+            li#historyBtnInvestment: a.active href="javascript:void()" 
               =I18n.t('user.info.investment_portfolio')
-            li#historyBtnHolders: a href="#" 
+            li#historyBtnHolders: a href="javascript:void()" 
               =I18n.t('user.info.stock_holders')
 
         .hconainer.scroll
