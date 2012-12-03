@@ -4,9 +4,17 @@ class Twitterexchange.Views.Flows.Flow extends Backbone.View
   template: JST["backbone/templates/flows/flow"]
 
   initialize: ->
-    @flow_type = @.options.flow_type
+    @collection   = new Twitterexchange.Collections.UsersCollection()
+    @flow_type    = @.options.flow_type
+
+    if @flow_type == "investments"
+      @collection.on('change', @render, this)
+      @collection.on('reset', @updateFlowMenuCounters, this)
+    if @flow_type == "investors"
+      @collection.on('reset', @updateFlowMenuCounters, this)
 
   render: ->
+    window.flow_users = @collection
     if @flow_type == "investments"
       stats =
         total_cost:     0
@@ -36,3 +44,9 @@ class Twitterexchange.Views.Flows.Flow extends Backbone.View
 
     view = new Twitterexchange.Views.Flows.Tile(model: user, type: type)
     @$('#tiles').append(view.render().el)
+
+  updateFlowMenuCounters: ->
+    if @flow_type == 'investments'
+      $('span#investments_count').text @collection.length
+    if @flow_type == 'investors'
+      $('span#investors_count').text @collection.length

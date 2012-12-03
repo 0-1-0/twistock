@@ -4,10 +4,15 @@
       ul#flows_menu.inline-list.sub-nav
         li= link_to t("main_page.flows.top"), root_path + '#top', id: 'flow_top_link'
         - if signed_in?
-          li= link_to t("main_page.flows.my_investments") + " (#{current_user.portfel.count})", \
-            root_path + '#investments', id: 'flow_investments_link'
-          li= link_to t("main_page.flows.my_holders") + " (#{current_user.my_shares.count})", \
-            root_path + '#investors', id: 'flow_investors_link'
+          li= link_to root_path + '#investments', id: 'flow_investments_link' do
+            = t("main_page.flows.my_investments") + " ("
+            span#investments_count
+              = current_user.portfel.count
+            = ")"
+          li= link_to root_path + '#investors', id: 'flow_investors_link' do
+            = t("main_page.flows.my_holders") + " ("
+            span#investors_count= current_user.my_shares.count
+            =")"
           li= link_to t("main_page.flows.friends") + " (#{current_user.my_friends.count})", \
             root_path + '#friends', id: 'flow_friends_link'
         - else

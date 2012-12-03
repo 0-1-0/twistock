@@ -21,5 +21,9 @@
       | $#{@user.get('share_price') * @user.get('purchased_shares')}
       == with_sign(@user.get('weekly_price_change') * @user.get('purchased_shares'))
 
-    .btn.center
-      a.secondary.button.radius.small.btn-buy.btn-buy-more href="#"= I18n.t('user.buy_more')
+    - if current_user.get('id') != @user.get('id')
+      .btn.center
+        a.secondary.button.radius.small.btn-buy.btn-buy-more href="#"= I18n.t('user.buy_more')
+    - else
+      a.secondary.button.radius.small.disabled href='#'
+        = I18n.t('user.buy')
