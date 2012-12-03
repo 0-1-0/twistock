@@ -91,7 +91,9 @@ ru:
 
     enter_email:
       text: 'Введи свою почту и получи $100 000'
-      label: 'Email:'
+      label: 'Ваш email:'
+      additional_text: 'Текст с пояснением'
+
 
     set_preferences:
       social_network: Мои профили

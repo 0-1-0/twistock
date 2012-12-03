@@ -7,7 +7,46 @@
 
     span.name
       | @#{@user.get('nickname')}
-      a#header_change href="#": i.icon-change
+      a#settings_btn href="javascript:void()": i.icon-change
+
+      / --- Dialog "Social network"
+      .network.arr-top.bg.dialog
+        a.close-dialog#close-settings href="javascript:void()": i.icon-close
+
+        .title Social network
+
+        .row
+          .two.mobile-one.columns
+            a.button.primary.button.radius.small href="#" twitter
+          .two.mobile-two.columns
+            a.button.disabled.secondary.button.radius.small href="#" Add facebook
+          .two.mobile-one.columns
+            a.button.disabled.secondary.button.radius.small href="#" Add Livejournal
+
+        .row
+          .three.mobile-two.columns Post on twitter
+          .two.mobile-two.columns.text-right
+            | On
+            input.checkbox type="checkbox"
+            | Off
+
+        .row
+          .two.mobile-one.columns Mail
+          .four.mobile-three.columns
+            input type="text"
+
+        .row
+          .three.mobile-two.columns 
+            | Money 
+            span (it’s not real)
+          .three.mobile-two.columns: ul.button-group.radius.even.four-up
+            li: a.button.secondary.radius href="#" $
+            li: a.button.secondary.radius href="#" €
+            li: a.button.secondary.radius href="#" £
+            li: a.button.secondary.radius href="#" Ɏ
+
+        .row
+          .six.columns: a.button.secondary.radius href="#" Sign out
 
     .user-money
       | $#{maybe_calculating(@user, 'share_price')}

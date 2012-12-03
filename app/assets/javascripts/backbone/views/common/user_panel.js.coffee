@@ -23,11 +23,13 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     'click .close-dialog': 'closeHistory'
     'click #historyBtnInvestment': 'switchInvestment'
     'click #historyBtnHolders': 'switchHolders'
+    'click #settings_btn': 'showSettings'
+    'click #close-settings': 'closeSettings'
 
   showHistory: ->
     $('#historyHoldersTab').html(@holders_tab.render().el)
     $('#historyInvestmentTab').html(@investments_tab.render().el)
-    $('.history').fadeIn()
+    $('.history').fadeIn(160)
     $(document).ready ()->
       $(".scroll").mCustomScrollbar()
 
@@ -40,8 +42,23 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     $('#historyInvestmentTab').hide()
     $('historyHoldersTab').show()
     $(".scroll").mCustomScrollbar("update")
+
+  showSettings: ->
+    network = $('.network')
+    $('.checkbox').checkbox({cls:'checkbox'})
+    network.fadeIn(160)
+
+    offset = $('#settings_btn').offset()
+    offset.top += 25
+    offset.left -= (network.width()/2 +10)
+    network.offset(offset)
+
+    
+
+  closeSettings: ->
+    $('.network').fadeOut(160)
     
     
 
   closeHistory:->
-    $('.history').fadeOut()
+    $('.history').fadeOut(160)
