@@ -12,6 +12,7 @@ class Twitterexchange.Views.Flows.Tile extends Backbone.View
 
   initialize: ->
     @type = @.options.type
+    @model.on('change', @render, this)
 
   render: ->
     if @type == 'std'

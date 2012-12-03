@@ -1,6 +1,7 @@
 class Twitterexchange.Routers.FlowsRouter extends Backbone.Router
   initialize: (options) ->
     @collection = new Twitterexchange.Collections.UsersCollection()
+    window.flow_users = @collection
 
     $('#flows_menu a:not(.curr)').click (e) ->
       $('#flows_menu a').removeClass('active')

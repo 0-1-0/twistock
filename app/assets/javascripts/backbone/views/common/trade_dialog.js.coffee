@@ -63,8 +63,12 @@ class Twitterexchange.Views.Common.TradeDialog extends Backbone.View
       e.preventDefault()
       count = $("#slider-price").slider('value')
       user_id = @model.get('id')
-      $.post "/user/#{user_id}/buy", { count: count }, ->
-        window.location.reload()
+      link.unbind().text(I18n.t('buy_dialog.processing'))
+      $.post "/api/users/#{user_id}/buy", { count: count }, =>
+        current_user.fetch()
+        if typeof flow_users != 'undefined'
+          flow_users.get(user_id).fetch()
+        @destroy()
 
   #
   init_buy_slider: ->
@@ -102,8 +106,12 @@ class Twitterexchange.Views.Common.TradeDialog extends Backbone.View
       e.preventDefault()
       count = $("#slider-price").slider('value')
       user_id = @model.get('id')
-      $.post "/user/#{user_id}/sell", { count: count }, ->
-        window.location.reload()
+      link.unbind().text(I18n.t('buy_dialog.processing'))
+      $.post "/api/users/#{user_id}/sell", { count: count }, =>
+        current_user.fetch()
+        if typeof flow_users != 'undefined'
+          flow_users.get(user_id).fetch()
+        @destroy()
 
   #
   init_sell_slider: ->

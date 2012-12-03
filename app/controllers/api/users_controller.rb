@@ -32,4 +32,30 @@ class Api::UsersController < ApplicationController
       respond_with({error: 'Access denied!'}, status: 503)
     end
   end
+
+  def buy
+    @user = User.find(params[:id])
+
+    @result = {success: true}
+    begin
+      current_user.buy_shares(@user, params[:count].to_i)
+    rescue
+      @result = {success: false}
+    end
+
+    respond_with @result, location: api_user_path(@user)
+  end
+
+  def sell
+    @user = User.find(params[:id])
+
+    @result = {success: true}
+    begin
+      current_user.sell_shares(@user, params[:count].to_i)
+    rescue
+      @result = {success: false}
+    end
+
+    respond_with @result, location: api_user_path(@user)
+  end
 end

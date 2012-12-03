@@ -1,9 +1,15 @@
 Twitterexchange::Application.routes.draw do
   namespace :api do
-    resources :users, only: [:index, :show, :update]
     resources :transactions, only: [:index] do
       collection do
         get 'history'
+      end
+    end
+
+    resources :users, only: [:index, :show, :update] do
+      member do
+        post 'buy'
+        post 'sell'
       end
     end
   end
