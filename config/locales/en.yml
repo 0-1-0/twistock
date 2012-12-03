@@ -2,8 +2,8 @@ en:
   buy_dialog:
     text:
       buy: Buy
-      sell: sell
-      stok: stock
+      sell: Sell
+      stock: stock
     buy: Buy
     sell: Sell
     cancel: Cancel

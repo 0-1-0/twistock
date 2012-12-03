@@ -11,8 +11,7 @@ window.Twitterexchange =
   Views: {}
 
   init: ->
-    # load current_user
-    true
+    window.trade_dialog = null
 
 $(document).ready ->
   Twitterexchange.init()

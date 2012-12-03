@@ -1,4 +1,7 @@
 .bg.blk.dialog-pin
+
+  span.buy-dialog
+
   a.avatar.small href=@user.get('url')
     i
     img src=@user.get('avatar')
