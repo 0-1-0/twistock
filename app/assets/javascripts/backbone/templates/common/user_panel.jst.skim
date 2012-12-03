@@ -17,8 +17,27 @@
   .two.mobile-two.columns.statw.pl20
     .history-link
       == "#{I18n.t 'user.money'}: $#{maybe_calculating(@user, 'money')}"
-      a#header_history href="#" = I18n.t 'user.history'
+      a#history_btn href="#" = I18n.t 'user.history'
       a href="/store" = I18n.t 'main_page.buy_real_goods'
+
+
+
+      / --- Dialog "History"
+      .history.arr-top.bg.dialog
+        a.close-dialog href="#": i.icon-close
+
+        .list-cont
+          ul.inline-list.sub-nav.tabs.pill
+            li#historyBtnInvestment: a.active href="#" 
+              =I18n.t('user.info.investment_portfolio')
+            li#historyBtnHolders: a href="#" 
+              =I18n.t('user.info.stock_holders')
+
+        .hconainer.scroll
+          ul.tabs-content
+            li#historyInvestmentTab.active
+            li#historyHoldersTab
+
 
     .price-cont
       = I18n.t 'user.today'

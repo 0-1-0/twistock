@@ -40,6 +40,15 @@ html lang="en"
         user_data['profile_image'] = '#{current_user.profile_image.html_safe}'
         user_data['its_you']  = true
         window.current_user   = new Twitterexchange.Models.User(user_data)
+
+        
+
+        window.transactions   = new Twitterexchange.Collections.Transactions()
+        window.transactions.fetch()
+
+        window.history        = new Twitterexchange.Collections.History()
+        window.history.fetch()
+
     - else
       javascript:
         window.current_user   = null
@@ -81,6 +90,7 @@ html lang="en"
           $(document).ready ->
             window.user_panel = new Twitterexchange.Views.Common.UserPanel()
             $('#user_panel').html(user_panel.render().el)
+
       - else
         .row.collapse.header-text
           .six.columns

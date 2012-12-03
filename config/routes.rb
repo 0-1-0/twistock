@@ -1,6 +1,11 @@
 Twitterexchange::Application.routes.draw do
   namespace :api do
     resources :users, only: [:index, :show, :update]
+    resources :transactions, only: [:index] do
+      collection do
+        get 'history'
+      end
+    end
   end
 
   resources :blog_posts, :path=>'blog' do

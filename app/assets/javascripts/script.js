@@ -17,6 +17,7 @@ $(document).ready(function(){
         return false;
     });
 
+
     // History dialog
     $('#header_history').on('click', function(){
         var history = $('.history');

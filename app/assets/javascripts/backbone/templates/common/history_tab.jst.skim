@@ -1,0 +1,24 @@
+table.default
+  thead
+    tr
+      th =I18n.t('user.info.holder')
+      th =I18n.t('user.info.date')
+      th =I18n.t('user.info.count')
+      th =I18n.t('user.info.one')
+      th =I18n.t('user.info.total')
+  tbody
+    - transactions.each (transaction) ->
+      tr
+        td 
+          a href="#{transaction.get('user_url')}" 
+            | @#{transaction.get('user_name')}
+        td
+          ==transaction.get('date')
+        td
+          =transaction.get('count')
+        td
+          |$ 
+          =transaction.get('price')
+        td 
+          |$
+          =transaction.get('cost')
