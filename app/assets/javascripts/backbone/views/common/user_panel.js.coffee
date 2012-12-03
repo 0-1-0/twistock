@@ -21,12 +21,27 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
   events:
     'click #history_btn': 'showHistory'
     'click .close-dialog': 'closeHistory'
+    'click #historyBtnInvestment': 'switchInvestment'
+    'click #historyBtnHolders': 'switchHolders'
 
   showHistory: ->
     $('#historyHoldersTab').html(@holders_tab.render().el)
     $('#historyInvestmentTab').html(@investments_tab.render().el)
-    $('.history').fadeIn 160, ()->
-      $(".scroll").mCustomScrollbar("update")
+    $('.history').fadeIn()
+    $(document).ready ()->
+      $(".scroll").mCustomScrollbar()
+
+  switchInvestment: ->
+    $('historyHoldersTab').hide()
+    $('#historyInvestmentTab').show()
+    $(".scroll").mCustomScrollbar("update")
+
+  switchHolders: ->
+    $('#historyInvestmentTab').hide()
+    $('historyHoldersTab').show()
+    $(".scroll").mCustomScrollbar("update")
+    
+    
 
   closeHistory:->
     $('.history').fadeOut()
