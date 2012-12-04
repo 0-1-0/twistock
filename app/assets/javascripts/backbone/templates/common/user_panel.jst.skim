@@ -29,14 +29,17 @@
             =I18n.t('main_page.set_preferences.post_on_twitter')
           .three.mobile-two.columns.text-right
             =I18n.t('main_page.set_preferences.enable')
-            input.checkbox type="checkbox"
+            - if window.current_user.get('twitter_translation')
+              input.checkbox#transalation-checkbox type="checkbox" checked='true'
+            - else
+              input.checkbox#transalation-checkbox type="checkbox"
             =I18n.t('main_page.set_preferences.disable')
 
         .row
           .two.mobile-one.columns 
             =I18n.t('main_page.set_preferences.mail')
           .four.mobile-three.columns
-            input type="text"
+            input#preferences-mail type="text" value=window.current_user.get('email')
 
         .row
           .three.mobile-two.columns 

@@ -9,6 +9,7 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     @holders_tab = new Twitterexchange.Views.Common.HistoryTab(collection: window.history)
     @investments_tab = new Twitterexchange.Views.Common.HistoryTab(collection: window.transactions)
     # $('#historyHoldersTab').html(history_tab.render().el)
+    @preferences = {}
 
   render: ->
     $(@el).html(@template(user: @user))
@@ -25,6 +26,8 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     'click #historyBtnHolders': 'switchHolders'
     'click #settings_btn': 'showSettings'
     'click #close-settings': 'closeSettings'
+    'change #transalation-checkbox': 'updateTwitterTranslationSetting'
+    'change #preferences-mail': 'updateEmail'
 
   showHistory: ->
     $('#historyHoldersTab').html(@holders_tab.render().el)
@@ -53,10 +56,17 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     offset.left -= (network.width()/2 +10)
     network.offset(offset)
 
+  updateTwitterTranslationSetting: (e)->
+    @preferences['twitter_translation'] = !e.target.checked
+
+  updateEmail: (e)->
+    @preferences['email'] = e.target.value
     
 
   closeSettings: ->
     $('.network').fadeOut(160)
+    window.current_user.set(@preferences)
+    window.current_user.save()
     
     
 
