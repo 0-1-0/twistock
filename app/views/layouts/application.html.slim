@@ -61,7 +61,7 @@ html lang="en"
             a href="/": img#logo.left src="/assets/logo.png" alt="Twistock" title="Twistock"
               
           nav#header-nav.left: ul
-            li=link_to t('main_page.top_menu.how_it_works'), '#'
+            li=link_to t('main_page.top_menu.how_it_works'), 'javascript:void()', :id=>'show_help'
             li=link_to t('main_page.top_menu.store'), '/store', class: active_when(controller_name == 'store')
             li=link_to t('main_page.top_menu.top_tweets'), '/top_tweets', class: active_when(controller_name == 'top_tweets')
             li=link_to t('main_page.top_menu.blog'), '/blog', class: active_when(controller_name == 'blog_posts')
@@ -101,3 +101,5 @@ html lang="en"
               =t('main_page.sign_in')
 
     = yield
+
+    = render :partial=>'shared/help'
