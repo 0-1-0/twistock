@@ -13,40 +13,46 @@
       .network.arr-top.bg.dialog
         a.close-dialog#close-settings href="javascript:void()": i.icon-close
 
-        .title Social network
+        .title
+          =I18n.t('main_page.set_preferences.social_network')
 
         .row
           .two.mobile-one.columns
-            a.button.primary.button.radius.small href="#" twitter
+            a.button.primary.button.radius.small href="javascript:void()" Twitter
           .two.mobile-two.columns
-            a.button.disabled.secondary.button.radius.small href="#" Add facebook
+            a.button.disabled.secondary.button.radius.small href="javascript:void()" Add facebook
           .two.mobile-one.columns
-            a.button.disabled.secondary.button.radius.small href="#" Add Livejournal
+            a.button.disabled.secondary.button.radius.small href="javascript:void()" Add LinkedIn
 
         .row
-          .three.mobile-two.columns Post on twitter
-          .two.mobile-two.columns.text-right
-            | On
+          .three.mobile-two.columns 
+            =I18n.t('main_page.set_preferences.post_on_twitter')
+          .three.mobile-two.columns.text-right
+            =I18n.t('main_page.set_preferences.enable')
             input.checkbox type="checkbox"
-            | Off
+            =I18n.t('main_page.set_preferences.disable')
 
         .row
-          .two.mobile-one.columns Mail
+          .two.mobile-one.columns 
+            =I18n.t('main_page.set_preferences.mail')
           .four.mobile-three.columns
             input type="text"
 
         .row
           .three.mobile-two.columns 
-            | Money 
-            span (it’s not real)
+            =I18n.t('main_page.set_preferences.money')
+            span 
+              =I18n.t('main_page.set_preferences.its_not_real')
           .three.mobile-two.columns: ul.button-group.radius.even.four-up
-            li: a.button.secondary.radius href="#" $
-            li: a.button.secondary.radius href="#" €
-            li: a.button.secondary.radius href="#" £
-            li: a.button.secondary.radius href="#" Ɏ
+            li: a.button.disabled.secondary.radius href="#" $
+            li: a.button.disabled.secondary.radius href="#" €
+            li: a.button.disabled.secondary.radius href="#" £
+            li: a.button.disabled.secondary.radius href="#" Ɏ
 
         .row
-          .six.columns: a.button.secondary.radius href="#" Sign out
+          .six.columns
+            a.button.secondary.radius href="/sign_out" 
+              =I18n.t('main_page.set_preferences.sign_out')
 
     .user-money
       | $#{maybe_calculating(@user, 'share_price')}
