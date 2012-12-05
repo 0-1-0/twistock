@@ -10,6 +10,7 @@ Twitterexchange::Application.routes.draw do
       member do
         post 'buy'
         post 'sell'
+        get 'price_log'
       end
     end
   end

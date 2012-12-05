@@ -23,6 +23,5 @@
 
 //= require job
 //= require script
-//= require price_graph
 // require buy
 // require buy.store

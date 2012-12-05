@@ -40,6 +40,7 @@ html lang="en"
         user_data['profile_image'] = '#{current_user.profile_image.html_safe}'
         user_data['its_you']  = true
         window.current_user   = new Twitterexchange.Models.User(user_data)
+        window.current_user_price_log = #{PriceLog.get_user_log(current_user, for: 1.week).map {|x| [x[1].to_i*1000, x[0]]}.inspect}
 
         
 

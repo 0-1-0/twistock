@@ -3,8 +3,19 @@ Twitterexchange.Views.Common ||= {}
 class Twitterexchange.Views.Common.UserPanel extends Backbone.View
   template: JST["backbone/templates/common/user_panel"]
 
+  events:
+    'click #history_btn':           'showHistory'
+    'click .close-dialog':          'closeHistory'
+    'click #historyBtnInvestment':  'switchInvestment'
+    'click #historyBtnHolders':     'switchHolders'
+    'click #settings_btn':          'showSettings'
+    'click #close-settings':        'closeSettings'
+    'change #transalation-checkbox':'updateTwitterTranslationSetting'
+    'change #preferences-mail':     'updateEmail'
+
   initialize: ->
     @user = current_user
+    @data = current_user_price_log
     @user.on('change', @render, this)
     @holders_tab = new Twitterexchange.Views.Common.HistoryTab(collection: window.history)
     @investments_tab = new Twitterexchange.Views.Common.HistoryTab(collection: window.transactions)
@@ -12,22 +23,13 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     @preferences = {}
 
   render: ->
-    $(@el).html(@template(user: @user))
-
-    # investment_tab = new Twitterexchange.Views.Common.HistoryTab(collection: window.transactions)
-    # $('#historyInvestmentTab').html(investment_tab.render().el)
-
+    $(@el).html(@template(user: @user, _this: this))
+    @renderGraph()
     return this
 
-  events:
-    'click #history_btn': 'showHistory'
-    'click .close-dialog': 'closeHistory'
-    'click #historyBtnInvestment': 'switchInvestment'
-    'click #historyBtnHolders': 'switchHolders'
-    'click #settings_btn': 'showSettings'
-    'click #close-settings': 'closeSettings'
-    'change #transalation-checkbox': 'updateTwitterTranslationSetting'
-    'change #preferences-mail': 'updateEmail'
+  renderGraph: ->
+    @graph = new Twitterexchange.Views.Common.PriceGraph(div_id: 'cu_graph', data: @data)
+    @$('.grafic').html(@graph.render().el)
 
   showHistory: ->
     $('#historyHoldersTab').html(@holders_tab.render().el)
