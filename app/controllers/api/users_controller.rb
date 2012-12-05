@@ -6,6 +6,7 @@ class Api::UsersController < ApplicationController
   def index
     flow = params[:flow]
     page = params[:page] || 1
+    page = page.to_i
 
 
     @users =      case flow
