@@ -73,6 +73,8 @@ class Twitterexchange.Views.Common.TradeDialog extends Backbone.View
         current_user.fetch()
         if typeof flow_users != 'undefined'
           flow_users.get(user_id).fetch()
+        if typeof window.user != 'undefined'
+          window.user.fetch()
         @destroy()
 
   #
@@ -116,6 +118,8 @@ class Twitterexchange.Views.Common.TradeDialog extends Backbone.View
         current_user.fetch()
         if typeof flow_users != 'undefined'
           flow_users.get(user_id).fetch()
+        if typeof window.user != 'undefined'
+          window.user.fetch()
         @destroy()
 
   #

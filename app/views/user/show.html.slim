@@ -1,63 +1,26 @@
-= render 'shared/buy_dialog'
 = render 'shared/flows_menu', flow: nil
 
 - if @user
+  javascript:
+    window.user_price_log = #{PriceLog.get_user_log(@user, for: 1.week).map {|x| [x[1].to_i*1000, x[0]]}.inspect}
+    window.user_data = #{@user.id}
   #user.row.bg
-    .row
-      .six.columns.user-info
-        .two.mobile-two.statw.columns
-
-          a.avatar href="#"
-            i
-            = image_tag @user.profile_image
-
-          span.name
-            | @#{@user.nickname} (#{@user.name})
-
-          .user-money
-            | $#{@user.share_price}
-            = with_sign(@user.weekly_price_change)
-
-
-        .two.mobile-two.columns.statw.pl20
-          .history-link
-            span
-
-          .price-cont
-            = t 'user.today'
-            = with_sign(@user.daily_price_change)
-          .price-cont
-            = t 'user.week'
-            = with_sign(@user.weekly_price_change)
-          .price-cont
-            = t 'user.month'
-            = with_sign(@user.monthly_price_change)
-
-        .two.columns.grafic
-          = render "shared/price_graph", user: @user, container: 'show_user_graph'
-          /img.grafic.right src="/assets/grafic.png"
-
-    .row
-      hr
-      .six.columns
-        ul.button-group.radius.even.two-up
-          - if @bos
-            li= link_to t('user.buy_more'),  '#', style: "width: 120px;", class: 'button secondary radius btn-buy btn-buy-more dialog-pin', 'data-id' => @user.id
-          - else
-            li= link_to t('user.buy'),  '#', style: "width: 120px;", class: 'button secondary radius btn-buy btn-buy-more dialog-pin', 'data-id' => @user.id
-          /li= link_to t('user.sell'), '#', class: 'secondary button radius'
-
+    div.bb_user_part
+      coffee:
+        $(document).ready ->
+          window.user = new Twitterexchange.Models.User(id: user_data)
+          $.when(user.fetch()).then ->
+            window.show_user = new Twitterexchange.Views.Common.ShowUser(model: user, price_log: user_price_log)
+            $('.bb_user_part').html(show_user.render().el)
     .two.columns.user-tw
-      - if @bos
-        .tw-blk
-          = t 'user.count_stock'
-          span= @bos.count
+      /- if @bos
+      .tw-blk
+        = t 'user.count_stock'
+        span#user_p_count
 
-        .tw-blk
-          = t 'user.investment_cost'
-          span
-            | $#{@bos.owner.share_price * @bos.count}
-            = with_sign(@bos.count * (@bos.owner.weekly_price_change || 0))
+      .tw-blk
+        = t 'user.investment_cost'
+        span#user_p_cost
 
       = link_to 'Twitter', @user.twitter_url, target: :blank
       - if @user.best_tweet

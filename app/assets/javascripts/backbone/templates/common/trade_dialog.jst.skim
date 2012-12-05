@@ -3,7 +3,7 @@
   a.close-dialog href="#": i.icon-close
 
   .row.buy-stock
-    .six.columns
+    .six.columns style="padding-top: 0;"
       span.btn-checkbox
         a.btb.active href="#"= I18n.t 'buy_dialog.text.buy'
         input.checkbox type="checkbox"
@@ -12,7 +12,7 @@
       a.user_link
 
   .row
-    .six.columns
+    .six.columns style="padding-top: 0;"
       .slide
         #slider-price
       .buy-price
