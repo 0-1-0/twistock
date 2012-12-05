@@ -35,8 +35,16 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     $('#historyHoldersTab').html(@holders_tab.render().el)
     $('#historyInvestmentTab').html(@investments_tab.render().el)
     $('.history').fadeIn(160)
+
     $(document).ready ()->
       $(".scroll").mCustomScrollbar()
+
+    l = @
+    $(document).mouseup (e)->
+        container = $(".history")
+        if (container.has(e.target).length == 0)
+          l.closeHistory()
+
 
   switchInvestment: ->
     $('historyHoldersTab').hide()
@@ -58,6 +66,12 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     offset.left -= (network.width()/2 +10)
     network.offset(offset)
 
+    l = @
+    $(document).mouseup (e)->
+      container = $(".network")
+      if (container.has(e.target).length == 0)
+        l.closeSettings()
+
   updateTwitterTranslationSetting: (e)->
     @preferences['twitter_translation'] = !e.target.checked
 
@@ -69,7 +83,6 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     $('.network').fadeOut(160)
     window.current_user.set(@preferences)
     window.current_user.save()
-    
     
 
   closeHistory:->
