@@ -59,11 +59,11 @@ module UserLogic
       end
 
       def most_expensive
-        User.where{share_price != nil}.order{share_price.desc}.limit(60)
+        User.where{share_price != nil}.order{share_price.desc}
       end
 
       def top
-        User.where{popularity != nil}.order{popularity.desc}.limit(60)
+        User.where{popularity != nil}.order{popularity.desc}
       end
 
       def celebreties

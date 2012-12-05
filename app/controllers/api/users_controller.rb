@@ -1,8 +1,12 @@
 class Api::UsersController < ApplicationController
   respond_to :json
 
+  USERS_PER_PAGE = 60
+
   def index
     flow = params[:flow]
+    page = params[:page] || 1
+
 
     @users =      case flow
                     when 'top'            then User.top
@@ -18,6 +22,8 @@ class Api::UsersController < ApplicationController
                     when 'celebreties'    then User.celebreties
                     else User.top
                   end.includes(:portfel).includes(:my_shares)
+
+    @users = @users.offset((page-1)*USERS_PER_PAGE).limit(USERS_PER_PAGE)
   end
 
   def show
