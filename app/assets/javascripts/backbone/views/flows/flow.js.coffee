@@ -8,12 +8,15 @@ class Twitterexchange.Views.Flows.Flow extends Backbone.View
     @flow_type    = @.options.flow_type
 
     if @flow_type == "investments"
-      @collection.on('change', @render, this)
+      # @collection.on('change', @render, this)
       @collection.on('reset', @updateFlowMenuCounters, this)
     if @flow_type == "investors"
       @collection.on('reset', @updateFlowMenuCounters, this)
 
+
   render: ->
+    
+    @page = 1
     window.flow_users = @collection
     if @flow_type == "investments"
       stats =
@@ -22,7 +25,7 @@ class Twitterexchange.Views.Flows.Flow extends Backbone.View
         weekly_change:  0
         monthly_change: 0
 
-      $.when(@collection.fetch(data: {flow: @flow_type})).then =>
+      $.when(@collection.fetch(data: {flow: @flow_type, page:@page})).then =>
         @collection.each (user) ->
           mult = user.get('purchased_shares')
           stats.total_cost      += user.get('share_price')          * mult
@@ -35,6 +38,12 @@ class Twitterexchange.Views.Flows.Flow extends Backbone.View
       $(@el).html(@template(type: @flow_type))
       $.when(@collection.fetch(data: {flow: @flow_type})).then =>
         @collection.each(@appendTile, this)
+
+    $(window).scroll () =>
+      if ($(window).scrollTop() + $(window).height() == $(document).height())
+        @page += 1
+        $.when(@collection.fetch(data: {flow: @flow_type, page:@page })).then =>
+          @collection.each(@appendTile, this)
 
     return this
 

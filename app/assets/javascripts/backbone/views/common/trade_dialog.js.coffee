@@ -9,6 +9,11 @@ class Twitterexchange.Views.Common.TradeDialog extends Backbone.View
 
   initialize: ->
     @parent_btn = @.options.parent_btn
+    l = @
+    $(document).mouseup (e)->
+      container = $(".buy.dialog")
+      if (container.has(e.target).length == 0)
+        l.destroy()
 
   render: ->
     $(@el).html(@template())
