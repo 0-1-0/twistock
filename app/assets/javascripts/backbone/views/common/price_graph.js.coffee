@@ -32,7 +32,9 @@ class Twitterexchange.Views.Common.PriceGraph extends Backbone.View
       plotOptions:
         area:
           lineWidth: 1
-          lineColor: 'blue'
+          lineColor: '#367fa0'
+          fillColor: '#1e9dcd'
+          fillOpacity: 0.1
 
 
       legend:
