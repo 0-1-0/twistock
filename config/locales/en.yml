@@ -3,19 +3,19 @@ en:
     text:
       buy: Buy
       sell: Sell
-      stock: stock
+      stock: Stock
     processing: Processing...
     buy: Buy
     sell: Sell
     cancel: Cancel
 
   user:
-    price: price
-    money: money
-    today: today
-    history: history
-    week: week
-    month: month
+    price: Price
+    money: Money
+    today: Today
+    history: History
+    week: Week
+    month: Month
 
     not_found: User not found
 
@@ -33,12 +33,12 @@ en:
       week: Week
       month: Month
 
-    count_stock: Count stock
-    investment_cost: Cost my investment
+    count_stock: Count of my stocks
+    investment_cost: Value of my investments
 
     info:
-      investment_portfolio: Investment Portfolio
-      stock_holders: Stock holder
+      investment_portfolio: My investments
+      stock_holders: My stock holders
       owner: Stock owner
       holder: Stock holder
       count: Count
@@ -47,8 +47,8 @@ en:
       date: Date
 
   top_tweets:
-    top_tweet: Top tweet
-    top_tweets: Top tweets
+    top_tweet: Top Tweet
+    top_tweets: Top Tweets
 
     all: All
     russian: Russian
@@ -74,8 +74,8 @@ en:
   main_page:
     sign_in: Sign in with twitter
     sign_out: Logout
-    options: options
-    buy_real_goods: buy real goods
+    options: Options
+    buy_real_goods: Buy real goods
 
     top_menu:
       how_it_works: How it works?
@@ -90,8 +90,8 @@ en:
       you can earn virtual money and then spend it on the real goods in Twistock Store.
 
     enter_email:
-      text: 'Take $100 000 for my mail'
-      label: 'My mail:'
+      text: Take $100 000 for your email
+      label: 'Your mail:'
       additional_text: 'Some text with details'
 
     set_preferences:
@@ -113,7 +113,7 @@ en:
       my_investments: My investments
       my_holders: My stock holders
       friends: Friends
-      expensive: Most valuable
+      expensive: Most expensive
       celebreties: Celebreties
 
 
