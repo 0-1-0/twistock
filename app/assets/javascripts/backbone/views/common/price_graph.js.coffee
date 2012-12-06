@@ -66,4 +66,4 @@ class Twitterexchange.Views.Common.PriceGraph extends Backbone.View
       ]
     )
 
-    #@$("##{container} tspan").hide()
+    container.find('tspan').hide()

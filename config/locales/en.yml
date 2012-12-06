@@ -99,13 +99,14 @@ en:
       post_on_twitter: Post on Twitter
       mail: Mail
       sign_out: Sign out
-      enable: On
-      disable: Off
       money: money
       its_not_real:    (it's not real)
       language: Language
       ru: Russian
       en: English
+      enable: 'On'
+      disable: 'Off'
+
 
     flows:
       top: Top
