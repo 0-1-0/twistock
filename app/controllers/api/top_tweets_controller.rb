@@ -1,7 +1,14 @@
-class TopTweetsController < ApplicationController
+class Api::TopTweetsController < ApplicationController
+  respond_to :json
+
+  TWEETS_PER_PAGE = 60
+
   def index
-    @type = params[:type]
-    @tweets = case @type
+    flow = params[:flow]
+    page = params[:page] || 1
+    page = page.to_i
+
+    @tweets = case flow
                 when 'ru'
                   BestTweet.where{lang == 'ru'}
                 when 'en'
@@ -11,12 +18,10 @@ class TopTweetsController < ApplicationController
                   BestTweet.where{user_id.in(friend_ids)}
                 else
                   BestTweet
-              end.includes(:user).order{param.desc}.limit(60)
+              end.includes(:user).order{param.desc}.offset((page-1)*TWEETS_PER_PAGE).limit(TWEETS_PER_PAGE)
   end
 
-  def edit_tags
-  end
-
-  def set_tags
+  def show
+    @tweet = BestTweet.find(params[:id])
   end
 end
