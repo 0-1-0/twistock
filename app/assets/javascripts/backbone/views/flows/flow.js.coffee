@@ -3,6 +3,7 @@ Twitterexchange.Views.Flows ||= {}
 class Twitterexchange.Views.Flows.Flow extends Backbone.View
   template: JST["backbone/templates/flows/flow"]
 
+
   initialize: ->
     @collection   = new Twitterexchange.Collections.UsersCollection()
     @flow_type    = @.options.flow_type
@@ -15,10 +16,10 @@ class Twitterexchange.Views.Flows.Flow extends Backbone.View
     if @flow_type == "investors"
       @collection.on('reset', @updateFlowMenuCounters, this)
 
+    @collection.on('add', @appendTile, this)
 
-  render: ->
 
-    
+  render: ->    
     window.flow_users = @collection
     if @flow_type == "investments"
       stats =
@@ -49,10 +50,10 @@ class Twitterexchange.Views.Flows.Flow extends Backbone.View
   add_tiles: ->
     if @has_more_pages
       @page += 1
-      $.when(@collection.fetch(data: {flow: @flow_type, page:@page })).then =>
-        @has_more_pages = (@collection.length > 0)
-        if @has_more_pages
-          @collection.each(@appendTile, this)
+      x = @collection.fetch(add: true, data: {flow: @flow_type, page:@page })
+      if x.responseText == '[]'
+        @has_more_pages = false
+        
 
 
   appendTile: (user) ->
