@@ -77,13 +77,10 @@ html lang="en"
             !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
         
-        - if signed_in? and !current_user.has_email?
-          .tape
-            a#haction href="javascript:$('#modal-mail').reveal();"
-              | + $100 000 
-              span for you email
+        #mail-dialog
+          
 
-          = render :partial=>'shared/enter_email_form'
+          
 
       - if signed_in?
         #user_panel

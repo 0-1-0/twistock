@@ -1,13 +1,4 @@
 $(document).ready(function(){
-
-    // Modal window Mail
-    $("#haction").click(function() {
-        $("#modal-mail").reveal();
-        return false;
-    });
-
-
-
     // Button Close Dialog (x)
     $('.close-dialog').on('click', function(){
         $(this).closest('.bg').fadeOut(160);

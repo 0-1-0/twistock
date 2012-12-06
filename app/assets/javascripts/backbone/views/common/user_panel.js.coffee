@@ -25,11 +25,18 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
   render: ->
     $(@el).html(@template(user: @user, _this: this))
     @renderGraph()
+    @renderMailDialog()
+
     return this
 
   renderGraph: ->
     @graph = new Twitterexchange.Views.Common.PriceGraph(div_id: 'cu_graph', data: @data)
     @$('.grafic').html(@graph.render().el)
+
+  renderMailDialog: ->
+    if !@user.get('email')
+      @mail_dialog = new Twitterexchange.Views.Common.MailDialog()
+      $('#mail-dialog').html(@mail_dialog.render().el)
 
   showHistory: ->
     $('#historyHoldersTab').html(@holders_tab.render().el)

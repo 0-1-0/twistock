@@ -1,0 +1,27 @@
+.tape
+  a#haction href="javascript:$('#modal-mail').reveal();"
+    | + $100 000 
+    span for you email
+
+#modal-mail.reveal-modal
+  h4.title
+    =I18n.t('main_page.enter_email.text')
+  p.text 
+    =I18n.t('main_page.enter_email.additional_text')
+
+  form
+    .row.mmailcont
+      .two.mobile-one.columns
+        label
+          =I18n.t('main_page.enter_email.label')
+      
+
+      .four.columns
+        input#input-mail-dialog type='text'
+
+    .center
+      br
+      br
+      button.primary.button.radius#submit-mail type="submit" Ok
+
+  a.close-reveal-modal: i.icon-close
