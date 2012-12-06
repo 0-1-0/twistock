@@ -13,6 +13,8 @@ Twitterexchange::Application.routes.draw do
         get 'price_log'
       end
     end
+
+    resources :top_tweets, only: [:index, :show]
   end
 
   resources :blog_posts, :path=>'blog' do

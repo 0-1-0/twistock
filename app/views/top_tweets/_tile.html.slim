@@ -10,7 +10,7 @@ li
         i
         = image_tag tweet.user.avatar
 
-      a.dialog-pin.secondary.button.radius.small.btn-buy href="#" data-id=tweet.user.id = t('user.buy')
+      a.dialog-pin.secondary.button.radius.small.btn-buy href=user_path(tweet.user) = t('user.buy')
 
       .info
         = link_to "@#{tweet.user.nickname} (#{tweet.user.name})", tweet.user, style: "display: block;"
