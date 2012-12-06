@@ -66,11 +66,10 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     offset.left -= (network.width()/2 +10)
     network.offset(offset)
 
-    l = @
-    $(document).mouseup (e)->
+    $(document).mouseup (e) =>
       container = $(".network")
       if (container.has(e.target).length == 0)
-        l.closeSettings()
+        @closeSettings()
 
   updateTwitterTranslationSetting: (e)->
     @preferences['twitter_translation'] = !e.target.checked
@@ -80,9 +79,9 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     
 
   closeSettings: ->
-    $('.network').fadeOut(160)
     window.current_user.set(@preferences)
     window.current_user.save()
+    $('.network').fadeOut(160)
     
 
   closeHistory:->

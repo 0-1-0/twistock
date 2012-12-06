@@ -30,9 +30,9 @@
           .three.mobile-two.columns.text-right
             =I18n.t('main_page.set_preferences.enable')
             - if window.current_user.get('twitter_translation')
-              input.checkbox#transalation-checkbox type="checkbox" checked='true'
+              input.checkbox#transalation-checkbox type="checkbox" 
             - else
-              input.checkbox#transalation-checkbox type="checkbox"
+              input.checkbox#transalation-checkbox type="checkbox" checked='true'
             =I18n.t('main_page.set_preferences.disable')
 
         .row
