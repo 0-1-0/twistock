@@ -38,7 +38,7 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
       @mail_dialog = new Twitterexchange.Views.Common.MailDialog()
       $('#mail-dialog').html(@mail_dialog.render().el)
 
-  showHistory: ->
+  showHistory: (e)->
     $('#historyHoldersTab').html(@holders_tab.render().el)
     $('#historyInvestmentTab').html(@investments_tab.render().el)
     $('.history').fadeIn(160)
@@ -66,6 +66,7 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
   showSettings: ->
     network = $('.network')
     $('.checkbox').checkbox({cls:'checkbox'})
+    $('.price-cont').hide()
     network.fadeIn(160)
 
     offset = $('#settings_btn').offset()
@@ -89,6 +90,7 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     window.current_user.set(@preferences)
     window.current_user.save()
     $('.network').fadeOut(160)
+    $('.price-cont').show()
     
 
   closeHistory:->

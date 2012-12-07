@@ -9,7 +9,7 @@ class Twitterexchange.Views.Flows.Tile extends Backbone.View
   events:
     'click .btn-buy:not(.buy-cancel)':  'openTradeDialog'
     'click .btn-buy.buy-cancel':        'closeTradeDialog'
-    'click .dialog-pin': 'redirectToProfile'
+    # 'click .dialog-pin': 'redirectToProfile'
 
   initialize: ->
     @type = @.options.type
