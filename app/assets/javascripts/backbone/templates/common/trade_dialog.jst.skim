@@ -1,4 +1,4 @@
-.buy.arr-bottom.bg.dialog.center
+.buy.arr-bottom.bg.dialog.center style="text-align: center; width: 410px;"
   /style="color: black;"
   a.close-dialog href="#": i.icon-close
 

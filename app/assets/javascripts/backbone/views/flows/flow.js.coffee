@@ -11,7 +11,7 @@ class Twitterexchange.Views.Flows.Flow extends Backbone.View
     @has_more_pages = true
 
     if @flow_type == "investments"
-      # @collection.on('change', @render, this)
+      @collection.on('change', @render, this)
       @collection.on('reset', @updateFlowMenuCounters, this)
     if @flow_type == "investors"
       @collection.on('reset', @updateFlowMenuCounters, this)
@@ -50,9 +50,9 @@ class Twitterexchange.Views.Flows.Flow extends Backbone.View
   add_tiles: ->
     if @has_more_pages
       @page += 1
-      x = @collection.fetch(add: true, data: {flow: @flow_type, page:@page })
-      if x.responseText == '[]'
-        @has_more_pages = false
+      $.when(x = @collection.fetch(add: true, data: {flow: @flow_type, page:@page })).then =>
+        if x.responseText == '[]'
+          @has_more_pages = false
         
 
 

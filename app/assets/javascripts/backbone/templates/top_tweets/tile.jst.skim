@@ -1,0 +1,18 @@
+.buy-dialog
+.bg
+  - if @tweet.get('media_url')
+    a href=@tweet.get('media_url') target="blank"
+      img src=@tweet.get('media_url')
+  p= @tweet.get('content')
+
+  .bott
+    a.avatar.small href=@tweet.get('user_path')
+      i
+      img src=@tweet.get('user_avatar')
+
+    a.secondary.button.radius.small.btn-buy href='#' = I18n.t('user.buy')
+
+    .info
+      a style='display: block;' href=@tweet.get('user_path') @#{@tweet.get('user_nickname')} (#{@tweet.get('user_name')})
+      span $#{@tweet.get('user_share_price')}
+      == with_sign(@tweet.get('user_weekly_price_change'))

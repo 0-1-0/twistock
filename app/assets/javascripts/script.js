@@ -44,20 +44,3 @@ $(document).ready(function(){
 
 
 });
-
-
-
-
-
-$(document).ready(function(){
-    $('#tiles').imagesLoaded(function() {
-        var options = {
-            autoResize: true,
-            container: $('#top'),
-            offset: 13,
-            itemWidth: $('#tiles .bg').outerWidth()
-        };
-
-        $('#tiles li').wookmark(options);
-    });
-});

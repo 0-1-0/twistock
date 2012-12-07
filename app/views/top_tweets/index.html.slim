@@ -1,18 +1,20 @@
 #magellanNav.list-cont data-magellan-expedition="fixed"
   .row
     .four.columns
-      ul.inline-list.sub-nav
-        li= link_to t('top_tweets.all'), top_tweets_path, class: active_when(!@type)
-        li= link_to t('top_tweets.english'), top_tweets_path(type: 'en'), class: active_when(@type == 'en')
-        li= link_to t('top_tweets.russian'), top_tweets_path(type: 'ru'), class: active_when(@type == 'ru')
+      ul#tt_menu.inline-list.sub-nav
+        li= link_to t('top_tweets.all'),      '#all', id: 'tt_all_link'
+        li= link_to t('top_tweets.english'),  '#en',  id: 'tt_en_link'
+        li= link_to t('top_tweets.russian'),  '#ru',  id: 'tt_ru_link'
         - if signed_in?
-          li= link_to t('top_tweets.friends'), top_tweets_path(type: 'friends'), class: active_when(@type == 'friends')
+          li= link_to t('top_tweets.friends'), '#friends', id: 'tt_friends_link'
 
     #search.two.columns
-      form
-        input.five.search.right type="text"
+      =form_tag search_user_index_path do
+        =text_field_tag 'nickname', nil, class: 'five search right'
 
 #top.row
-  ul#tiles.block-grid.three-up.mobile-one-up.tab-two-up.center
-    - @tweets.each do |tweet|
-      =render 'tile', tweet: tweet
+
+coffee:
+  $(document).ready ->
+    new Twitterexchange.Routers.TopTweetsRouter()
+    Backbone.history.start()
