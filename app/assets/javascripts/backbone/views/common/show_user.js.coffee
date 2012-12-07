@@ -17,6 +17,11 @@ class Twitterexchange.Views.Common.ShowUser extends Backbone.View
     @user_graph = new Twitterexchange.Views.Common.PriceGraph(div_id: 'show_user_graph', data: @price_log)
     $(@el).find('.grafic').html(@user_graph.render().el)
 
+    unless @model.get('purchased_shares') > 0
+      $('#invdata').hide()
+    else
+      $('#invdata').show()
+
     @updateOuterData()
 
     return this

@@ -14,8 +14,8 @@ class PriceLog < ActiveRecord::Base
       end
 
       # Monkey patch
-      if query.size == 0
-        return [[0,0],[0,0]]
+      if query.size <= 1
+        return [[user.share_price, Time.now - 10],[user.share_price, Time.now]]
       end
 
       query = [query.first, query.last] if opts[:first_and_last]

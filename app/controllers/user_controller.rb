@@ -7,10 +7,6 @@ class UserController < ApplicationController
       @best_tweet = @user.best_tweet
       @portfel    = @user.portfel.includes(:owner)
       @my_shares  = @user.my_shares.includes(:holder)
-
-      if current_user.shares_of(@user) > 0
-        @bos = current_user.portfel.where(owner_id: @user.id).first
-      end
     end
 
   end

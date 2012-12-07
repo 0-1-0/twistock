@@ -14,6 +14,8 @@ Twitterexchange::Application.routes.draw do
       end
     end
 
+    resources :block_of_shares, only: [:index, :show]
+
     resources :top_tweets, only: [:index, :show]
   end
 

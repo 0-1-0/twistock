@@ -14,13 +14,14 @@
             $('.bb_user_part').html(show_user.render().el)
     .two.columns.user-tw
       /- if @bos
-      .tw-blk
-        = t 'user.count_stock'
-        span#user_p_count
+      #invdata
+        .tw-blk
+          = t 'user.count_stock'
+          span#user_p_count
 
-      .tw-blk
-        = t 'user.investment_cost'
-        span#user_p_cost
+        .tw-blk
+          = t 'user.investment_cost'
+          span#user_p_cost
 
       = link_to 'Twitter', @user.twitter_url, target: :blank
       - if @user.best_tweet
