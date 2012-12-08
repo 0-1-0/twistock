@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :signed_in?
   helper_method :signed_as_admin?
+  helper_method :iphone_request?
 
   def set_locale
     logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
@@ -54,4 +55,9 @@ class ApplicationController < ActionController::Base
   def admin_required
     redirect_to '/', alert: 'You must be admin to view this page ^_^' unless (signed_in? and current_user.is_admin?)
   end
+
+  def iphone_request?
+#     request.subdomains.first == 'iphone'
+    request.env["HTTP_USER_AGENT"] && request.env['HTTP_USER_AGENT'].downcase.match(/android|iphone/)
+  end  
 end

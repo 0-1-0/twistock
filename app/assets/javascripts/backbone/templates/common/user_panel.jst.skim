@@ -87,7 +87,7 @@
             li#historyHoldersTab
 
 
-    .price-cont
+    .price-cont#price-cont-today
       = I18n.t 'user.today'
       == with_sign maybe_calculating(@user, 'daily_price_change')
     .price-cont

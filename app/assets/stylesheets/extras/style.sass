@@ -12,6 +12,8 @@ $f: "assets"
 // -------
 // Base
 // -------
+
+
 body
   background-color: #dfdfe0
   &.bg-white
@@ -103,11 +105,13 @@ hr
       margin-left: 20px
       display: inline-block
   .statw
+    z-index: 10
     width: 320px
     margin-bottom: 20px
   // z-index: 1
   .price-cont
     // width: 94px
+    z-index: -1
     width: 31%
     max-width: 94px
     float: left
@@ -119,6 +123,7 @@ hr
 
 // Grafic
 .grafic
+  z-index: 1
   margin-bottom: 15px
 
 // Avatar Big & Small
@@ -890,13 +895,14 @@ hr
 // --------------
 .dialog
   position: absolute
-  z-index: 1000
+  z-index: 100
   padding: 20px
   border-radius: 5px
   webkit-box-sizing: border-box
   -moz-box-sizing: border-box
   box-sizing: border-box
   .close-dialog
+    z-index: 201
     float: right
     margin: -5px -5px 0 0
   &:before
@@ -921,7 +927,9 @@ hr
   text-shadow: 1px 1px 0 white
   top: 30px
   margin-left: 8px
+
   .row
+    z-index: 201
     height: 40px
     margin-top: 10px
   .title
