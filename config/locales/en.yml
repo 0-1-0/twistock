@@ -124,8 +124,13 @@ en:
 
   help:
     its_you: It's you
-    its_cost: It's a cost of one stock of yours
-    its_dinamic: Dymanic price chart
-    twit: Tweet about us!
-    its_invest: Invest in theese accounts!
-    search: Search by nickname
+    its_cost: Your one stock price
+    its_dinamic: Dynamic of your stock price
+    twit: Tweet about us ;)
+    its_invest: The most trendy stocks
+    search: Search anyone by his nickname in Twitter
+    top_tweets: The hottest tweets worldwide. Click to explore!
+    friends: Buy the stocks of your friends in Twitter
+    investments: Your investments
+    more:  More info in our blog
+    click_to_buy: Click to buy stocks
