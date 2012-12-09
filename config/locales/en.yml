@@ -120,7 +120,9 @@ en:
   store:
     buy: Buy 
     for: for
-    about: Text about shop
+    about: >
+      Here you can monetize your social capital to the real goods. 
+      Now there are not many products and the prices are rather high, but everything will change soon.
 
   help:
     its_you: It's you

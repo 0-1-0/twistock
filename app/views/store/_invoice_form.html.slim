@@ -43,13 +43,13 @@
       .two.columns
         label for="m_mail" E-mail
       .four.columns
-        = f.input :email, :label=>false
+        = f.text_field :email, :label=>false
         / span.error Wrong E-mail
     .row
       .two.columns
         label for="m_mail" Pnone
       .four.columns
-        = f.input :phone, :label=>false
+        = f.text_field :phone, :label=>false
         / span.error Wrong Pnone
     .row
       .four.offset-by-two.columns

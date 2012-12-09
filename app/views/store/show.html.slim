@@ -1,17 +1,42 @@
-#store.row.single
-  .two.columns.clearing-container
-    =@product.description.html_safe
+/ #store
+/   .row.single
+/     .two.columns.clearing-container
+/       .img.big: img src="/images/img-store-single.jpg" alt=""
 
-  .four.columns.clearing-container
-    h3.title
-      =@product.name
+/     .four.columns.clearing-container
+/       h3.title
+/         | Just 5 Space
+/         br
+/         | Just the simplest phone!
 
-    p=@product.short_description.html_safe
+/       p Some text with more details.
 
-    .info-down
-      .price $#{@product.price}
-      a.secondary.button.radius.buy-store href="#" onclick="$('#product-dialog-#{@product.id}').reveal();" Buy
+/       .info-down
+/         .price $542
+/         a.secondary.button.radius.buy-store href="#" Buy
 
+
+#store
+  .row.single
+    .two.columns.clearing-container
+    
+
+    .four.columns.clearing-container
+      h3.title
+        =@product.name
+
+      p#single-store-desc=@product.description.html_safe
+
+      .info-down
+        .price 
+          | $#{@product.price}
+          
+        - if signed_in? and current_user.money >= @product.price
+          a.secondary.button.radius.buy-store href="#" onclick="$('#product-dialog-#{@product.id}').reveal();" 
+            =t 'store.buy'
+        - else
+          a.secondary.button.radius.disabled href="#"
+            =t 'store.buy'
 .row
   ul.block-grid.four-up.mobile-two-up
     li

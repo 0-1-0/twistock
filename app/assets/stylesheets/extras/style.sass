@@ -576,6 +576,15 @@ hr
 // Store
 // -----
 #store
+  background: #fbfbfc
+  width: 100%
+  min-height: 100%
+  padding-bottom: 200px
+  position: absolute
+  z-index: 0
+  margin-top: -15px
+  padding-top: 15px
+  +box-sizing( border-box )
   .about-shop
     font-size: 18px
     color: black
@@ -613,7 +622,7 @@ hr
       margin: 0 0 8px
 
   // Single Store
-  &.single
+  .single
     margin-top: 40px
     margin-bottom: 40px
     .title
@@ -626,10 +635,9 @@ hr
       font-weight: bold
       margin: -2px 10px 0 0
       &, .button
-      float: left
+        float: left
     .columns
       min-height: 350px
-
 
 // ----
 // Top
@@ -1178,6 +1186,14 @@ span.error
     .bott .info
       width: 155px !important
 
+  input.search
+    margin-top: 0 !important
+
+  #header
+    .twitter-share-button
+      top: 101px
+
+
 // iPhone
 @media only screen and (min-width : 481px) and (max-width : 640px)
   .tape
@@ -1198,6 +1214,57 @@ span.error
   #header
     .twitter-share-button
       top: 16px
+ 
+
+// iPads (portrait) // and (orientation : portrait)
+@media only screen and (min-width : 641px) and (max-width : 960px) and (orientation : portrait)
+  #help
+    .its-dinamic
+      top: 192px
+      left: 32px
+      right: auto
+      i
+        background-position: -157px -15px
+        width: 60px
+        height: 60px
+        bottom: -55px
+        right: -61px 
+    .its-invest
+      top: 290px
+      left: 240px
+      i
+        background-position: -8px -67px
+        width: 40px
+        height: 40px
+        bottom: -40px
+        left: -40px
+    .its-search
+      top: 297px
+      right: 32%
+      i
+        background-position: -248px -60px
+        width: 48px
+        height: 32px
+        bottom: -32px
+        right: -48px
+    .its-invest-2
+      top: 394px
+      right: 77%
+      i
+        background-position: -60px -102px
+        width: 64px
+        height: 40px
+        bottom: -40px
+        right: -64px
+    .its-invest-3
+      top: 384px
+      left: 387px
+      i
+        background-position: -138px -77px
+        width: 85px
+        height: 95px
+        bottom: -95px
+        left: -85px 
 
 // iPad (landscape)
 @media only screen and (min-width : 641px) and (max-width : 960px)
@@ -1235,6 +1302,7 @@ span.error
 
   #top ul
     margin-left: -50px !important
+
 
 
 // ------------
