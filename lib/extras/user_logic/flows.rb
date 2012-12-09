@@ -1,27 +1,69 @@
 module UserLogic
   module Flows
     module Global
-      CELEBRITIES_NAMES = %w{
-        SergeiMinaev
-        shirokovr15
-        M_Galustyan
-        durov
-        adagamov
-        tina_kandelaki
-        VRSoloviev
-        mnzadornov
-        EvgeniPlushenko
-        Garik2000
-        VS_Oblomov
-        olegtinkov
-        VictoriaDaineko
-        dolboed
-        TimatiOfficial
-        SatiKazanova
-        dolyasergey
-        maksimofficial
-        kichanova
-        elkasinger
+      SPORTS_NAMES = %w{
+        SHAQ
+        Cristiano Ronaldo
+        Adam Schefter
+        Bill Simmons
+        Chad Johnson
+        Dwight Howard
+        Alyssa Milano
+        LAMAR ODOM
+        Mark Sanchez
+        Pete Carroll
+        Warren Sapp
+        Baron Davis
+        Danica Patrick
+        Shaun White
+        bubba watson
+        John Daly
+        Shawne Merriman
+        Kaka
+        KFUCKINGP
+        Charlie Villanueva
+        CC Sabathia
+        Ndamukong Suh
+        NBA
+        Los Angeles Lakers
+        Amar'e Stoudemire
+        John Calipari
+        InsideHoops.com
+        Orlando Magic
+        Boston Celtics
+        Chicago Bulls
+        NBA New York Knicks
+        Jozy Altidore
+        EA SPORTS
+        FIFA.com
+        New York Jets
+        FOX Sports: MLB
+        Jason Terry
+        USA Basketball
+        Bonnie Bernstein
+        C.J. Wilson
+        Jay Crawford
+        MLB Public Relations
+        Merril Hoge
+        US Olympic Team
+        Wimbledon
+        Ricky Rubio
+        Liverpool FC
+        San Francisco Giants
+        Will Kinsler
+        Pau Gasol
+        Chicago Blackhawks
+        Lewis Howes
+        Champ Bailey
+        Maurice Edu
+        New York Rangers
+        Dhani Jones
+        Los Angeles Clippers
+        Atlanta_Falcons
+        OKC THUNDER
+        OAKLAND RAIDERS
+        Minnesota Vikings
+        Urijah Faber
       }
 
       # По заданному списку ников выдает массив пользователей.
@@ -66,8 +108,8 @@ module UserLogic
         User.where{popularity != nil}.order{popularity.desc}
       end
 
-      def celebreties
-        User.find_by_nicknames CELEBRITIES_NAMES, shuffle: true
+      def sports
+        User.find_by_nicknames SPORTS_NAMES, shuffle: true
       end
     end
 

@@ -20,7 +20,7 @@
           li= link_to t("main_page.flows.my_holders"), '#',     class: 'curr'
           li= link_to t("main_page.flows.friends"), '#',        class: 'curr'
 
-        - %w{expensive celebreties}.each do |el|
+        - %w{expensive sports}.each do |el|
           li= link_to t("main_page.flows.#{el}"), root_path + "##{el}", id: "flow_#{el}_link"
 
     #search.two.columns

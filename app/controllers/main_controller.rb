@@ -14,7 +14,7 @@ class MainController < ApplicationController
                         nil
                       end
                     when 'expensive'      then User.most_expensive
-                    when 'celebreties'    then User.celebreties
+                    when 'sports'         then User.sports
                     else User.top
                     end
     rescue

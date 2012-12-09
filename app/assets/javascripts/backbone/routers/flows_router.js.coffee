@@ -7,7 +7,7 @@ class Twitterexchange.Routers.FlowsRouter extends Backbone.Router
     @view_investors   = new Twitterexchange.Views.Flows.Flow(flow_type: 'investors')
     @view_friends     = new Twitterexchange.Views.Flows.Flow(flow_type: 'friends')
     @view_expensive   = new Twitterexchange.Views.Flows.Flow(flow_type: 'expensive')
-    @view_celebreties = new Twitterexchange.Views.Flows.Flow(flow_type: 'celebreties')
+    @view_sports      = new Twitterexchange.Views.Flows.Flow(flow_type: 'sports')
     @active = @view_top
 
 
@@ -24,7 +24,7 @@ class Twitterexchange.Routers.FlowsRouter extends Backbone.Router
     "investors": "investors"
     "friends": "friends"
     "expensive": "expensive"
-    "celebreties": "celebreties"
+    "sports": "sports"
   
   top: ->
     $('#flows_menu a').removeClass('active')
@@ -56,9 +56,9 @@ class Twitterexchange.Routers.FlowsRouter extends Backbone.Router
     $("#main").html(@view_expensive.render().el)
     @active = @view_expensive
 
-  celebreties: ->
+  sports: ->
     $('#flows_menu a').removeClass('active')
-    $("#flows_menu a#flow_celebreties_link").addClass('active')
-    $("#main").html(@view_celebreties.render().el)
-    @active = @view_celebreties
+    $("#flows_menu a#flow_sports_link").addClass('active')
+    $("#main").html(@view_sports.render().el)
+    @active = @view_sports
 
