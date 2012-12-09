@@ -5,6 +5,11 @@ html lang="en"
     meta name="description" content=""
     meta name="author" content=""
     meta name="keywords" content=""
+
+    /Apple stuff
+    meta name="apple-mobile-web-app-capable" content="yes" 
+    link rel="apple-touch-icon" href="/assets/favicons/64.ico"
+
     - if iphone_request?
       meta name='viewport' content='width=device-width, initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=0;'
     - else
@@ -12,6 +17,10 @@ html lang="en"
     
 
     title Twistock
+
+
+    /Favicon
+    link rel="shortcut icon" href="/assets/favicons/32.ico"
 
     /! Included CSS Files
     = stylesheet_link_tag    "application"
