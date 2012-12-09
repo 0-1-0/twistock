@@ -2,68 +2,51 @@ module UserLogic
   module Flows
     module Global
       SPORTS_NAMES = %w{
+        NickSwisher
+        sashin_rt
+        Carles5puyol
+        cesc4official
+        paulpierce34
+        FloydMayweather
+        DwayneWade
+        andresiniesta8
+        DiegoForlan7
+        RyanScheckler
+        reggie_bush
+        RealLamarOdom
+        WayneRooney
+        serenawilliams
+        DwightHoward
+        Ronaldinho
+        ClaroRonaldo
+        tonyhawk
+        Njr92
+        KingJames
+        ochocinco
         SHAQ
-        Cristiano Ronaldo
-        Adam Schefter
-        Bill Simmons
-        Chad Johnson
-        Dwight Howard
-        Alyssa Milano
-        LAMAR ODOM
-        Mark Sanchez
-        Pete Carroll
-        Warren Sapp
-        Baron Davis
-        Danica Patrick
-        Shaun White
-        bubba watson
-        John Daly
-        Shawne Merriman
-        Kaka
-        KFUCKINGP
-        Charlie Villanueva
-        CC Sabathia
-        Ndamukong Suh
-        NBA
-        Los Angeles Lakers
-        Amar'e Stoudemire
-        John Calipari
-        InsideHoops.com
-        Orlando Magic
-        Boston Celtics
-        Chicago Bulls
-        NBA New York Knicks
-        Jozy Altidore
-        EA SPORTS
-        FIFA.com
-        New York Jets
-        FOX Sports: MLB
-        Jason Terry
-        USA Basketball
-        Bonnie Bernstein
-        C.J. Wilson
-        Jay Crawford
-        MLB Public Relations
-        Merril Hoge
-        US Olympic Team
-        Wimbledon
-        Ricky Rubio
-        Liverpool FC
-        San Francisco Giants
-        Will Kinsler
-        Pau Gasol
-        Chicago Blackhawks
-        Lewis Howes
-        Champ Bailey
-        Maurice Edu
-        New York Rangers
-        Dhani Jones
-        Los Angeles Clippers
-        Atlanta_Falcons
-        OKC THUNDER
-        OAKLAND RAIDERS
-        Minnesota Vikings
-        Urijah Faber
+        Cristiano
+        KAKA
+        JeffGordonWeb
+        MagicJohnson 
+        MikeTyson
+        DjokerNole
+        KDTrey5
+        DwyaneWade
+        MichaelPhelps
+        TimTebow
+        paugasol
+        EmmittSmith22
+        davidortiz 
+        DwightHoward
+        steveaustinBSR 
+        andy_murray
+        ryanlochte 
+        JensonButton
+        Pele
+        LewisHamilton
+        AussieGrit
+        Venuseswilliams 
+        andresiniesta8
       }
 
       # По заданному списку ников выдает массив пользователей.

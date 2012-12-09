@@ -11,7 +11,7 @@
 
       .user-money
         | $#{@user.get('share_price')}
-        == with_sign(@user.get('weekly_price_change'))
+        == with_sign(@user.get('daily_price_change'))
 
 
     .two.mobile-two.columns.statw.pl20
