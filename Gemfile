@@ -104,5 +104,4 @@ gem 'unicorn'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 
-# POSSIBLE DEPRECATION BLOCK
-# нужно уточнить необходимость этих gem'ов
+gem 'newrelic_rpm'

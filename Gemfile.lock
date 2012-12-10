@@ -136,6 +136,7 @@ GEM
       sassy-math (>= 1.2)
     multi_json (1.4.0)
     multipart-post (1.1.5)
+    newrelic_rpm (3.4.1)
     nokogiri (1.5.5)
     oauth (0.4.7)
     omniauth (1.1.1)
@@ -333,6 +334,7 @@ DEPENDENCIES
   jquery-rails
   looksee
   masonry-rails
+  newrelic_rpm
   omniauth
   omniauth-twitter
   pg
