@@ -25,4 +25,11 @@ $(document).ready(function(){
     });
 
 
+    $(document).scroll(function(e){
+        // alert('!');
+        $('#help').css({'height': $(document).height()});
+        
+    })
+
+
 });
