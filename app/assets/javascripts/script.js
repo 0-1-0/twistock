@@ -28,6 +28,11 @@ $(document).ready(function(){
     $(document).scroll(function(e){
         // alert('!');
         $('#help').css({'height': $(document).height()});
+
+        var navigation = $('#magellanNav');
+        if( $('#self-info').height() > $(window).scrollTop() ){
+            navigation.css({'position': 'static'});
+        }
         
     })
 

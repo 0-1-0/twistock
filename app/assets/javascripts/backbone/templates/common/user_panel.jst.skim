@@ -1,4 +1,4 @@
-.row.collapse.user-info
+.row.collapse.user-info#self-info
   .two.mobile-two.columns.statw
 
     a.avatar href=@user.get('url')
