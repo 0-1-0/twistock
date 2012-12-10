@@ -23,10 +23,10 @@
     - Product.where(:published=>true).each do |product|
       = render :partial=>'invoice_form', :locals=>{:product=>product, :product_invoice=>@product_invoice}
 
-- if signed_as_admin?
-  .row
-    hr
-    =link_to 'Manage products', products_path
-    br
-    br
-    =link_to 'Manage invoices', invoices_path
+  - if signed_as_admin?
+    .row
+      hr
+      =link_to 'Manage products', products_path
+      br
+      br
+      =link_to 'Manage invoices', invoices_path
