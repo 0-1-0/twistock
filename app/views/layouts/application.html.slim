@@ -8,7 +8,7 @@ html lang="en"
 
     /Apple stuff
     meta name="apple-mobile-web-app-capable" content="yes" 
-    link rel="apple-touch-icon" href="/assets/favicons/64.ico"
+    link rel="apple-touch-icon" href="/assets/favicons/iOS.png"
 
     - if iphone_request?
       meta name='viewport' content='width=device-width, initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=0;'
@@ -109,7 +109,7 @@ html lang="en"
             $('#user_panel').html(user_panel.render().el)
 
       - else
-        .row.collapse.header-text
+        .row.collapse.header-text#self-info
           .six.columns
             p= t 'main_page.welcome_text'
             
