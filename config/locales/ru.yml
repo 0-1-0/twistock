@@ -92,7 +92,7 @@ ru:
     enter_email:
       text: 'Введи свою почту и получи $100 000'
       label: 'Ваш email:'
-      additional_text: 'Текст с пояснением'
+      additional_text: 
 
 
     set_preferences:

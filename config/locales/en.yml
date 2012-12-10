@@ -92,7 +92,7 @@ en:
     enter_email:
       text: Take $100 000 for your email
       label: 'Your mail:'
-      additional_text: 'Some text with details'
+      additional_text: 
 
     set_preferences:
       social_network: Social network
