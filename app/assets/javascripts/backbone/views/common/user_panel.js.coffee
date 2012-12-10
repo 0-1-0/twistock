@@ -41,16 +41,24 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
   showHistory: (e)->
     $('#historyHoldersTab').html(@holders_tab.render().el)
     $('#historyInvestmentTab').html(@investments_tab.render().el)
-    $('.history').fadeIn(160)
+
+    history = $('.history')
+    history.fadeIn(160)
+    
+    
+    offset = $('#history_btn').offset()
+    offset.top += 25
+    offset.left -= history.width()/2
+    history.offset(offset)
+
+   
 
     $(document).ready ()->
       $(".scroll").mCustomScrollbar()
 
-    l = @
-    $(document).mouseup (e)->
-        container = $(".history")
-        if (container.has(e.target).length == 0)
-          l.closeHistory()
+    $(document).mouseup (e) =>
+        if (history.has(e.target).length == 0)
+          @closeHistory()
 
 
   switchInvestment: ->
@@ -66,7 +74,6 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
   showSettings: ->
     network = $('.network')
     $('.checkbox').checkbox({cls:'checkbox'})
-    $('.price-cont').hide()
     network.fadeIn(160)
 
     offset = $('#settings_btn').offset()
@@ -90,8 +97,9 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     window.current_user.set(@preferences)
     window.current_user.save()
     $('.network').fadeOut(160)
-    $('.price-cont').show()
     
 
   closeHistory:->
     $('.history').fadeOut(160)
+
+

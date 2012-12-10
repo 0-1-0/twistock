@@ -1,22 +1,4 @@
 $(document).ready(function(){
-    // Button Close Dialog (x)
-    $('.close-dialog').on('click', function(){
-        $(this).closest('.bg').fadeOut(160);
-        return false;
-    });
-
-
-
-    // Change dialog
-    $('#header_change').on('click', function(){
-        var network = $('.network');
-
-        $('.dialog').not( network ).fadeOut(160);
-
-        network.fadeIn(160);
-        return false;
-    });
-
 
 
     // Show Help

@@ -23,5 +23,3 @@
 
 //= require job
 //= require script
-// require buy
-// require buy.store

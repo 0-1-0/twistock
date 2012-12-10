@@ -10,12 +10,12 @@ ru:
     cancel: Отмена
 
   user:
-    price: цена
-    money: деньги
+    price: Цена
+    money: Деньги
     today: сегодня
-    history: история
-    week: неделя
-    month: месяц
+    history: История
+    week: Неделя
+    month: Месяц
 
     buy: Купить
     buy_more: Купить еще
@@ -38,7 +38,7 @@ ru:
 
     info:
       investment_portfolio: Ивестиции
-      stock_holders: Держатели акций
+      stock_holders: Держатели моих акций
       owner: Владелец
       holder: Держатель
       count: Количество
@@ -68,14 +68,14 @@ ru:
 
   status:
     share_price:
-      calculating: 'вычисляется...'
-      unavailable:   'недоступно для продажи'
+      calculating: 'Вычисляется...'
+      unavailable:   'Недоступно для продажи'
 
   main_page:
     sign_in: Войти с помощью twitter
     sign_out: Выйти
-    options: настройки
-    buy_real_goods: купить реальные товары
+    options: Настройки
+    buy_real_goods: Потратить деньги
 
     top_menu:
       how_it_works: Как это работает?
