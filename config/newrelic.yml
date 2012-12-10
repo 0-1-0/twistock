@@ -118,7 +118,7 @@ common: &default_settings
   # Java: create a config setting called "ignored_params" and set it to
   #     a comma separated list of HTTP parameter names.
   #     ex: ignored_params: credit_card, ssn, password 
-  capture_params: false
+  capture_params: true
 
 
   # Transaction tracer captures deep information about slow
@@ -150,12 +150,12 @@ common: &default_settings
     # call. In other words, when SQL statements exceed this threshold,
     # then capture and send the current stack trace. This is
     # helpful for pinpointing where long SQL calls originate from
-    stack_trace_threshold: 0.500
+    stack_trace_threshold: 0.080
 
     # Determines whether the agent will capture query plans for slow
     # SQL queries.  Only supported in mysql and postgres.  Should be
     # set to false when using other adapters.
-    # explain_enabled: true
+    explain_enabled: true
 
     # Threshold for query execution time below which query plans will not 
     # not be captured.  Relevant only when `explain_enabled` is true.
