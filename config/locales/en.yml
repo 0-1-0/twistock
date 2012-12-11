@@ -39,8 +39,8 @@ en:
     investment_cost: Value of my investments
 
     info:
-      investment_portfolio: My investments
-      stock_holders: My stock holders
+      investment_portfolio: Investments
+      stock_holders: Stock holders
       owner: Stock owner
       holder: Stock holder
       count: Count
