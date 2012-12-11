@@ -63,6 +63,11 @@ class Twitterexchange.Views.Common.TradeDialog extends Backbone.View
   init_buy_logic: ->
     link = @$(".buy.dialog .action")
     link.unbind()
+    if @model.get('share_price') > current_user.get('money')
+      link.text(I18n.t('buy_dialog.no_money'))
+      link.click (e) ->
+        e.preventDefault()
+      return
 
     link.click (e) =>
       e.preventDefault()
@@ -110,6 +115,11 @@ class Twitterexchange.Views.Common.TradeDialog extends Backbone.View
   init_sell_logic: ->
     link = $(".buy.dialog .action")
     link.unbind()
+    if @model.get('purchased_shares') == 0
+      link.text(I18n.t('buy_dialog.no_shares'))
+      link.click (e) ->
+        e.preventDefault()
+      return
 
     link.click (e) =>
       e.preventDefault()
