@@ -58,17 +58,8 @@ Twitterexchange::Application.routes.draw do
     end
   end
 
-
-  get "main/index"
-
-  resources :top_tweets, only: [:index] do
-    collection do
-      get 'edit_tags'
-      post 'set_tags'
-    end
-  end
-
-  resources :tag, only: [:index, :destroy, :create, :update]
+  resources :top_tweets, only: [:index]
+  #resources :tag, only: [:index, :destroy, :create, :update]
 
   root to: 'main#index'
 

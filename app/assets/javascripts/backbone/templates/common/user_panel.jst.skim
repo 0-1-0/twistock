@@ -59,7 +59,7 @@
 
     .user-money
       | $#{maybe_calculating(@user, 'share_price')}
-      == with_sign maybe_calculating(@user, 'weekly_price_change')
+      == with_sign maybe_calculating(@user, 'daily_price_change')
 
 
   .two.mobile-two.columns.statw.pl20

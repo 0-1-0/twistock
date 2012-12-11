@@ -12,6 +12,7 @@ json.user_avatar                top_tweet.user.avatar
 json.user_share_price           top_tweet.user.share_price
 json.user_base_price            top_tweet.user.base_price
 json.user_weekly_price_change   top_tweet.user.weekly_price_change
+json.user_daily_price_change    top_tweet.user.daily_price_change
 if signed_in?
   json.user_purchased_shares    current_user.shares_of(top_tweet.user)
 end

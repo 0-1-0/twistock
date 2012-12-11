@@ -20,8 +20,4 @@ class Api::TopTweetsController < ApplicationController
                   BestTweet
               end.includes(:user).order{param.desc}.offset((page-1)*TWEETS_PER_PAGE).limit(TWEETS_PER_PAGE)
   end
-
-  def show
-    @tweet = BestTweet.find(params[:id])
-  end
 end
