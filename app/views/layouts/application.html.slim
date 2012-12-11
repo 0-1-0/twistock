@@ -119,4 +119,7 @@ html lang="en"
 
     = yield
 
-    = render :partial=>'shared/help'
+    - if signed_in? and controller_name == 'main'
+      = render partial: 'shared/help'
+    - else
+      = render partial: 'shared/short_help'
