@@ -3,13 +3,13 @@ class Api::TransactionsController < ApplicationController
 
   def index
     @transactions = []
-    current_user.transactions.includes(:owner, :user).reverse.each do |t|
+    current_user.transactions.includes(:owner, :user).order{created_at.desc}.each do |t|
       h = t.attributes
       h['user_name'] = t.owner.nickname
       h['user_url']  = user_path(t.owner)
       h['date'] = t.created_at.to_formatted_s(:short)
 
-      @transactions += [h]
+      @transactions << h
     end
 
     respond_with @transactions
@@ -17,12 +17,12 @@ class Api::TransactionsController < ApplicationController
 
   def history
     @history = []
-    current_user.history.reverse.each do |t|
+    current_user.history.includes(:owner, :user).order{created_at.desc}.each do |t|
       h = t.attributes
       h['user_name'] = t.user.nickname
       h['user_url']  = user_path(t.user)
 
-      @history  += [h]
+      @history  << h
     end
 
     respond_with @history 

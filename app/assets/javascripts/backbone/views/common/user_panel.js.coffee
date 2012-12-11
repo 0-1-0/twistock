@@ -39,6 +39,7 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
       $('#mail-dialog').html(@mail_dialog.render().el)
 
   showHistory: (e)->
+    e.preventDefault()
     $('#historyHoldersTab').html(@holders_tab.render().el)
     $('#historyInvestmentTab').html(@investments_tab.render().el)
 
