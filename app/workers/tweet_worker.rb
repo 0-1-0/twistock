@@ -3,11 +3,11 @@ class TweetWorker
 
   def self.buy_message(transaction)
     message =  "@" + transaction.user_nickname + ' '
-    message += I18n.t(:bought) + ' '
+    message += I18n.t('tweet_worker.bought') + ' '
     message += transaction.count.to_s +  ' '
-    message += I18n.t(:stocks_of) + ' '
+    message += I18n.t('tweet_worker.stocks_of') + ' '
     message +=  "@" + transaction.owner_nickname + ' '
-    message +=  I18n.t(:on_twistock_com)
+    message +=  I18n.t('tweet_worker.on_twistock_com')
 
     TweetWorker.perform_async(transaction.user.id, message)
   end
@@ -15,11 +15,11 @@ class TweetWorker
 
   def self.sell_message(transaction)
     message =  "@" + transaction.user_nickname + ' '
-    message += I18n.t(:sold) + ' '
+    message += I18n.t('tweet_worker.sold') + ' '
     message += transaction.count.to_s +  ' '
-    message += I18n.t(:stocks_of) + ' '
+    message += I18n.t('tweet_worker.stocks_of') + ' '
     message +=  "@" + transaction.owner_nickname + ' '
-    message +=  I18n.t(:on_twistock_com)
+    message +=  I18n.t('tweet_worker.on_twistock_com')
 
     TweetWorker.perform_async(transaction.user.id, message)
   end

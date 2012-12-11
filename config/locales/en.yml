@@ -136,3 +136,9 @@ en:
     investments: Your investments
     more:  More info in our blog
     click_to_buy: Click to buy stocks
+
+  tweet_worker:
+    bought: "bought"
+    sold: 'sold'
+    stocks_of: 'stocks of'
+    on_twistock_com: 'on twistock.com #MonetizeSocialCapital'
