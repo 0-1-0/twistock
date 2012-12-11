@@ -3,7 +3,7 @@ class Api::TransactionsController < ApplicationController
 
   def index
     @transactions = []
-    current_user.transactions.reverse.each do |t|
+    current_user.transactions.includes(:owner, :user).reverse.each do |t|
       h = t.attributes
       h['user_name'] = t.owner.nickname
       h['user_url']  = user_path(t.owner)
