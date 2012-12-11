@@ -28,6 +28,7 @@ class Api::UsersController < ApplicationController
   end
 
   def show
+    @ext  = params['ext']
     @user = User.find(params[:id])
   end
 

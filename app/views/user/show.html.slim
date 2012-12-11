@@ -9,63 +9,9 @@
       coffee:
         $(document).ready ->
           window.user = new Twitterexchange.Models.User(id: user_data)
-          $.when(user.fetch()).then ->
+          $.when(user.fetch(data: {ext: true})).then ->
             window.show_user = new Twitterexchange.Views.Common.ShowUser(model: user, price_log: user_price_log)
             $('.bb_user_part').html(show_user.render().el)
-    .two.columns.user-tw
-      /- if @bos
-      #invdata
-        .tw-blk
-          = t 'user.count_stock'
-          span#user_p_count
-
-        .tw-blk
-          = t 'user.investment_cost'
-          span#user_p_cost
-
-      = link_to 'Twitter', @user.twitter_url, target: :blank
-      - if @user.best_tweet
-        h6 #{t 'top_tweets.top_tweet'}:
-        p= @user.best_tweet.content
-        span
-          i.icon-pr
-          | #{@user.best_tweet.retweets} RT
-        = link_to t('top_tweets.top_tweets'), top_tweets_path
-
-    .two.columns.link-border
-      = t 'user.info.investment_portfolio'
-      table.default
-        thead
-          tr
-            th= t 'user.info.owner'
-            th= t 'user.info.count'
-            th= t 'user.info.one'
-            th= t 'user.info.total'
-        tbody
-          - @portfel.each do |bos|
-            tr
-              td
-                = link_to bos.owner.nickname, bos.owner
-              td
-                = bos.count
-              td #{bos.owner.share_price}$
-              td #{bos.owner.share_price * bos.count}$
-
-    .two.columns
-      = t 'user.info.stock_holders'
-      table.default
-        thead
-          tr
-            th= t 'user.info.holder'
-            th= t 'user.info.count'
-            th= t 'user.info.total'
-        tbody
-          - @my_shares.each do |bos|
-            tr
-              td
-                = link_to bos.holder.nickname, bos.holder
-              td= bos.count
-              td #{bos.count * @user.share_price}$
 - else
   #user.row.bg
     .row

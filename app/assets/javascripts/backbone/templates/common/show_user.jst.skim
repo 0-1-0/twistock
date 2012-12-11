@@ -41,3 +41,64 @@
           - else
             a.button.secondary.radius.btn-buy href='#'= I18n.t('user.buy')
           .buy-dialog style="display: block;"
+
+.two.columns.user-tw
+  /- if @bos
+  #invdata
+    .tw-blk
+      = I18n.t 'user.count_stock'
+      span= @user.get('purchased_shares')
+
+    .tw-blk
+      = I18n.t 'user.investment_cost'
+      span
+        = '$' + @user.get('purchased_shares')*@user.get('share_price') + ' '
+        == with_sign(@user.get('purchased_shares')*@user.get('weekly_price_change'))
+
+  /= link_to 'Twitter', @user.twitter_url, target: :blank
+  a href=@user.get('twitter_url') target='blank' Twitter
+  - if @user.get('best_tweet')
+    - bt = @user.get('best_tweet')
+    h6 #{I18n.t 'top_tweets.top_tweet'}:
+    p= bt.content
+    span
+      i.icon-pr
+      | #{bt.retweets} RT
+    a href='/top_tweets'= I18n.t('top_tweets.top_tweets')
+
+.two.columns.link-border
+  = I18n.t 'user.info.investment_portfolio'
+  table.default
+    thead
+      tr
+        th= I18n.t 'user.info.owner'
+        th= I18n.t 'user.info.count'
+        th= I18n.t 'user.info.one'
+        th= I18n.t 'user.info.total'
+    tbody
+      - @portfel.each (bos) ->
+        tr
+          td
+            a href="/user/#{bos.get('owner').nickname}" = bos.get('owner').nickname
+            /= link_to bos.owner.nickname, bos.owner
+          td
+            = bos.get('count')
+          td #{bos.get('owner').share_price}$
+          td #{bos.get('owner').share_price * bos.get('count')}$
+
+.two.columns
+  = I18n.t 'user.info.stock_holders'
+  table.default
+    thead
+      tr
+        th= I18n.t 'user.info.holder'
+        th= I18n.t 'user.info.count'
+        th= I18n.t 'user.info.total'
+    tbody
+      - @my_shares.each (bos) ->
+        tr
+          td
+            a href="/user/#{bos.get('holder').nickname}" = bos.get('holder').nickname
+            /= link_to bos.holder.nickname, bos.holder
+          td= bos.get('count')
+          td #{bos.get('count') * @user.get('share_price')}$

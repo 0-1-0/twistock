@@ -21,6 +21,7 @@ json.(user,
     :daily_price_change,
     :weekly_price_change,
     :monthly_price_change,
-    :shares_in_stock)
+    :shares_in_stock,
+    :twitter_url)
 json.url user_path(user)
 json.its_you true

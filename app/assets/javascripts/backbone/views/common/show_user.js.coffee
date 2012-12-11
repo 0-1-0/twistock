@@ -9,30 +9,28 @@ class Twitterexchange.Views.Common.ShowUser extends Backbone.View
 
   initialize: ->
     @price_log = @.options.price_log
+
+    @portfel      = new Twitterexchange.Collections.BlockOfShares()
+    @my_shares    = new Twitterexchange.Collections.BlockOfShares()
+
     @model.on('change', @render, this)
     this
 
   render: ->
-    $(@el).html(@template(user: @model))
-    @user_graph = new Twitterexchange.Views.Common.PriceGraph(div_id: 'show_user_graph', data: @price_log)
-    $(@el).find('.grafic').html(@user_graph.render().el)
+    $.when(
+      @portfel.fetch(data: {type: 'portfel', user_id: @model.get('id')}),
+      @my_shares.fetch(data: {type: 'my_shares', user_id: @model.get('id')})
+    ).then =>
+      $(@el).html(@template(user: @model, portfel: @portfel, my_shares: @my_shares))
+      @user_graph = new Twitterexchange.Views.Common.PriceGraph(div_id: 'show_user_graph', data: @price_log)
+      $(@el).find('.grafic').html(@user_graph.render().el)
 
-    unless @model.get('purchased_shares') > 0
-      $('#invdata').hide()
-    else
-      $('#invdata').show()
-
-    @updateOuterData()
+      unless @model.get('purchased_shares') > 0
+        @$('#invdata').hide()
+      else
+        @$('#invdata').show()
 
     return this
-
-  updateOuterData: ->
-    $('#user_p_count').text @model.get('purchased_shares')
-
-    summary_cost = @model.get('purchased_shares')*@model.get('share_price')
-    summary_change = with_sign(@model.get('purchased_shares')*@model.get('weekly_price_change'))
-
-    $('#user_p_cost').html "$#{summary_cost} #{summary_change}"
 
   openTradeDialog: (e) ->
     e.preventDefault()
