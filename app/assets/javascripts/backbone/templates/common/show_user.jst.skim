@@ -60,7 +60,7 @@
   - if @user.get('best_tweet')
     - bt = @user.get('best_tweet')
     h6 #{I18n.t 'top_tweets.top_tweet'}:
-    p= bt.content
+    p== bt.content.linkify_tweet()
     span
       i.icon-pr
       | #{bt.retweets} RT

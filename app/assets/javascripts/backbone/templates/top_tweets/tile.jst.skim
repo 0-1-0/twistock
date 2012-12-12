@@ -3,7 +3,7 @@
   - if @tweet.get('media_url')
     a href=@tweet.get('media_url') target="blank"
       img src=@tweet.get('media_url')
-  p= @tweet.get('content')
+  p== @tweet.get('content').linkify_tweet()
 
   .bott
     a.avatar.small href=@tweet.get('user_path')

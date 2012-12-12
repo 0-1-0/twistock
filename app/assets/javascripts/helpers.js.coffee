@@ -21,6 +21,19 @@ window.maybe_calculating = (model, attr) ->
 window.log10 = (x) ->
   Math.log(x) / Math.LN10
 
+String::linkify_tweet = ->
+  tweet = @replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&\?\/.=]+/g, (url) ->
+    wrap = document.createElement("div")
+    anch = document.createElement("a")
+    anch.href = url
+    anch.target = "_blank"
+    anch.innerHTML = url
+    wrap.appendChild anch
+    wrap.innerHTML
+  )
+  tweet = tweet.replace(/(^|\s)@(\w+)/g, "$1<a href=\"http://www.twitter.com/$2\" target=\"_blank\">@$2</a>")
+  tweet.replace /(^|\s)#((\w|А-Я|а-я)+)/g, "$1<a href=\"http://search.twitter.com/search?q=%23$2\" target=\"_blank\">#$2</a>"
+
 window.StockMath =
   # стоимость покупки
   buy_cost: (count, base_price, shares_in_stock) ->
