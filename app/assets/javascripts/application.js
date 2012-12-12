@@ -15,6 +15,9 @@
 
 // require masonry/jquery.masonry
 
+//= require xregexp/xregexp
+//= require xregexp/unicode-base
+
 //= require helpers
 
 //= require_tree ./extras
