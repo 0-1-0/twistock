@@ -85,12 +85,20 @@ class User < ActiveRecord::Base
       rescue
         return nil
       end
-      user = User.create(  twitter_id:  info.id,
-                           name:        info.name,
-                           nickname:    info.screen_name,
-                           avatar:      info.profile_image_url,
-                           money:       Settings.start_money
-      )
+      if user = User.find_by_twitter_id(info.id)
+        user.update_attributes(  twitter_id:  info.id,
+                                 name:        info.name,
+                                 nickname:    info.screen_name,
+                                 avatar:      info.profile_image_url
+        )
+      else
+        user = User.create(  twitter_id:  info.id,
+                             name:        info.name,
+                             nickname:    info.screen_name,
+                             avatar:      info.profile_image_url,
+                             money:       Settings.start_money
+        )
+      end
       user.update_profile!
       user
     end
