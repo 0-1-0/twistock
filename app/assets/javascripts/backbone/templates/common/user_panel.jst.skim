@@ -57,14 +57,21 @@
             a.button.secondary.radius href="/sign_out" 
               =I18n.t('main_page.set_preferences.sign_out')
 
-    .user-money
-      | $#{maybe_calculating(@user, 'share_price')}
-      == with_sign maybe_calculating(@user, 'daily_price_change')
+    - if @user.get('share_price')
+      .user-money
+        | $#{maybe_calculating(@user, 'share_price')}
+        == with_sign maybe_calculating(@user, 'daily_price_change')
+    - else
+      br
+      - if @user.get('base_price')
+        = I18n.t 'status.share_price.unavailable'
+      - else
+        = I18n.t 'status.share_price.calculating'
 
 
   .two.mobile-two.columns.statw.pl20
     .history-link
-      == "#{I18n.t 'user.money'}: $#{maybe_calculating(@user, 'money')}"
+      == "#{I18n.t 'user.money'}: $#{@user.get('money')}"
       a#history_btn href="#" = I18n.t 'user.history'
       a href="/store" = I18n.t 'main_page.buy_real_goods'
 
@@ -86,16 +93,16 @@
             li#historyInvestmentTab.active
             li#historyHoldersTab
 
-
-    .price-cont#price-cont-today
-      = I18n.t 'user.today'
-      == with_sign maybe_calculating(@user, 'daily_price_change')
-    .price-cont
-      = I18n.t('user.week')
-      == with_sign maybe_calculating(@user, 'weekly_price_change')
-    .price-cont
-      = I18n.t('user.month')
-      == with_sign maybe_calculating(@user, 'monthly_price_change')
+    - if @user.get('share_price')
+      .price-cont#price-cont-today
+        = I18n.t 'user.today'
+        == with_sign maybe_calculating(@user, 'daily_price_change')
+      .price-cont
+        = I18n.t('user.week')
+        == with_sign maybe_calculating(@user, 'weekly_price_change')
+      .price-cont
+        = I18n.t('user.month')
+        == with_sign maybe_calculating(@user, 'monthly_price_change')
 
   .two.columns.grafic
     /img class="grafic right" src="/images/grafic.png"

@@ -9,38 +9,46 @@
       span.name
         | @#{@user.get('nickname')} (#{@user.get('name')})
 
-      .user-money
-        | $#{@user.get('share_price')}
-        == with_sign(@user.get('daily_price_change'))
-
+      - if @user.get('share_price')
+        .user-money
+          | $#{@user.get('share_price')}
+          == with_sign(@user.get('daily_price_change'))
+      - else
+        br
+        - if @user.get('base_price')
+          = I18n.t 'status.share_price.unavailable'
+        - else
+          = I18n.t 'status.share_price.calculating'
 
     .two.mobile-two.columns.statw.pl20
       .history-link
         span
 
-      .price-cont
-        = I18n.t 'user.today'
-        == with_sign(@user.get('daily_price_change'))
-      .price-cont
-        = I18n.t 'user.week'
-        == with_sign(@user.get('weekly_price_change'))
-      .price-cont
-        = I18n.t 'user.month'
-        == with_sign(@user.get('monthly_price_change'))
+      - if user.get('share_price')
+        .price-cont
+          = I18n.t 'user.today'
+          == with_sign(@user.get('daily_price_change'))
+        .price-cont
+          = I18n.t 'user.week'
+          == with_sign(@user.get('weekly_price_change'))
+        .price-cont
+          = I18n.t 'user.month'
+          == with_sign(@user.get('monthly_price_change'))
 
     .two.columns.grafic
 
 .row
   hr
   .six.columns
-    ul.button-group.radius.even.two-up
-      li
-        div.dialog-pin style="display: inline-block; position: relative;"
-          - if @user.get('purchased_shares') > 0
-            a.button.secondary.radius.btn-buy.btn-buy-more style='width: 120px' href='#'= I18n.t('user.buy_more')
-          - else
-            a.button.secondary.radius.btn-buy href='#'= I18n.t('user.buy')
-          .buy-dialog style="display: block;"
+    - if @user.get('share_price')
+      ul.button-group.radius.even.two-up
+        li
+          div.dialog-pin style="display: inline-block; position: relative;"
+            - if @user.get('purchased_shares') > 0
+              a.button.secondary.radius.btn-buy.btn-buy-more style='width: 120px' href='#'= I18n.t('user.buy_more')
+            - else
+              a.button.secondary.radius.btn-buy href='#'= I18n.t('user.buy')
+            .buy-dialog style="display: block;"
 
 .two.columns.user-tw
   /- if @bos
