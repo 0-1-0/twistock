@@ -6,6 +6,8 @@ class PriceLog < ActiveRecord::Base
 
   class << self
     def get_user_log(user, opts = {})
+      return [] unless user.share_price
+
       query = PriceLog.where(user_id: user.id).order{created_at.asc}
       if opts[:from] and opts[:to]
         query = query.where{ (created_at >= opts[:from]) & (created_at <= opts[:to])}

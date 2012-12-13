@@ -2,8 +2,11 @@
 
 - if @user
   javascript:
-    window.user_price_log = #{PriceLog.get_user_log(@user, for: 1.week).map {|x| [x[1].to_i*1000, x[0]]}.inspect}
-    window.user_data = #{@user.id}
+    (function() {
+      window.user_price_log = #{PriceLog.get_user_log(@user, for: 1.week).map {|x| [x[1].to_i*1000, x[0]]}.inspect};
+      window.user_data = #{@user.id};
+    }).call(this);
+
   #user.row.bg
     div.bb_user_part
       coffee:
