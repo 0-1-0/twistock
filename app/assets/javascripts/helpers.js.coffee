@@ -32,7 +32,7 @@ String::linkify_tweet = ->
     wrap.innerHTML
   )
   tweet = tweet.replace(/(^|\s)@(\w+)/g, "$1<a href=\"http://www.twitter.com/$2\" target=\"_blank\">@$2</a>")
-  XRegExp.replace(tweet, XRegExp('(^|\\s)#(\\p{L}+)', 'g'), "$1<a href=\"http://search.twitter.com/search?q=%23$2\" target=\"_blank\">#$2</a>")
+  XRegExp.replace(tweet, XRegExp('(^|\\s)#([\\p{L}0-9]+)', 'g'), "$1<a href=\"http://search.twitter.com/search?q=%23$2\" target=\"_blank\">#$2</a>")
 
 window.StockMath =
   # стоимость покупки
