@@ -8,7 +8,7 @@ ru:
     buy: Купить
     sell: Продать
     cancel: Отмена
-    no_money: Нет денег
+    no_money: Недостаточно денег
     no_shares: Нет акций
 
   user:

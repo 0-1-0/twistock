@@ -10,15 +10,19 @@ class Twitterexchange.Views.Common.TradeDialog extends Backbone.View
   initialize: ->
     @parent_btn = @.options.parent_btn
     l = @
-    #$(document).mouseup (e)->
-    #  container = $(".buy.dialog")
-    #  if (container.has(e.target).length == 0)
-    #    l.destroy()
 
   render: ->
     $(@el).html(@template())
     @init_buy_slider()
     return this
+
+  buttonToText: (btn) ->
+    btn.removeClass('button primary secondary radius')
+    btn.attr 'style', 'color: black; font-size: 20px; line-height: 40px;'
+
+  normailizeButton: (btn) ->
+    btn.attr 'style', ''
+    btn.addClass('button radius')
 
   show: ->
     @$('.buy.dialog').fadeIn()
@@ -49,7 +53,8 @@ class Twitterexchange.Views.Common.TradeDialog extends Backbone.View
   switchMode: (e) ->
     x = $('.btn-checkbox input')
     block = x.parent()
-    btn = x.closest(".dialog").find(".button")
+    btn = x.closest(".dialog").find(".action")
+    @normailizeButton(btn)
     block.find("a").toggleClass "active"
     if x.is(":checked")
       btn.removeClass("primary").addClass("secondary").text(I18n.t("buy_dialog.sell"))
@@ -64,6 +69,7 @@ class Twitterexchange.Views.Common.TradeDialog extends Backbone.View
     link = @$(".buy.dialog .action")
     link.unbind()
     if @model.get('share_price') > current_user.get('money')
+      @buttonToText(link)
       link.text(I18n.t('buy_dialog.no_money'))
       link.click (e) ->
         e.preventDefault()
@@ -116,6 +122,7 @@ class Twitterexchange.Views.Common.TradeDialog extends Backbone.View
     link = $(".buy.dialog .action")
     link.unbind()
     if @model.get('purchased_shares') == 0
+      @buttonToText(link)
       link.text(I18n.t('buy_dialog.no_shares'))
       link.click (e) ->
         e.preventDefault()

@@ -8,7 +8,7 @@ en:
     buy: Buy
     sell: Sell
     cancel: Cancel
-    no_money: No money
+    no_money: Not enough money
     no_shares: No shares
 
   user:
