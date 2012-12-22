@@ -121,7 +121,7 @@ class User < ActiveRecord::Base
   end
 
   def profile_image
-    avatar.sub("_normal", "")
+    avatar.sub("_normal", "_bigger")
   end
 
   # Twitter client methods
