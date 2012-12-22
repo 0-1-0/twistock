@@ -12,23 +12,39 @@ class Twitterexchange.Views.TopTweets.Flow extends Backbone.View
     this
 
   render: ->
-    $(@el).html(@template())
+    $(@el).attr('id', 'tiles').html(@template())
     $.when(tweets.fetch(data: {flow: @flow})).then =>
-      tweets.each(@appendTile, this)
+      $(@el).masonry
+        itemSelector: '.box'
+        isAnimated: false
+        columnWidth: 10
+      @appendTiles(tweets)
 
-      @$("#tiles").imagesLoaded =>
-        options =
-          autoResize: true
-          container: @$("#tiles")
-          offset: 13
-          itemWidth: @$("#tiles .bg").outerWidth()
 
-        @$("#tiles li").wookmark options
+      #@$("#tiles").imagesLoaded =>
+      #  options =
+      #    autoResize: true
+      #    container: @$("#tiles")
+      #    offset: 13
+      #    itemWidth: @$("#tiles .bg").outerWidth()
+
+      #  @$("#tiles li").wookmark options
     return this
 
-  appendTile: (tweet) ->
-    tile = new Twitterexchange.Views.TopTweets.Tile(model: tweet)
-    @$('ul').append tile.render().el
+  appendTiles: (tweets) ->
+
+    x = tweets.map (tweet) ->
+      tile = new Twitterexchange.Views.TopTweets.Tile(model: tweet)
+      $(tile.render().el)
+    y = _.reduce x,
+      (memo, key) ->
+        memo.add(key)
+      , $('')
+
+    cont = $(@el)
+    cont.append(y).imagesLoaded ->
+      cont.masonry('appended', y);
+      cont.find('.box').removeClass('hidden')
 
   add_tiles: ->
     if @has_more_pages
@@ -39,13 +55,4 @@ class Twitterexchange.Views.TopTweets.Flow extends Backbone.View
           @has_more_pages = false
         else
           models = tweets.models[before..tweets.length-1]
-          _.each(models, @appendTile, this)
-
-          @$(" #tiles").imagesLoaded =>
-            options =
-              autoResize: true
-              container: @$("#tiles")
-              offset: 13
-              itemWidth: @$("#tiles .bg").outerWidth()
-
-            @$("#tiles li").wookmark options
+          @appendTiles(tweets)

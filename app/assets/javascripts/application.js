@@ -13,7 +13,7 @@
 // require backbone_datalink
 //= require backbone/twitterexchange
 
-// require masonry/jquery.masonry
+//= require masonry/jquery.masonry
 
 //= require xregexp/xregexp
 //= require xregexp/unicode-base

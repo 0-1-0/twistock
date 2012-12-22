@@ -3,7 +3,7 @@ Twitterexchange.Views.TopTweets ||= {}
 class Twitterexchange.Views.TopTweets.Tile extends Backbone.View
   template: JST["backbone/templates/top_tweets/tile"]
 
-  tagName: 'li'
+  tagName: 'div'
 
   events:
     'click .btn-buy:not(.buy-cancel)':  'openTradeDialog'
@@ -14,7 +14,7 @@ class Twitterexchange.Views.TopTweets.Tile extends Backbone.View
     this
 
   render: ->
-    $(@el).html(@template(tweet: @model))
+    $(@el).addClass('box hidden').html(@template(tweet: @model))
     return this
 
   openTradeDialog: (e) ->
