@@ -20,19 +20,9 @@ class Twitterexchange.Views.TopTweets.Flow extends Backbone.View
         columnWidth: 10
       @appendTiles(tweets)
 
-
-      #@$("#tiles").imagesLoaded =>
-      #  options =
-      #    autoResize: true
-      #    container: @$("#tiles")
-      #    offset: 13
-      #    itemWidth: @$("#tiles .bg").outerWidth()
-
-      #  @$("#tiles li").wookmark options
     return this
 
   appendTiles: (tweets) ->
-
     x = tweets.map (tweet) ->
       tile = new Twitterexchange.Views.TopTweets.Tile(model: tweet)
       $(tile.render().el)
@@ -42,7 +32,8 @@ class Twitterexchange.Views.TopTweets.Flow extends Backbone.View
       , $('')
 
     cont = $(@el)
-    cont.append(y).imagesLoaded ->
+    cont.append(y)
+    y.imagesLoaded ->
       cont.masonry('appended', y);
       cont.find('.box').removeClass('hidden')
 
@@ -55,4 +46,4 @@ class Twitterexchange.Views.TopTweets.Flow extends Backbone.View
           @has_more_pages = false
         else
           models = tweets.models[before..tweets.length-1]
-          @appendTiles(tweets)
+          @appendTiles(models)
