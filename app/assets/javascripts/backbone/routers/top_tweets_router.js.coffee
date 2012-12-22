@@ -15,11 +15,21 @@ class Twitterexchange.Routers.TopTweetsRouter extends Backbone.Router
 
 
   routes:
-    "":         'all'
+    "":         'initial'
     'all':      'all'
     'ru':       'russian'
     'en':       'english'
     'friends':  'friends'
+
+  initial: ->
+    window.location.hash =
+      if I18n.locale == 'ru'
+        'ru'
+      else
+        if I18n.locale == 'en'
+          'en'
+        else
+          'all'
 
   all: ->
     $('#tt_menu a').removeClass('active')
