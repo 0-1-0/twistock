@@ -10,7 +10,8 @@ json.(user,
     :daily_price_change,
     :weekly_price_change,
     :monthly_price_change,
-    :twitter_url)
+    :twitter_url,
+    :email_bonus)
 
 if signed_in?
   json.purchased_shares current_user.shares_of(user)

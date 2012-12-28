@@ -35,7 +35,9 @@ class Api::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user == current_user
-      respond_with(@user.update_attributes(params[:user]))
+      resp = @user.update_attributes(params[:user])
+      @user.check_bonus
+      respond_with(resp)
     else
       respond_with({error: 'Access denied!'}, status: 503)
     end

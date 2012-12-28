@@ -14,8 +14,7 @@ class UserController < ApplicationController
   def set_mail
     @user = User.find_by_nickname params[:id]
     @user.email = params[:email]
-    @user.money += 100000
-    @user.save
+    @user.check_bonus
 
     redirect_to :back
   end

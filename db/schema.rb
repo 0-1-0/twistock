@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121125131147) do
+ActiveRecord::Schema.define(:version => 20121228174042) do
 
   create_table "best_tweets", :force => true do |t|
     t.integer  "user_id"
@@ -83,17 +83,6 @@ ActiveRecord::Schema.define(:version => 20121125131147) do
 
   add_index "price_logs", ["user_id"], :name => "index_price_logs_on_user_id"
 
-  create_table "price_stamps", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "price"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "previous_price"
-    t.integer  "delta"
-  end
-
-  add_index "price_stamps", ["user_id"], :name => "index_price_stamps_on_user_id"
-
   create_table "product_invoices", :force => true do |t|
     t.string   "product_name"
     t.string   "country"
@@ -159,7 +148,7 @@ ActiveRecord::Schema.define(:version => 20121125131147) do
     t.string   "token"
     t.string   "secret"
     t.boolean  "activated",                         :default => false
-    t.string   "locale",                            :default => "en"
+    t.string   "locale"
     t.boolean  "twitter_translation",               :default => true
     t.integer  "share_price"
     t.integer  "popularity"
@@ -167,6 +156,7 @@ ActiveRecord::Schema.define(:version => 20121125131147) do
     t.integer  "daily_price_change"
     t.integer  "weekly_price_change"
     t.integer  "monthly_price_change"
+    t.boolean  "email_bonus"
   end
 
   add_index "users", ["nickname"], :name => "index_users_on_nickname", :unique => true

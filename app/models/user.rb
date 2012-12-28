@@ -165,4 +165,12 @@ class User < ActiveRecord::Base
     email 
   end
 
+  def check_bonus
+    if (not email_bonus) and email
+      self.money += 100000
+      self.email_bonus = true
+      save
+    end
+  end
+
 end

@@ -34,7 +34,7 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     @$('.grafic').html(@graph.render().el)
 
   renderMailDialog: ->
-    if !@user.get('email')
+    if !@user.get('email_bonus')
       @mail_dialog = new Twitterexchange.Views.Common.MailDialog()
       $('#mail-dialog').html(@mail_dialog.render().el)
 
