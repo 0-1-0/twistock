@@ -22,6 +22,8 @@ end
 
 gem 'jquery-rails'
 
+gem 'clockwork'
+
 # Оказывается SLIM быстрее HAML
 gem 'slim-rails'
 gem 'slim', '~> 1.2.2'

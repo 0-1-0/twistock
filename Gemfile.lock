@@ -47,6 +47,8 @@ GEM
     childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
     chunky_png (1.2.6)
+    clockwork (0.4.1)
+      tzinfo
     code_analyzer (0.3.0)
       sexp_processor
     coderay (1.0.8)
@@ -320,6 +322,7 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
+  clockwork
   coffee-rails (~> 3.2.2)
   compass-rails
   database_cleaner
