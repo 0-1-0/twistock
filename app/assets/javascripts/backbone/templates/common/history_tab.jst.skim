@@ -7,7 +7,7 @@ table.default
       th =I18n.t('user.info.one')
       th =I18n.t('user.info.total')
   tbody
-    - transactions.each (transaction) ->
+    - @transactions.each (transaction) ->
       tr
         td 
           a href="#{transaction.get('user_url')}" 

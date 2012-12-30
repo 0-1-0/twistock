@@ -71,6 +71,8 @@ group :development do
   gem 'rails_best_practices'
   gem 'quiet_assets'
   gem 'thin'
+
+  gem 'meta_request', '0.2.0' # for rails panel chrome plugin
 end
 
 # --- BDD фреймворки

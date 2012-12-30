@@ -17,7 +17,7 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     @user = current_user
     @data = current_user_price_log
     @user.on('change', @render, this)
-    @holders_tab = new Twitterexchange.Views.Common.HistoryTab(collection: window.history)
+    @holders_tab = new Twitterexchange.Views.Common.HistoryTab(collection: window.uhistory)
     @investments_tab = new Twitterexchange.Views.Common.HistoryTab(collection: window.transactions)
     # $('#historyHoldersTab').html(history_tab.render().el)
     @preferences = {}
@@ -62,14 +62,16 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
           @closeHistory()
 
 
-  switchInvestment: ->
-    $('historyHoldersTab').hide()
+  switchInvestment: (e) ->
+    e.preventDefault()
+    $('#historyHoldersTab').hide()
     $('#historyInvestmentTab').show()
     $(".scroll").mCustomScrollbar("update")
 
-  switchHolders: ->
+  switchHolders: (e) ->
+    e.preventDefault()
     $('#historyInvestmentTab').hide()
-    $('historyHoldersTab').show()
+    $('#historyHoldersTab').show()
     $(".scroll").mCustomScrollbar("update")
 
   showSettings: ->
