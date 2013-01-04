@@ -16,8 +16,11 @@ class Twitterexchange.Views.Common.MailDialog extends Backbone.View
   saveMail: ->
     @user = window.current_user
     @email = $('#input-mail-dialog').val()
-    @money = @user.get('money')
     window.current_user.set({'email': @email})
-    window.current_user.save()
+    $.when(
+      window.current_user.save()
+    ).then =>
+      window.current_user.fetch()
+    
     @$('.close-reveal-modal').click()
     $('#mail-dialog').hide()
