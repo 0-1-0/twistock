@@ -45,8 +45,7 @@ class Api::UsersController < ApplicationController
 
   def price_log
     @user = User.find(params[:id])
-    PriceLog.get_user_log(@user, for: 1.week).map {|x| [x[1].to_i*1000, x[0]]}
-    respond_with
+    respond_with PriceLog.get_user_log(@user, for: 1.week).map {|x| [x[1].to_i*1000, x[0]]}
   end
 
   def buy
