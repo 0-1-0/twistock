@@ -4,4 +4,4 @@ require 'clockwork'
 
 include Clockwork
 
-every(12.hours,  'Mass user update') { User.update_all_profiles }
+every(24.hours,  'Mass user update') { User.update_all_profiles }
