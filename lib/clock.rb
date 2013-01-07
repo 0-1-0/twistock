@@ -4,4 +4,4 @@ require 'clockwork'
 
 include Clockwork
 
-every(24.hours,  'Mass user update') { User.update_all_profiles }
+every(3.hours,  'Start random price fluctuation') { User.gen_price_fluctuation }
