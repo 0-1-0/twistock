@@ -15,6 +15,6 @@ class Api::BlockOfSharesController < ApplicationController
   end
 
   def show
-    respond_with BlockOfShares.find(params[:id])
+    respond_with BlockOfShares.find(params[:id]).as_json(include: [:owner, :holder])
   end
 end
