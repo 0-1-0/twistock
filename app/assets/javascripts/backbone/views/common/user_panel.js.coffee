@@ -132,11 +132,10 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
   closeSettings: ->
     if !@network_visible
       window.current_user.set(@preferences)
-      window.current_user.save()
-      $('.network').fadeOut(160)
-
-      if @preferences.locale
-        window.location.reload()
+      $.when(window.current_user.save()).then =>
+        $('.network').fadeOut(160)
+        if @preferences.locale
+          window.location.reload()
     
 
   closeHistory:->
