@@ -1,11 +1,18 @@
 Twitterexchange.Views.Common ||= {}
 
+Array::chunk = (chunkSize) ->
+  array = this
+  [].concat.apply [], array.map((elem, i) ->
+    (if i % chunkSize then [] else [array.slice(i, i + chunkSize)])
+  )
+
 class Twitterexchange.Views.Common.ShowUser extends Backbone.View
   template: JST["backbone/templates/common/show_user"]
 
   events:
     'click .btn-buy:not(.buy-cancel)':  'openTradeDialog'
     'click .btn-buy.buy-cancel':        'closeTradeDialog'
+    'click .page_switch':       'page_switch'
 
   initialize: ->
     @price_log = @.options.price_log
@@ -21,7 +28,14 @@ class Twitterexchange.Views.Common.ShowUser extends Backbone.View
       @portfel.fetch(data: {type: 'portfel', user_id: @model.get('id')}),
       @my_shares.fetch(data: {type: 'my_shares', user_id: @model.get('id')})
     ).then =>
-      $(@el).html(@template(user: @model, portfel: @portfel, my_shares: @my_shares))
+      portfel_pages   = @portfel.models.chunk(10)
+      my_shares_pages = @my_shares.models.chunk(10)
+      $(@el).html(@template(user: @model, portfel: portfel_pages, my_shares: my_shares_pages))
+
+      @$('#portfel tr[page=1]').show()
+      @$('#my_shares tr[page=1]').show()
+      @$('.page_switch[page=1]').addClass('active').attr('style', 'color: black;')
+
       @user_graph = new Twitterexchange.Views.Common.PriceGraph(div_id: 'show_user_graph', data: @price_log)
       $(@el).find('.grafic').html(@user_graph.render().el)
 
@@ -31,6 +45,20 @@ class Twitterexchange.Views.Common.ShowUser extends Backbone.View
         @$('#invdata').show()
 
     return this
+
+  page_switch: (e) ->
+    e.preventDefault()
+
+    x = $(e.target)
+    p = x.parent()
+
+    p.find('.page_switch.active').removeClass('active').removeAttr('style')
+    x.addClass('active').attr('style', 'color: black;')
+
+    page = x.attr('page')
+    p.find("table tr[page=#{page}]").show()
+    p.find("table tr[page!=#{page}]").hide()
+
 
   openTradeDialog: (e) ->
     e.preventDefault()

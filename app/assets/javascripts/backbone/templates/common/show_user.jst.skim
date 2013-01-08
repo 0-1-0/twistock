@@ -76,7 +76,7 @@
 
 .two.columns.link-border
   = I18n.t 'user.info.investment_portfolio'
-  table.default
+  table.default#portfel
     thead
       tr
         th= I18n.t 'user.info.owner'
@@ -84,29 +84,42 @@
         th= I18n.t 'user.info.one'
         th= I18n.t 'user.info.total'
     tbody
-      - @portfel.each (bos) ->
-        tr
-          td
-            a href="/user/#{bos.get('owner').nickname}" = bos.get('owner').nickname
-            /= link_to bos.owner.nickname, bos.owner
-          td
-            = bos.get('count')
-          td #{bos.get('owner').share_price}$
-          td #{bos.get('owner').share_price * bos.get('count')}$
+      - _.each @portfel, (page, index) ->
+        - _.each page, (bos) ->
+          tr page=index+1 style="display: none;"
+            td
+              a href="/user/#{bos.get('owner').nickname}" = bos.get('owner').nickname
+              /= link_to bos.owner.nickname, bos.owner
+            td
+              = bos.get('count')
+            td #{bos.get('owner').share_price}$
+            td #{bos.get('owner').share_price * bos.get('count')}$
+  - if @portfel.length > 1
+    br
+    - _.each _.range(1, @portfel.length+1), (i) ->
+      a.page_switch href="#" page=i = i
+      div style="width: 7px; display: inline-block;"
 
 .two.columns
   = I18n.t 'user.info.stock_holders'
-  table.default
+  table.default#my_shares
     thead
       tr
         th= I18n.t 'user.info.holder'
         th= I18n.t 'user.info.count'
         th= I18n.t 'user.info.total'
     tbody
-      - @my_shares.each (bos) ->
-        tr
-          td
-            a href="/user/#{bos.get('holder').nickname}" = bos.get('holder').nickname
-            /= link_to bos.holder.nickname, bos.holder
-          td= bos.get('count')
-          td #{bos.get('count') * @user.get('share_price')}$
+      - _.each @my_shares, (page, index) ->
+        - _.each page, (bos) ->
+          tr page=index+1 style="display: none;"
+            td
+              a href="/user/#{bos.get('holder').nickname}" = bos.get('holder').nickname
+              /= link_to bos.holder.nickname, bos.holder
+            td= bos.get('count')
+            td #{bos.get('count') * @user.get('share_price')}$
+  - if @my_shares.length > 1
+    br
+    - _.each _.range(1, @my_shares.length+1), (i) ->
+      a.page_switch href="#" page=i = i
+      div style="width: 7px; display: inline-block;"
+
