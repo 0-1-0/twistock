@@ -45,6 +45,7 @@
           .three.mobile-two.columns 
             =I18n.t('main_page.set_preferences.money')
             span 
+              |   
               =I18n.t('main_page.set_preferences.its_not_real')
           .three.mobile-two.columns: ul.button-group.radius.even.four-up
             li: a.button.disabled.secondary.radius href="#" $

@@ -8,8 +8,8 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     'click .close-dialog':          'closeHistory'
     'click #historyBtnInvestment':  'switchInvestment'
     'click #historyBtnHolders':     'switchHolders'
-    'click #settings_btn':          'showSettings'
-    'click #close-settings':        'closeSettings'
+    'click #settings_btn':          'toggleSettings'
+    'click #close-settings':        'toggleSettings'
     'change #transalation-checkbox':'updateTwitterTranslationSetting'
     'change #preferences-mail':     'updateEmail'
 
@@ -21,6 +21,7 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     @investments_tab = new Twitterexchange.Views.Common.HistoryTab(collection: window.transactions)
     # $('#historyHoldersTab').html(history_tab.render().el)
     @preferences = {}
+    @network_visible = false
 
   render: ->
     $(@el).html(@template(user: @user, _this: this))
@@ -39,7 +40,6 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
       $('#mail-dialog').html(@mail_dialog.render().el)
 
   showHistory: (e)->
-    e.preventDefault()
     $('#historyHoldersTab').html(@holders_tab.render().el)
     $('#historyInvestmentTab').html(@investments_tab.render().el)
 
@@ -60,6 +60,7 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     $(document).mouseup (e) =>
         if (history.has(e.target).length == 0)
           @closeHistory()
+          
 
 
   switchInvestment: (e) ->
@@ -74,20 +75,34 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     $('#historyHoldersTab').show()
     $(".scroll").mCustomScrollbar("update")
 
+  toggleSettings: (e) ->
+    if @network_visible  
+      @network_visible = false    
+      @closeSettings()      
+    else
+      @network_visible = true
+      @showSettings()
+
+
   showSettings: ->
-    network = $('.network')
-    $('.checkbox').checkbox({cls:'checkbox'})
-    network.fadeIn(160)
+    if @network_visible
+      network = $('.network')
+      $('.checkbox').checkbox({cls:'checkbox'})
+      network.fadeIn(160)
 
-    offset = $('#settings_btn').offset()
-    offset.top += 25
-    offset.left -= (network.width()/2 +10)
-    network.offset(offset)
+      offset = $('#settings_btn').offset()
+      offset.top += 25
+      offset.left -= (network.width()/2 +10)
+      network.offset(offset)
 
-    $(document).mouseup (e) =>
-      container = $(".network")
-      if (container.has(e.target).length == 0)
-        @closeSettings()
+      $(document).mouseup (e) =>
+        container = $(".network")
+        container2 = $('#settings_btn')
+        if (container.has(e.target).length == 0 and container2.has(e.target).length == 0)
+          @network_visible = false
+          @closeSettings()
+
+
 
   updateTwitterTranslationSetting: (e)->
     @preferences['twitter_translation'] = !e.target.checked
@@ -97,9 +112,10 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     
 
   closeSettings: ->
-    window.current_user.set(@preferences)
-    window.current_user.save()
-    $('.network').fadeOut(160)
+    if !@network_visible
+      window.current_user.set(@preferences)
+      window.current_user.save()
+      $('.network').fadeOut(160)
     
 
   closeHistory:->
