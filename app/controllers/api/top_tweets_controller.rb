@@ -8,6 +8,14 @@ class Api::TopTweetsController < ApplicationController
     page = params[:page] || 1
     page = page.to_i
 
+    if flow == 'three'
+      ids = BestTweet.where{media_url == nil}.where{lang == I18n.locale.to_s}.order{param.desc}.limit(60).select(:id).map(&:id)
+      ids.shuffle!
+
+      @tweets = BestTweet.where{id.in ids[0..2]}.includes(:user)
+      return
+    end
+
     @tweets = case flow
                 when 'ru'
                   BestTweet.where{lang == 'ru'}

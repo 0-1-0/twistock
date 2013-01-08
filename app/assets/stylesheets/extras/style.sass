@@ -663,7 +663,7 @@ hr
 // ----
 // Top
 // ----
-#top
+#top, .top-like
   position: relative
   width: 1020px
   .block-grid
@@ -675,6 +675,11 @@ hr
     overflow: inherit
     width: auto
   .box
+    &.fixh
+      .bg
+        p
+          min-height: 70px
+        height: 150px
     margin: 8px 4px
   .bg
     width: 325px
@@ -718,6 +723,11 @@ hr
       float: right
       margin-top: 5px
 
+.top-like
+  padding: 0 !important
+  height: 165px
+  .box
+    margin-right: 10px
 
 // ----------
 // Investment

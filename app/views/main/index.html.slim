@@ -1,5 +1,7 @@
 coffee:
   $(document).ready ->
+    window.user_panel.do_tweet_render = true
+    window.user_panel.renderTweets()
     new Twitterexchange.Routers.FlowsRouter()
     Backbone.history.start()
 

@@ -10,11 +10,15 @@ class Twitterexchange.Views.TopTweets.Tile extends Backbone.View
     'click .btn-buy.buy-cancel':        'closeTradeDialog'
 
   initialize: ->
+    @simple = @.options.simple
     @model.on('change', @render, this)
     this
 
   render: ->
-    $(@el).addClass('box hidden').html(@template(tweet: @model))
+    if @simple
+      $(@el).addClass('box fixh').html(@template(tweet: @model))
+    else
+      $(@el).addClass('box hidden').html(@template(tweet: @model))
     return this
 
   openTradeDialog: (e) ->
