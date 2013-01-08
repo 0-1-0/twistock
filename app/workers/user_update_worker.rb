@@ -89,6 +89,7 @@ class UserUpdateWorker
       if twitter_user.protected # запрещать покупку таких пользователей
         logger.info 'User is protected !!! =('
         user.base_price  = -1 # -1 - значит нельзя покупать
+        user.share_price = nil
         user.save
 
         return user

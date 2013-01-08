@@ -4,10 +4,10 @@ class User < ActiveRecord::Base
   has_many :portfel,        class_name: BlockOfShares, foreign_key: :holder_id
   has_many :my_investments, through: :portfel, source: :owner
 
-  has_many :my_shares,    class_name: BlockOfShares,  foreign_key: :owner_id
-  has_many :my_holders,   through: :my_shares,        source: :holder
+  has_many :my_shares,      class_name: BlockOfShares,  foreign_key: :owner_id
+  has_many :my_holders,     through: :my_shares,        source: :holder
 
-  has_many :history,    class_name: Transaction, foreign_key: :owner_id
+  has_many :history,        class_name: Transaction, foreign_key: :owner_id
   has_many :transactions
 
   has_many :product_invoices
@@ -105,7 +105,7 @@ class User < ActiveRecord::Base
     def gen_price_fluctuation(delta = 3)
       User.select(:id).all.map(&:id).each do |id|
         u = User.find(id)
-        if u.base_price
+        if u.base_price and (not u.is_protected?)
           u.base_price = [u.base_price + rand(2*delta+1) - delta, 1].max
           u.update_share_price
           u.save
