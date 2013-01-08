@@ -104,7 +104,8 @@ class User < ActiveRecord::Base
     end
 
     def gen_price_fluctuation(delta = 3)
-      User.all.each do |u|
+      User.select(:id).all.map(&:id).each do |id|
+        u = User.find(id)
         if u.base_price
           u.base_price = [u.base_price + rand(2*delta+1) - delta, 1].max
           u.update_share_price
