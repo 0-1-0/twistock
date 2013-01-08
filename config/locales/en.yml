@@ -55,7 +55,7 @@ en:
     all: All
     russian: Russian
     english: English
-    friends: Friends
+    friends: My Friends
 
   blog:
     all: 'All'
@@ -114,7 +114,7 @@ en:
       top: Top
       my_investments: My investments
       my_holders: My stock holders
-      friends: Friends
+      friends: My Friends
       expensive: Most expensive
       sports: Sports
 

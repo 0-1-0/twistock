@@ -84,7 +84,7 @@
 
   .two.mobile-two.columns.statw.pl20
     .history-link
-      == "#{I18n.t 'user.money'}: $#{@user.get('money')}"
+      span.money== "#{I18n.t 'user.money'}: $#{@user.get('money')}"
       a#history_btn href="#" = I18n.t 'user.history'
       a href="/store" = I18n.t 'main_page.buy_real_goods'
 
