@@ -9,12 +9,11 @@ class User < ActiveRecord::Base
 
   has_many :history,    class_name: Transaction, foreign_key: :owner_id
   has_many :transactions
-  has_one  :best_tweet
 
   has_many :product_invoices
   has_many :price_logs
 
-  has_one :best_tweet
+  has_many :best_tweets
 
 
   # ACCESSORS

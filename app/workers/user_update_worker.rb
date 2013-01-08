@@ -24,7 +24,7 @@ class UserUpdateWorker
       .tap { logger.info 'Fetched user timeline from twitter' }
   end
 
-  def get_best_tweet(timeline, prev_best_retweets, followers_count)
+  def get_best_tweet(timeline, prev_best_retweets, followers_count, used_tweets = [])
     best_tweet = BestTweet.new(retweets: 0)
 
     top_time_gate     = Time.now - Settings.best_tweet_update_delay
@@ -32,7 +32,7 @@ class UserUpdateWorker
     best_tweet_index  = nil
 
     top_time_line.each.with_index do |tweet, i|
-      if tweet.retweet_count > best_tweet.retweets
+      if (tweet.retweet_count > best_tweet.retweets) and (not used_tweets.include?(tweet.id.to_s))
         best_tweet.retweets = tweet.retweet_count
         best_tweet_index    = i
       end
@@ -113,9 +113,22 @@ class UserUpdateWorker
     # will be useful in future
     #user.best_tweet.update_retweets(twitter) if user.best_tweet
 
-    best_tweet_retweets = ( (user.best_tweet and user.best_tweet.retweets) or -1 )
-    user.best_tweet.destroy if user.best_tweet
-    user.best_tweet = get_best_tweet(timeline, best_tweet_retweets, followers_count)
+    user.best_tweets.destroy_all
+
+    used_ids = []
+
+    if (t1 = get_best_tweet(timeline, 0, followers_count))
+      used_ids << t1.twitter_id
+    end
+
+    if (t2 = get_best_tweet(timeline, 0, followers_count, used_ids))
+      used_ids << t2.twitter_id
+    end
+
+    if (t3 = get_best_tweet(timeline, 0, followers_count, used_ids))
+      used_ids << t3.twitter_id
+    end
+    user.best_tweets = [t1, t2, t3].compact
 
 
     user.base_price  = StockMath.base_price(retweets_count, tweets_count, followers_count)

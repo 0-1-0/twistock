@@ -5,5 +5,5 @@ else
 end
 
 if @ext
-  json.best_tweet @user.best_tweet
+  json.best_tweets @user.best_tweets
 end
