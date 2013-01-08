@@ -26,10 +26,21 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
 
   render: ->
     $(@el).html(@template(user: @user, _this: this))
+    @$('#tweets').hide()
     @renderGraph()
     @renderMailDialog()
+    @renderTweets()
 
     return this
+
+  renderTweets: ->
+    if @do_tweet_render
+      @$('#tweets').show()
+      tweets = new Twitterexchange.Collections.TopTweetsCollection()
+      $.when(tweets.fetch(data: {flow: 'three'})).then =>
+        tweets.each (t) ->
+          tv = new Twitterexchange.Views.TopTweets.Tile(model: t, simple: true)
+          @$('#tweets').append tv.render().el
 
   renderGraph: ->
     @graph = new Twitterexchange.Views.Common.PriceGraph(div_id: 'cu_graph', data: @data)

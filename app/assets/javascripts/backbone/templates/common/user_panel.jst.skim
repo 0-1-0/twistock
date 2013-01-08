@@ -119,3 +119,5 @@
 
   .two.columns.grafic
     /img class="grafic right" src="/images/grafic.png"
+.row.top-like#tweets
+.row style="height: 10px;"

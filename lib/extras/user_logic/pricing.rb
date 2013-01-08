@@ -2,8 +2,11 @@ module UserLogic
   module Pricing
     def update_share_price
       old_price = share_price
-      self.share_price = nil if (not base_price) or base_price == -1
-      self.share_price = StockMath.share_price(base_price, shares_in_stock).round
+      if (not base_price) or base_price == -1
+        self.share_price = nil
+      else
+        self.share_price = StockMath.share_price(base_price, shares_in_stock).round
+      end
 
       if old_price != share_price
         PriceLog.create(user_id: id, price: share_price)
