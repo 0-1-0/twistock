@@ -17,9 +17,9 @@ class BlogPostsController < ApplicationController
   # GET /blog_posts.json
   def index
     if signed_as_admin?
-      @blog_posts = BlogPost.all
+      @blog_posts = BlogPost.all(:order => "created_at DESC")
     else
-      @blog_posts = BlogPost.where(:published=>true)
+      @blog_posts = BlogPost.where(:published=>true, :order => "created_at DESC")
     end
 
     respond_to do |format|
