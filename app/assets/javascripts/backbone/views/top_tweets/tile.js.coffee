@@ -16,9 +16,9 @@ class Twitterexchange.Views.TopTweets.Tile extends Backbone.View
 
   render: ->
     if @simple
-      $(@el).addClass('box fixh').html(@template(tweet: @model))
+      $(@el).addClass('box fixh').html(@template(tweet: @model,   simple: true))
     else
-      $(@el).addClass('box hidden').html(@template(tweet: @model))
+      $(@el).addClass('box hidden').html(@template(tweet: @model, simple: false))
     return this
 
   openTradeDialog: (e) ->
