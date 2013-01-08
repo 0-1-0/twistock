@@ -1,4 +1,6 @@
 Twitterexchange::Application.routes.draw do
+  get "emails" => 'email#index'
+
   namespace :api do
     resources :transactions, only: [:index] do
       collection do

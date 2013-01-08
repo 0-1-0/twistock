@@ -83,6 +83,8 @@ html lang="en"
             li=link_to t('main_page.top_menu.store'), '/store', class: active_when(controller_name == 'store')
             li=link_to t('main_page.top_menu.top_tweets'), '/top_tweets', class: active_when(controller_name == 'top_tweets')
             li=link_to t('main_page.top_menu.blog'), '/blog', class: active_when(controller_name == 'blog_posts')
+            - if signed_as_admin?
+              li=link_to 'Emails', '/emails'
 
           .left
             a href="https://twitter.com/share" class="twitter-share-button" data-url="http://twistock.com" data-via="twistock_com" data-size="medium" data-text="First of its kind social trade exchange. Click and earn $ on Twistock - "
