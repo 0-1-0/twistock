@@ -19,10 +19,15 @@
             a.secondary.button.radius.disabled href="#"
               =t 'store.buy'
 
+- Product.where(:published=>true).each do |product|
   .row
-    - Product.where(:published=>true).each do |product|
-      = render :partial=>'invoice_form', :locals=>{:product=>product, :product_invoice=>@product_invoice}
+    ul.block-grid.four-up.mobile-two-up
+      li
+        = render :partial=>'invoice_form', :locals=>{:product=>product, :product_invoice=>@product_invoice}
 
+    
+
+      
   - if signed_as_admin?
     .row
       hr

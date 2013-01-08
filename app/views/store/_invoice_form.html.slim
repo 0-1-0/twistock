@@ -1,4 +1,4 @@
-.reveal-modal.medium id='product-dialog-#{product.id}'
+.product-dialog.reveal-modal.medium id='product-dialog-#{product.id}'
   h3.title 
     =t('store.buy')
     |  
@@ -53,7 +53,8 @@
         / span.error Wrong Pnone
     .row
       .four.offset-by-two.columns
-        a href="#" Term of use
+        br
+        / a href="#" Term of use
     .row
       .four.offset-by-two.columns
         = f.button :submit, t('store.buy'), :class=>'primary button radius'
