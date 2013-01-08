@@ -36,6 +36,18 @@
             =I18n.t('main_page.set_preferences.disable')
 
         .row
+          .three.mobile-two.columns
+            =I18n.t('main_page.set_preferences.language')
+          .three.mobile-two.columns.text-right
+            =I18n.t('main_page.set_preferences.rus')
+            - if window.current_user.get('locale') == 'ru'
+              input.checkbox#locale-checkbox type="checkbox" 
+            - else
+              input.checkbox#locale-checkbox type="checkbox" checked='true'
+            =I18n.t('main_page.set_preferences.eng')
+
+
+        .row
           .two.mobile-one.columns 
             =I18n.t('main_page.set_preferences.mail')
           .four.mobile-three.columns

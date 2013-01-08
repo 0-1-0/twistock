@@ -11,6 +11,7 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     'click #settings_btn':          'toggleSettings'
     'click #close-settings':        'toggleSettings'
     'change #transalation-checkbox':'updateTwitterTranslationSetting'
+    'change #locale-checkbox':      'updateLocaleSetting'
     'change #preferences-mail':     'updateEmail'
 
   initialize: ->
@@ -107,6 +108,12 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
   updateTwitterTranslationSetting: (e)->
     @preferences['twitter_translation'] = !e.target.checked
 
+  updateLocaleSetting: (e)->
+    if e.target.checked
+      @preferences['locale'] = 'en'
+    else
+      @preferences['locale'] = 'ru'
+
   updateEmail: (e)->
     @preferences['email'] = e.target.value
     
@@ -116,6 +123,9 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
       window.current_user.set(@preferences)
       window.current_user.save()
       $('.network').fadeOut(160)
+
+      if @preferences.locale
+        window.location.reload()
     
 
   closeHistory:->

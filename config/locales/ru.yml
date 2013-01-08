@@ -54,8 +54,8 @@ ru:
     top_tweets: Лучшие твиты
 
     all: Все
-    russian: Русский
-    english: Английский
+    russian: Рус
+    english: Анг
     friends: Друзья
 
   blog:
@@ -107,8 +107,8 @@ ru:
       money: Деньги
       its_not_real:    (не настоящие)
       language: Язык
-      ru: Рус
-      en: Англ
+      rus: Рус
+      eng: Англ
 
     flows:
       top: Топ
