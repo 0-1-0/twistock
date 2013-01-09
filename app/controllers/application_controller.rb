@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   #we must set up locale before performing any other actions
   before_filter :set_locale
+  
+  before_filter :referral_check
 
   helper_method :current_user
   helper_method :signed_in?
@@ -32,6 +34,14 @@ class ApplicationController < ActionController::Base
     #http_accept_language.preferred_language_from(available)
 
     logger.debug "* Locale set to '#{I18n.locale}'"
+  end
+
+  private
+  def referral_check
+    if params[:ref_id] and (user = User.find_by_nickname(params[:ref_id]))
+      user.ref_count += 1
+      user.save
+    end
   end
 
   private
