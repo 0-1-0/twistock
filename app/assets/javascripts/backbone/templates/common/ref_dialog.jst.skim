@@ -1,0 +1,18 @@
+.tape
+  a#haction href="javascript:$('#modal-ref').reveal();"
+    | + $10 000 
+    span for referral
+
+#modal-ref.reveal-modal
+  h4.title
+    =I18n.t('main_page.referral.text')
+  p.text 
+    =I18n.t('main_page.referral.additional_text')
+
+  
+  .row.mmailcont
+    .center
+      textarea#ref-textarea
+        | http://www.twistock.com/auth/twitter?ref_id=#{current_user.get("nickname")}
+
+  a.close-reveal-modal: i.icon-close

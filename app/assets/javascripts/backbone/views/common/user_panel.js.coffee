@@ -50,6 +50,9 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     if !@user.get('email_bonus')
       @mail_dialog = new Twitterexchange.Views.Common.MailDialog()
       $('#mail-dialog').html(@mail_dialog.render().el)
+    else
+      @ref_dialog = new Twitterexchange.Views.Common.RefDialog()
+      $('#mail-dialog').html(@ref_dialog.render().el)
 
   showHistory: (e)->
     $('#historyHoldersTab').html(@holders_tab.render().el)
