@@ -19,7 +19,7 @@ class BlogPostsController < ApplicationController
     if signed_as_admin?
       @blog_posts = BlogPost.all(:order => "created_at DESC")
     else
-      @blog_posts = BlogPost.where(:published=>true, :order => "created_at DESC")
+      @blog_posts = BlogPost.where{published == true}.order{created_at.desc}
     end
 
     respond_to do |format|
