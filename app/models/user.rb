@@ -183,7 +183,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def ref_url
-    root_url + "/auth/twitter/"
+  def ref_url(root_url) # cause of root url presents only in controller
+    root_url + "/auth/twitter?ref_id=#{nickname}"
   end
 end
