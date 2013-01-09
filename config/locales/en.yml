@@ -97,6 +97,10 @@ en:
       label: 'Your mail:'
       additional_text: 
 
+    referral:
+      text: Take $10 000 for every registration
+      additional_text: Share this link among friends and get bonus for every registered friend!
+
     set_preferences:
       social_network: Social network
       post_on_twitter: Post on Twitter
