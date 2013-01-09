@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130109102644) do
+ActiveRecord::Schema.define(:version => 20130109123824) do
 
   create_table "best_tweets", :force => true do |t|
     t.integer  "user_id"
@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(:version => 20130109102644) do
     t.integer  "monthly_price_change"
     t.boolean  "email_bonus"
     t.integer  "ref_count",                         :default => 0
+    t.integer  "reg_ref_count",                     :default => 0
   end
 
   add_index "users", ["nickname"], :name => "index_users_on_nickname", :unique => true

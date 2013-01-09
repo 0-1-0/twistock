@@ -183,4 +183,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  def ref_url
+    root_url + "/auth/twitter/"
+  end
 end

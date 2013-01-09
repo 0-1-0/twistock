@@ -38,9 +38,9 @@ class ApplicationController < ActionController::Base
 
   private
   def referral_check
-    if params[:ref_id] and (user = User.find_by_nickname(params[:ref_id]))
-      user.ref_count += 1
-      user.save
+    if params[:ref_id] and (@ref_user = User.find_by_nickname(params[:ref_id]))
+      @ref_user.ref_count += 1
+      @ref_user.save
     end
   end
 
