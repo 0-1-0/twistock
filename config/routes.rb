@@ -1,3 +1,11 @@
+class SidekiqSecurity
+  def matches?(request)
+    return false unless request.session[:user_id]
+    user = User.find request.session[:user_id]
+    user && user.is_admin?
+  end
+end
+
 Twitterexchange::Application.routes.draw do
   get "emails" => 'email#index'
 
@@ -38,7 +46,7 @@ Twitterexchange::Application.routes.draw do
   resources :store, only: [:index, :show]
 
   require 'sidekiq/web'
-  mount Sidekiq::Web => '/sidekiq'
+  mount Sidekiq::Web => '/sidekiq', constraints: SidekiqSecurity.new
 
   resources :user, only: [:show, :update] do
     member do
