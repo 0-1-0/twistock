@@ -1,9 +1,10 @@
 coffee:
   $(document).ready ->
-    window.user_panel.do_tweet_render = true
-    window.user_panel.renderTweets()
-    new Twitterexchange.Routers.FlowsRouter()
-    Backbone.history.start()
+  	if window.user_panel?
+			window.user_panel.do_tweet_render = true
+			window.user_panel.renderTweets()
+		new Twitterexchange.Routers.FlowsRouter()
+		Backbone.history.start()
 
 = render 'shared/flows_menu', flow: @flow
 .row
