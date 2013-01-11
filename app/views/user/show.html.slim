@@ -12,8 +12,9 @@
       coffee:
         $(document).ready ->
           window.user = new Twitterexchange.Models.User(id: user_data)
-          window.user_panel.do_tweet_render = true
-          window.user_panel.renderTweets()
+          if window.user_panel?
+            window.user_panel.do_tweet_render = true
+            window.user_panel.renderTweets()
           $.when(user.fetch(data: {ext: true})).then ->
             window.show_user = new Twitterexchange.Views.Common.ShowUser(model: user, price_log: user_price_log)
             $('.bb_user_part').html(show_user.render().el)
