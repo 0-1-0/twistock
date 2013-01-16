@@ -13,6 +13,6 @@
   .row.mmailcont
     .center
       textarea#ref-textarea
-        | http://www.twistock.com/auth/twitter?ref_id=#{current_user.get("nickname")}
+        | http://twistock.com/auth/twitter?ref_id=#{current_user.get("nickname")}
 
   a.close-reveal-modal: i.icon-close
