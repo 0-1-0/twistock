@@ -2,6 +2,8 @@ class Transaction < ActiveRecord::Base
   belongs_to :user
   belongs_to :owner, class_name: User
 
+  has_many :activity_events, as: :source
+
   attr_accessible :action, :cost, :count, :owner, :user, :price
 
   delegate :nickname, to: :user,  prefix: true

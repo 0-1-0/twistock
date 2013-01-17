@@ -82,6 +82,13 @@ module UserLogic
         TweetWorker.buy_message(t)
       end
 
+      # Добавляем событие в ленту
+      ActivityEvent.create(
+          user: owner,
+          price_change: smth,
+          source: t
+      )
+
       self
     end
 

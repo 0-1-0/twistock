@@ -6,6 +6,8 @@ class BestTweet < ActiveRecord::Base
   validates :twitter_id, uniqueness: true
   validates :content, :retweets, :user_id, :twitter_id, :lang, presence: true
 
+  has_one :activity_event, as: :source
+
   def update_retweets(twitter)
     self.retweets = twitter.status(twitter_id).retweets_count
     self.save

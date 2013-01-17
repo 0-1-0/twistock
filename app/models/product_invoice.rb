@@ -3,4 +3,6 @@ class ProductInvoice < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :product
+
+  has_one :activity_event, as: :source
 end
