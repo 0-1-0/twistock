@@ -38,6 +38,7 @@ module UserLogic
       raise BuyZeroSharesError unless count > 0
 
       cost = 0
+      price_change = 0
 
       User.transaction do
         owner.reload
@@ -59,7 +60,9 @@ module UserLogic
           self.portfel << BlockOfShares.new(count: count, owner_id: owner.id)
         end
 
+        price_change  = owner.share_price
         owner.update_share_price
+        price_change  = owner.share_price - price_change
         owner.update_popularity
 
         owner.save!
@@ -85,7 +88,7 @@ module UserLogic
       # Добавляем событие в ленту
       ActivityEvent.create(
           user: owner,
-          price_change: smth,
+          price_change: price_change,
           source: t
       )
 
@@ -96,6 +99,7 @@ module UserLogic
       raise SellZeroSharesError unless count > 0
 
       cost = 0
+      price_change = 0
 
       User.transaction do
         self.reload
@@ -111,8 +115,10 @@ module UserLogic
           bos.save
         end
 
-        # Важен порядок следующих 3 операций!
+        # Важен порядок следующих 5 операций!
+        price_change  = owner.share_price
         owner.update_share_price
+        price_change  = owner.share_price - price_change
         owner.update_popularity
         owner.reload
 
@@ -130,6 +136,13 @@ module UserLogic
           count:  count,
           price:  owner.share_price,
           cost:   cost)
+
+      # Добавляем событие в ленту
+      ActivityEvent.create(
+          user: owner,
+          price_change: price_change,
+          source: t
+      )
 
       # Пишем о транзакции в твиттер
       if twitter_translation?

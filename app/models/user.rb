@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
 
   has_many :best_tweets
 
+  has_many :activity_events
+
 
   # ACCESSORS
   # TODO: temporary access to all
