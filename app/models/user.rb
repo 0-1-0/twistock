@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_many :product_invoices
   has_many :price_logs
 
-  has_many :best_tweets
+  has_many :best_tweets, conditions: {outdated: false}
 
   has_many :activity_events
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130116184102) do
+ActiveRecord::Schema.define(:version => 20130117130625) do
 
   create_table "activity_events", :force => true do |t|
     t.integer  "user_id"
@@ -32,9 +32,10 @@ ActiveRecord::Schema.define(:version => 20130116184102) do
     t.integer  "retweets"
     t.text     "content"
     t.float    "param"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "lang"
+    t.boolean  "outdated",   :default => false
   end
 
   add_index "best_tweets", ["user_id"], :name => "index_best_tweets_on_user_id"

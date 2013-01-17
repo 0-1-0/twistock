@@ -108,13 +108,14 @@ class UserUpdateWorker
     tweets_count    = timeline.count || 0
     retweets_count  = timeline.inject(0){|a, b| a += b.retweet_count} || 0
     followers_count = twitter_user.followers_count || 0
+    shares_in_stock = user.shares_in_stock
 
     # Определяем самый популярный твит пользователя
 
     # will be useful in future
     #user.best_tweet.update_retweets(twitter) if user.best_tweet
 
-    user.best_tweets.destroy_all
+    user.best_tweets.update_all(outdated: true)
 
     used_ids = []
 
@@ -130,6 +131,10 @@ class UserUpdateWorker
       used_ids << t3.twitter_id
     end
     user.best_tweets = [t1, t2, t3].compact
+
+    user.best_tweets.each do |bt|
+      bt.gen_activity_event(retweets_count, tweets_count, followers_count, shares_in_stock)
+    end
 
 
     user.base_price  = StockMath.base_price(retweets_count, tweets_count, followers_count)
