@@ -7,6 +7,8 @@ class SidekiqSecurity
 end
 
 Twitterexchange::Application.routes.draw do
+  get "statistics/index"
+
   get "emails" => 'email#index'
 
   namespace :api do
