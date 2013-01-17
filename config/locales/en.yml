@@ -113,6 +113,7 @@ en:
       eng: En
       enable: 'On'
       disable: 'Off'
+      is_hidden: Hidden profile
 
 
     flows:

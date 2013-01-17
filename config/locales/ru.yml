@@ -115,6 +115,7 @@ ru:
       language: Язык
       rus: Рус
       eng: Англ
+      is_hidden: Скрыть профиль
 
     flows:
       top: Топ

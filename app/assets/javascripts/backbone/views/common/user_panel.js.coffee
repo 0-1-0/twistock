@@ -13,6 +13,7 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
     'change #transalation-checkbox':'updateTwitterTranslationSetting'
     'change #locale-checkbox':      'updateLocaleSetting'
     'change #preferences-mail':     'updateEmail'
+    'change #ishidden-checkbox':    'updateIsHiddenSetting'
 
   initialize: ->
     @user = current_user
@@ -127,6 +128,12 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
       @preferences['locale'] = 'en'
     else
       @preferences['locale'] = 'ru'
+
+  updateIsHiddenSetting: (e)->
+    if e.target.checked
+      @preferences['is_hidden'] = 'true'
+    else
+      @preferences['is_hidden'] = 'false'
 
   updateEmail: (e)->
     @preferences['email'] = e.target.value

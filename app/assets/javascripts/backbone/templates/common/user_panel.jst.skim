@@ -46,6 +46,18 @@
               input.checkbox#locale-checkbox type="checkbox" checked='true'
             =I18n.t('main_page.set_preferences.eng')
 
+        .row
+          .three.mobile-two.columns
+            =I18n.t('main_page.set_preferences.is_hidden')
+          .three.mobile-two.columns.text-right
+            =I18n.t('main_page.set_preferences.enable')
+            - if window.current_user.get('is_hidden')
+              input.checkbox#ishidden-checkbox type="checkbox" 
+            - else
+              input.checkbox#ishidden-checkbox type="checkbox" checked='true'
+            =I18n.t('main_page.set_preferences.disable')
+
+
 
         .row
           .two.mobile-one.columns 
