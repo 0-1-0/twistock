@@ -109,6 +109,7 @@ class UserUpdateWorker
     retweets_count  = timeline.inject(0){|a, b| a += b.retweet_count} || 0
     followers_count = twitter_user.followers_count || 0
 
+
     # Определяем самый популярный твит пользователя
 
     # will be useful in future
