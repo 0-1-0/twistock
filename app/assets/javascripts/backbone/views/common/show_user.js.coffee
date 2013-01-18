@@ -20,6 +20,10 @@ class Twitterexchange.Views.Common.ShowUser extends Backbone.View
     @portfel      = new Twitterexchange.Collections.BlockOfShares()
     @my_shares    = new Twitterexchange.Collections.BlockOfShares()
 
+    @activity_stream_view = new Twitterexchange.Views.Common.ActivityStream(
+      user_id: @model.get('id')
+    )
+
     @model.on('change', @render, this)
     this
 
@@ -43,6 +47,8 @@ class Twitterexchange.Views.Common.ShowUser extends Backbone.View
         @$('#invdata').hide()
       else
         @$('#invdata').show()
+
+      @$('#userStreamTab').html(@activity_stream_view.render().el)
 
     return this
 

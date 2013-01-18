@@ -29,6 +29,8 @@ Twitterexchange::Application.routes.draw do
     resources :block_of_shares, only: [:index, :show]
 
     resources :top_tweets, only: [:index]
+
+    resources :activity_events, only: [:index]
   end
 
   resources :blog_posts, :path=>'blog' do

@@ -23,6 +23,10 @@ en:
     distr_lang: Distribution of tweets by language
 
   user:
+    #tabs
+    main: Main
+    stream: Activity Stream
+
     price: Price
     money: Money
     today: Today
