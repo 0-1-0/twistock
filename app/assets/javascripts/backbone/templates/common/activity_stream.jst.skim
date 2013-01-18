@@ -1,0 +1,19 @@
+.row.six.columns
+  - @flow.each (x) =>
+    - user = x.get('user')
+    .bg.stream
+      p= x.get('message')
+      .bott
+        a.avatar.small href="/user/#{user.nickname}"
+          i
+          img src=user.avatar
+        .info
+          a style="display: block;" href="/user/#{user.nickname}" @#{user.nickname} (#{user.name})
+          span $#{user.share_price}
+          |&nbsp;
+          == with_sign(user.daily_price_change)
+          .right
+            b
+              == with_sign(x.get('price_change'), '$')
+              - if x.get('rt')
+                | &nbsp;#{x.get('rt')} RT

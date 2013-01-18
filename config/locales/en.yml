@@ -12,6 +12,10 @@ en:
     no_shares: No shares
 
   user:
+    #tabs
+    main: Main
+    stream: Activity Stream
+
     price: Price
     money: Money
     today: Today

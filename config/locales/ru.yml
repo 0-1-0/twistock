@@ -12,6 +12,11 @@ ru:
     no_shares: Нет акций
 
   user:
+    #tabs
+    main: Главное
+    stream: Лента Событий
+
+
     price: Цена
     money: Деньги
     today: сегодня

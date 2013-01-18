@@ -1,11 +1,11 @@
-window.with_sign = (int) ->
+window.with_sign = (int, append = '') ->
   return '' if typeof int == "undefined"
   return '' if int == null
 
   if int >= 0
-    "<span class=\"green\">+#{int}</span>"
+    "<span class=\"green\">+#{int}#{append}</span>"
   else
-    "<span class=\"red\">#{int}</span>"
+    "<span class=\"red\">#{int}#{append}</span>"
 
 
 window.maybe_calculating = (model, attr) ->
