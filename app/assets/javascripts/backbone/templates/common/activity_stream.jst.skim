@@ -2,7 +2,7 @@
   - @flow.each (x) =>
     - user = x.get('user')
     .bg.stream
-      p= x.get('message')
+      p== x.get('message').linkify_tweet()
       .bott
         a.avatar.small href="/user/#{user.nickname}"
           i
