@@ -6,10 +6,10 @@ class StatisticsController < ApplicationController
   end
 
   def calculate_user_growth
-    Rails.cache.fetch "user_growth", expires_in: 1.day do
-      result = []
-      30.times do |t|
-        result += [User.where('created_at < ?', Time.now - 30.days + t.days).count]
+    Rails.cache.fetch "__usergrowth", expires_in: 1.day do
+      result = {}
+      7.times do |t|
+        result[l(Time.now - 7.days + t.days,:format => :numeric)] = [User.where('created_at < ?', Time.now - 7.days + t.days).count]
       end
 
       result

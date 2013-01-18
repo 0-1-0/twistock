@@ -1,4 +1,8 @@
 ru:
+  time:
+    formats:
+      numeric: "%m/%d/%y"
+
   buy_dialog:
     text:
       buy: Купить
@@ -10,6 +14,13 @@ ru:
     cancel: Отмена
     no_money: Недостаточно денег
     no_shares: Нет акций
+
+  stat:
+    title: Статистика Twistock
+    numberusers: Количество пользователей за по дням
+    best_distr: Распределение лучших твитов
+    distr_retweets: Количество твитов с максимальным ретвитом
+    distr_lang: Распределение твитов по языкам
 
   user:
     price: Цена
@@ -85,7 +96,8 @@ ru:
       how_it_works: Как это работает?
       store: Магазин
       top_tweets: Лучшие Твиты
-      blog: Блог и Новости
+      blog: Блог
+      stat: Статистика
 
     welcome_text: >
       Twistock - это симулятор торговой биржи,

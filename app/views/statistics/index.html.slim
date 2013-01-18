@@ -1,5 +1,90 @@
 .row
-  | Growth of user base
-  =@user_growth
-  =@best_tweets_stat
-  =@best_tweet_distribution
+  h1 =t('stat.title')
+.row#growth
+  h3 =t('stat.numberusers')
+  #plot-growth
+
+.row
+  #dist.three.columns
+    h3 =t('stat.best_distr')
+    #plot-distribution
+    br
+    .center
+      =t('stat.distr_retweets')
+  #lang.three.columns
+    br
+    br
+    br
+    br
+    #plot-lang
+    br
+    .center
+      =t('stat.distr_lang')
+
+.row
+  br
+  br
+  br
+  br
+
+javascript:
+  plotter({
+     container:"plot-distribution",
+     datas:[{values:#{@best_tweet_distribution.to_json.html_safe}, color: "#1e9dcd"}],
+     width: $('#dist').width(),
+     height: 200,
+     fill:'solid',
+     mode: 'line',
+     labels:{
+        color:"#666",
+        x:1,
+        y:[0,50,100],
+        ypos:"left+right",
+        font:"normal 12px \"Sans Serif\""
+     },
+  });
+
+  plotter({
+     container:"plot-growth",
+     datas:[{values:#{@user_growth.to_json.html_safe}, color: "#1e9dcd"}],
+     width: $('#growth').width(),
+     height: 200,
+     fill:'solid',
+     mode: 'chart',
+     barspace: 45,
+     labels:{
+        color:"#666",
+        x:1,
+        y:[0,50,100],
+        ypos:"left+right",
+        font:"normal 12px \"Sans Serif\""
+     },
+      mouseover: false
+  })
+
+  plotter({
+     container:"plot-lang",
+     datas:[
+      {title: 'English', values:[#{@best_tweets_stat['en']}], color:"#1e9dcd"}, 
+      {title: 'Russian', values:[#{@best_tweets_stat['ru']}]}
+      ], 
+     width: $('#lang').width(),
+     height: 200,
+     fill:'solid',
+     mode: 'pie',
+     barspace: 5,
+     labels:{
+        color:"#666",
+        x:1,
+        y:[0,50,100],
+        ypos:"left+right",
+        font:"normal 12px \"Sans Serif\""
+     },
+     legends:{
+      x:2,
+      y:2,
+      font:"normal 16px \"Sans Serif\""
+     },
+  })
+
+

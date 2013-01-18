@@ -1,4 +1,8 @@
 en:
+  time:
+    formats:
+      numeric: "%m/%d/%y"
+
   buy_dialog:
     text:
       buy: Buy
@@ -10,6 +14,13 @@ en:
     cancel: Cancel
     no_money: Not enough money
     no_shares: No shares
+
+  stat:
+    title: Statistics of Twistock
+    numberusers: Number of users per day
+    best_distr: Best Tweets Distribution 
+    distr_retweets: Distribution of tweets by maximum retweets
+    distr_lang: Distribution of tweets by language
 
   user:
     price: Price
@@ -84,7 +95,8 @@ en:
       how_it_works: How it works?
       store: Twistock Store
       top_tweets: Top Tweets
-      blog: Blog & News
+      blog: Blog
+      stat: Statistics
 
     welcome_text: >
       Twistock is а simulator
