@@ -131,9 +131,9 @@ class Twitterexchange.Views.Common.UserPanel extends Backbone.View
 
   updateIsHiddenSetting: (e)->
     if e.target.checked
-      @preferences['is_hidden'] = 'true'
+      @preferences['is_hidden'] = false
     else
-      @preferences['is_hidden'] = 'false'
+      @preferences['is_hidden'] = true
 
   updateEmail: (e)->
     @preferences['email'] = e.target.value
