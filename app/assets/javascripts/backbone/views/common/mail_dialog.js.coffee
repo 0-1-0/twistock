@@ -5,6 +5,8 @@ class Twitterexchange.Views.Common.MailDialog extends Backbone.View
 
   events:
     'click #submit-mail': 'saveMail'
+    'click #haction': 'showDialog'
+
 
   initialize: ->
     this
@@ -24,3 +26,7 @@ class Twitterexchange.Views.Common.MailDialog extends Backbone.View
     
     @$('.close-reveal-modal').click()
     $('#mail-dialog').hide()
+
+  showDialog: (e)->
+    e.stopPropagation()
+    $('#modal-mail').reveal()

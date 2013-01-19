@@ -1,5 +1,5 @@
 .tape
-  a#haction href="javascript:$('#modal-mail').reveal();"
+  a#haction href="#"
     | + $100 000 
     span for your email
 

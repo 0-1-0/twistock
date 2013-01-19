@@ -1,5 +1,5 @@
 .tape
-  a#haction href="javascript:$('#modal-ref').reveal();"
+  a#haction href="#"
     | + $10 000 
     span for referral
 
