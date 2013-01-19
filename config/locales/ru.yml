@@ -23,6 +23,11 @@ ru:
     distr_lang: Распределение твитов по языкам
 
   user:
+    #tabs
+    main: Главное
+    stream: Лента Событий
+
+
     price: Цена
     money: Деньги
     today: сегодня

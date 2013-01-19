@@ -49,80 +49,89 @@
             - else
               a.button.secondary.radius.btn-buy href='#'= I18n.t('user.buy')
             .buy-dialog style="display: block;"
+.row
+  .six.columns
+    dl.tabs.pill.slim
+      dd.active
+        a href="#userMain"= I18n.t 'user.main'
+      dd
+        a href="#userStream"= I18n.t 'user.stream'
+    ul.tabs-content.pill
+      li#userMainTab.active
+        .row
+          .two.columns.user-tw
+            /- if @bos
+            #invdata
+              .tw-blk
+                = I18n.t 'user.count_stock'
+                span= @user.get('purchased_shares')
 
-.two.columns.user-tw
-  /- if @bos
-  #invdata
-    .tw-blk
-      = I18n.t 'user.count_stock'
-      span= @user.get('purchased_shares')
+              .tw-blk
+                = I18n.t 'user.investment_cost'
+                span
+                  = '$' + @user.get('purchased_shares')*@user.get('share_price') + ' '
+                  == with_sign(@user.get('purchased_shares')*@user.get('weekly_price_change'))
 
-    .tw-blk
-      = I18n.t 'user.investment_cost'
-      span
-        = '$' + @user.get('purchased_shares')*@user.get('share_price') + ' '
-        == with_sign(@user.get('purchased_shares')*@user.get('weekly_price_change'))
+            a href=@user.get('twitter_url') target='blank' Twitter
+            - if @user.get('best_tweets').length > 0
+              h6
+                a href='/top_tweets' #{I18n.t 'top_tweets.top_tweets'}:
+              br
+              - _.each @user.get('best_tweets'), (bt) ->
+                p== bt.content.linkify_tweet()
+                span
+                  i.icon-pr
+                  | #{bt.retweets} RT
+                hr style="margin-left: 0;"
+            - else
+              a href='/top_tweets' style="margin-left: 7px;" = I18n.t('top_tweets.top_tweets')
 
-  a href=@user.get('twitter_url') target='blank' Twitter
-  - if @user.get('best_tweets').length > 0
-    h6
-      a href='/top_tweets' #{I18n.t 'top_tweets.top_tweets'}:
-    br
-    - _.each @user.get('best_tweets'), (bt) ->
-      p== bt.content.linkify_tweet()
-      span
-        i.icon-pr
-        | #{bt.retweets} RT
-      hr style="margin-left: 0;"
-  - else
-    a href='/top_tweets' style="margin-left: 7px;" = I18n.t('top_tweets.top_tweets')
+          .two.columns.link-border
+            = I18n.t 'user.info.investment_portfolio'
+            table.default#portfel
+              thead
+                tr
+                  th= I18n.t 'user.info.owner'
+                  th= I18n.t 'user.info.count'
+                  th= I18n.t 'user.info.one'
+                  th= I18n.t 'user.info.total'
+              tbody
+                - _.each @portfel, (page, index) ->
+                  - _.each page, (bos) ->
+                    tr page=index+1 style="display: none;"
+                      td
+                        a href="/user/#{bos.get('owner').nickname}" = bos.get('owner').nickname
+                        /= link_to bos.owner.nickname, bos.owner
+                      td
+                        = bos.get('count')
+                      td #{bos.get('owner').share_price}$
+                      td #{bos.get('owner').share_price * bos.get('count')}$
+            - if @portfel.length > 1
+              br
+              - _.each _.range(1, @portfel.length+1), (i) ->
+                a.page_switch href="#" page=i = i
+                div style="width: 7px; display: inline-block;"
 
-.two.columns.link-border
-  = I18n.t 'user.info.investment_portfolio'
-  table.default#portfel
-    thead
-      tr
-        th= I18n.t 'user.info.owner'
-        th= I18n.t 'user.info.count'
-        th= I18n.t 'user.info.one'
-        th= I18n.t 'user.info.total'
-    tbody
-      - _.each @portfel, (page, index) ->
-        - _.each page, (bos) ->
-          tr page=index+1 style="display: none;"
-            td
-              a href="/user/#{bos.get('owner').nickname}" = bos.get('owner').nickname
-              /= link_to bos.owner.nickname, bos.owner
-            td
-              = bos.get('count')
-            td #{bos.get('owner').share_price}$
-            td #{bos.get('owner').share_price * bos.get('count')}$
-  - if @portfel.length > 1
-    br
-    - _.each _.range(1, @portfel.length+1), (i) ->
-      a.page_switch href="#" page=i = i
-      div style="width: 7px; display: inline-block;"
-
-.two.columns
-  = I18n.t 'user.info.stock_holders'
-  table.default#my_shares
-    thead
-      tr
-        th= I18n.t 'user.info.holder'
-        th= I18n.t 'user.info.count'
-        th= I18n.t 'user.info.total'
-    tbody
-      - _.each @my_shares, (page, index) ->
-        - _.each page, (bos) ->
-          tr page=index+1 style="display: none;"
-            td
-              a href="/user/#{bos.get('holder').nickname}" = bos.get('holder').nickname
-              /= link_to bos.holder.nickname, bos.holder
-            td= bos.get('count')
-            td #{bos.get('count') * @user.get('share_price')}$
-  - if @my_shares.length > 1
-    br
-    - _.each _.range(1, @my_shares.length+1), (i) ->
-      a.page_switch href="#" page=i = i
-      div style="width: 7px; display: inline-block;"
-
+          .two.columns
+            = I18n.t 'user.info.stock_holders'
+            table.default#my_shares
+              thead
+                tr
+                  th= I18n.t 'user.info.holder'
+                  th= I18n.t 'user.info.count'
+                  th= I18n.t 'user.info.total'
+              tbody
+                - _.each @my_shares, (page, index) ->
+                  - _.each page, (bos) ->
+                    tr page=index+1 style="display: none;"
+                      td
+                        a href="/user/#{bos.get('holder').nickname}" = bos.get('holder').nickname
+                        /= link_to bos.holder.nickname, bos.holder
+                      td= bos.get('count')
+                      td #{bos.get('count') * @user.get('share_price')}$
+            - if @my_shares.length > 1
+              br
+              - _.each _.range(1, @my_shares.length+1), (i) ->
+                a.page_switch href="#" page=i = i
+                div style="width: 7px; display: inline-block;"
+      li#userStreamTab

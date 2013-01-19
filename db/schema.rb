@@ -13,6 +13,18 @@
 
 ActiveRecord::Schema.define(:version => 20130117230328) do
 
+  create_table "activity_events", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "price_change"
+    t.integer  "source_id"
+    t.string   "source_type"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "activity_events", ["source_id"], :name => "index_activity_events_on_source_id"
+  add_index "activity_events", ["user_id"], :name => "index_activity_events_on_user_id"
+
   create_table "best_tweets", :force => true do |t|
     t.integer  "user_id"
     t.string   "twitter_id"
@@ -20,9 +32,10 @@ ActiveRecord::Schema.define(:version => 20130117230328) do
     t.integer  "retweets"
     t.text     "content"
     t.float    "param"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "lang"
+    t.boolean  "outdated",   :default => false
   end
 
   add_index "best_tweets", ["user_id"], :name => "index_best_tweets_on_user_id"
@@ -82,17 +95,6 @@ ActiveRecord::Schema.define(:version => 20130117230328) do
   end
 
   add_index "price_logs", ["user_id"], :name => "index_price_logs_on_user_id"
-
-  create_table "price_stamps", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "price"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "previous_price"
-    t.integer  "delta"
-  end
-
-  add_index "price_stamps", ["user_id"], :name => "index_price_stamps_on_user_id"
 
   create_table "product_invoices", :force => true do |t|
     t.string   "product_name"
@@ -159,7 +161,7 @@ ActiveRecord::Schema.define(:version => 20130117230328) do
     t.string   "token"
     t.string   "secret"
     t.boolean  "activated",                         :default => false
-    t.string   "locale",                            :default => "en"
+    t.string   "locale"
     t.boolean  "twitter_translation",               :default => true
     t.integer  "share_price"
     t.integer  "popularity"
