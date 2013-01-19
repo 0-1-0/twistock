@@ -1,0 +1,5 @@
+@-moz-document url-prefix(){
+  .fffix{
+     width: 70px;
+  }
+}

@@ -11,12 +11,13 @@
       i
       img src=@tweet.get('user_avatar')
 
-    - if @simple
-      a.secondary.button.radius.small href='/top_tweets' = I18n.t('top_tweets.see_more')
-    - else
-      a.secondary.button.radius.small.btn-buy href='#' = I18n.t('buy_dialog.buy')
-
     .info
       a style='display: block;' href=@tweet.get('user_path') @#{@tweet.get('user_nickname')} (#{@tweet.get('user_name')})
       span $#{@tweet.get('user_share_price')}
       == with_sign(@tweet.get('user_daily_price_change'))
+
+    - if @simple
+      a.secondary.button.radius.small.fffix href='/top_tweets' = I18n.t('top_tweets.see_more')
+
+    - if !@simple
+      a.secondary.button.radius.small.btn-buy href='#' = I18n.t('buy_dialog.buy')
