@@ -84,6 +84,8 @@ module UserLogic
       if twitter_translation?
         TweetWorker.buy_message(t)
       end
+      #Пишем о транзакции в на почту
+      MailWorker.buy_message(t)
 
       # Добавляем событие в ленту
       ActivityEvent.create(
@@ -148,6 +150,8 @@ module UserLogic
       if twitter_translation?
         TweetWorker.sell_message(t)
       end
+      # Пишем о транзакции в на почту
+      MailWorker.sell_message(t)
 
       self
     end

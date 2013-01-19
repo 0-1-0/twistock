@@ -109,3 +109,6 @@ gem 'unicorn'
 
 
 gem 'newrelic_rpm'
+
+#Для рассылки email'ов
+gem 'pony'
