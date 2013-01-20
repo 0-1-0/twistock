@@ -16,11 +16,34 @@ class Twitterexchange.Views.Common.PriceGraph extends Backbone.View
   drawGraph: ->
     #min =
     #max =
+
     prices = _.map @data, (x) ->
       x[1]
     min = _.min(prices) - 6
     max = _.max(prices) + 6
     container = $(@el).find("##{@div_id}")
+
+    # plotter(
+    #   container: container[0]
+
+    #   datas: [
+    #     values: prices
+    #     color: "#1e9dcd"
+    #   ]
+
+    #   width: 310
+    #   height: 100
+    #   fill:'solid'
+    #   mode: 'curve'
+
+    #   labels:
+    #     color: "#666"
+    #     font: "normal 12px \"Sans Serif\""
+    #     x:1
+    #     y:1
+
+  
+    # )
 
     new Highcharts.Chart(
       chart:

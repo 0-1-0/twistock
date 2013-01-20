@@ -15,6 +15,10 @@ en:
     no_money: Not enough money
     no_shares: No shares
 
+  tweet_dialog:
+    tweet: Tweet
+    text: Compose new tweet
+
   stat:
     title: Statistics of Twistock
     numberusers: Number of users per day
@@ -39,6 +43,7 @@ en:
     buy: Buy
     buy_more: Buy more
     sell: Sell
+    tweet: New tweet
 
     inv_tile:
       count: Count

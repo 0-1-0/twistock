@@ -44,11 +44,15 @@
       ul.button-group.radius.even.two-up
         li
           div.dialog-pin style="display: inline-block; position: relative;"
-            - if @user.get('purchased_shares') > 0
-              a.button.secondary.radius.btn-buy.btn-buy-more style='width: 120px' href='#'= I18n.t('user.buy_more')
+            - if @user.get('nickname') != window.current_user.get('nickname')
+              - if @user.get('purchased_shares') > 0
+                a.button.secondary.radius.btn-buy.btn-buy-more style='width: 120px' href='#'= I18n.t('user.buy_more')
+              - else
+                a.button.secondary.radius.btn-buy href='#'= I18n.t('user.buy')
+              .buy-dialog style="display: block;"
             - else
-              a.button.secondary.radius.btn-buy href='#'= I18n.t('user.buy')
-            .buy-dialog style="display: block;"
+              a.button.secondary.radius.btn-tweet href='#' = I18n.t('user.tweet')
+              .tweet-dialog style='display:block;'
 .row
   .six.columns
     dl.tabs.pill.slim

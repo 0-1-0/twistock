@@ -15,6 +15,10 @@ ru:
     no_money: Недостаточно денег
     no_shares: Нет акций
 
+  tweet_dialog:
+    tweet: Твитнуть
+    text: Новое сообщение
+
   stat:
     title: Статистика Twistock
     numberusers: Количество пользователей за по дням
@@ -38,6 +42,7 @@ ru:
     buy: Купить
     buy_more: Купить еще
     sell: Продать
+    tweet: Новый твит
 
     not_found: Пользователь не найден
 

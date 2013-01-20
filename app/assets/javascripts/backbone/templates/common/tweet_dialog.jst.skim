@@ -1,0 +1,11 @@
+.tweet.arr-bottom.bg.dialog.center style="text-align: center; width: 410px; "
+  /style="color: black;"
+  a.close-dialog href="#": i.icon-close
+
+  .row
+    .six.columns style="padding-top: 0;"
+      textarea#tweet_textarea
+
+  .row
+    .six.columns style="padding-top: 0;"
+      a.button.primary.radius.action href="#"= I18n.t 'tweet_dialog.tweet'

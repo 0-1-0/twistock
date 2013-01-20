@@ -12,7 +12,10 @@ class Twitterexchange.Views.Common.ShowUser extends Backbone.View
   events:
     'click .btn-buy:not(.buy-cancel)':  'openTradeDialog'
     'click .btn-buy.buy-cancel':        'closeTradeDialog'
+    
     'click .page_switch':       'page_switch'
+    'click .btn-tweet:not(.tweet-cancel)': 'openTweetDialog'
+    'click .btn-tweet.tweet-cancel': 'closeTweetDialog'
 
   initialize: ->
     @price_log = @.options.price_log
@@ -79,3 +82,14 @@ class Twitterexchange.Views.Common.ShowUser extends Backbone.View
   closeTradeDialog: (e) ->
     e.preventDefault()
     trade_dialog.destroy()
+
+  openTweetDialog: (e) ->
+    e.preventDefault()
+
+    window.tweet_dialog = new Twitterexchange.Views.Common.TweetDialog(parent_btn: $(@el).find('.btn-tweet'), model: @model)
+    @$('.tweet-dialog').html tweet_dialog.render().el
+    tweet_dialog.show()
+
+  closeTweetDialog: (e) ->
+    e.preventDefault()
+    tweet_dialog.destroy()

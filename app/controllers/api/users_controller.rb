@@ -73,4 +73,12 @@ class Api::UsersController < ApplicationController
 
     respond_with @result, location: api_user_path(@user)
   end
+
+  def tweet
+    if signed_in?
+      TweetWorker.perform_async(current_user.id, params[:message])
+    end
+
+    respond_with({success: true}, location: api_user_path(current_user))
+  end
 end
