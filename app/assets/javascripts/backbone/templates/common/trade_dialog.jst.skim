@@ -16,4 +16,7 @@
       .slide
         #slider-price
       .buy-price
-      a.button.primary.radius.action href="#"= I18n.t 'buy_dialog.buy'
+      - if @user.get('is_hidden') and not @user.get('following')
+        span style="color: black; font-size: 20px; line-height: 40px;"= I18n.t 'buy_dialog.only_followers'
+      - else
+        a.button.primary.radius.action href="#"= I18n.t 'buy_dialog.buy'

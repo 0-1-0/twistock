@@ -17,6 +17,9 @@ class User < ActiveRecord::Base
 
   has_many :activity_events
 
+  has_many :followings
+  has_many :followers, through: :followings
+
 
   # ACCESSORS
   # TODO: temporary access to all
@@ -34,6 +37,7 @@ class User < ActiveRecord::Base
   include UserLogic::Pricing
   extend  UserLogic::Flows::Global
   include UserLogic::Flows::Local
+  include UserLogic::Followings
 
   # CLASS METHODS
   class << self

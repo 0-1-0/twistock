@@ -32,6 +32,11 @@ module UserLogic
       include StandartError
     end
 
+    class NotFollowerError < Exception
+      @standart_message = "Available only for followers"
+      include StandartError
+    end
+
     # NOW WRITE THE METHODS!!!
 
     def buy_shares(owner, count)
@@ -39,6 +44,10 @@ module UserLogic
 
       cost = 0
       price_change = 0
+
+      if owner.is_hidden?
+        raise NotFollowerError unless owner.has_follower?(current_user)
+      end
 
       User.transaction do
         owner.reload

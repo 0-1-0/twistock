@@ -14,6 +14,7 @@ ru:
     cancel: Отмена
     no_money: Недостаточно денег
     no_shares: Нет акций
+    only_followers: Доступно только фолловерам
 
   tweet_dialog:
     tweet: Твитнуть

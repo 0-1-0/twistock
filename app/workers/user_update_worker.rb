@@ -145,6 +145,7 @@ class UserUpdateWorker
     user.save
 
     user.my_friends if user.has_credentials?
+    user.update_followers
 
     logger.info 'Save user to database: ' + user.name
 

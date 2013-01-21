@@ -11,10 +11,12 @@ json.(user,
     :weekly_price_change,
     :monthly_price_change,
     :twitter_url,
-    :email_bonus)
+    :email_bonus,
+    :is_hidden)
 
 if signed_in?
   json.purchased_shares current_user.shares_of(user)
+  json.following user.has_follower?(current_user)
 end
 
 json.url user_path(user)

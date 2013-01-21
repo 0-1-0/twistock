@@ -12,7 +12,7 @@ class Twitterexchange.Views.Common.TradeDialog extends Backbone.View
     l = @
 
   render: ->
-    $(@el).html(@template())
+    $(@el).html(@template(user: @model))
     @init_buy_slider()
     return this
 
