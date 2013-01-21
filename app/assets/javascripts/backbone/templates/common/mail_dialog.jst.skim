@@ -17,7 +17,7 @@
     
 
     .four.columns
-      input#input-mail-dialog type='text'
+      input#input-mail-dialog type="email"
 
   .center
     br
